@@ -2,7 +2,6 @@
 
 
 body{
-    
 }
 
 p{
@@ -13,6 +12,7 @@ section{
     padding-left: 0px;
     margin: 0px;
     overflow:hidden;
+    width:33%;
 }
 
 section > section{
@@ -45,7 +45,7 @@ section > section{
     
 }
 
-.header a.large, a.large:hover{
+.header a.large, .header a.large:hover{
     color: rgb(0,206,186);
     font-size: 100px;
     
@@ -55,13 +55,12 @@ section > section{
     
 }
 
-.header a.small, a.small:hover{
+.header a.small, .header a.small:hover{
     color: rgb(0,150,150);
     font-size: 25px;
     position: relative;
     top:75px;
 }
-
 .info{
     font-size: 25px;
     background-color: #232528;
@@ -92,6 +91,7 @@ section > section{
     font-size: 30px;
     color:darkgray;
     margin: 0px;
+    text-align:center;
 }
 
 .footer a.desc{
@@ -102,13 +102,12 @@ section > section{
     white-space: pre-wrap;
     display:inline-block;
     overflow: visible;
-    max-width: 300px;
+    max-width: 30%;
 }
 
 .footer a.picture_display{
-    text-align: center;
-    position: relative;
+    text-align: center !important ;
+    position: static;
     display: inline-block;
     overflow: hidden;
-    
 }
