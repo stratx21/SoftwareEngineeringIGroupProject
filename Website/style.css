@@ -9,7 +9,7 @@ p{
 }
 
 section{
-    padding-left: 0px;
+    padding: 20px;
     margin: 0px;
     overflow:hidden;
     width:33%;
@@ -102,7 +102,6 @@ section > section{
     white-space: pre-wrap;
     display:inline-block;
     overflow: visible;
-    max-width: 30%;
 }
 
 .footer a.picture_display{
