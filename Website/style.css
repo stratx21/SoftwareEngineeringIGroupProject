@@ -10,23 +10,17 @@ p{
 }
 
 section{
-    padding:10px;
+    padding-left: 0px;
+    margin: 0px;
     overflow:hidden;
 }
 
 section > section{
+    margin: 0px;
     float: left;
     overflow:hidden;
     position:relative;
     word-wrap:break-word;
-}
-
-#section-right{
-    float:right;
-    margin-left:30px;
-}
-#section-left{
-    float:left;
 }
 
 .picture_display{
@@ -34,18 +28,42 @@ section > section{
 }
 
 .header{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: 10% 10%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/sunset.jpg);
     background-repeat: no-repeat;
     background-position: center;
+    
     background-size: cover;
-    background-color:black;
-    height:900px;
+    background-color:rgb(55,40,36);
+    height:700px;
     
     font: Monospace;
     text-align:center;
     white-space: nowrap;
+    
+}
+
+.header a.large, a.large:hover{
+    color: rgb(0,206,186);
+    font-size: 100px;
+    
+    line-height: 250px;
+    position: relative;
+    top: 50px;
+    
+}
+
+.header a.small, a.small:hover{
+    color: rgb(0,150,150);
+    font-size: 25px;
+    position: relative;
+    top:75px;
 }
 
 .info{
+    font-size: 25px;
     background-color: #232528;
     top:0px;
     width: 100%;
@@ -56,19 +74,41 @@ section > section{
     font: Monospace;
     text-align: center;
     white-space: nowrap;
-    font-size: 25px;
-    color: darkgray;
     
+    color: darkgray;
+    margin:0px;
+    padding: 0px;
 }
 
 .footer{
+    padding: 25px;
     background-color: #232528;
     width: 100%;
-    position:relative;
+    position:static;
     display:inline-block;
     overflow:hidden;
     font: Monospace;
     white-space: nowrap;
     font-size: 30px;
     color:darkgray;
+    margin: 0px;
+}
+
+.footer a.desc{
+    font-size: 20px;
+    position: relative;
+    text-align:left;
+    line-height: 1 !important;
+    white-space: pre-wrap;
+    display:inline-block;
+    overflow: visible;
+    max-width: 300px;
+}
+
+.footer a.picture_display{
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    
 }
