@@ -31,7 +31,7 @@ section > section{
     overflow-y: hidden;
     overflow-x: hidden;
     background-size: 10% 10%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/sunset.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(./sunset.jpg);
     background-repeat: no-repeat;
     background-position: center;
     
