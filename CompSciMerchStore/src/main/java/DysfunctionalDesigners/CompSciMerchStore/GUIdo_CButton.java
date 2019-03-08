@@ -75,28 +75,44 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		
 	}
 
+	public void setIcons() {
+		this.hasIcons=true;
+	}
+	
+	public void disableIcons() {
+		this.hasIcons=false;
+	}
 	
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+		//none?
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(this.hasIcons) {
+			
+		}
 	}
 
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(this.hasIcons) {
+			
+		}
 	}
 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(this.hasIcons) {
+			
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(this.hasIcons) {
+			
+		}
 	}}
