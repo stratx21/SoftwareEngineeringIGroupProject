@@ -15,6 +15,12 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 	
 	private boolean disabled=false;
 	
+	
+	//stale image, hover image, clicked image
+	private boolean hasIcons=false;
+	
+	private ImageIcon staleIcon,hoverIcon,clickedIcon;
+	
 	public GUIdo_CButton(int x,int y,int width, int height) {
 		super.setBounds(x, y, width, height);
 		this.addMouseListener(this);
@@ -25,21 +31,36 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		
 	}
 	
-	public GUIdo_CButton(int x,int y,int width,int height,ImageIcon icon) {
+	public GUIdo_CButton(int x,int y,int width,int height,ImageIcon[] icons) {
 		this(x,y,width,height);
 		
+		
+		if(icons.length>=3) {
+			this.hasIcons=true;
+			this.staleIcon=icons[0];
+			this.hoverIcon=icons[1];
+			this.clickedIcon=icons[2];
+		}
+	}
+	
+	public GUIdo_CButton(int x,int y,int width,int height,ImageIcon stale,ImageIcon hover,ImageIcon clicked) {
+		this(x,y,width,height);
+		this.hasIcons=true;
+		this.staleIcon=stale;
+		this.hoverIcon=hover;
+		this.clickedIcon=clicked;
 	}
 	
 	public GUIdo_CButton(int x,int y,int width,int height, String label,boolean hasBorder) {
-		this(x,y,width,height);
+		this(x,y,width,height,label);
 		
 		
 		if(!hasBorder)
 			this.disableBorder();
 	}
 	
-	public GUIdo_CButton(int x,int y,int width,int height,ImageIcon icon,boolean hasBorder) {
-		this(x,y,width,height);
+	public GUIdo_CButton(int x,int y,int width,int height,ImageIcon[] icons,boolean hasBorder) {
+		this(x,y,width,height,icons);
 		
 		
 		if(!hasBorder)
