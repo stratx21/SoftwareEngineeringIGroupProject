@@ -16,25 +16,44 @@ import javax.swing.ScrollPaneConstants;
 
 public class GUIdo_Frame extends JFrame{
 	
+	/**
+	 * the height in pixels of the toolbar
+	 */
 	private final int TOOLBAR_HEIGHT = 75;//pixels
 	
+	/**
+	 * the width in pixels of the window
+	 */
 	private final int INITIAL_WIDTH=1350;
 	
+	/**
+	 * The height in pixels of the window
+	 */
 	private final int INITIAL_HEIGHT=850;
-	
-	//JToolBar toolbar = null;
+
+	/**
+	 * the GUIdo_CToolbar instance to be used for the toolbar in this frame
+	 */
 	GUIdo_CToolbar toolbar = null;
 	
+	/**
+	 * the current panel that is being used for the page to scroll through
+	 */
 	GUIdo_CPanel current_panel;
 	
+	/**
+	 * This initializes the GUIdo_Frame instance; it calls initialize to
+	 * 	organize the setup and have the ability to call it again. 
+	 */
 	public GUIdo_Frame() {
-		
-		
 		this.initialize();
-		
-		
 	}
 	
+	/**
+	 * This initializes this instance of GUIdo_Frame by setting up the frame,
+	 * 	setting up the toolbar and the scrolling pane with the current panel
+	 *  within a panel to add to the frame. 
+	 */
 	public void initialize() {
 		
 		
