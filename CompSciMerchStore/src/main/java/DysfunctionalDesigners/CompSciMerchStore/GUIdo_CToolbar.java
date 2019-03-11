@@ -25,8 +25,19 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		//home button:
 		
 		GUIdo_CButton home_button = new GUIdo_CButton(x+height/10,y+height/10,height*8/10,height*8/10,"HOME");
+		home_button.setActionCommand("home");
 		home_button.setActionListener_clicked(done);
 		home_button.setBackground(Color.YELLOW);
+		
+		GUIdo_CButton wishlist = new GUIdo_CButton(x+width-height*3,y,height,height,"WISH");
+		wishlist.setActionCommand("wishlist");
+		wishlist.setActionListener_clicked(done);
+		wishlist.setBackground(Color.YELLOW);
+		
+		GUIdo_CButton login = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGIN");
+		login.setActionCommand("login");
+		login.setActionListener_clicked(done);
+		login.setBackground(Color.cyan);
 		
 		
 		//search bar:
@@ -44,7 +55,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 				done.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search"));
 			}
 		});
-		searchBar.setSize(width-height, height/2);
+		searchBar.setSize(width-height*4, height/2);
 		searchBar.setLocation(height, height/4);
 		
 		searchBar.setBackground(new Color(255,102,167));
@@ -52,6 +63,8 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		this.add(home_button);
 		this.add(searchBar);
+		this.add(wishlist);
+		this.add(login);
 		
 		home_button.repaint();
 		
