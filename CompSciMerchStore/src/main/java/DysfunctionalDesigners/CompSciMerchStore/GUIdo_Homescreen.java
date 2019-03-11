@@ -10,7 +10,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		super();
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
 		this.repaint();
-		this.setVisible(true);
+//		this.setVisible(true);
 	}
 	
 	@Override

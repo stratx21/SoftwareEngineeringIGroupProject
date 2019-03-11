@@ -18,9 +18,9 @@ public class GUIdo_Frame extends JFrame{
 	
 	private final int TOOLBAR_HEIGHT = 75;//pixels
 	
-	private final int INITIAL_WIDTH=500;
+	private final int INITIAL_WIDTH=1350;
 	
-	private final int INITIAL_HEIGHT=500;
+	private final int INITIAL_HEIGHT=850;
 	
 	//JToolBar toolbar = null;
 	GUIdo_CToolbar toolbar = null;
@@ -54,6 +54,10 @@ public class GUIdo_Frame extends JFrame{
 				} else if(e.getActionCommand().equals("home")) {
 					current_panel=new GUIdo_Homescreen();
 					current_panel.repaint();
+				} else if(e.getActionCommand().equals("wishlist")) {
+					System.out.println("wishlist");
+				} else if(e.getActionCommand().equals("login")) {
+					System.out.println("login");
 				}
 			}
 		});
