@@ -1,9 +1,26 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JToolBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class GUIdo_Frame extends JFrame{
+	
+	private final int TOOLBAR_HEIGHT = 75;//pixels
+	
+	private final int INITIAL_WIDTH=500;
+	
+	private final int INITIAL_HEIGHT=500;
 	
 	//JToolBar toolbar = null;
 	GUIdo_CToolbar toolbar = null;
@@ -19,28 +36,98 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	public void initialize() {
-//		toolbar = new JToolBar();
-//		
-//		toolbar.addSeparator();
-//		
-//		toolbar.add(new GUIdo_CButton(0,0,50,50,"hit this"));
 		
 		
-		
+		//frame setup:
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setDefaultLookAndFeelDecorated(true);
+		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.setTitle("Computer Science Merchandise Store");
-		this.setSize(500, 500);
+		this.setSize(this.INITIAL_WIDTH, this.INITIAL_HEIGHT);
 		this.setResizable(true);
-		this.setVisible(true);
 		
-		toolbar = new GUIdo_CToolbar(0,0,500,50);
+		
+		toolbar = new GUIdo_CToolbar(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("search")) {
+					//the flow for the search, when the search is submitted
+					
+				} else if(e.getActionCommand().equals("home")) {
+					current_panel=new GUIdo_Homescreen();
+					current_panel.repaint();
+				}
+			}
+		});
+//		toolbar.setMinimumSize(new Dimension(250,TOOLBAR_HEIGHT));
+//		toolbar.setMaximumSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),TOOLBAR_HEIGHT));
 		
 		this.current_panel=new GUIdo_Homescreen();
 		
-		this.add(toolbar);
-		this.add(current_panel);
 		
+		
+		
+		
+		final JScrollPane pane = new JScrollPane(current_panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		pane.setAutoscrolls(true);
+		
+		pane.setLocation(0, TOOLBAR_HEIGHT);
+		pane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-150));
+		
+		pane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+
+			public void adjustmentValueChanged(AdjustmentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				pane.repaint();
+				toolbar.repaint();
+				
+			}
+			
+		});
+		
+		
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		//add toolbar and pane to the panel
+		panel.add(toolbar);
+		panel.add(pane);
+		this.add(panel);
+		
+		//
+		//this (frame) contains:
+		//		- panel, contains:
+		//			- toolbar
+		//			- pane (JScrollPane), contains:
+		//				- current_panel
+		//		
+		
+
+		
+		//this.current_panel.setLocation(0, TOOLBAR_HEIGHT);
+		
+		
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent evt) {
+				JFrame thisframe = (JFrame)evt.getSource();
+//				System.out.println("GUIdo_Frame resized to (" + thisframe.getWidth() + "," + thisframe.getHeight() + ")");
+				
+//				toolbar.setSize(thisframe.getWidth(),TOOLBAR_HEIGHT);
+//				current_panel.setSize(thisframe.getWidth(), current_panel.getHeight());
+//				current_panel.setLocation(0, TOOLBAR_HEIGHT);
+//				thisframe.remove(pane);
+//				pane.setLocation(0, TOOLBAR_HEIGHT);
+//				pane.setSize(thisframe.getWidth(), thisframe.getHeight()-TOOLBAR_HEIGHT*3);
+//				thisframe.add(pane);
+			}
+		});
+		
+		
+		//set visible after adding Components: 
+		this.setVisible(true);
+		
+		//repaint for toolbar, then for others:
+		this.toolbar.repaint();
 		this.current_panel.repaint();
+		
 	}
 }
