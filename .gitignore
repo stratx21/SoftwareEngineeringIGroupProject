@@ -103,6 +103,13 @@ local.properties
 # Java annotation processor (APT)
 .factorypath
 
+### Eclipse Patch ###
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
 # PDT-specific (PHP Development Tools)
 .buildpath
 

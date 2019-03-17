@@ -4,10 +4,11 @@ import java.util.Set;
 
 public class Catalogue {
 	private static Set<ItemInfo> catalogue;
-	private static int numItems;
+	private static int numItems = 0;
 	
 	public static void addItem(ItemInfo e) {
 		catalogue.add(e);
+		numItems++;
 	}
 	
 	public static void removeItem(int itemID) {
