@@ -3,6 +3,8 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUIdo_Homescreen extends GUIdo_CPanel{
 	
@@ -13,6 +15,17 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		super();
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
 		this.repaint();
+		
+		GUIdo_CButton trybutton = new GUIdo_CButton(75,75,75,75,"TRY");
+		trybutton.setActionListener_clicked(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("TRY!!!!!!");
+			}
+		});
+		trybutton.setBackground(Color.GREEN);
+		
+		this.add(trybutton);
+		
 //		this.setVisible(true);
 	}
 	
