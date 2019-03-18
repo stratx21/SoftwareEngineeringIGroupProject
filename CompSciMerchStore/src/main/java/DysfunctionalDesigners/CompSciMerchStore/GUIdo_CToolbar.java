@@ -9,17 +9,14 @@ import java.awt.event.ActionListener;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
 	
-	private int x,y;
-	private int width, height;
-	
 	private JTextField searchBar;
 	
 	public GUIdo_CToolbar(int x, int y, int width, int height, final ActionListener done) {
 //		super();
 		//general setup:
 		this.setSize(width, height);
-		this.width=width;
-		this.height=height;
+//		this.width=width;
+//		this.height=height;
 		this.setBackground(Color.PINK);
 		
 		//home button:
@@ -51,8 +48,10 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 				
 				//use searchBar.getText() to get the String of text entered to search
 				
+				ActionEvent forPerformed = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search");
+				forPerformed.setSource(searchBar.getText());
 				
-				done.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search"));
+				done.actionPerformed(forPerformed);
 			}
 		});
 		searchBar.setSize(width-height*4, height/2);

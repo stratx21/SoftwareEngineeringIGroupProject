@@ -1,6 +1,7 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
@@ -19,22 +20,18 @@ public class GUIdo_Frame extends JFrame{
 	/**
 	 * the height in pixels of the toolbar
 	 */
-	private final int TOOLBAR_HEIGHT = 75;//pixels
-	
-	/**
-	 * the width in pixels of the window
-	 */
-	private final int INITIAL_WIDTH=1350;
-	
-	/**
-	 * The height in pixels of the window
-	 */
-	private final int INITIAL_HEIGHT=850;
+	private final int TOOLBAR_HEIGHT = 70;//pixels
 
 	/**
 	 * the GUIdo_CToolbar instance to be used for the toolbar in this frame
 	 */
 	GUIdo_CToolbar toolbar = null;
+	
+	/**
+	 * the GUIdo_SectionHeader instance to be used for the toolbar for the 
+	 * 	list of professors 
+	 */
+	GUIdo_SectionHeader professorHeader = null;
 	
 	/**
 	 * the current panel that is being used for the page to scroll through
@@ -61,7 +58,9 @@ public class GUIdo_Frame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.setTitle("Computer Science Merchandise Store");
-		this.setSize(this.INITIAL_WIDTH, this.INITIAL_HEIGHT);
+		Dimension screen_size = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setSize(screen_size);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setResizable(true);
 		
 		
@@ -69,6 +68,8 @@ public class GUIdo_Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("search")) {
 					//the flow for the search, when the search is submitted
+					String searched = (String)e.getSource();
+					
 					
 				} else if(e.getActionCommand().equals("home")) {
 					current_panel=new GUIdo_Homescreen();
@@ -80,8 +81,14 @@ public class GUIdo_Frame extends JFrame{
 				}
 			}
 		});
-//		toolbar.setMinimumSize(new Dimension(250,TOOLBAR_HEIGHT));
-//		toolbar.setMaximumSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),TOOLBAR_HEIGHT));
+		
+		professorHeader = new GUIdo_SectionHeader(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("section1")) {
+					
+				}
+			}
+		});
 		
 		this.current_panel=new GUIdo_Homescreen();
 		
@@ -93,7 +100,7 @@ public class GUIdo_Frame extends JFrame{
 		pane.setAutoscrolls(true);
 		
 		pane.setLocation(0, TOOLBAR_HEIGHT);
-		pane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-150));
+		pane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-4*TOOLBAR_HEIGHT));
 		
 		pane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 
@@ -113,6 +120,7 @@ public class GUIdo_Frame extends JFrame{
 		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		//add toolbar and pane to the panel
 		panel.add(toolbar);
+		panel.add(professorHeader);
 		panel.add(pane);
 		this.add(panel);
 		

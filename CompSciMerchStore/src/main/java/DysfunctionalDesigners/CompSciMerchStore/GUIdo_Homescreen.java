@@ -25,8 +25,6 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		trybutton.setBackground(Color.GREEN);
 		
 		this.add(trybutton);
-		
-//		this.setVisible(true);
 	}
 	
 	/**
