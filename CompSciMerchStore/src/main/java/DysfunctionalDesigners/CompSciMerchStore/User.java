@@ -61,6 +61,7 @@ public class User {
 		this.userID = Integer.parseInt(d[5]);
 	}
 	
+	
 	public String toStringDisplay() {
 		return "User [email=" + email + ", motherMaidenName=" + motherMaidenName + ", userName=" + userName
 				+ ", password=" + password + ", name=" + name + ", userID=" + userID + "]";
@@ -76,7 +77,6 @@ public class User {
 		jsonFormat += "\t\"username\" : \"" + this.userName + "\",\n";
 		jsonFormat += "\t\"password\" : \"" + this.password + "\",\n";
 		jsonFormat += "\t\"userID\"   : " + this.userID   + ",\n";
-		
 		
 		
 		
