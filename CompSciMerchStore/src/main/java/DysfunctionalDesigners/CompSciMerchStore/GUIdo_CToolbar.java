@@ -21,7 +21,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		//home button:
 		
-		GUIdo_CButton home_button = new GUIdo_CButton(x+height/10,y+height/10,height*8/10,height*8/10,"HOME");
+		GUIdo_CButton home_button = new GUIdo_CButton(x,y,height,height,"HOME");
 		home_button.setActionCommand("home");
 		home_button.setActionListener_clicked(done);
 		home_button.setBackground(Color.YELLOW);
