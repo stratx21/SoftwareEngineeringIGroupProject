@@ -126,20 +126,6 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	}
 	
 	/**
-	 * Checks to see if a promo code is valid.
-	 * 
-	 * @param code the code to check
-	 * @return if the code is valid
-	 */
-	public static boolean checkPromoCode(String code) {
-		if(code.length() >= ItemInfo.EXTENDED_ID_LENGTH) {
-			int itemID = Integer.parseInt(code.substring(code.length()-ItemInfo.EXTENDED_ID_LENGTH));
-			return catalogue.get(itemID).hasPromoCode(code);
-		}
-		return false;
-	}
-	
-	/**
 	 * Searches the catalogue for a keyword and pulls up items like it.
 	 * 
 	 * @param keywords the string to search for
