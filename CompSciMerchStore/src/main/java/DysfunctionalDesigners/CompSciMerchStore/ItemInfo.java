@@ -32,12 +32,22 @@ public class ItemInfo {
 	
 	/**
 	 * Creates an ItemInfo with the specified fields
+	 * @throws Exception 
 	 */
-	public ItemInfo(String description, String displayName, int stock, int vendorID, double price) {
+	public ItemInfo(String description, String displayName, int stock, int vendorID, double price) throws Exception {
+		this(description, displayName, stock, vendorID, price, NEXT_ID);
+		if(NEXT_ID == 0) {
+			throw new Exception("ERROR: NEXT_ID HASN'T BEEN SET YET, CALL CATALOGUE SETID FUNCTION BASED ON CATALOGUE DATA FILE");
+		} else {
+			NEXT_ID++;
+		}
+	}
+	
+	private ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id) {
 		super();
 		this.description = description;
 		this.displayName = displayName;
-		this.itemID = NEXT_ID++;///////////////////////////////////////////this will need to be changed to be incorporated into one of the files so new items don't get set to old item's numbers
+		this.itemID = id;///////////////////////////////////////////this will need to be changed to be incorporated into one of the files so new items don't get set to old item's numbers
 		this.extendedItemID = String.format("%0" + EXTENDED_ID_LENGTH, this.itemID);
 		this.stock = stock;
 		this.vendorID = vendorID;
@@ -45,7 +55,9 @@ public class ItemInfo {
 		this.promoDiscounts = new HashMap<String, Double>();
 		this.price = price;
 	}
-
+	
+	public static void setNextID(int id) { NEXT_ID = id; }
+	
 	/**
 	 * This returns the total discount counting the sale discount and promo discounts.
 	 * 

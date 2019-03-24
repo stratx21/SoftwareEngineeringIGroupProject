@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,10 @@ import java.util.Map;
 public class Catalogue {//all should be static as the top-level class unfortunately cannot be
 	private static Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private static int numItems = 0;
+	
+	public static void readFile(BufferedReader bf) {
+		
+	}
 	
 //////////////////modifiers
 	/**
@@ -21,14 +26,15 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	}
 	
 	/**
-	 * Removes an item from the catalogue if present.
+	 * Removes an item from the catalogue if present.  Actually just disables it because previous sales depend on it.
 	 * 
 	 * @param itemID the item to remove
 	 */
 	public static void removeItem(int itemID) {
-		if(catalogue.remove(itemID) != null) {
-			numItems--;
-		}
+		Catalogue.disableItem(itemID);
+//		if(catalogue.remove(itemID) != null) {
+//			numItems--;
+//		}
 	}
 	
 	/**
@@ -64,7 +70,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * Disables the item
 	 * @param itemID the item to disable
 	 */
-	public void disableItem(int itemID) {
+	public static void disableItem(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).disable();
 		}
@@ -74,15 +80,30 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * Enables the item
 	 * @param itemID the item to enable
 	 */
-	public void enableItem(int itemID) {
+	public static void enableItem(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).enable();
 		}
 	}
 	
-	public void updateItem(int itemID, ItemInfo info) {
+	/**
+	 * 
+	 * @param itemID
+	 * @param info
+	 * @throws Exception
+	 */
+	public static void updateItem(int itemID, ItemInfo info) throws Exception {
+		if(info.getItemID() != itemID) {
+			throw new Exception("New ItemInfo ID does NOT match given itemID");
+		}
 		catalogue.put(itemID, info);
 	}
+	
+	/**
+	 * Sets the next id to start from.
+	 * @param id the next id to start from (aka next item has that id and the one after has that id+1 etc)
+	 */
+	public static void setNextID(int id) { ItemInfo.setNextID(id); }
 	
 //////////////////accessors
 	/**
