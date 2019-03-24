@@ -12,6 +12,7 @@ public class ItemInfo {
 	private double saleDiscount, price;
 	private Map<String, Double> promoDiscounts;
 	private boolean enabled = true;
+	private Professor prof;
 	
 	/**
 	 * this is for quick searching and comparison objects -- not meant to be a permanent object
@@ -190,6 +191,7 @@ public class ItemInfo {
 	public double getSaleDiscount() { return saleDiscount; }
 	public Map<String, Double> getPromoDiscounts() { return promoDiscounts; }
 	public double getPrice() { return price; }
+	public Professor getProf() { return prof; }
 	
 	public void enable() { this.enabled = true; }
 	public void disable() { this.enabled = false; }
@@ -200,6 +202,6 @@ public class ItemInfo {
 	public void setStock(int stock) { this.stock = stock; }
 	public void setSaleDiscount(double saleDiscount) { this.saleDiscount = (saleDiscount > 1 ? 1 : saleDiscount); }
 	public void setPromoDiscounts(Map<String, Double> promoDiscounts) { this.promoDiscounts = promoDiscounts; }
-	
+	public void setProf(Professor prof) { this.prof = prof; }
 	
 }
