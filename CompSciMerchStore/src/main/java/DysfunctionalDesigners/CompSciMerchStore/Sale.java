@@ -81,10 +81,24 @@ public class Sale {
 	 * @param code the promo code to add
 	 */
 	public void applyPromoCode(String code) {
-		if(!this.finalized && Catalogue.checkPromoCode(code)) {
+		if(!this.finalized && this.checkPromoCode(code)) {
 			//guaranteed to be the right length
 			this.itemList.get(Integer.parseInt(code.substring(code.length()-ItemInfo.EXTENDED_ID_LENGTH))).addPromoCode(code);
 		}
+	}
+	
+	/**
+	 * Checks to see if a promo code is valid.
+	 * 
+	 * @param code the code to check
+	 * @return if the code is valid
+	 */
+	public boolean checkPromoCode(String code) {
+		if(code.length() >= ItemInfo.EXTENDED_ID_LENGTH) {
+			int itemID = Integer.parseInt(code.substring(code.length()-ItemInfo.EXTENDED_ID_LENGTH));
+			return Catalogue.getItem(itemID).hasPromoCode(code);
+		}
+		return false;
 	}
 	
 	/**
