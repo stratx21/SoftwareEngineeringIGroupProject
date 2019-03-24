@@ -1,11 +1,19 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
 public class ItemInfo {
 	public static final int EXTENDED_ID_LENGTH = 5;
+	private static Font DESC_FONT=new Font("Ariel",Font.PLAIN,10);
 	private static int NEXT_ID = 0;
 	private String description, displayName, extendedItemID;
 	private int itemID, stock, vendorID;
@@ -44,6 +52,27 @@ public class ItemInfo {
 		this.saleDiscount = 0.0;
 		this.promoDiscounts = new HashMap<String, Double>();
 		this.price = price;
+	}
+	
+	public void drawDisplay(Graphics g, int x, int y, int width, int height) {
+		int currenty = y+height*3/4;
+		int line_height = g.getFontMetrics(DESC_FONT).getHeight();
+		try {
+			g.drawImage(ImageIO.read(new File("src/main/resources/ItemImages/"+String.format("%05d",this.itemID)+".jpg")), 
+					x,y,width,currenty-y, null);
+		} catch(IOException ioex) {
+			ioex.printStackTrace();
+		}
+		
+		g.setFont(DESC_FONT);
+		
+		ArrayList<String> lines = GUIdo_OutputTools.formatStringForPrompt(this.displayName,DESC_FONT,width);
+		for(String line : lines) {
+			g.drawString(line, x, currenty);
+			currenty+=line_height;
+		}
+		g.drawString(this.price+"", x, currenty);
+		currenty+=line_height;
 	}
 
 	/**
