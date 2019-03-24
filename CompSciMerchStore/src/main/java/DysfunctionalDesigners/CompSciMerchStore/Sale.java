@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Sale {
-	static final double SHIPPING = 10, TAX = 0.0875;//$, %
+	static final double SHIPPING = 68, TAX = 0.08;//$, %
 	private static int nextSaleID = 0;
 	
 	private Payment payment;
