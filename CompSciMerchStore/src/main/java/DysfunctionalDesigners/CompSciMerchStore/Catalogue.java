@@ -26,8 +26,8 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 			while((line = bf.readLine()) != null) {
 				splitLine = line.split(", ");
 				int id = Integer.parseInt(splitLine[0]);
-				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[1]), 
-							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[4]), id));
+				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[3]), 
+							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[5]), id));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
