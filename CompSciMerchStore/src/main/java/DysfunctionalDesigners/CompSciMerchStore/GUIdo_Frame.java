@@ -46,6 +46,31 @@ public class GUIdo_Frame extends JFrame{
 		this.initialize();
 	}
 	
+	private void toolbar_call(ActionEvent e) {
+		if(e.getActionCommand().equals("search")) {
+			//the flow for the search, when the search is submitted
+			String searched = (String)e.getSource();
+			
+			
+		} else if(e.getActionCommand().equals("home")) {
+			current_panel=new GUIdo_Homescreen();
+			current_panel.repaint();
+		} else if(e.getActionCommand().equals("wishlist")) {
+			System.out.println("wishlist");
+		} else if(e.getActionCommand().equals("login")) {
+			System.out.println("login");
+			current_panel = new GUIdo_LoginScreen(new ActionListener () {
+				public void actionPerformed(ActionEvent e) {
+					login_call(e);
+				}
+			});
+		}
+	}
+	
+	private void login_call(ActionEvent e) {
+		
+	}
+	
 	/**
 	 * This initializes this instance of GUIdo_Frame by setting up the frame,
 	 * 	setting up the toolbar and the scrolling pane with the current panel
@@ -66,19 +91,7 @@ public class GUIdo_Frame extends JFrame{
 		
 		toolbar = new GUIdo_CToolbar(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("search")) {
-					//the flow for the search, when the search is submitted
-					String searched = (String)e.getSource();
-					
-					
-				} else if(e.getActionCommand().equals("home")) {
-					current_panel=new GUIdo_Homescreen();
-					current_panel.repaint();
-				} else if(e.getActionCommand().equals("wishlist")) {
-					System.out.println("wishlist");
-				} else if(e.getActionCommand().equals("login")) {
-					System.out.println("login");
-				}
+				toolbar_call(e);
 			}
 		});
 		
