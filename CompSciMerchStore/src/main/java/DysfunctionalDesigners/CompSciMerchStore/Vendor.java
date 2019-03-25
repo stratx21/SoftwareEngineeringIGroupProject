@@ -1,7 +1,7 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 import java.util.ArrayList;
 import java.util.List;
-public class Vendor extends User{
+public abstract class Vendor extends User{
 
 	List<Integer> uploadedItems;
 	List<Sale> pastSales;
@@ -28,6 +28,12 @@ public class Vendor extends User{
 		super(d);
 		this.uploadedItems = items;
 		this.pastSales = sales;
+	}
+	
+	@SuppressWarnings("unused")
+	private Vendor() throws Exception {
+		super(5);
+		throw new Exception("Customer must only be initialized by a subclass");
 	}
 	
 	/**

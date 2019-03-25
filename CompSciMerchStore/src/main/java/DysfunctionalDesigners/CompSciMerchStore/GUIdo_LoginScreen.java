@@ -90,7 +90,24 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 							userData = new BufferedReader(new FileReader(new File("src/main/java/resources/UserData/" + uname + ".txt")));
 							userLine = userData.readLine();
 							fileInfo = fileLine.split(",");
-							users.add(new User(fileInfo));
+							int id = Integer.parseInt(fileInfo[5]);
+							if(id >= 40000) {
+								users.add(new Administrator(fileInfo));
+							}
+							else if(id >= 10000) {
+								users.add(new Customer(fileInfo));
+							}
+							else {
+								try {
+									throw new Exception("Unknown user id in file " + uname + ".txt");
+								} catch (Exception e1) {
+									
+									e1.printStackTrace();
+								}
+							}
+								
+							
+							
 						}else {
 							 JOptionPane.showMessageDialog(panel, "Incorrect password", 
 								      "Error", JOptionPane.ERROR_MESSAGE); 

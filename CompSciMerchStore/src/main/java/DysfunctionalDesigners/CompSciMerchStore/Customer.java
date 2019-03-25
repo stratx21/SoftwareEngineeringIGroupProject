@@ -37,6 +37,10 @@ public class Customer extends Vendor{
 		this.cart = cart;
 		this.previousPurchases = previousPurchases;
 	}
+	public Customer(String [] d) {
+		super(d);
+	}
+	
 	
 	public MemberLevel getStatus() {
 		return status;

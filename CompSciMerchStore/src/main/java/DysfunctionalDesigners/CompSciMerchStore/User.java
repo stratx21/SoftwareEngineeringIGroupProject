@@ -1,6 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
-public class User {
+public abstract class User {
 	String email;
 	String motherMaidenName;
 	String userName;
@@ -43,7 +43,7 @@ public class User {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public User(String email, String motherMaidenName, String userName, String password, String name, int userID) {
+	protected User(String email, String motherMaidenName, String userName, String password, String name, int userID) {
 		super();
 		this.email = email;
 		this.motherMaidenName = motherMaidenName;
@@ -52,7 +52,7 @@ public class User {
 		this.name = name;
 		this.userID = userID;
 	}
-	public User(String[] d) {
+	protected User(String[] d) {
 		this.email = d[0];
 		this.motherMaidenName = d[1];
 		this.userName = d[2];
@@ -61,6 +61,11 @@ public class User {
 		this.userID = Integer.parseInt(d[5]);
 	}
 	
+	@SuppressWarnings("unused")
+	private User() throws Exception {
+		throw new Exception("User must only be initialized by a subclass");
+	}
+	protected User(int notUsed) {}
 	
 	public String toStringDisplay() {
 		return "User [email=" + email + ", motherMaidenName=" + motherMaidenName + ", userName=" + userName
