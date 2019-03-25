@@ -23,7 +23,7 @@ public class LineItem {
 	}
 	
 	public int getQuantity() { return quantity; }
-	public int getItem() { return itemID; }
+	public int getItemID() { return itemID; }
 	
 	public void setQuantity(int quantity) { this.quantity = quantity; }
 	public void setItem(int itemID) { this.itemID = itemID; }

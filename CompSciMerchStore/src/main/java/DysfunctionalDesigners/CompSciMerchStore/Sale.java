@@ -160,7 +160,7 @@ public class Sale {
 			this.finalized = true;
 			//decrease quantity from catalogue
 			for(LineItem li : this.itemList.values()) {
-				Catalogue.decreaseQuantity(li.getItem(), li.getQuantity());
+				Catalogue.decreaseQuantity(li.getItemID(), li.getQuantity());
 			}
 			this.dateTime = new Date();
 			/////////here is where we would add some of the database and remote

@@ -1,6 +1,7 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,24 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	private static Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private static int numItems = 0;
 	
-	public static void readFile(BufferedReader bf) {
-		
+	public static void readFile(BufferedReader bf) throws Exception {
+		String line;
+		String[] splitLine;
+		try {
+			line = bf.readLine();
+			numItems = Integer.parseInt((line.split(" "))[1]);
+			ItemInfo.setNextID(numItems);
+			
+			while((line = bf.readLine()) != null) {
+				splitLine = line.split(", ");
+				int id = Integer.parseInt(splitLine[0]);
+				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[1]), 
+							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[4]), id));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new Exception("Couldn't read catalogue from file stack trace");
+		}		
 	}
 	
 //////////////////modifiers

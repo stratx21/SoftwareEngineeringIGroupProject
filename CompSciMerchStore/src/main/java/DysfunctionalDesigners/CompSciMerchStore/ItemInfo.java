@@ -28,9 +28,9 @@ public class ItemInfo {
 	 */
 	public ItemInfo(int ID) {
 		this.itemID = ID;
-		this.description = "ERROR: This is a temporary ItemInfo and shouldn't be used for more than that";
-		this.displayName = "ERROR: This is a temporary ItemInfo and shouldn't be used for more than that";
-		this.extendedItemID = "ERROR: This is a temporary ItemInfo and shouldn't be used for more than that";
+		this.description = "ERROR: This is a temporary ItemInfo used for searching/comparing and shouldn't be used for more than that";
+		this.displayName = "ERROR: This is a temporary ItemInfo used for searching/comparing and shouldn't be used for more than that";
+		this.extendedItemID = "ERROR: This is a temporary ItemInfo used for searching/comparing and shouldn't be used for more than that";
 		this.stock = -1;
 		this.vendorID = -1;
 		this.saleDiscount = -1;
@@ -51,7 +51,7 @@ public class ItemInfo {
 		}
 	}
 	
-	private ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id) {
+	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id) {
 		super();
 		this.description = description;
 		this.displayName = displayName;
