@@ -14,10 +14,18 @@ public class LineItem {
 		this.promoCodes = new ArrayList<String>();
 	}
 	
+	/**
+	 * Adds a promo code to the item
+	 * @param promo the promo code to add
+	 */
 	public void addPromoCode(String promo) {
 		this.promoCodes.add(promo);
 	}
 	
+	/**
+	 * Returns the total price for this item counting by quantity.
+	 * @return the total price
+	 */
 	public double getTotalPrice() {
 		return this.quantity * Catalogue.getItem(this.itemID).getTotalDiscount(this.promoCodes);
 	}

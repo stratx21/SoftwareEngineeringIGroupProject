@@ -10,6 +10,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	private static Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private static int numItems = 0;
 	
+	/**
+	 * Reads the catalogue from a file and sets the next itemid to add.
+	 * @param bf the file to read from
+	 * @throws Exception if it can't read from the catalogue
+	 */
 	public static void readFile(BufferedReader bf) throws Exception {
 		String line;
 		String[] splitLine;
