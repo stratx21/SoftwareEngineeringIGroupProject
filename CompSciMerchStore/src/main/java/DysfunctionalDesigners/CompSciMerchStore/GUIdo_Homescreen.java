@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			+ "to each other.";
 	private final static ItemInfo display_item1 = Catalogue.getItem(00000),
 						          display_item2 = Catalogue.getItem(00001);
+	
+	private static BufferedImage cashn = null;
 			
 	/**
 	 * This sets up the GUIdo_Homescreen instance 
@@ -50,6 +53,13 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		this.add(display_item_2);
 		
 		this.setOpaque(false);
+		
+		try {
+			cashn = (BufferedImage)ImageIO.read(new File("src/main/resources/cashn.jpg"));
+		} catch(Exception e) {
+			System.out.println("Error drawing CASHN");
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -71,13 +81,10 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		g.setColor(new Color(255,181,9));
 		g.setFont(new Font("Ariel",Font.PLAIN,this.getWidth()/16));
 		
-		try {
-			g.drawImage(ImageIO.read(new File("src/main/resources/cashn.jpg")), 
-					this.getWidth()*1/10, this.getHeight()*1/10, this.getWidth()*2/5,this.getWidth()*3/14, null);
-		} catch(Exception e) {
-			System.out.println("Error drawing CASHN");
-			e.printStackTrace();
-		}
+		
+		g.drawImage(this.cashn, 
+				this.getWidth()*1/10, this.getHeight()*1/10, this.getWidth()*2/5,this.getWidth()*3/14, null);
+		
 		
 		g.drawRect(this.getWidth()*6/10, this.getHeight()*1/10, welcome_width, this.getHeight()*7/10);
 		g.drawString("Welcome!", welcome_x_start, currenty);

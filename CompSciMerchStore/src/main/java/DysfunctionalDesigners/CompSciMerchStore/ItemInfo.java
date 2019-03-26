@@ -2,6 +2,7 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -80,16 +81,25 @@ public class ItemInfo {
 	 */
 	public static void setNextID(int id) { NEXT_ID = id; }
 	
+	private BufferedImage image=null;
+	
 	public void drawDisplay(Graphics g, int x, int y, int width, int height) {
 		int currenty = y+height*3/4;
 		int line_height = g.getFontMetrics(DESC_FONT).getHeight();
-		try {
-			g.drawImage(ImageIO.read(new File("src/main/resources/itemimages/"
-					+String.format("%0" + EXTENDED_ID_LENGTH + "d",this.itemID)+".jpg")), 
-					x,y,width,currenty-y, null);
-		} catch(IOException ioex) {
-			ioex.printStackTrace();
+		
+		if(this.image==null) {
+			try {
+				this.image=ImageIO.read(new File("src/main/resources/itemimages/"
+						+String.format("%0" + EXTENDED_ID_LENGTH + "d",this.itemID)+".jpg"));
+			} catch(IOException ioex) {
+				ioex.printStackTrace();
+			}
 		}
+		
+		
+			g.drawImage(this.image, 
+					x,y,width,currenty-y, null);
+		
 		
 		g.setFont(DESC_FONT);
 		
