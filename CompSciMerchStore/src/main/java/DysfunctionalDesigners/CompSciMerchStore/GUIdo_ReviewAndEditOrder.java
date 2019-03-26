@@ -26,7 +26,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	public GUIdo_ReviewAndEditOrder(Sale sale) {
 	    super();
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
-	    this.drawScreen(sale);
+	    this.drawScreen(sale, 0);
 	    this.drawCart(sale);
   	    this.repaint();
 	}
@@ -39,8 +39,11 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	}
 	
 	
-	public void drawScreen(Sale sale) {
+	public void drawScreen(Sale sale, int num) {
 		DecimalFormat df2 = new DecimalFormat("0.00");
+		if(num == 1) {
+			this.removeAll(); // redraw components
+		}
 		
 		// title at top of screen
 		JLabel label= new JLabel("Review and Edit Order");
@@ -49,6 +52,9 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		label.setSize(1300, 100);
 		label.setFont(new Font("Cambria", Font.BOLD, 34));
 		this.add(label);
+		
+		GUIdo_CButton proceed = new GUIdo_CButton(965, 415, 200, 50, "Proceed to Checkout");
+		this.add(proceed);
 		
 		// initial subtotal box component
 		JLabel od = new JLabel("Order Details");
@@ -73,6 +79,9 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		od.setFont(new Font("Cambria", Font.ROMAN_BASELINE, 22));
 		od.setHorizontalAlignment(SwingConstants.RIGHT);
 		od.setSize(1125, 300);
+		shipping.setFont(new Font("Cambria", Font.PLAIN, 14));
+		shipping.setHorizontalAlignment(SwingConstants.RIGHT);
+		shipping.setSize(1172, 575);
 		subtotal.setFont(new Font("Cambria", Font.PLAIN, 14));
 		subtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		subtotal.setSize(1172, 425);
@@ -83,9 +92,6 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		total.setHorizontalAlignment(SwingConstants.RIGHT);
 		total.setSize(1173, 700);
 		total.setForeground(Color.red);
-		shipping.setFont(new Font("Cambria", Font.PLAIN, 14));
-		shipping.setHorizontalAlignment(SwingConstants.RIGHT);
-		shipping.setSize(1172, 575);
 		
 		this.add(subtotal);
 		this.add(od);
@@ -93,8 +99,10 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.add(total);
 		this.add(shipping);
 		
-		GUIdo_CButton proceed = new GUIdo_CButton(965, 415, 200, 50, "Proceed to Checkout");
-		this.add(proceed);
+		subtotal.repaint();
+		estTax.repaint();
+		total.repaint();
+		this.repaint();
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -110,7 +118,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	    int y3 = 200;
 	    String[] numItems = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 	    DecimalFormat df2 = new DecimalFormat("0.00");
-
+	    
 		if(sale.getNumUniqueItems() > 0) { // CHANGE TO > 0
 			for(Entry<Integer, LineItem> i : sale.getItemList().entrySet()) {
 			//for(int j = 0; j < 2; j++) {
@@ -157,22 +165,19 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    this.add(quantity);
 			    
 			    quantity.addActionListener(new ActionListener() {
-			    	
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JComboBox comboBox = (JComboBox) e.getSource();
 						Object selected = comboBox.getSelectedItem();
 						String command = e.getActionCommand();
 						
-						//if("comboBoxChanged".equals(command)) {
-		                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
-		                    	updateOrderDetails(sale);
-		                    }
-
-		               // }
+	                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
+	                    	updateOrderDetails(sale);
+	                    	quantity.updateUI();
+	                    }
 					}
-			    	
 			    });
+			    
 			    
 			    /*
 			    JLabel quan = new JLabel();
@@ -192,6 +197,8 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	
 	public void updateOrderDetails(Sale sale) {
 		// update JLabels for order detail components with new data
+		this.drawScreen(sale, 1);
+		/*
 		DecimalFormat df2 = new DecimalFormat("0.00");
 		JLabel subtotal = null;
 		if(sale.getNumItems() == 1) {
@@ -224,10 +231,11 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.add(estTax);
 		this.add(total);
 		
+		
 		subtotal.repaint();
 		estTax.repaint();
 		total.repaint();
-		this.repaint();
+		this.repaint();*/
 	}
 
 	@Override
