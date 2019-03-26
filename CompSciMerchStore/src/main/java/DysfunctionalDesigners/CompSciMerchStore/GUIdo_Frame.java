@@ -55,9 +55,10 @@ public class GUIdo_Frame extends JFrame{
 	private void toolbar_call(ActionEvent e) {
 		if(e.getActionCommand().equals("search")) {
 			//the flow for the search, when the search is submitted
-			String searched = (String)e.getSource();
-			
-			
+			if(!toolbar.getButtons_disabled()) {
+				String searched = (String)e.getSource();
+				
+			}
 		} else if(e.getActionCommand().equals("home")) {
 			to_homescreen();
 		} else if(e.getActionCommand().equals("wishlist")) {
@@ -67,7 +68,7 @@ public class GUIdo_Frame extends JFrame{
 			
 			
 		} else if(e.getActionCommand().equals("cart")) {
-			to_cart((Sale)e.getSource());
+			to_cart(cart);
 		}
 	}
 	
@@ -83,22 +84,21 @@ public class GUIdo_Frame extends JFrame{
 	
 	private void login_call(ActionEvent e) {
 		if(e.getActionCommand().equals("Enter")) {
-			if(e.getSource() instanceof User) {
-				current_user = (User)e.getSource();
-			} else {
-				System.err.println("ERROR: User not passed back as the source, GUIdo_Frame");
-			}
+			current_user = (User)e.getSource();
 			
 			this.cart = new Sale(this.current_user.getUserID());
+			toolbar.enable_all_buttons();
 			to_homescreen();
 		} else if(e.getActionCommand().equals("Continue as a guest!")) {
 			
-			//current_user = new Customer()*************************************************************************************************
+			this.current_user = new Customer(new String[]{"guest@email.com", "guesty", "guest", "guestPass", "Guest", "19999"});
 			
 			this.cart = new Sale(this.current_user.getUserID());
+			toolbar.enable_all_buttons();
 			to_homescreen();
+			
 		} else if(e.getActionCommand().equals("Create Account")) {
-			this.current_user = new Customer(new String[]{"guest@email.com", "guesty", "guest", "guestPass", "Guest", "19999"});
+			
 		} else if(e.getActionCommand().equals("Forgot Password?")) {
 			
 		}
@@ -107,6 +107,9 @@ public class GUIdo_Frame extends JFrame{
 	private void to_cart(Sale sale) {
 		this.current_panel = new GUIdo_ReviewAndEditOrder(sale);
 		scrollpane.getViewport().add(this.current_panel);
+		scrollpane.repaint();
+		this.current_panel.repaint();
+		System.out.println("ITEMS: " + sale.getNumItems());
 	}
 	
 	private void to_homescreen() {
@@ -121,7 +124,14 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	private void display_item(ItemInfo item) {
-		current_panel = new GUIdo_ItemDisplay(item,scrollpane.getWidth());
+		current_panel = new GUIdo_ItemDisplay(item,scrollpane.getWidth(),cart,new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("item_added")) {
+					cart = (Sale)e.getSource();
+					System.out.println("CART UPDATED: items: " + cart.getNumItems());
+				}
+			}
+		});
 		scrollpane.getViewport().add(current_panel);
 	}
 	
@@ -155,9 +165,7 @@ public class GUIdo_Frame extends JFrame{
 					
 				}
 			}
-		}); 
-		
-		
+		});
 		
 		
 		scrollpane = new JScrollPane(current_panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -224,7 +232,8 @@ public class GUIdo_Frame extends JFrame{
 		//set visible after adding Components: 
 		this.setVisible(true);
 		
-		this.to_homescreen();
+		this.to_login();
+		toolbar.disable_all_buttons();
 		
 		//repaint for toolbar, then for others:
 		this.toolbar.repaint();
