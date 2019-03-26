@@ -109,7 +109,6 @@ public class GUIdo_Frame extends JFrame{
 		scrollpane.getViewport().add(this.current_panel);
 		scrollpane.repaint();
 		this.current_panel.repaint();
-		System.out.println("ITEMS: " + sale.getNumItems());
 	}
 	
 	private void to_homescreen() {
@@ -128,7 +127,7 @@ public class GUIdo_Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("item_added")) {
 					cart = (Sale)e.getSource();
-					System.out.println("CART UPDATED: items: " + cart.getNumItems());
+					to_cart(cart);
 				}
 			}
 		});
