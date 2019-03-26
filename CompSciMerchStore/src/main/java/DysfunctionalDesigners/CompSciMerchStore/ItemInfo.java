@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import javax.imageio.ImageIO;
 
 public class ItemInfo {
 	public static final int EXTENDED_ID_LENGTH = 5;
-	private static Font DESC_FONT=new Font("Ariel",Font.PLAIN,10);
+	private static Font DESC_FONT=new Font("Ariel",Font.PLAIN,27);
 	private static int NEXT_ID = 0;
 	private String description, displayName, extendedItemID;
 	private int itemID, stock, vendorID;
@@ -65,7 +66,7 @@ public class ItemInfo {
 		this.description = description;
 		this.displayName = displayName;
 		this.itemID = id;///////////////////////////////////////////this will need to be changed to be incorporated into one of the files so new items don't get set to old item's numbers
-		this.extendedItemID = String.format("%0" + EXTENDED_ID_LENGTH, this.itemID);
+		this.extendedItemID = String.format("%0" + EXTENDED_ID_LENGTH + "d", this.itemID);
 		this.stock = stock;
 		this.vendorID = vendorID;
 		this.saleDiscount = 0.0;
@@ -83,7 +84,8 @@ public class ItemInfo {
 		int currenty = y+height*3/4;
 		int line_height = g.getFontMetrics(DESC_FONT).getHeight();
 		try {
-			g.drawImage(ImageIO.read(new File("src/main/resources/ItemImages/"+String.format("%05d",this.itemID)+".jpg")), 
+			g.drawImage(ImageIO.read(new File("src/main/resources/itemimages/"
+					+String.format("%0" + EXTENDED_ID_LENGTH + "d",this.itemID)+".jpg")), 
 					x,y,width,currenty-y, null);
 		} catch(IOException ioex) {
 			ioex.printStackTrace();
@@ -91,12 +93,14 @@ public class ItemInfo {
 		
 		g.setFont(DESC_FONT);
 		
+		currenty+=line_height;
+		
 		ArrayList<String> lines = GUIdo_OutputTools.formatStringForPrompt(this.displayName,DESC_FONT,width);
 		for(String line : lines) {
 			g.drawString(line, x, currenty);
 			currenty+=line_height;
 		}
-		g.drawString(this.price+"", x, currenty);
+		g.drawString("$"+new DecimalFormat("#.00").format(this.price), x, currenty);
 		currenty+=line_height;
 	}
 
