@@ -43,6 +43,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		DecimalFormat df2 = new DecimalFormat("0.00");
 		if(num == 1) {
 			this.removeAll(); // redraw components
+			this.setLayout(null);
 		}
 		
 		// title at top of screen
