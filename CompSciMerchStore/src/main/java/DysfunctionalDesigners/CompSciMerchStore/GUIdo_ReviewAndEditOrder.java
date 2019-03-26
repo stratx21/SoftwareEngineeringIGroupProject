@@ -109,7 +109,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	    int x3 = 450;
 	    int y3 = 200;
 	    String[] numItems = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-	    
+	    DecimalFormat df2 = new DecimalFormat("0.00");
 
 		if(sale.getNumUniqueItems() > 0) { // CHANGE TO > 0
 			for(Entry<Integer, LineItem> i : sale.getItemList().entrySet()) {
@@ -133,7 +133,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    
 			    // price component
 
-			    JLabel price = new JLabel("Price: $" + sale.getItemList().get(i.getKey()).getTotalPrice());
+			    JLabel price = new JLabel("Price: $" + df2.format(sale.getItemList().get(i.getKey()).getTotalPrice()));
 			    price.setHorizontalAlignment(SwingConstants.CENTER);
 			    price.setSize(x2, y2);
 			    y2 += 2*h + 200; // unsure about constant factor multiplier to maintain continuity in position
