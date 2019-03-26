@@ -160,7 +160,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    
 			    JComboBox quantity;
 			    quantity = new JComboBox(numItems);
-			    quantity.setLayout(new GridLayout(0, 1));
+			    //quantity.setLayout(new GridLayout(0, 1));
 			    //quantity.addActionListener(this);
 			    quantity.setSelectedIndex(sale.getItemList().get(i.getKey()).getQuantity());
 			    quantity.setBounds(x3, y3, 50, 50);
@@ -185,7 +185,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    price.repaint();
 			    q.repaint();
 			    //quantity.revalidate();
-			    //quantity.repaint();
+			    quantity.repaint();
 			    quantity.validate();
 			    this.repaint();
 			    
