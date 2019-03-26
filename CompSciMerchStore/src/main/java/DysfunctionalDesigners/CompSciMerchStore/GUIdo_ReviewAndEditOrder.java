@@ -120,7 +120,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 				ItemInfo currItem = Catalogue.getItem(i.getKey());
 				BufferedImage image = null;
 				try {
-					image = ImageIO.read(new File("src/main/resources/itemimages" + currItem.getExtendedItemID() + ".jpg"));
+					image = ImageIO.read(new File("src/main/resources/itemimages/" + currItem.getExtendedItemID() + ".jpg"));
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -133,7 +133,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    
 			    // price component
 
-			    JLabel price = new JLabel("Price: $" + sale.getItemList().get(i).getTotalPrice());
+			    JLabel price = new JLabel("Price: $" + sale.getItemList().get(i.getKey()).getTotalPrice());
 			    price.setHorizontalAlignment(SwingConstants.CENTER);
 			    price.setSize(x2, y2);
 			    y2 += 2*h + 200; // unsure about constant factor multiplier to maintain continuity in position
@@ -165,7 +165,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 						String command = e.getActionCommand();
 						
 						if("comboBoxChanged".equals(command)) {
-		                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), (int)selected)) {
+		                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
 		                    	//getRootPane().add(comboBox);
 		                    	updateOrderDetails(sale);
 		                    }
