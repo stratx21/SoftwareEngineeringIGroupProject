@@ -69,6 +69,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		this.add(searchBar);
 		this.add(wishlist);
 		this.add(login);
+		this.add(cart);
 		
 		home_button.repaint();
 		
