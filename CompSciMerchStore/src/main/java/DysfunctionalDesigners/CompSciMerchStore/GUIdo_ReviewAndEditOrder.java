@@ -184,7 +184,8 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    pic.repaint();
 			    price.repaint();
 			    q.repaint();
-			    //quantity.repaint();
+			    quantity.revalidate();
+			    quantity.repaint();
 			    this.repaint();
 			    
 			    /*
