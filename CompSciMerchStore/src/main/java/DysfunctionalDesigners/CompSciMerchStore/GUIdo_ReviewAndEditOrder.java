@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -159,6 +160,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    
 			    JComboBox quantity;
 			    quantity = new JComboBox(numItems);
+			    quantity.setLayout(new GridLayout(0, 1));
 			    //quantity.addActionListener(this);
 			    quantity.setSelectedIndex(sale.getItemList().get(i.getKey()).getQuantity());
 			    quantity.setBounds(x3, y3, 50, 50);
