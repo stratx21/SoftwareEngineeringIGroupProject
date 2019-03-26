@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -20,6 +21,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	private BufferedImage item_image = null;
 	
 	private ItemInfo item = null;
+	
+	private static final Font DESC_FONT = new Font("Calibri",Font.PLAIN,35);
 	
 	private int quantity_chosen = 1;
 	
@@ -54,15 +57,26 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		stock.setBounds(price.getX(), price.getY()+35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(stock);
 		
-		JLabel desc =  new JLabel("Item Description:\n"+this.item.getDescription());
-		desc.setFont(new Font("Calibri",Font.PLAIN,35));
-		desc.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*3/20, this.getWidth()/2-this.getWidth()/10, this.getHeight()/5);
-		this.add(desc);
 		
+		int currenty = stock.getY()+stock.getHeight()+5;
+		final int DESC_LINE_HEIGHT = 40;//g.getFontMetrics(DESC_FONT).getHeight();
+		
+		ArrayList<String> desc_lines = GUIdo_OutputTools.formatStringForPrompt(this.item.getDescription(), DESC_FONT, this.getWidth()/2-this.getWidth()/10);
+		
+		JLabel desc = null;
+		
+		for(String line : desc_lines) {
+			desc =  new JLabel(this.item.getDescription());
+			
+			desc.setFont(DESC_FONT);
+			desc.setBounds(this.getWidth()/2+this.getWidth()/10, currenty, this.getWidth()/2-this.getWidth()/10, DESC_LINE_HEIGHT);
+			currenty += DESC_LINE_HEIGHT;
+			this.add(desc);
+		}
 		
 		JLabel quantityis = new JLabel("Quantity: ");
 		quantityis.setFont(new Font("Calibri",Font.PLAIN,20));
-		quantityis.setBounds(desc.getX(), desc.getY()+desc.getHeight()+5, 88, 25);
+		quantityis.setBounds(desc.getX(), currenty+DESC_LINE_HEIGHT+5, 88, 25);
 		this.add(quantityis);
 		
 		ArrayList<String> options = new ArrayList<>();
@@ -89,7 +103,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	    
 	    this.add(quantity);
 		
-		GUIdo_CButton addtocart = new GUIdo_CButton(quantity.getX()+quantity.getWidth()+5 ,desc.getY()+desc.getHeight()+5, 250, 50, "add to cart");
+		GUIdo_CButton addtocart = new GUIdo_CButton(quantity.getX()+quantity.getWidth()+5 ,quantity.getY(), 250, 50, "add to cart");
 		addtocart.setActionCommand("add_to_cart");
 		addtocart.setActionListener_clicked(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
