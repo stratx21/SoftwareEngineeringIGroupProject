@@ -27,7 +27,7 @@ public class LineItem {
 	 * @return the total price
 	 */
 	public double getTotalPrice() {
-		return this.quantity * Catalogue.getItem(this.itemID).getTotalDiscount(this.promoCodes);
+		return this.quantity * Catalogue.getItem(this.itemID).getTotalPrice(this.promoCodes);
 	}
 	
 	public int getQuantity() { return quantity; }
