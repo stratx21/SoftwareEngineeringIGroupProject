@@ -10,8 +10,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 public class GUIdo_Homescreen extends GUIdo_CPanel{
 	private static final String SCHPIEL = "Our store vision is simple. "
@@ -21,17 +19,35 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			+ "Major at Baylor University. With the use of our product, we believe "
 			+ "Computer Science Majors will better be able to understand and relate "
 			+ "to each other.";
+	private final static ItemInfo display_item1 = Catalogue.getItem(00000),
+						          display_item2 = Catalogue.getItem(00001);
 			
 	/**
 	 * This sets up the GUIdo_Homescreen instance 
 	 */
-	public GUIdo_Homescreen(){
-		super();
-		this.setPreferredSize(new Dimension(this.getWidth(), 1000));
+	public GUIdo_Homescreen(ActionListener done, int width){
+		super(1500);
+		this.setSize(new Dimension(width, 1500));
 		
+		System.out.println("width = " + width);
 		
+		GUIdo_CButton display_item_1 = new GUIdo_CButton(this.getWidth()*1/10, this.getWidth()*3/10*3/4+this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), 30, 
+				//50,50,100,100,
+				"view");
+		display_item_1.setActionListener_clicked(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				done.actionPerformed(new ActionEvent(display_item1, ActionEvent.ACTION_PERFORMED, "display1"));
+			}
+		});
+		this.add(display_item_1);
 		
-		
+		GUIdo_CButton display_item_2 = new GUIdo_CButton(this.getWidth()*3/10, this.getWidth()*3/10*3/4+this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), 30, "view");
+		display_item_2.setActionListener_clicked(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				done.actionPerformed(new ActionEvent(display_item2, ActionEvent.ACTION_PERFORMED, "display2"));
+			}
+		});
+		this.add(display_item_2);
 	}
 	
 	/**
@@ -50,6 +66,13 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		g.setColor(Color.PINK);
 		g.setFont(new Font("Ariel",Font.PLAIN,this.getWidth()/16));
 		
+		try {
+			g.drawImage(ImageIO.read(new File("src/main/resources/cashn.jpg")), 
+					this.getWidth()*1/10, this.getHeight()*1/10, this.getWidth()*2/5,this.getWidth()*3/14, null);
+		} catch(Exception e) {
+			System.out.println("Error drawing CASHN");
+			e.printStackTrace();
+		}
 		
 		g.drawRect(this.getWidth()*6/10, this.getHeight()*1/10, welcome_width, this.getHeight()*7/10);
 		g.drawString("Welcome!", welcome_x_start, currenty);
@@ -63,22 +86,10 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			currenty+=this.getFontMetrics(desc_font).getHeight();
 		}
 		
-		try {//in case the item doesn't actually exist or import properly 
-			Catalogue
-				.getItem(00000)
-				.drawDisplay(g, this.getWidth()*1/10, this.getWidth()*4/10, this.getWidth()*2/10, welcome_width);
-		} catch(Exception e) {
-			System.out.println("Error importing item: ");
-			e.printStackTrace();
-		}
 		
-		try {
-			g.drawImage(ImageIO.read(new File("src/main/resources/hat.jpg")), 
-					this.getWidth()*1/10, this.getWidth()*1/10, this.getWidth()*2/10,this.getWidth()*2/10, null);
-		} catch(Exception e) {
-			System.out.println("ERROR drawing picture: ");
-			e.printStackTrace();
-		}
+		display_item1.drawDisplay(g, this.getWidth()*1/10, this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
+	
+		display_item2.drawDisplay(g, this.getWidth()*3/10, this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
 		
 	}
 
