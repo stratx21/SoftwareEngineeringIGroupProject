@@ -150,8 +150,8 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    
 			    JComboBox quantity;
 			    quantity = new JComboBox(numItems);
-			    quantity.addActionListener(this);
-			    quantity.setSelectedIndex(1);
+			    //quantity.addActionListener(this);
+			    quantity.setSelectedIndex(sale.getItemList().get(i.getKey()).getQuantity());
 			    quantity.setBounds(x3, y3, 50, 50);
 			    y3 += 350;
 			    this.add(quantity);
@@ -174,7 +174,6 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 					}
 			    	
 			    });
-			    
 			    
 			    /*
 			    JLabel quan = new JLabel();
