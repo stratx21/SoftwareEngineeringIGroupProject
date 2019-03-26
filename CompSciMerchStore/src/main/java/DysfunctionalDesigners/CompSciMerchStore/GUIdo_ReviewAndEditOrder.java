@@ -223,6 +223,11 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.add(subtotal);
 		this.add(estTax);
 		this.add(total);
+		
+		subtotal.repaint();
+		estTax.repaint();
+		total.repaint();
+		this.repaint();
 	}
 
 	@Override
