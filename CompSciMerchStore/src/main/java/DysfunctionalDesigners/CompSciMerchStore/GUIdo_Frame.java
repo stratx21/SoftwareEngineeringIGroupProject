@@ -21,6 +21,10 @@ public class GUIdo_Frame extends JFrame{
 	 * the height in pixels of the toolbar
 	 */
 	private final int TOOLBAR_HEIGHT = 70;//pixels
+	
+	private JScrollPane scrollpane;
+	
+	private Sale cart; 
 
 	/**
 	 * the GUIdo_CToolbar instance to be used for the toolbar in this frame
@@ -32,6 +36,8 @@ public class GUIdo_Frame extends JFrame{
 	 * 	list of professors 
 	 */
 	GUIdo_SectionHeader professorHeader = null;
+	
+	private User current_user = null;
 	
 	/**
 	 * the current panel that is being used for the page to scroll through
@@ -53,22 +59,70 @@ public class GUIdo_Frame extends JFrame{
 			
 			
 		} else if(e.getActionCommand().equals("home")) {
-			current_panel=new GUIdo_Homescreen();
-			current_panel.repaint();
+			to_homescreen();
 		} else if(e.getActionCommand().equals("wishlist")) {
 			System.out.println("wishlist");
 		} else if(e.getActionCommand().equals("login")) {
-			System.out.println("login");
-			current_panel = new GUIdo_LoginScreen(new ActionListener () {
-				public void actionPerformed(ActionEvent e) {
-					login_call(e);
-				}
-			});
+			to_login();
+			
+			
+		} else if(e.getActionCommand().equals("cart")) {
+			to_cart((Sale)e.getSource());
 		}
 	}
 	
-	private void login_call(ActionEvent e) {
+	private void to_login() {
+		current_panel = new GUIdo_LoginScreen(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				login_call(e);
+			}
+		});
+		scrollpane.getViewport().add(current_panel);
 		
+	}
+	
+	private void login_call(ActionEvent e) {
+		if(e.getActionCommand().equals("Enter")) {
+			if(e.getSource() instanceof User) {
+				current_user = (User)e.getSource();
+			} else {
+				System.err.println("ERROR: User not passed back as the source, GUIdo_Frame");
+			}
+			
+			this.cart = new Sale(this.current_user.getUserID());
+			to_homescreen();
+		} else if(e.getActionCommand().equals("Continue as a guest!")) {
+			
+			//current_user = new Customer()*************************************************************************************************
+			
+			this.cart = new Sale(this.current_user.getUserID());
+			to_homescreen();
+		} else if(e.getActionCommand().equals("Create Account")) {
+			this.current_user = new Customer(new String[]{"guest@email.com", "guesty", "guest", "guestPass", "Guest", "19999"});
+		} else if(e.getActionCommand().equals("Forgot Password?")) {
+			
+		}
+	}
+	
+	private void to_cart(Sale sale) {
+		this.current_panel = new GUIdo_ReviewAndEditOrder(sale);
+		scrollpane.getViewport().add(this.current_panel);
+	}
+	
+	private void to_homescreen() {
+		current_panel = new GUIdo_Homescreen(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
+					display_item((ItemInfo)e.getSource());
+				}
+			}
+		}, scrollpane.getWidth());
+		scrollpane.getViewport().add(current_panel);
+	}
+	
+	private void display_item(ItemInfo item) {
+		current_panel = new GUIdo_ItemDisplay(item,scrollpane.getWidth());
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	/**
@@ -101,26 +155,24 @@ public class GUIdo_Frame extends JFrame{
 					
 				}
 			}
-		});
-		
-		this.current_panel=new GUIdo_Homescreen();
+		}); 
 		
 		
 		
 		
+		scrollpane = new JScrollPane(current_panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollpane.setAutoscrolls(true);
 		
-		final JScrollPane pane = new JScrollPane(current_panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		pane.setAutoscrolls(true);
+		scrollpane.setLocation(0, TOOLBAR_HEIGHT);
+		scrollpane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-4*TOOLBAR_HEIGHT));
+		scrollpane.getVerticalScrollBar().setUnitIncrement(5);
 		
-		pane.setLocation(0, TOOLBAR_HEIGHT);
-		pane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-4*TOOLBAR_HEIGHT));
-		
-		pane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+		scrollpane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 
 			public void adjustmentValueChanged(AdjustmentEvent arg0) {
 				// TODO Auto-generated method stub
 				
-				pane.repaint();
+				scrollpane.repaint();
 				toolbar.repaint();
 				
 			}
@@ -128,14 +180,17 @@ public class GUIdo_Frame extends JFrame{
 		});
 		
 		
-		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		
 		//add toolbar and pane to the panel
 		panel.add(toolbar);
 		panel.add(professorHeader);
-		panel.add(pane);
+		panel.add(scrollpane);
 		this.add(panel);
+		
+		
+		
 		
 		//
 		//this (frame) contains:
@@ -168,6 +223,8 @@ public class GUIdo_Frame extends JFrame{
 		
 		//set visible after adding Components: 
 		this.setVisible(true);
+		
+		this.to_homescreen();
 		
 		//repaint for toolbar, then for others:
 		this.toolbar.repaint();

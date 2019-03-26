@@ -2,4 +2,3 @@ nextid 3
 00000, T-Shirt, It's comfy cozy and crazy fashionable, 27, 40000, 20
 00001, Hat, Cool hat bro, 1, 40000, 168015
 00002, Tank top, Pink limited edition from Zing 2019 worn by Josh Holland himself, 1, 40000, 68
-

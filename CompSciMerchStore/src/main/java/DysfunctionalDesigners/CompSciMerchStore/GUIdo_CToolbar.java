@@ -21,6 +21,11 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		//home button:
 		
+		GUIdo_CButton cart = new GUIdo_CButton(width-height*4,y, height,height, "CART");
+		cart.setActionCommand("cart");
+		cart.setActionListener_clicked(done);
+		cart.setBackground(Color.YELLOW);
+		
 		GUIdo_CButton home_button = new GUIdo_CButton(x,y,height,height,"HOME");
 		home_button.setActionCommand("home");
 		home_button.setActionListener_clicked(done);
@@ -54,7 +59,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 				done.actionPerformed(forPerformed);
 			}
 		});
-		searchBar.setSize(width-height*4, height/2);
+		searchBar.setSize(width-height*5, height/2);
 		searchBar.setLocation(height, height/4);
 		
 		searchBar.setBackground(new Color(255,102,167));
@@ -64,6 +69,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		this.add(searchBar);
 		this.add(wishlist);
 		this.add(login);
+		this.add(cart);
 		
 		home_button.repaint();
 		
