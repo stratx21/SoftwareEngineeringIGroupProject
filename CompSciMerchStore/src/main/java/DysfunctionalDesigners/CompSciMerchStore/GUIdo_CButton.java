@@ -1,5 +1,7 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -22,6 +24,10 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 	private boolean disabled=false;
 	
 	ActionListener onClicked=null;
+	
+	private Color pressedColor = null;
+	private Color hoverColor = null;
+	private Color defaultColor = null;
 	
 	private String custom_action_command="CLICKED";
 	
@@ -231,6 +237,38 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		this.custom_action_command=newActionCommand;
 	}
 	
+	public void setPressedColor(Color newcolor) {
+		this.pressedColor = newcolor;
+	}
+	
+	public void setHoverColor(Color newcolor) {
+		this.hoverColor=newcolor;
+	}
+	
+	public void setDefaultColor(Color newcolor) {
+		this.defaultColor=newcolor;
+	}
+	
+//	@Override
+//	protected void paintComponent(Graphics g) {
+//		if(!this.disabled && getModel().isPressed() && this.pressedColor != null) {
+//			g.setColor(this.pressedColor);
+//		} else if(!this.disabled && getModel().isRollover() && this.hoverColor != null) {
+//			g.setColor(this.hoverColor);
+//		} else {
+//			g.setColor(this.getBackground());
+//		}
+//		
+//		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+//		super.paintComponent(g);
+//	}
+	
+	@Override
+	public void setBackground(Color newcolor) {
+		this.defaultColor=newcolor;
+		super.setBackground(newcolor);
+	}
+	
 	
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -243,6 +281,8 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		if(!this.disabled) {
 			if(this.hasIcons) {
 				this.setIcon(hoverIcon);
+			} else if(hoverColor != null){
+				super.setBackground(this.hoverColor);
 			}
 		}
 	}
@@ -252,6 +292,8 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		if(!this.disabled) {
 			if(this.hasIcons) {
 				this.setIcon(staleIcon);
+			} else if(defaultColor != null){
+				super.setBackground(this.defaultColor);
 			}
 		}
 	}
@@ -261,6 +303,8 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		if(!this.disabled) {
 			if(this.hasIcons) {
 				this.setIcon(clickedIcon);
+			} else if(pressedColor != null){
+				super.setBackground(this.pressedColor);
 			}
 		}
 	}
@@ -270,6 +314,8 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		if(!this.disabled) {
 			if(this.hasIcons) {
 				this.setIcon(staleIcon);
+			} else if(defaultColor != null){
+				super.setBackground(this.defaultColor);
 			}
 			
 			if(this.onClicked != null) {
