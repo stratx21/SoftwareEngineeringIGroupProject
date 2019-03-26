@@ -27,7 +27,6 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	    super();
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
 	    this.drawScreen(sale, 0);
-	    this.drawCart(sale);
   	    this.repaint();
 	}
 
@@ -46,6 +45,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			this.setLayout(null);
 		}
 		
+		this.drawCart(sale);
 		// title at top of screen
 		JLabel label= new JLabel("Review and Edit Order");
 		label.setHorizontalAlignment(JLabel.CENTER);
