@@ -128,7 +128,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 				} else {
 					//all was correct, user and password
 					ActionEvent forPerformed = new ActionEvent(users.get(0), ActionEvent.ACTION_PERFORMED, "Enter");
-					forPerformed.setSource(tf1.getText());
+					//forPerformed.setSource(tf1.getText());
 					
 					al.actionPerformed(forPerformed);
 				}
