@@ -39,8 +39,8 @@ public class ItemInfo {
 	}
 	
 	/**
-	 * Creates an ItemInfo with the specified fields
-	 * @throws Exception 
+	 * Creates an ItemInfo with the specified fields (and auto sets the id)
+	 * @throws Exception if NEXT_ID hasn't been set yet
 	 */
 	public ItemInfo(String description, String displayName, int stock, int vendorID, double price) throws Exception {
 		this(description, displayName, stock, vendorID, price, NEXT_ID);
@@ -51,6 +51,15 @@ public class ItemInfo {
 		}
 	}
 	
+	/**
+	 * Creates an ItemInfo with the specified fields (does NOT auto set the id)
+	 * @param description
+	 * @param displayName
+	 * @param stock
+	 * @param vendorID
+	 * @param price
+	 * @param id
+	 */
 	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id) {
 		super();
 		this.description = description;
@@ -64,6 +73,10 @@ public class ItemInfo {
 		this.price = price;
 	}
 	
+	/**
+	 * Sets the next id to assign
+	 * @param id the next id to assign
+	 */
 	public static void setNextID(int id) { NEXT_ID = id; }
 	
 	public void drawDisplay(Graphics g, int x, int y, int width, int height) {

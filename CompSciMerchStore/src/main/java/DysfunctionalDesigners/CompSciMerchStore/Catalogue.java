@@ -1,6 +1,8 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,20 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	private static Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private static int numItems = 0;
 	
+	static {
+		try{
+    		Catalogue.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
+    	} catch(Exception e) {
+    		System.out.println("Error importing the Catalogue: ");
+    		e.printStackTrace();
+    	}
+	}
+	
+	/**
+	 * Reads the catalogue from a file and sets the next itemid to add.
+	 * @param bf the file to read from
+	 * @throws Exception if it can't read from the catalogue
+	 */
 	public static void readFile(BufferedReader bf) throws Exception {
 		String line;
 		String[] splitLine;
@@ -18,11 +34,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 			numItems = Integer.parseInt((line.split(" "))[1]);
 			ItemInfo.setNextID(numItems);
 			
-			while((line = bf.readLine()) != null) {
+			while((line = bf.readLine()) != "" && line != null) {
 				splitLine = line.split(", ");
 				int id = Integer.parseInt(splitLine[0]);
-				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[1]), 
-							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[4]), id));
+				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[3]), 
+							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[5]), id));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

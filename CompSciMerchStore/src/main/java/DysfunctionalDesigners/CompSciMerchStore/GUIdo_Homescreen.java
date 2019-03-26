@@ -63,6 +63,15 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			currenty+=this.getFontMetrics(desc_font).getHeight();
 		}
 		
+		try {//in case the item doesn't actually exist or import properly 
+			Catalogue
+				.getItem(00000)
+				.drawDisplay(g, this.getWidth()*1/10, this.getWidth()*4/10, this.getWidth()*2/10, welcome_width);
+		} catch(Exception e) {
+			System.out.println("Error importing item: ");
+			e.printStackTrace();
+		}
+		
 		try {
 			g.drawImage(ImageIO.read(new File("src/main/resources/hat.jpg")), 
 					this.getWidth()*1/10, this.getWidth()*1/10, this.getWidth()*2/10,this.getWidth()*2/10, null);
