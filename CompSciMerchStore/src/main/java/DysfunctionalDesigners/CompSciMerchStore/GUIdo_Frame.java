@@ -98,7 +98,7 @@ public class GUIdo_Frame extends JFrame{
 			this.cart = new Sale(this.current_user.getUserID());
 			to_homescreen();
 		} else if(e.getActionCommand().equals("Create Account")) {
-			
+			this.current_user = new Customer(new String[]{"guest@email.com", "guesty", "guest", "guestPass", "Guest", "19999"});
 		} else if(e.getActionCommand().equals("Forgot Password?")) {
 			
 		}

@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 enum MemberLevel{
@@ -39,6 +40,12 @@ public class Customer extends Vendor{
 	}
 	public Customer(String [] d) {
 		super(d);
+		this.status = MemberLevel.GENERAL;
+		this.paymentInfo = null;
+		this.shippingAddr = null;
+		this.wishList = null;
+		this.cart = null;
+		this.previousPurchases = null;
 	}
 	
 	
@@ -65,6 +72,10 @@ public class Customer extends Vendor{
 	
 
 	public void updateWishlist(ItemInfo item) {
+		if(this.wishList == null) {
+			this.wishList = new ArrayList<ItemInfo>();
+		}
+		
 		if(this.wishList.contains(item)) {
 			this.wishList.remove(item);
 		}
@@ -74,9 +85,15 @@ public class Customer extends Vendor{
 	}
 	
 	public void addToCart(int id, int q) {
+		if(this.cart == null) {
+			this.cart = new Sale(this.getUserID());
+		}
 		this.cart.addItem(q, id);
 	}
 	public void updatePreviousPurchases(Sale sale) {
+		if(this.previousPurchases == null) {
+			this.previousPurchases = new ArrayList<Sale>();
+		}
 		this.previousPurchases.add(sale);
 	}
 	
