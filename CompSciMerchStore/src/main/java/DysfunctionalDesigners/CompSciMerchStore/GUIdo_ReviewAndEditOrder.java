@@ -157,20 +157,19 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    this.add(quantity);
 			    
 			    quantity.addActionListener(new ActionListener() {
-
+			    	
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JComboBox comboBox = (JComboBox) e.getSource();
 						Object selected = comboBox.getSelectedItem();
 						String command = e.getActionCommand();
 						
-						if("comboBoxChanged".equals(command)) {
+						//if("comboBoxChanged".equals(command)) {
 		                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
-		                    	//getRootPane().add(comboBox);
 		                    	updateOrderDetails(sale);
 		                    }
 
-		                }
+		               // }
 					}
 			    	
 			    });
