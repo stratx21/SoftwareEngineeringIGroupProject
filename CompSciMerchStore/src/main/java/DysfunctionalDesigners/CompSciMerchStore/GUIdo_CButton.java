@@ -1,9 +1,13 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -68,13 +72,14 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		
 		if(icons.length>=3) {
 			this.hasIcons=true;
-			this.staleIcon=icons[0];
-			this.hoverIcon=icons[1];
-			this.clickedIcon=icons[2];
+			this.staleIcon=new ImageIcon(getScaledImage(icons[0].getImage(),width,height));
+			this.hoverIcon=new ImageIcon(getScaledImage(icons[1].getImage(),width,height));
+			this.clickedIcon=new ImageIcon(getScaledImage(icons[2].getImage(),width,height));
 		} else {
 			System.err.println("ERROR: ImageIcon[] icons size provided invalid; size is " 
 					+ icons.length + ", requires 3 icons");
 		}
+		this.repaint();
 	}
 	
 	/**
@@ -91,9 +96,10 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 	public GUIdo_CButton(int x,int y,int width,int height,ImageIcon stale,ImageIcon hover,ImageIcon clicked) {
 		this(x,y,width,height);
 		this.hasIcons=true;
-		this.staleIcon=stale;
-		this.hoverIcon=hover;
-		this.clickedIcon=clicked;
+		this.staleIcon=new ImageIcon(getScaledImage(stale.getImage(),width,height));
+		this.hoverIcon=new ImageIcon(getScaledImage(hover.getImage(),width,height));
+		this.clickedIcon=new ImageIcon(getScaledImage(clicked.getImage(),width,height));
+		this.repaint();
 	}
 	
 	
@@ -132,6 +138,19 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		
 		if(!hasBorder)
             this.disableBorder();
+		
+		this.repaint();
+	}
+	
+	private Image getScaledImage(Image source, int width, int height) {
+		BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	    Graphics2D g = resized.createGraphics();
+
+	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g.drawImage(source, 0, 0, width, height, null);
+	    g.dispose();
+
+	    return resized;
 	}
 	
 	/**
@@ -179,9 +198,9 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 	 * @param clicked the icon used when the mouse is clicking on the button
 	 */
 	public void enableIcons(ImageIcon stale, ImageIcon hover,ImageIcon clicked) {
-		this.staleIcon=stale;
-		this.hoverIcon=hover;
-		this.clickedIcon=clicked;
+		this.staleIcon=new ImageIcon(getScaledImage(stale.getImage(),this.getWidth(),this.getHeight()));
+		this.hoverIcon=new ImageIcon(getScaledImage(hover.getImage(),this.getWidth(),this.getHeight()));
+		this.clickedIcon=new ImageIcon(getScaledImage(clicked.getImage(),this.getWidth(),this.getHeight()));
 		this.hasIcons=true;
 	}
 	
