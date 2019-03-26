@@ -48,6 +48,8 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			}
 		});
 		this.add(display_item_2);
+		
+		this.setOpaque(false);
 	}
 	
 	/**
@@ -58,12 +60,15 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
+		
+		g.setColor(new Color(20,66,30));
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		int currenty = this.getHeight()*2/10+15;
 		int welcome_width = this.getWidth()*3/10;
 		int welcome_x_start = this.getWidth()*6/10+15;
 		Font desc_font = new Font("Ariel",Font.PLAIN, this.getWidth()/60);
 		
-		g.setColor(Color.PINK);
+		g.setColor(new Color(255,181,9));
 		g.setFont(new Font("Ariel",Font.PLAIN,this.getWidth()/16));
 		
 		try {
@@ -91,6 +96,12 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 	
 		display_item2.drawDisplay(g, this.getWidth()*3/10, this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
 		
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -43,19 +43,19 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		
 		btn1.setActionCommand("Enter");
 //		btn1.setActionListener_clicked(al);
-		btn1.setBackground(Color.yellow);
+		btn1.setBackground(new Color(255,181,9));
 		
 		btn2.setActionCommand("Continue as a guest!");
 		btn2.setActionListener_clicked(al);
-		btn2.setBackground(Color.yellow);
+		btn2.setBackground(new Color(255,181,9));
 		
 		btn3.setActionCommand("Create Account");
 		btn3.setActionListener_clicked(al);
-		btn3.setBackground(Color.yellow);
+		btn3.setBackground(new Color(255,181,9));
 		
 		btn4.setActionCommand("Forgot Password?");
 		btn4.setActionListener_clicked(al);
-		btn4.setBackground(Color.yellow);		
+		btn4.setBackground(new Color(255,181,9));		
 		
 		l2.setBounds(  80,  70, 200, 30);
 		l3.setBounds(  80, 110, 200, 30);

@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
@@ -29,14 +30,16 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		this.setSize(width, height);
 //		this.width=width;
 //		this.height=height;
-		this.setBackground(Color.PINK);
+		this.setBackground(new Color(13,64,24));
 		
 		//home button:
 		
 		GUIdo_CButton cart = new GUIdo_CButton (width- height* 4,y , height, height, "CART" ) ;
 		cart. setActionCommand("cart");
 		cart. setActionListener_clicked( done);
-		cart.setBackground(Color. YELLOW);
+		cart.setBackground(new Color(255,181,9));
+		cart.setHoverColor(new Color(242,170,0));
+//		cart.setPressedColor(new Color(230,160,0));
 		
 		GUIdo_CButton home_button= null;
 		try  {
@@ -50,17 +53,29 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		}
 		home_button.setActionCommand("home");
 		home_button.setActionListener_clicked(done);
-		home_button.setBackground(Color.YELLOW);
+		home_button.setBackground(new Color(255,181,9));
+		home_button.setHoverColor(new Color(242,170,0));
 		
-		GUIdo_CButton wishlist = new GUIdo_CButton(x+width-height*3,y,height,height,"WISH");
+		GUIdo_CButton wishlist=null;
+		try {
+			wishlist = new GUIdo_CButton(x+width-height*3,y,height,height,
+					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish1.png"))),
+					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish2.png"))),
+					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish3.png"))));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		wishlist.setActionCommand("wishlist");
 		wishlist.setActionListener_clicked(done);
-		wishlist.setBackground(Color.YELLOW);
+		wishlist.setBackground(new Color(255,181,9));
+		wishlist.setHoverColor(new Color(242,170,0));
 		
 		GUIdo_CButton login = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGIN");
 		login.setActionCommand("login");
 		login.setActionListener_clicked(done);
-		login.setBackground(Color.cyan);
+		login.setBackground(new Color(255,181,9));
+		login.setHoverColor(new Color(242,170,0));
 		
 		
 		//search bar:
@@ -83,7 +98,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		searchBar.setSize(width-height*5, height/2);
 		searchBar.setLocation(height, height/4);
 		
-		searchBar.setBackground(new Color(255,102,167));
+		searchBar.setBackground(new Color(255,181,9));
 		
 		
 		this.add(home_button);

@@ -98,7 +98,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 				done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
 			}
 		});
-		addtocart.setBackground(Color.PINK);
+		addtocart.setBackground(new Color(255,181,9));
+		addtocart.setHoverColor(new Color(242,170,0));
 		this.add(addtocart);
 	}
 	
