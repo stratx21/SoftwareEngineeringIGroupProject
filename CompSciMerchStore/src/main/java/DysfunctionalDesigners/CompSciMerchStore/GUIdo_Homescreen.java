@@ -99,9 +99,9 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		}
 		
 		
-		display_item1.drawDisplay(g, this.getWidth()*1/10, this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
+		display_item1.drawDisplay(g, this.getWidth()*1/10, this.getHeight()*1/10+this.getWidth()*3/14+30, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
 	
-		display_item2.drawDisplay(g, this.getWidth()*3/10, this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
+		display_item2.drawDisplay(g, this.getWidth()*3/10, this.getHeight()*1/10+this.getWidth()*3/14+30, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
 		
 		try {
 			Thread.sleep(20);
