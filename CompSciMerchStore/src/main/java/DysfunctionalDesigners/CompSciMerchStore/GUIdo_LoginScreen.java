@@ -37,32 +37,32 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		tf1 = new JTextField();
 		p1 = new JPasswordField();
 		btn1 = new GUIdo_CButton(150, 160, 100, 30, "Enter");
-		btn2 = new GUIdo_CButton(250, 160, 100, 30, "Continue as a guest!");
+		btn2 = new GUIdo_CButton(250, 160, 100, 30, "Continue as guest");
 		btn3 = new GUIdo_CButton(150, 260, 100, 30, "Create Account");
-		btn4 = new GUIdo_CButton(250, 260, 100, 30, "Forgot Password?");
+		btn4 = new GUIdo_CButton(250, 260, 100, 30, "Forgot Password");
 		
 		btn1.setActionCommand("Enter");
-		btn1.setActionListener_clicked(al);
-		btn1.setBackground(Color.blue);
+//		btn1.setActionListener_clicked(al);
+		btn1.setBackground(Color.yellow);
 		
 		btn2.setActionCommand("Continue as a guest!");
 		btn2.setActionListener_clicked(al);
-		btn2.setBackground(Color.blue);
+		btn2.setBackground(Color.yellow);
 		
 		btn3.setActionCommand("Create Account");
 		btn3.setActionListener_clicked(al);
-		btn3.setBackground(Color.blue);
+		btn3.setBackground(Color.yellow);
 		
 		btn4.setActionCommand("Forgot Password?");
 		btn4.setActionListener_clicked(al);
-		btn4.setBackground(Color.blue);		
+		btn4.setBackground(Color.yellow);		
 		
 		l2.setBounds(80, 70, 200, 30);
 		l3.setBounds(80, 110, 200, 30);
 		tf1.setBounds(300, 70, 200, 30);
 		p1.setBounds(300, 110, 200, 30);
 		
-		tf1.addActionListener(new ActionListener() {
+		btn1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -74,57 +74,64 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 				String fileLine, userLine;
 				String[] fileInfo, userInfo;
 				List<User> users = new ArrayList<User>();
+				boolean userexists=false, wrongpass=true;
 				
 				try {
-					br = new BufferedReader(new FileReader(new File("src/main/java/resources/UserData/usernames.txt")));
+					br = new BufferedReader(new FileReader(new File("src/main/resources/UserData/usernames.txt")));
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-				try {
-					fileLine = br.readLine();
-					fileInfo = fileLine.split(" ");
-					if(uname == fileInfo[0]) {
-						if(pass == fileInfo[1]) {
-							userData = new BufferedReader(new FileReader(new File("src/main/java/resources/UserData/" + uname + ".txt")));
-							userLine = userData.readLine();
-							fileInfo = fileLine.split(",");
-							int id = Integer.parseInt(fileInfo[5]);
-							if(id >= 40000) {
-								users.add(new Administrator(fileInfo));
-							}
-							else if(id >= 10000) {
-								users.add(new Customer(fileInfo));
-							}
-							else {
-								try {
-									throw new Exception("Unknown user id in file " + uname + ".txt");
-								} catch (Exception e1) {
-									
-									e1.printStackTrace();
+				try {  //                 not empty          and     not found yet 
+					while((fileLine = br.readLine() )!= null && !(userexists && !wrongpass)) {
+						fileInfo = fileLine.split(" ");
+						if(uname.equals(fileInfo[0])){
+							userexists=true;
+							if(pass.equals(fileInfo[1])) {
+								//user and password found
+								
+								wrongpass=false;
+								userData = new BufferedReader(new FileReader(new File("src/main/resources/UserData/" + uname + ".txt")));
+								userLine = userData.readLine();
+								fileInfo = userLine.split(",");
+								fileInfo[5] = fileInfo[5].replaceAll(" ", "");
+								int id = Integer.parseInt(fileInfo[5]);
+								if(id >= 40000) {
+									users.add(new Administrator(fileInfo));
+								}
+								else if(id >= 10000) {
+									users.add(new Customer(fileInfo));
+								}
+								else {
+									try {
+										throw new Exception("Unknown user id in file " + uname + ".txt");
+									} catch (Exception e1) {
+										
+										e1.printStackTrace();
+									}
 								}
 							}
-								
-							
-							
-						}else {
-							 JOptionPane.showMessageDialog(panel, "Incorrect password", 
-								      "Error", JOptionPane.ERROR_MESSAGE); 
 						}
-					}else {
-						 JOptionPane.showMessageDialog(panel, "User does not exist", 
-							      "Error", JOptionPane.ERROR_MESSAGE); 
 					}
-					
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-				ActionEvent forPerformed = new ActionEvent(users.get(0), ActionEvent.ACTION_PERFORMED, "Enter");
-				forPerformed.setSource(tf1.getText());
 				
-				al.actionPerformed(forPerformed);
+				if(!userexists) {
+					JOptionPane.showMessageDialog(panel, "User does not exist", 
+						      "Error", JOptionPane.ERROR_MESSAGE); 
+				} else if(wrongpass) {
+					JOptionPane.showMessageDialog(panel, "Incorrect password", 
+						      "Error", JOptionPane.ERROR_MESSAGE); 
+				} else {
+					//all was correct, user and password
+					ActionEvent forPerformed = new ActionEvent(users.get(0), ActionEvent.ACTION_PERFORMED, "Enter");
+					forPerformed.setSource(tf1.getText());
+					
+					al.actionPerformed(forPerformed);
+				}
 			}
 			
 		});
