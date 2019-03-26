@@ -36,10 +36,10 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		l3 = new JLabel("Password");
 		tf1 = new JTextField();
 		p1 = new JPasswordField();
-		btn1 = new GUIdo_CButton(150, 160, 100, 30, "Enter");
-		btn2 = new GUIdo_CButton(250, 160, 100, 30, "Continue as guest");
-		btn3 = new GUIdo_CButton(150, 260, 100, 30, "Create Account");
-		btn4 = new GUIdo_CButton(250, 260, 100, 30, "Forgot Password");
+		btn1 = new GUIdo_CButton(150, 160, 170, 30, "Login");
+		btn2 = new GUIdo_CButton(330, 160, 170, 30, "Be our guest");
+		btn3 = new GUIdo_CButton(150, 260, 170, 30, "Create Account");
+		btn4 = new GUIdo_CButton(330, 260, 170, 30, "Forgot Password");
 		
 		btn1.setActionCommand("Enter");
 //		btn1.setActionListener_clicked(al);
@@ -57,12 +57,12 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		btn4.setActionListener_clicked(al);
 		btn4.setBackground(Color.yellow);		
 		
-		l2.setBounds(80, 70, 200, 30);
-		l3.setBounds(80, 110, 200, 30);
-		tf1.setBounds(300, 70, 200, 30);
-		p1.setBounds(300, 110, 200, 30);
+		l2.setBounds(  80,  70, 200, 30);
+		l3.setBounds(  80, 110, 200, 30);
+		tf1.setBounds(300,  70, 200, 30);
+		p1.setBounds( 300, 110, 200, 30);
 		
-		btn1.addActionListener(new ActionListener() {
+		ActionListener alistener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -99,8 +99,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 								int id = Integer.parseInt(fileInfo[5]);
 								if(id >= 40000) {
 									users.add(new Administrator(fileInfo));
-								}
-								else if(id >= 10000) {
+								} else if(id >= 10000) {
 									users.add(new Customer(fileInfo));
 								}
 								else {
@@ -134,7 +133,10 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 				}
 			}
 			
-		});
+		};
+		tf1.addActionListener(alistener);
+		p1.addActionListener(alistener);
+		btn1.addActionListener(alistener);
 		
 		this.add(l1);
 		this.add(l2); 
