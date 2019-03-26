@@ -110,21 +110,18 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	    int y3 = 200;
 	    String[] numItems = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 	    
-		if(sale.getNumUniqueItems() >= 0) { // CHANGE TO > 0
-			//for(Entry<Integer, LineItem> i : sale.getItemList().entrySet()) {
-			for(int j = 0; j < 2; j++) {
+
+		if(sale.getNumUniqueItems() > 0) { // CHANGE TO > 0
+			for(Entry<Integer, LineItem> i : sale.getItemList().entrySet()) {
+			//for(int j = 0; j < 2; j++) {
 //				i.getKey();
 //				Catalogue.getItem(i.getValue().getItemID());
 //				Catalogue.getItem(i.getKey());
-				//ItemInfo currItem = Catalogue.getItem(i.getKey());
+				ItemInfo currItem = Catalogue.getItem(i.getKey());
 				BufferedImage image = null;
 				try {
-					//image = ImageIO.read(new File("src/main/resources/itemimages" + currItem.getExtendedItemID() + ".jpg"));
-					if(j == 0) {
-						image = ImageIO.read(new File("src/main/resources/itemimages/hat.jpg"));
-					}else {
-						image = ImageIO.read(new File("src/main/resources/itemimages/tshirt.jpg"));
-					}
+					image = ImageIO.read(new File("src/main/resources/itemimages" + currItem.getExtendedItemID() + ".jpg"));
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -135,7 +132,8 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    y += h + 100;
 			    
 			    // price component
-			    JLabel price = new JLabel("Price: $10.00"); //+ sale.getItemList().get(i).getTotalPrice());
+
+			    JLabel price = new JLabel("Price: $" + sale.getItemList().get(i).getTotalPrice());
 			    price.setHorizontalAlignment(SwingConstants.CENTER);
 			    price.setSize(x2, y2);
 			    y2 += 2*h + 200; // unsure about constant factor multiplier to maintain continuity in position
@@ -167,10 +165,11 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 						String command = e.getActionCommand();
 						
 						if("comboBoxChanged".equals(command)) {
-		                    //if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), (int)selected)) {
+		                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), (int)selected)) {
 		                    	//getRootPane().add(comboBox);
 		                    	updateOrderDetails(sale);
-		                    //}
+		                    }
+
 		                }
 					}
 			    	
