@@ -17,7 +17,13 @@ public abstract class Vendor extends User{
 		this.uploadedItems = new ArrayList<Integer>();
 		this.pastSales = new ArrayList<Sale>();
 	}
-	
+
+	public Vendor(String email, String motherMaidenName, String userName, String password, String name, int userID, List<Integer> uploadedItems, List<Sale> pastSales) {
+		super(email, motherMaidenName, userName, password, name, userID);
+		this.uploadedItems = uploadedItems;
+		this.pastSales = pastSales;
+	}
+
 	/**
 	 * This function creates a vendor object based on given parameters.
 	 * @param d all pertinent information to be passed to the super class
