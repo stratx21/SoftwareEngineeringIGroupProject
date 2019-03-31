@@ -18,25 +18,34 @@ import javax.swing.ScrollPaneConstants;
 public class GUIdo_Frame extends JFrame{
 	
 	/**
-	 * the height in pixels of the toolbar
+	 * the height in pixels of the toolbar.
 	 */
 	private final int TOOLBAR_HEIGHT = 70;//pixels
 	
+	/**
+	 * The JScrollPane instance used for the pages in the main part of the frame.
+	 */
 	private JScrollPane scrollpane;
 	
+	/**
+	 * The cart used to hold the items that are being bought in the current session.
+	 */
 	private Sale cart; 
 
 	/**
-	 * the GUIdo_CToolbar instance to be used for the toolbar in this frame
+	 * the GUIdo_CToolbar instance to be used for the toolbar in this frame.
 	 */
 	GUIdo_CToolbar toolbar = null;
 	
 	/**
 	 * the GUIdo_SectionHeader instance to be used for the toolbar for the 
-	 * 	list of professors 
+	 * 	list of professors.
 	 */
 	GUIdo_SectionHeader professorHeader = null;
 	
+	/**
+	 * The current logged in user 
+	 */
 	private User current_user = null;
 	
 	/**
@@ -52,6 +61,12 @@ public class GUIdo_Frame extends JFrame{
 		this.initialize();
 	}
 	
+	/**
+	 * The toolbar will be called here to initialize it and to set up the listener
+	 *  for actions made through the toolbar.
+	 * @param e the ActionEvent used by the ActionListener to call on buttons in
+	 * 	the toolbar.
+	 */
 	private void toolbar_call(ActionEvent e) {
 		if(e.getActionCommand().equals("search")) {
 			//the flow for the search, when the search is submitted
@@ -72,6 +87,9 @@ public class GUIdo_Frame extends JFrame{
 		}
 	}
 	
+	/**
+	 * This function sets up the login screen and adds it to this frame.
+	 */
 	private void to_login() {
 		current_panel = new GUIdo_LoginScreen(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
@@ -82,6 +100,12 @@ public class GUIdo_Frame extends JFrame{
 		
 	}
 	
+	/**
+	 * This function is used for when the user logs in and the different
+	 * 	actions that are called through the ActionListener. 
+	 * @param e the ActionEvent instance that is sent by the ActionListener
+	 * 	instance for the buttons in the login menu.
+	 */
 	private void login_call(ActionEvent e) {
 		if(e.getActionCommand().equals("Enter")) {
 			current_user = (User)e.getSource();
@@ -104,6 +128,13 @@ public class GUIdo_Frame extends JFrame{
 		}
 	}
 	
+	/**
+	 * This function transfers the page to the cart page, where the user can see their
+	 * 	subtotal of items including tax and change some values about the items such
+	 * 	as quantity. 
+	 * @param sale the Sale object that is being used for the Cart to be able to display
+	 * 	the cart. 
+	 */
 	private void to_cart(Sale sale) {
 		this.current_panel = new GUIdo_ReviewAndEditOrder(sale);
 		scrollpane.getViewport().add(this.current_panel);
@@ -111,6 +142,9 @@ public class GUIdo_Frame extends JFrame{
 		this.current_panel.repaint();
 	}
 	
+	/**
+	 * This function goes to and sets up the homescreen. 
+	 */
 	private void to_homescreen() {
 		current_panel = new GUIdo_Homescreen(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,6 +156,11 @@ public class GUIdo_Frame extends JFrame{
 		scrollpane.getViewport().add(current_panel);
 	}
 	
+	/**
+	 * This function displays the item specified by the parameter with all the 
+	 * 	details for the user to see.
+	 * @param item the item to display information for. 
+	 */
 	private void display_item(ItemInfo item) {
 		current_panel = new GUIdo_ItemDisplay(item,scrollpane.getWidth(),cart,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -141,7 +180,6 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	public void initialize() {
 		
-		
 		//frame setup:
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -160,7 +198,22 @@ public class GUIdo_Frame extends JFrame{
 		
 		professorHeader = new GUIdo_SectionHeader(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("section1")) {
+				if(e.getActionCommand().equals("cerny"))          {
+					
+				} else if(e.getActionCommand().equals("booth"))   {
+					
+				} else if(e.getActionCommand().equals("fry"))     {
+					
+				} else if(e.getActionCommand().equals("hamerly")) {
+					
+				} else if(e.getActionCommand().equals("aars"))    {
+					
+				} else if(e.getActionCommand().equals("maurer"))  {
+					
+				} else {
+					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
+					System.err.println("name given: \"" + e.getActionCommand()+"\"");
+					return;//throw exception???
 					
 				}
 			}
@@ -197,33 +250,9 @@ public class GUIdo_Frame extends JFrame{
 		this.add(panel);
 		
 		
-		
-		
-		//
-		//this (frame) contains:
-		//		- panel, contains:
-		//			- toolbar
-		//			- pane (JScrollPane), contains:
-		//				- current_panel
-		//		
-		
-
-		
-		//this.current_panel.setLocation(0, TOOLBAR_HEIGHT);
-		
-		
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent evt) {
 				JFrame thisframe = (JFrame)evt.getSource();
-//				System.out.println("GUIdo_Frame resized to (" + thisframe.getWidth() + "," + thisframe.getHeight() + ")");
-				
-//				toolbar.setSize(thisframe.getWidth(),TOOLBAR_HEIGHT);
-//				current_panel.setSize(thisframe.getWidth(), current_panel.getHeight());
-//				current_panel.setLocation(0, TOOLBAR_HEIGHT);
-//				thisframe.remove(pane);
-//				pane.setLocation(0, TOOLBAR_HEIGHT);
-//				pane.setSize(thisframe.getWidth(), thisframe.getHeight()-TOOLBAR_HEIGHT*3);
-//				thisframe.add(pane);
 			}
 		});
 		
