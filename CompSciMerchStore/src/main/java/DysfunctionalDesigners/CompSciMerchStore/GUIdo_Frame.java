@@ -8,6 +8,7 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -47,6 +48,11 @@ public class GUIdo_Frame extends JFrame{
 	 * The current logged in user 
 	 */
 	private User current_user = null;
+	
+	/**
+	 * The item to display the details of to the user
+	 */
+	private ItemInfo toDisplay = null;
 	
 	/**
 	 * the current panel that is being used for the page to scroll through
@@ -198,24 +204,39 @@ public class GUIdo_Frame extends JFrame{
 		
 		professorHeader = new GUIdo_SectionHeader(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ActionListener toItemDisplay = new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						display_item((ItemInfo)(e.getSource()));
+					}
+				};
+				List<ItemInfo> display_items=null;
+				String title=null;
+				//set display_items to the items given by the professor list
+				//set title to the professor's name
 				if(e.getActionCommand().equals("cerny"))          {
-					
+					title = "Dr. Cerny";
+					//TODO set display_items to the items given by the professor list
 				} else if(e.getActionCommand().equals("booth"))   {
-					
+					title = "Dr. Booth";
+					//TODO set display_items to the items given by the professor list
 				} else if(e.getActionCommand().equals("fry"))     {
-					
+					title = "Professor Fry";
+					//TODO set display_items to the items given by the professor list
 				} else if(e.getActionCommand().equals("hamerly")) {
-					
+					title = "Dr. Hamerly";
+					//TODO set display_items to the items given by the professor list
 				} else if(e.getActionCommand().equals("aars"))    {
-					
+					title = "Bald and Balding Aars";
+					//TODO set display_items to the items given by the professor list
 				} else if(e.getActionCommand().equals("maurer"))  {
-					
+					title = "Dr. Maurer, the Baldest Aars";
+					//TODO set display_items to the items given by the professor list
 				} else {
 					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
 					return;//throw exception???
-					
 				}
+				current_panel = new GUIdo_ItemCollection(display_items,title,toItemDisplay);
 			}
 		});
 		
