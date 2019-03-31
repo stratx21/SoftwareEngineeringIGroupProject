@@ -24,10 +24,10 @@ public class GUIdo_OutputTools {
      *      be displayed based on how long each line is in pixels
      */
     public static ArrayList<String> formatStringForPrompt(String text,Font font,int maxPixelWidth){
-        ArrayList<String> r=new ArrayList<String>();
-        if(getPixelWidth(text,font)<=maxPixelWidth){ //defualt case just works
-            r.add(text);
-            return r;
+        ArrayList<String> line_list=new ArrayList<String>();
+        if(getPixelWidth(text,font)<=maxPixelWidth){ //default case just works
+            line_list.add(text);
+            return line_list;
         }
         //PRE [to this point in flow]:: the string is longer than what can be output in one line properly
         int lastLength=0;
@@ -47,8 +47,8 @@ public class GUIdo_OutputTools {
                     if(getPixelWidth(toAdd+" "+text,font)<maxPixelWidth){//can fit in the current line
                         toAdd+=" "+text;
                     }else{//cannot fit on the current line; must start on a new one
-                        r.add(toAdd);//must call this here so that it is in the proper order
-                        r.add(text);
+                        line_list.add(toAdd);//must call this here so that it is in the proper order
+                        line_list.add(text);
                         alreadyAdded=true;
                     }
                     done=totalDone=true;
@@ -63,10 +63,10 @@ public class GUIdo_OutputTools {
                 }
             }
             if(!alreadyAdded)
-                r.add(toAdd);
+                line_list.add(toAdd);
         }
         
-        return r;
+        return line_list;
     }
     
     /**

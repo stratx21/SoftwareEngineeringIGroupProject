@@ -66,7 +66,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		JLabel desc = null;
 		
 		for(String line : desc_lines) {
-			desc =  new JLabel(this.item.getDescription());
+			desc =  new JLabel(line);
 			
 			desc.setFont(DESC_FONT);
 			desc.setBounds(this.getWidth()/2+this.getWidth()/10, currenty, this.getWidth()/2-this.getWidth()/10, DESC_LINE_HEIGHT);
@@ -130,12 +130,6 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		g.drawImage(this.item_image, 
 				this.getWidth()*1/10, this.getHeight()*1/10, width, height, null);
-		
-		
-		
-		
-		
-		
 	}
 	
 }
