@@ -13,7 +13,7 @@ public class Customer extends Vendor{
 	MemberLevel status;
 	List<PaymentInfo> paymentInfo;
 	Address shippingAddr;
-	List<ItemInfo> wishList;
+	List<Integer> wishList;
 	Sale cart;
 	List<Sale> previousPurchases;	
 	
@@ -29,7 +29,7 @@ public class Customer extends Vendor{
 	 * @param previousPurchases
 	 */
 	public Customer(String[] d, MemberLevel status, List<PaymentInfo> paymentInfo, Address shippingAddr,
-			List<ItemInfo> wishList, Sale cart, List<Sale> previousPurchases) {
+			List<Integer> wishList, Sale cart, List<Sale> previousPurchases) {
 		super(d);
 		this.status = status;
 		this.paymentInfo = paymentInfo;
@@ -51,23 +51,24 @@ public class Customer extends Vendor{
 	
 	public MemberLevel getStatus() {return status;}
 	public Address getShippingAddr() {return shippingAddr;}
-	public List<ItemInfo> getWishList() {return wishList;}
+	public List<Integer> getWishList() {return wishList;}
 		
 	public void setStatus(MemberLevel status) {this.status = status;}
 	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
-	public void setWishList(List<ItemInfo> wishList) {this.wishList = wishList;	}
+	public void setWishList(List<Integer> wishList) {this.wishList = wishList;	}
 	
-
-	public void updateWishlist(ItemInfo item) {
+	
+	public void addItemToWishlist(Integer id) {
 		if(this.wishList == null) {
-			this.wishList = new ArrayList<ItemInfo>();
+			this.wishList = new ArrayList<Integer>();
 		}
+		this.wishList.remove(id);		
 		
-		if(this.wishList.contains(item)) {
-			this.wishList.remove(item);
-		}
-		else {
-			this.wishList.add(item);
+	}
+	
+	public void removeItemFromWishlist(Integer id) {
+		if(this.wishList.contains(id)) {
+			this.wishList.remove(id);
 		}
 	}
 	
