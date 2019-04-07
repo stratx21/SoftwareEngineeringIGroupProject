@@ -49,26 +49,13 @@ public class Customer extends Vendor{
 	}
 	
 	
-	public MemberLevel getStatus() {
-		return status;
-	}
-	public void setStatus(MemberLevel status) {
-		this.status = status;
-	}
+	public MemberLevel getStatus() {return status;}
+	public Address getShippingAddr() {return shippingAddr;}
+	public List<ItemInfo> getWishList() {return wishList;}
 		
-	
-	public Address getShippingAddr() {
-		return shippingAddr;
-	}
-	public void setShippingAddr(Address shippingAddr) {
-		this.shippingAddr = shippingAddr;
-	}
-	public List<ItemInfo> getWishList() {
-		return wishList;
-	}
-	public void setWishList(List<ItemInfo> wishList) {
-		this.wishList = wishList;
-	}
+	public void setStatus(MemberLevel status) {this.status = status;}
+	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
+	public void setWishList(List<ItemInfo> wishList) {this.wishList = wishList;	}
 	
 
 	public void updateWishlist(ItemInfo item) {

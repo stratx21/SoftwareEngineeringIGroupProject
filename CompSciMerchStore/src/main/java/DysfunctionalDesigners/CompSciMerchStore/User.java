@@ -7,42 +7,24 @@ public abstract class User {
 	String password;
 	String name;
 	Integer userID;
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getMotherMaidenName() {
-		return motherMaidenName;
-	}
-	public void setMotherMaidenName(String motherMaidenName) {
-		this.motherMaidenName = motherMaidenName;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getUserID() {
-		return userID;
-	}
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+	public String getEmail() {return email;	}
+	
+	
+	public void setEmail(String email) {this.email = email;	}
+	public void setMotherMaidenName(String motherMaidenName) {this.motherMaidenName = motherMaidenName;}
+	public void setUserName(String userName) {this.userName = userName;}
+	public void setPassword(String password) {this.password = password;}
+	public void setName(String name) {this.name = name;}
+	public void setUserID(int userID) {this.userID = userID;}
+	
+	public String getMotherMaidenName() {return motherMaidenName;}
+	public String getUserName() {return userName;}
+	public String getPassword() {return password;}
+	public String getName() {return name;}	
+	public int getUserID() {return userID;}
+
+
+	
 	protected User(String email, String motherMaidenName, String userName, String password, String name, int userID) {
 		super();
 		this.email = email;
