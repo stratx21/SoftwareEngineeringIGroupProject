@@ -3,9 +3,6 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.util.List;
 
 public class Administrator extends Vendor{
-	
-	@SuppressWarnings("unused")
-	public Administrator() throws Exception {}
     public Administrator(String[] d) {
         super(d);
         

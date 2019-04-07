@@ -43,7 +43,7 @@ public class Customer extends Vendor{
 		this.status = MemberLevel.GENERAL;
 		this.paymentInfo = null;
 		this.shippingAddr = null;
-		this.wishList = new ArrayList<ItemInfo>();
+		this.wishList = new ArrayList<Integer>();
 		this.cart = null;
 		this.previousPurchases = new ArrayList<Sale>();
 	}
@@ -53,7 +53,7 @@ public class Customer extends Vendor{
 		this.paymentInfo = null;
 		this.cart = null;
 		this.shippingAddr = null;
-		this.wishList = new ArrayList<ItemInfo>();
+		this.wishList = new ArrayList<Integer>();
 		this.previousPurchases = new ArrayList<Sale>();
 	}
 	
