@@ -43,11 +43,19 @@ public class Customer extends Vendor{
 		this.status = MemberLevel.GENERAL;
 		this.paymentInfo = null;
 		this.shippingAddr = null;
-		this.wishList = null;
+		this.wishList = new ArrayList<ItemInfo>();
 		this.cart = null;
-		this.previousPurchases = null;
+		this.previousPurchases = new ArrayList<Sale>();
 	}
 	
+	public Customer() {
+		super();
+		this.paymentInfo = null;
+		this.cart = null;
+		this.shippingAddr = null;
+		this.wishList = new ArrayList<ItemInfo>();
+		this.previousPurchases = new ArrayList<Sale>();
+	}
 	
 	public MemberLevel getStatus() {return status;}
 	public Address getShippingAddr() {return shippingAddr;}

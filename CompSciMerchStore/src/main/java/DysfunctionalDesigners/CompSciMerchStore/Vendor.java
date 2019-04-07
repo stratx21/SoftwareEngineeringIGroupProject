@@ -38,9 +38,8 @@ public abstract class Vendor extends User{
 	}
 	
 	@SuppressWarnings("unused")
-	public Vendor() throws Exception {
-		super(5);
-		throw new Exception("Customer must only be initialized by a subclass");
+	public Vendor() {
+		super();
 	}
 	
 	/**
