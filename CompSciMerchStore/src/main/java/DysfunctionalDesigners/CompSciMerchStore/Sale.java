@@ -2,6 +2,9 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.util.Date;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashMap;
 
 public class Sale {
@@ -10,13 +13,12 @@ public class Sale {
 	
 	private Payment payment;
 	private Date dateTime;//finished when finalized
-	private int customerID, saleID;
+	private int customerID = -1, saleID;
 	private Map<Integer, LineItem> itemList;
 	private Address shippingAddr;
 	private boolean finalized = false;
 	
 	
-	public Sale() {}
 	public Sale(int custID) {
 		this.customerID = custID;
 		this.saleID = nextSaleID++;
@@ -25,7 +27,12 @@ public class Sale {
 		this.dateTime = null;
 		this.shippingAddr = null;
 	}
-
+	
+	/**
+	 * Jackson Json parser requires this
+	 */
+	public Sale() {}
+	
 	/**
 	 * This function adds an item to the sale, or increases the amount currently in the cart if it's already present.
 	 * 
@@ -109,12 +116,13 @@ public class Sale {
 	 * @return if the payment is sufficient
 	 */
 	public boolean checkPaymentAmount() {
-		return (this.payment != null ? payment.getAmount() >= this.getTotalWithTax() : false);//if they want to give us more, sure!
+		return (this.payment != null && payment.getAmount() >= this.getTotalWithTax());//if they want to give us more, sure!
 	}
 	
 	/**
 	 * @return the total without tax or shipping
 	 */
+	@JsonIgnore
 	public double getTotalWithoutTax() { 
 		double total = 0;
 		
@@ -128,6 +136,7 @@ public class Sale {
 	/**
 	 * @return the estimated tax to be collected
 	 */
+	@JsonIgnore
 	public double getEstimatedTax() {
 		return this.getTotalWithoutTax()*TAX;
 	}
@@ -135,6 +144,7 @@ public class Sale {
 	/**
 	 * @return the total for the sale with tax and shipping
 	 */
+	@JsonIgnore
 	public double getTotalWithTax() {
 		double total = this.getTotalWithoutTax();
 		return total + total*TAX + SHIPPING;
@@ -143,6 +153,7 @@ public class Sale {
 	/**
 	 * @return the total number of items in the sale
 	 */
+	@JsonIgnore
 	public int getNumItems() {
 		return itemList.values().stream().mapToInt(e -> e.getQuantity()).reduce(0, Integer::sum);
 	}
@@ -150,6 +161,7 @@ public class Sale {
 	/**
 	 * @return the number of unique items in the sale
 	 */
+	@JsonIgnore
 	public int getNumUniqueItems() { return this.itemList.size(); }
 	
 	/**
@@ -158,7 +170,7 @@ public class Sale {
 	 * @return if the payment is enough or if the sale was already finalized
 	 */
 	public boolean finalizePayment(){
-		if(!this.finalized && this.checkPaymentAmount() && this.shippingAddr != null) {
+		if(!this.finalized && this.checkPaymentAmount() && this.shippingAddr != null && this.customerID != -1) {
 			this.finalized = true;
 			//decrease quantity from catalogue
 			for(LineItem li : this.itemList.values()) {
@@ -183,6 +195,7 @@ public class Sale {
 	public static double getShipping() { return SHIPPING; }
 	public static double getTax() { return TAX; }
 	public Address getShippingAddr() { return shippingAddr; }
+	public boolean getFinalized() { return finalized; }
 	
 	
 }

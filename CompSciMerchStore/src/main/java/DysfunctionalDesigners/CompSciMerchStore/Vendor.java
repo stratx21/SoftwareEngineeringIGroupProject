@@ -38,9 +38,8 @@ public abstract class Vendor extends User{
 	}
 	
 	@SuppressWarnings("unused")
-	public Vendor() throws Exception {
-		super(5);
-		throw new Exception("Customer must only be initialized by a subclass");
+	public Vendor() {
+		super();
 	}
 	
 	/**
@@ -77,9 +76,11 @@ public abstract class Vendor extends User{
 	}
 	
 	public void removeItemFromCatalogue(int id) {
-		Catalogue.removeItem(id);
+		if(this.uploadedItems.contains(id))
+			Catalogue.removeItem(id);
 	}
 	
+//	public void disableItem(Integer id) {}
 	
 	
 	

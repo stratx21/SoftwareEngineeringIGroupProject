@@ -7,7 +7,6 @@ public abstract class User {
 	String password;
 	String name;
 	
-//	public User() {}
 	Integer userID;
 	public String getEmail() {return email;	}
 	
@@ -25,8 +24,10 @@ public abstract class User {
 	public String getName() {return name;}	
 	public int getUserID() {return userID;}
 
+	public String getComplaintPrefix() {
+		return this.userID + ":|: ";
+	}
 
-	
 	protected User(String email, String motherMaidenName, String userName, String password, String name, int userID) {
 		super();
 		this.email = email;
@@ -46,10 +47,8 @@ public abstract class User {
 	}
 	
 	@SuppressWarnings("unused")
-	private User() throws Exception {
-		throw new Exception("User must only be initialized by a subclass");
+	public User() {
 	}
-	protected User(int notUsed) {}
 	
 	public String toStringDisplay() {
 		return "User [email=" + email + ", motherMaidenName=" + motherMaidenName + ", userName=" + userName

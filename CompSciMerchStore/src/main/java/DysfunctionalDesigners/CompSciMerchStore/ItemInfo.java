@@ -23,6 +23,7 @@ public class ItemInfo {
 	private Map<String, Double> promoDiscounts;
 	private boolean enabled = true;
 	private Professor prof;
+	private List<Review> reviews;
 	
 	/**
 	 * this is for quick searching and comparison objects -- not meant to be a permanent object
@@ -38,6 +39,7 @@ public class ItemInfo {
 		this.saleDiscount = -1;
 		this.price = -1;
 		this.promoDiscounts = null;
+		this.reviews = null;
 	}
 	
 	/**
@@ -73,6 +75,7 @@ public class ItemInfo {
 		this.saleDiscount = 0.0;
 		this.promoDiscounts = new HashMap<String, Double>();
 		this.price = price;
+		this.reviews = new ArrayList<Review>();
 	}
 	
 	/**
@@ -260,6 +263,7 @@ public class ItemInfo {
 	public Map<String, Double> getPromoDiscounts() { return promoDiscounts; }
 	public double getPrice() { return price; }
 	public Professor getProf() { return prof; }
+	public List<Review> getReviews(){ return this.reviews; }
 	
 	public void enable() { this.enabled = true; }
 	public void disable() { this.enabled = false; }
@@ -271,5 +275,8 @@ public class ItemInfo {
 	public void setSaleDiscount(double saleDiscount) { this.saleDiscount = (saleDiscount > 1 ? 1 : saleDiscount); }
 	public void setPromoDiscounts(Map<String, Double> promoDiscounts) { this.promoDiscounts = promoDiscounts; }
 	public void setProf(Professor prof) { this.prof = prof; }
-	
+	public void setReviews(List<Review> reviews) { this.reviews = reviews; }
+	public void addReview(Review review) {
+		
+	}
 }

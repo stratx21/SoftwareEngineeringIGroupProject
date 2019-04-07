@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Catalogue {//all should be static as the top-level class unfortunately cannot be
 	private static Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
@@ -45,6 +48,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 			throw new Exception("Couldn't read catalogue from file stack trace");
 		}		
 	}
+	
+	/**
+	 * Jackson Json parser requires this
+	 */
+	public Catalogue() {}
 	
 //////////////////modifiers
 	/**
@@ -138,13 +146,38 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	public static void setNextID(int id) { ItemInfo.setNextID(id); }
 	
+	public static void addDiscountToAll(Double discount){
+		
+	}
+	
+	public static void addDiscountToAll(Double discount, String code){
+		
+	}
+	
+	public static void addDiscountToAll(Double discount, Professor prof){
+		
+	}
+	
+	public static void addDiscountToAll(Double discount, String code, Professor prof){
+		
+	}
+	
 //////////////////accessors
 	/**
 	 * @param itemID the item to get
 	 * @return the ItemInfo for that item
 	 */
+	@JsonIgnore
 	public static ItemInfo getItem(int itemID) {
 		return catalogue.get(itemID);
+	}
+	
+	public static List<ItemInfo> getItems(List<Integer> itemIDs){
+		List<ItemInfo> toReturn = new ArrayList<ItemInfo>();
+		for(Integer i : itemIDs) {
+			toReturn.add(getItem(i));
+		}
+		return toReturn;
 	}
 	
 	/**
@@ -152,6 +185,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	public static int getNumItems() { return numItems; }
 	
+	/**
+	 * @return the catalogue (only for use in json output)
+	 */
+	public static Map<Integer, ItemInfo> getCatalogue() { return catalogue; }
+
 	/**
 	 * @param itemID item to check
 	 * @return if it's enabled
@@ -187,6 +225,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	public static List<ItemInfo> search(String keywords){
 		//TODO: Kind of auto-generated method stub
+		return null;
+	}
+	
+	public static List<ItemInfo> searchByProfessor(Professor prof){
+		
 		return null;
 	}
 	
