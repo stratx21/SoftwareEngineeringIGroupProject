@@ -4,6 +4,9 @@ public class Payment {
     private double amount;
     private PaymentInfo paymentInfo;
 
+    public Payment() { 	}
+    
+    
     public Payment(double amount, PaymentInfo paymentInfo) {
         this.amount = amount;
         this.paymentInfo = paymentInfo;
@@ -17,19 +20,11 @@ public class Payment {
                 '}';
     }
 
-    public double getAmount() {
-        return amount;
-    }
+    public double getAmount() { return amount;  }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
+    public void setAmount(double amount) { this.amount = amount;}
 
-    public PaymentInfo getPaymentInfo() {
-        return paymentInfo;
-    }
+    public PaymentInfo getPaymentInfo() { return paymentInfo; }
 
-    public void setPaymentInfo(PaymentInfo paymentInfo) {
-        this.paymentInfo = paymentInfo;
-    }
+    public void setPaymentInfo(PaymentInfo paymentInfo) {this.paymentInfo = paymentInfo;}
 }
