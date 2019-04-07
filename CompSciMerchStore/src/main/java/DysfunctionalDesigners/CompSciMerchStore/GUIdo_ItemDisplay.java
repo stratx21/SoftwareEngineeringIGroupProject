@@ -40,7 +40,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			System.out.println("Error getting image for item in GUIdo_ItemDisplay");
 			e.printStackTrace();
 		}
-		System.out.println("width = " + this.getWidth());
+//		System.out.println("width = " + this.getWidth());
 		this.image_ratio = (this.item_image.getWidth()*1.0/this.item_image.getHeight());
 		
 		JLabel name =  new JLabel(this.item.getDisplayName());

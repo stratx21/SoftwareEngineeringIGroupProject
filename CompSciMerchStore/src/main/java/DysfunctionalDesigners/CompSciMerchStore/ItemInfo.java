@@ -100,8 +100,8 @@ public class ItemInfo {
 		}
 		
 		
-			g.drawImage(this.image, 
-					x,y,width,currenty-y, null);
+		g.drawImage(this.image, 
+				x,y,width,currenty-y, null);
 		
 		
 		g.setFont(DESC_FONT);

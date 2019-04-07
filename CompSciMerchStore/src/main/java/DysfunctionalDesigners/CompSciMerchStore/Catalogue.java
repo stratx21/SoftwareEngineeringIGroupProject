@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,6 +170,14 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	@JsonIgnore
 	public static ItemInfo getItem(int itemID) {
 		return catalogue.get(itemID);
+	}
+	
+	public static List<ItemInfo> getItems(List<Integer> itemIDs){
+		List<ItemInfo> toReturn = new ArrayList<ItemInfo>();
+		for(Integer i : itemIDs) {
+			toReturn.add(getItem(i));
+		}
+		return toReturn;
 	}
 	
 	/**
