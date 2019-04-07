@@ -15,6 +15,8 @@ public class Sale {
 	private Address shippingAddr;
 	private boolean finalized = false;
 	
+	
+	public Sale() {}
 	public Sale(int custID) {
 		this.customerID = custID;
 		this.saleID = nextSaleID++;

@@ -6,6 +6,8 @@ public abstract class User {
 	String userName;
 	String password;
 	String name;
+	
+//	public User() {}
 	Integer userID;
 	public String getEmail() {return email;	}
 	

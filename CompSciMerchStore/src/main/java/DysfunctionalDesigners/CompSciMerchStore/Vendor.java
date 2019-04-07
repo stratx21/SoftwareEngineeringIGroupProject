@@ -12,6 +12,7 @@ public abstract class Vendor extends User{
 	 * empty lists for uploadedItems and pastSales.
 	 * @param d the string array containing all pertinent information to be passed to the superclass.
 	 */
+
 	public Vendor(String d[]) {
 		super(d);
 		this.uploadedItems = new ArrayList<Integer>();
@@ -37,7 +38,7 @@ public abstract class Vendor extends User{
 	}
 	
 	@SuppressWarnings("unused")
-	private Vendor() throws Exception {
+	public Vendor() throws Exception {
 		super(5);
 		throw new Exception("Customer must only be initialized by a subclass");
 	}
