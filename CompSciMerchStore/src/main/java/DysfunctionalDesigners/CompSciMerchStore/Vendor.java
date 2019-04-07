@@ -48,9 +48,23 @@ public abstract class Vendor extends User{
 	 * @param info the item info is used to add the new item to the catalogue
 	 */
 	public void updateUploadedItems(Integer id, ItemInfo info) {
-		this.uploadedItems.add(id);
+		if(this.uploadedItems.contains(id)) {
+			try {
+				Catalogue.updateItem(id, info);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}	
+		}
+		
+	}
+	
+	public void addItemToCatalogue(ItemInfo info) {
+		this.uploadedItems.add(info.getItemID());
 		Catalogue.addItem(info);
 	}
+	
+	
 	
 	/**
 	 * This function adds a sale to the vendor's sale history upon completion of the sale
