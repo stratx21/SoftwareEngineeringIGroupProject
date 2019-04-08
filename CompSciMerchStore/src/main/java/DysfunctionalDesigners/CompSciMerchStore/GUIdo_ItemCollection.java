@@ -19,15 +19,17 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	
 	private static final int VIEW_BUTTON_HEIGHT = 50;
 	
-	private static final int WISHLIST_BUTTON_HEIGHT = 45;
+	public static final int WISHLIST_BUTTON_HEIGHT = 45;
 	
-	private static final int TITLE_Y = 10;
+	private static final int TITLE_Y = 55;
 	
 	private static final int ORIGINAL_X = 50;
 	
 	private static final int GAP_Y = 20;
 	
 	private static final int GAP_X = 15;
+	
+	public static ImageIcon onlist1 ,onlist2,onlist3,offlist1,offlist2,offlist3;
 	
 	private int item_display_width;
 	
@@ -40,6 +42,24 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	private String title = null;
 	
 	private int item_count=-1;
+	
+	private Customer customer=null;
+	
+	static {
+		try {
+			onlist1 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/1_onlist.png")));
+		    onlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2_onlist.png")));
+		    onlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3_onlist.png")));
+		
+		
+			offlist1 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/1.png")));
+			offlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2.png")));
+			offlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3.png")));
+		} catch(IOException ioex) {
+			System.err.println("ERROR importing images for wishlist in GUIdo_ItemCollection");
+			ioex.printStackTrace();
+		}
+	}
 	
 //	private int current_page=1;
 	
@@ -56,35 +76,10 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 		
 		GUIdo_CButton button_to_add = null;
 		GUIdo_CButton wishlist_button = null;
-		Customer customer=null;
-		ImageIcon onlist1 = null,
-				  onlist2 = null,
-				  onlist3 = null;
-		ImageIcon offlist1= null,
-				  offlist2= null,
-				  offlist3= null;
 		
 		if(!user.isAdmin()) {
 			wishlist_button = new GUIdo_CButton(0,0,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
 			customer = (Customer)user;
-			
-			try {
-				onlist1 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/1_onlist.png")));
-				onlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2_onlist.png")));
-				onlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3_onlist.png")));
-			} catch(IOException ioex) {
-				System.err.println("ERROR importing on wishlist images for wishlist button");
-				ioex.printStackTrace();
-			}
-			
-			try {
-				offlist1 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/1.png")));
-				offlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2.png")));
-				offlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3.png")));
-			} catch(IOException ioex) {
-				System.err.println("ERROR importing on wishlist images for wishlist button");
-				ioex.printStackTrace();
-			}
 		}
 		
 		int x = ORIGINAL_X;
@@ -103,11 +98,46 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 				
 				//is customer, add wishlist button 
 				wishlist_button = new GUIdo_CButton(x,y-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
-				if(customer.getWishList().contains(items_to_display.get(itemIndex))) {
+				if(customer.getWishList().contains(itemIndex)) {
 					wishlist_button.enableIcons(onlist1,onlist2,onlist3);
 				} else {
 					wishlist_button.enableIcons(offlist1,offlist2,offlist3);
 				}
+				
+				wishlist_button.setData_from_holding(items_to_display.get(itemIndex));
+				
+				//toggle:
+				wishlist_button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						GUIdo_CButton thisbutton=null;
+						try {
+							thisbutton = (GUIdo_CButton)(e.getSource());
+						} catch(Exception ex) {
+							System.err.println("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
+							ex.printStackTrace();
+						}
+						
+						ItemInfo item=null;
+						
+						try {
+							item = (ItemInfo)((thisbutton).getData_from_holding());
+						} catch(Exception ex) {
+							System.err.println("ERROR casting to ItemInfo : GUIdo_ItemCollection");
+							ex.printStackTrace();
+						}
+						
+						if(customer.getWishList().contains(item.getItemID())) {
+							//has item, so remove it 
+							customer.removeItemFromWishlist(item.getItemID());
+							thisbutton.enableIcons(offlist1,offlist2,offlist3);
+						} else {
+							customer.addItemToWishlist(item.getItemID());
+							thisbutton.enableIcons(onlist1,onlist2,onlist3);
+						}
+					}
+				});
+				
+				this.add(wishlist_button);
 				
 			}
 			

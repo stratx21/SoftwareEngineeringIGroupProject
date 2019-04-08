@@ -28,9 +28,11 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	
 	private double image_ratio = 0;
 	
-	public GUIdo_ItemDisplay(ItemInfo itemToDisplay,int width, Sale cart,ActionListener done) {
+	private User current_user = null;
+	
+	public GUIdo_ItemDisplay(ItemInfo itemToDisplay,int width, Sale cart,ActionListener done, User user) {
 		super(1500);
-		
+		this.current_user=user;
 		this.setSize(new Dimension(width,1500));
 		
 		this.item = itemToDisplay;
@@ -115,6 +117,58 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		addtocart.setBackground(new Color(255,181,9));
 		addtocart.setHoverColor(new Color(242,170,0));
 		this.add(addtocart);
+		
+		GUIdo_CButton wishlist_button = new GUIdo_CButton(quantityis.getX(),quantityis.getY()+quantityis.getHeight()+5,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
+		
+		Customer customer = (Customer)current_user;
+		
+		if(customer.getWishList().contains(itemToDisplay.getItemID())) {
+			wishlist_button.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
+		} else {
+			wishlist_button.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
+		}
+		
+		wishlist_button.setData_from_holding(itemToDisplay);
+		
+		//toggle:
+		wishlist_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GUIdo_CButton thisbutton=null;
+				try {
+					thisbutton = (GUIdo_CButton)(e.getSource());
+				} catch(Exception ex) {
+					System.err.println("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
+					ex.printStackTrace();
+				}
+				
+				ItemInfo item=null;
+				
+				try {
+					item = (ItemInfo)((thisbutton).getData_from_holding());
+				} catch(Exception ex) {
+					System.err.println("ERROR casting to ItemInfo : GUIdo_ItemCollection");
+					ex.printStackTrace();
+				}
+				
+				if(customer.getWishList().contains(item.getItemID())) {
+					System.out.println("Exists, removing...");
+					//has item, so remove it 
+					customer.removeItemFromWishlist(item.getItemID());
+					thisbutton.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
+				} else {
+					System.out.println("Doesn't exist, adding...");
+					customer.addItemToWishlist(item.getItemID());
+					thisbutton.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
+					System.out.println("wishlist items: ");
+					for(Integer item_id : customer.getWishList()) {
+						System.out.println(Catalogue.getItem(item_id).getDisplayName());
+					}
+				}
+				thisbutton.repaint();
+			}
+		});
+		wishlist_button.repaint();
+		this.add(wishlist_button);
 	}
 	
 	@Override
