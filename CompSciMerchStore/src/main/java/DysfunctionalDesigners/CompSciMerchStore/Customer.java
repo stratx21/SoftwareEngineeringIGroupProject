@@ -70,7 +70,7 @@ public class Customer extends Vendor{
 		if(this.wishList == null) {
 			this.wishList = new ArrayList<Integer>();
 		}
-		this.wishList.remove(id);		
+		this.wishList.add(id);		
 		
 	}
 	
