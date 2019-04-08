@@ -212,8 +212,7 @@ public class GUIdo_Frame extends JFrame{
 		    @Override
 		    public void windowClosed(WindowEvent windowEvent) {
 		        //code here for exiting the program... 
-		    	
-		    	
+
 		    }
 		});
 		

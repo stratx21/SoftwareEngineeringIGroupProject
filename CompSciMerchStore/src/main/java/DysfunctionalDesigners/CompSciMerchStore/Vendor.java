@@ -70,7 +70,7 @@ public abstract class Vendor extends User{
 	 * This function adds a sale to the vendor's sale history upon completion of the sale
 	 * @param sale is the new sale that occurred
 	 */
-	public void adddNewSale(Sale sale) {
+	public void addNewSale(Sale sale) {
 		this.pastSales.add(sale);
 	}
 
