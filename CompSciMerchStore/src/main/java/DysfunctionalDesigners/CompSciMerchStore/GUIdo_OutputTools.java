@@ -37,10 +37,19 @@ public class GUIdo_OutputTools {
                 &&lastLength!=text.length()){
             lastLength=text.length();
             boolean done=false,alreadyAdded=false;
-            String toAdd=text.substring(0,text.indexOf(" ")),
-                    temp="";
-            if(toAdd.length()>0)
-            	text=text.substring(toAdd.length()+1);
+            int indxr = text.indexOf(" ");
+            String toAdd,temp="";
+            if(indxr == -1)
+            	toAdd = text;
+            else
+            	toAdd=text.substring(0,indxr);
+            
+            if(toAdd.length()>0) {
+            	if(text.length()>toAdd.length())
+            		text=text.substring(toAdd.length()+1);
+            	else
+            		text="";
+            }
             
             while(!done){
                 if(text.indexOf(" ")==-1){//out of spaces and is done
