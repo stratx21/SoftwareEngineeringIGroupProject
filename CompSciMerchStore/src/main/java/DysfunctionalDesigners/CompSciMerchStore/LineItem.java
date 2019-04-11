@@ -19,7 +19,9 @@ public class LineItem {
 	 * @param promo the promo code to add
 	 */
 	public void addPromoCode(String promo) {
-		this.promoCodes.add(promo);
+		if(Catalogue.getInstance().getItem(itemID).hasPromoCode(promo)) {
+			this.promoCodes.add(promo);
+		}
 	}
 	
 	/**
@@ -29,13 +31,14 @@ public class LineItem {
 	
 	
 	public double getTotalPrice() {
-		return this.quantity * Catalogue.getItem(this.itemID).getTotalPrice(this.promoCodes);
+		return this.quantity * Catalogue.getInstance().getItem(this.itemID).getTotalPrice(this.promoCodes);
 	}
 	
+	/**
+	 * required by json parser
+	 */
+	public LineItem() {}
 	
-	public LineItem() {
-		
-	}
 	public int getQuantity() { return quantity; }
 	public int getItemID() { return itemID; }
 	

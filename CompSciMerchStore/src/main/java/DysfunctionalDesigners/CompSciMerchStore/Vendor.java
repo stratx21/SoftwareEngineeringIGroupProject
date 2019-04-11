@@ -49,7 +49,7 @@ public abstract class Vendor extends User{
 	 */
 	public void updateUploadedItems(Integer id, ItemInfo info) {
 		this.uploadedItems.add(id);
-		Catalogue.addItem(info);
+		Catalogue.getInstance().addItem(info);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public abstract class Vendor extends User{
 	
 	public void removeItemFromCatalogue(int id) {
 		if(this.uploadedItems.contains(id))
-			Catalogue.removeItem(id);
+			Catalogue.getInstance().removeItem(id);
 	}
 	
 //	public void disableItem(Integer id) {}

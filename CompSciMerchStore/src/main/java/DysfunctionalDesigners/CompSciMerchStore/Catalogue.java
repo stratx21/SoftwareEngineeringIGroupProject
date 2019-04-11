@@ -8,16 +8,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Catalogue {//all should be static as the top-level class unfortunately cannot be
-	private static Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
-	private static int numItems = 0;
+	private Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
+	private int numItems = 0;
+	private static Catalogue instance = null;
 	
-	static {
+	public static Catalogue getInstance() {
+		if(instance == null) {
+			synchronized (Catalogue.class) {
+				if(instance == null) {
+					instance = new Catalogue();
+				}
+            }
+		}
+		return instance;
+	}
+	
+	protected Catalogue() {
 		try{
-    		Catalogue.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
+    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
     	} catch(Exception e) {
     		System.out.println("Error importing the Catalogue: ");
     		e.printStackTrace();
@@ -29,7 +43,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param bf the file to read from
 	 * @throws Exception if it can't read from the catalogue
 	 */
-	public static void readFile(BufferedReader bf) throws Exception {
+	public void readFile(BufferedReader bf) throws Exception {
 		String line;
 		String[] splitLine;
 		try {
@@ -49,10 +63,14 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		}		
 	}
 	
+	public String catalogueToJSON() {
+		return "";
+	}
+	
 	/**
 	 * Jackson Json parser requires this
 	 */
-	public Catalogue() {}
+//	public Catalogue() {}
 	
 //////////////////modifiers
 	/**
@@ -60,7 +78,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * 
 	 * @param e the item to add
 	 */
-	public static void addItem(ItemInfo e) {
+	public void addItem(ItemInfo e) {
 		if(catalogue.put(e.getItemID(), e) == null) {
 			numItems++;
 		}
@@ -71,8 +89,8 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * 
 	 * @param itemID the item to remove
 	 */
-	public static void removeItem(int itemID) {
-		Catalogue.disableItem(itemID);
+	public void removeItem(int itemID) {
+		disableItem(itemID);
 //		if(catalogue.remove(itemID) != null) {
 //			numItems--;
 //		}
@@ -84,7 +102,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param itemID the item to decrease
 	 * @param amount the amount to decrease by
 	 */
-	public static void decreaseQuantity(int itemID, int amount) {
+	public void decreaseQuantity(int itemID, int amount) {
 		if(checkAmount(itemID, amount)) {
 			try {
 				catalogue.get(itemID).decreaseAmount(amount);
@@ -101,7 +119,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param itemID the item to increase
 	 * @param amount the amount to increase by
 	 */
-	public static void increaseQuantity(int itemID, int amount) {
+	public void increaseQuantity(int itemID, int amount) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).increaseAmount(amount);
 		}
@@ -111,7 +129,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * Disables the item
 	 * @param itemID the item to disable
 	 */
-	public static void disableItem(int itemID) {
+	public void disableItem(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).disable();
 		}
@@ -121,7 +139,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * Enables the item
 	 * @param itemID the item to enable
 	 */
-	public static void enableItem(int itemID) {
+	public void enableItem(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).enable();
 		}
@@ -133,7 +151,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param info
 	 * @throws Exception
 	 */
-	public static void updateItem(int itemID, ItemInfo info) throws Exception {
+	public void updateItem(int itemID, ItemInfo info) throws Exception {
 		if(info.getItemID() != itemID) {
 			throw new Exception("New ItemInfo ID does NOT match given itemID");
 		}
@@ -144,22 +162,50 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * Sets the next id to start from.
 	 * @param id the next id to start from (aka next item has that id and the one after has that id+1 etc)
 	 */
-	public static void setNextID(int id) { ItemInfo.setNextID(id); }
+	public void setNextID(int id) { ItemInfo.setNextID(id); }
 	
-	public static void addDiscountToAll(Double discount){
-		
+	/**
+	 * ONLY applies discount to item if it is greater than the current discount
+	 * @param discount the discount to be applied
+	 */
+	public void addDiscountToAll(Double discount){//will be a sale discount
+		for(Entry<Integer, ItemInfo> item : catalogue.entrySet()) {
+			if(discount > item.getValue().getSaleDiscount()) {
+				item.getValue().setSaleDiscount(discount);
+			}
+		}
 	}
 	
-	public static void addDiscountToAll(Double discount, String code){
-		
+	/**
+	 * Adds a promo discount to all items
+	 * @param discount the discount
+	 * @param code the promo code to apply
+	 */
+	public void addDiscountToAll(Double discount, String code){
+		catalogue.entrySet().stream().forEach(e -> e.getValue().addPromoDiscount(code, discount));
 	}
 	
-	public static void addDiscountToAll(Double discount, Professor prof){
-		
+	/**
+	 * add a sale discount to all items associated with a professor
+	 * @param discount the discount
+	 * @param prof the professor to search for
+	 */
+	public void addDiscountToAll(Double discount, Professor prof){
+		searchByProfessor(prof).stream().forEach(e -> {
+			if(discount > e.getSaleDiscount()) {
+				e.setSaleDiscount(discount);
+			}
+		});
 	}
 	
-	public static void addDiscountToAll(Double discount, String code, Professor prof){
-		
+	/**
+	 * add a promo discount to all items associated with a professor
+	 * @param discount the discount
+	 * @param code the promo code to apply
+	 * @param prof the professor to apply it to
+	 */
+	public void addDiscountToAll(Double discount, String code, Professor prof){
+		searchByProfessor(prof).stream().forEach(e -> e.addPromoDiscount(code, discount));
 	}
 	
 //////////////////accessors
@@ -168,11 +214,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @return the ItemInfo for that item
 	 */
 	@JsonIgnore
-	public static ItemInfo getItem(int itemID) {
+	public ItemInfo getItem(int itemID) {
 		return catalogue.get(itemID);
 	}
 	
-	public static List<ItemInfo> getItems(List<Integer> itemIDs){
+	public List<ItemInfo> getItems(List<Integer> itemIDs){
 		List<ItemInfo> toReturn = new ArrayList<ItemInfo>();
 		for(Integer i : itemIDs) {
 			toReturn.add(getItem(i));
@@ -183,18 +229,18 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	/**
 	 * @return the number of unique items in the catalogue
 	 */
-	public static int getNumItems() { return numItems; }
+	public int getNumItems() { return numItems; }
 	
 	/**
 	 * @return the catalogue (only for use in json output)
 	 */
-	public static Map<Integer, ItemInfo> getCatalogue() { return catalogue; }
+	public Map<Integer, ItemInfo> getCatalogue() { return catalogue; }
 
 	/**
 	 * @param itemID item to check
 	 * @return if it's enabled
 	 */
-	public static boolean isEnabled(int itemID) {
+	public boolean isEnabled(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			return catalogue.get(itemID).isEnabled();
 		}
@@ -209,7 +255,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param amount the amount to withdraw
 	 * @return if that amount can be taken from that item
 	 */
-	public static boolean checkAmount(int itemID, int amount) {
+	public boolean checkAmount(int itemID, int amount) {
 		ItemInfo temp = catalogue.get(itemID);
 		if(temp != null) {
 			return (amount >= 0 && amount <= temp.getStock());
@@ -223,14 +269,39 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param keywords the string to search for
 	 * @return the list of ItemInfos which match the keywords
 	 */
-	public static List<ItemInfo> search(String keywords){
-		//TODO: Kind of auto-generated method stub
-		return null;
+	public List<ItemInfo> search(String keywords){
+		List<ItemInfo> toReturn = new ArrayList<ItemInfo>();
+		String lower = keywords.toLowerCase();
+		for(Entry<Integer, ItemInfo> i : catalogue.entrySet()) {
+			ItemInfo temp = i.getValue();
+			
+			if(temp.getDisplayName().toLowerCase().indexOf(lower) != -1) {//check name
+				toReturn.add(temp);
+			} else if(temp.getDescription().toLowerCase().indexOf(lower) != -1) {//check description
+				toReturn.add(temp);
+			} else if(temp.getProf().toString().toLowerCase().indexOf(lower) != -1) {//check description
+				toReturn.add(temp);
+			} else if((temp.getExtendedItemID() + "").indexOf(lower) != -1) {//check itemid
+				toReturn.add(temp);
+			} else if((temp.getPrice() + "").indexOf(lower) != -1) {//check price
+				toReturn.add(temp);
+			} else if((temp.getVendorID() + "").indexOf(lower) != -1) {//check vendor id
+				toReturn.add(temp);
+			}
+		}
+		return toReturn;
 	}
 	
-	public static List<ItemInfo> searchByProfessor(Professor prof){
-		
-		return null;
+	/**
+	 * Searches the catalogue for all items associated with the given professor.
+	 * @param prof the professor to look for
+	 * @return the list of ItemInfos which match the professor
+	 */
+	public List<ItemInfo> searchByProfessor(Professor prof){
+		return catalogue.entrySet().stream()
+				 .filter(e -> e.getValue().getProf() == prof)
+				 .map(e -> e.getValue())
+				 .collect(Collectors.toList());
 	}
 	
 }

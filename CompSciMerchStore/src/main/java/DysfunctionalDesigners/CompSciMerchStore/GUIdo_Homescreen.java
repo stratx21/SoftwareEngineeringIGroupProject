@@ -20,8 +20,8 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			+ "Major at Baylor University. With the use of our product, we believe "
 			+ "Computer Science Majors will better be able to understand and relate "
 			+ "to each other.";
-	private final static ItemInfo display_item1 = Catalogue.getItem(00000),
-						          display_item2 = Catalogue.getItem(00001);
+	private final static ItemInfo display_item1 = Catalogue.getInstance().getItem(00000),
+						          display_item2 = Catalogue.getInstance().getItem(00001);
 	
 	private static BufferedImage cashn = null;
 			

@@ -127,7 +127,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 //				i.getKey();
 //				Catalogue.getItem(i.getValue().getItemID());
 //				Catalogue.getItem(i.getKey());
-				ItemInfo currItem = Catalogue.getItem(i.getKey());
+				ItemInfo currItem = Catalogue.getInstance().getItem(i.getKey());
 				BufferedImage image = null;
 				try {
 					image = ImageIO.read(new File("src/main/resources/itemimages/" + currItem.getExtendedItemID() + ".jpg"));
@@ -174,7 +174,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 						Object selected = comboBox.getSelectedItem();
 						String command = e.getActionCommand();
 						
-	                    if(sale.editQuantity(Catalogue.getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
+	                    if(sale.editQuantity(Catalogue.getInstance().getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
 	                    	updateOrderDetails(sale);
 	                    	quantity.updateUI();
 	                    }

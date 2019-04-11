@@ -2,6 +2,7 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,12 +45,12 @@ public class Sale {
 		boolean success = false;
 		if(!this.finalized) {
 			if(itemList.containsKey(itemID)) {
-				if(Catalogue.checkAmount(itemID, quantity + itemList.get(itemID).getQuantity())) {
+				if(Catalogue.getInstance().checkAmount(itemID, quantity + itemList.get(itemID).getQuantity())) {
 					itemList.get(itemID).addSome(quantity);
 					success = true;
 				}
 			} else {
-				if(Catalogue.checkAmount(itemID, quantity)){
+				if(Catalogue.getInstance().checkAmount(itemID, quantity)){
 					itemList.put(itemID, new LineItem(quantity, itemID));
 					success = true;
 				}
@@ -77,7 +78,7 @@ public class Sale {
 	 * @return if the edit was successful (if the quantity is in bounds of the stock)
 	 */
 	public boolean editQuantity(int itemID, int newQuantity) {
-		if(!this.finalized && Catalogue.checkAmount(itemID, newQuantity)) {
+		if(!this.finalized && Catalogue.getInstance().checkAmount(itemID, newQuantity)) {
 			itemList.get(itemID).setQuantity(newQuantity);
 			return true;
 		}
@@ -90,9 +91,11 @@ public class Sale {
 	 * @param code the promo code to add
 	 */
 	public void applyPromoCode(String code) {
-		if(!this.finalized && this.checkPromoCode(code)) {
+		if(!this.finalized) {// && this.checkPromoCode(code)
 			//guaranteed to be the right length
-			this.itemList.get(Integer.parseInt(code.substring(code.length()-ItemInfo.EXTENDED_ID_LENGTH))).addPromoCode(code);
+			for(Integer i : this.itemList.keySet()) {
+				this.itemList.get(i).addPromoCode(code);
+			}
 		}
 	}
 	
@@ -103,9 +106,10 @@ public class Sale {
 	 * @return if the code is valid
 	 */
 	public boolean checkPromoCode(String code) {
-		if(code.length() >= ItemInfo.EXTENDED_ID_LENGTH) {
-			int itemID = Integer.parseInt(code.substring(code.length()-ItemInfo.EXTENDED_ID_LENGTH));
-			return Catalogue.getItem(itemID).hasPromoCode(code);
+		for(Entry<Integer, LineItem> i : this.itemList.entrySet()){
+			if(Catalogue.getInstance().getItem(i.getValue().getItemID()).hasPromoCode(code)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -174,7 +178,7 @@ public class Sale {
 			this.finalized = true;
 			//decrease quantity from catalogue
 			for(LineItem li : this.itemList.values()) {
-				Catalogue.decreaseQuantity(li.getItemID(), li.getQuantity());
+				Catalogue.getInstance().decreaseQuantity(li.getItemID(), li.getQuantity());
 			}
 			this.dateTime = new Date();
 			/////////here is where we would add some of the database and remote

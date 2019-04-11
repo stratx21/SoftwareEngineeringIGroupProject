@@ -93,7 +93,7 @@ public class ItemInfo {
 		if(this.image==null) {
 			try {
 				this.image=ImageIO.read(new File("src/main/resources/itemimages/"
-						+String.format("%0" + EXTENDED_ID_LENGTH + "d",this.itemID)+".jpg"));
+						+this.extendedItemID+".jpg"));
 			} catch(IOException ioex) {
 				ioex.printStackTrace();
 			}
@@ -167,16 +167,14 @@ public class ItemInfo {
 	}
 	
 	/**
-	 * This function allows you to generate and add a promo code.
+	 * This function allows you to add a promo code.
 	 * 
-	 * @param keyword the promo keyword used to access this discount (prepended before the item id)
+	 * @param keyword the promo keyword used to access this discount
 	 * @param discount the amount off the discount adds
-	 * @return code the promo code generated that can be used to access this discount
 	 */
-	public String makePromoDiscount(String keyword, double discount) {
-		//key will be keyword+id
-		this.promoDiscounts.put(keyword + this.extendedItemID, (discount > 1 ? 1 : discount));
-		return keyword + this.extendedItemID;
+	public void addPromoDiscount(String keyword, double discount) {
+		//key will be keyword
+		this.promoDiscounts.put(keyword, (discount > 1 ? 1 : discount));
 	}
 	
 	/**
