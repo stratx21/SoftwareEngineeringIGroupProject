@@ -37,6 +37,12 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 	private ImageIcon staleIcon,hoverIcon,clickedIcon;
 	
 	/**
+	 * The item that can be used to represent the data that this
+	 *  button is holding for dependencies. 
+	 */
+	private Object data_from_holding;
+	
+	/**
 	 * Set up the GUIdo_CButton with x,y,width, and height as base
 	 * @param x the x value to start at 
 	 * @param y the y value to start at 
@@ -201,13 +207,14 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 	 * Enable the icons and set them 
 	 * @param stale the icon used for when the button is inactive 
 	 * @param hover the icon used when the mouse hovers over the button
-	 * @param clicked the icon used when the mouse is clicking on the button
+	 * @param clicked the icon used when the mouse is clicking on the button 
 	 */
 	public void enableIcons(ImageIcon stale, ImageIcon hover,ImageIcon clicked) {
 		this.staleIcon=new ImageIcon(getScaledImage(stale.getImage(),this.getWidth(),this.getHeight()));
 		this.hoverIcon=new ImageIcon(getScaledImage(hover.getImage(),this.getWidth(),this.getHeight()));
 		this.clickedIcon=new ImageIcon(getScaledImage(clicked.getImage(),this.getWidth(),this.getHeight()));
 		this.hasIcons=true;
+		this.setIcon(this.staleIcon);
 	}
 	
 	/**
@@ -322,6 +329,14 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 				this.onClicked.actionPerformed(new ActionEvent(this,ActionEvent.ACTION_PERFORMED,custom_action_command));
 			}
 		}
+	}
+
+	public Object getData_from_holding() {
+		return data_from_holding;
+	}
+
+	public void setData_from_holding(Object data_from_holding) {
+		this.data_from_holding = data_from_holding;
 	}
 
 }

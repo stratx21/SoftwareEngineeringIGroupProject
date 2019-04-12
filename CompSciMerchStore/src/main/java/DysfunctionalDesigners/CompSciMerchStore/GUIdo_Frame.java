@@ -8,6 +8,9 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -83,7 +86,7 @@ public class GUIdo_Frame extends JFrame{
 		} else if(e.getActionCommand().equals("home")) {
 			to_homescreen();
 		} else if(e.getActionCommand().equals("wishlist")) {
-			System.out.println("wishlist");
+			to_wishlist(current_user);
 		} else if(e.getActionCommand().equals("login")) {
 			to_login();
 			
@@ -91,6 +94,20 @@ public class GUIdo_Frame extends JFrame{
 		} else if(e.getActionCommand().equals("cart")) {
 			to_cart(cart);
 		}
+	}
+	
+	/**
+	 * This function goes to the wishlist page for the specified User. 
+	 * @param user_to_see the user to see the wishlist page for.
+	 */
+	public void to_wishlist(User user_to_see) {
+		List<ItemInfo> items_for_wishlist = Catalogue.getInstance().getItems(((Customer)user_to_see).getWishList());
+		this.current_panel = new GUIdo_ItemCollection(items_for_wishlist,"Wishlist",new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				display_item((ItemInfo)(e.getSource()));
+			}
+		},user_to_see);
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	/**
@@ -178,7 +195,7 @@ public class GUIdo_Frame extends JFrame{
 					to_cart(cart);
 				}
 			}
-		});
+		},current_user);
 		scrollpane.getViewport().add(current_panel);
 	}
 	
@@ -190,12 +207,20 @@ public class GUIdo_Frame extends JFrame{
 	public void initialize() {
 		
 		//frame setup:
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosed(WindowEvent windowEvent) {
+		        //code here for exiting the program... 
+
+		    }
+		});
+		
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.setTitle("Computer Science Merchandise Store");
 		Dimension screen_size = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screen_size);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setResizable(true);
 		
 		
@@ -239,7 +264,7 @@ public class GUIdo_Frame extends JFrame{
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
 					return;//throw exception???
 				}
-				current_panel = new GUIdo_ItemCollection(display_items,title,toItemDisplay);
+				current_panel = new GUIdo_ItemCollection(display_items,title,toItemDisplay,current_user);
 			}
 		});
 		
