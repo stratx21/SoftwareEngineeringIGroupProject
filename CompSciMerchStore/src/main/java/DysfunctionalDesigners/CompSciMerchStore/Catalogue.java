@@ -1,17 +1,23 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Catalogue {//all should be static as the top-level class unfortunately cannot be
 	private Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
@@ -31,7 +37,8 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	
 	protected Catalogue() {
 		try{
-    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
+//    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
+			this.readJSONFile();
     	} catch(Exception e) {
     		System.out.println("Error importing the Catalogue: ");
     		e.printStackTrace();
@@ -43,7 +50,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param bf the file to read from
 	 * @throws Exception if it can't read from the catalogue
 	 */
-	public void readFile(BufferedReader bf) throws Exception {
+	private void readFile(BufferedReader bf) throws Exception {
 		String line;
 		String[] splitLine;
 		try {
@@ -55,7 +62,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 				splitLine = line.split(", ");
 				int id = Integer.parseInt(splitLine[0]);
 				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[3]), 
-							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[5]), id));
+							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[5]), id, Professor.valueOf(splitLine[6])));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -63,14 +70,72 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		}		
 	}
 	
-	public String catalogueToJSON() {
-		return "";
+	/**
+	 * Reads the catalogue from a JSON file and sets the next itemid to add.
+	 * @throws Exception if the json isn't formatted correctly
+	 */
+	private void readJSONFile() throws Exception {
+		//get the next number
+		Scanner scan = new Scanner(new File("src/main/resources/NEXT_ID.txt"));
+		int nextNum = scan.nextInt();
+		ItemInfo.setNextID(nextNum);
+		scan.close();
+		
+		ObjectMapper mapper = new ObjectMapper();
+
+		this.catalogue = null;
+        //User readAdmin2 = null;
+        File in = new File("src/main/resources/catalogue.json");
+        try {
+        	catalogue = mapper.readValue(in, new TypeReference<HashMap<Integer, ItemInfo>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+      //pretty print
+//        String readAdminString = "";
+//        try {
+//            readAdminString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(catalogue);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("Printing catalogue read from json file");
+//        System.out.println(readAdminString);
 	}
 	
-	/**
-	 * Jackson Json parser requires this
-	 */
-//	public Catalogue() {}
+	public void catalogueToJSON() {
+		if(this.catalogue != null) {
+			ObjectMapper mapper = new ObjectMapper();
+	
+	        try {
+	            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/catalogue.json"), this.catalogue);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        try {
+				BufferedWriter bf = new BufferedWriter(new FileWriter(new File("src/main/resources/NEXT_ID.txt")));
+				bf.write(ItemInfo.getNEXTID() + "");
+				bf.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	//		String jsonString = "";
+	//        try {
+	////            jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testAdmin);
+	//            jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.catalogue);
+	//        } catch (JsonProcessingException e) {
+	//            e.printStackTrace();
+	//        }
+	//        System.out.println(jsonString);
+	//		return jsonString;
+		} else {
+			//TODO: LOG IT UNDER SEVERE
+		}
+	}
 	
 //////////////////modifiers
 	/**

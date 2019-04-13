@@ -1,0 +1,44 @@
+{
+  "0" : {
+    "description" : "It's comfy cozy and crazy fashionable",
+    "displayName" : "T-Shirt",
+    "extendedItemID" : "00000",
+    "itemID" : 0,
+    "stock" : 27,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 20.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "CERNY",
+    "reviews" : [ ]
+  },
+  "1" : {
+    "description" : "Cool hat bro",
+    "displayName" : "Hat",
+    "extendedItemID" : "00001",
+    "itemID" : 1,
+    "stock" : 1,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 168015.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "BOOTH",
+    "reviews" : [ ]
+  },
+  "2" : {
+    "description" : "Pink limited edition from Zing 2019 worn by Josh Holland himself",
+    "displayName" : "Tank top",
+    "extendedItemID" : "00002",
+    "itemID" : 2,
+    "stock" : 1,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 68.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "HAMERLY",
+    "reviews" : [ ]
+  }
+}
