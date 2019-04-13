@@ -339,19 +339,20 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		String lower = keywords.toLowerCase();
 		for(Entry<Integer, ItemInfo> i : catalogue.entrySet()) {
 			ItemInfo temp = i.getValue();
-			
-			if(temp.getDisplayName().toLowerCase().indexOf(lower) != -1) {//check name
-				toReturn.add(temp);
-			} else if(temp.getDescription().toLowerCase().indexOf(lower) != -1) {//check description
-				toReturn.add(temp);
-			} else if(temp.getProf().toString().toLowerCase().indexOf(lower) != -1) {//check description
-				toReturn.add(temp);
-			} else if((temp.getExtendedItemID() + "").indexOf(lower) != -1) {//check itemid
-				toReturn.add(temp);
-			} else if((temp.getPrice() + "").indexOf(lower) != -1) {//check price
-				toReturn.add(temp);
-			} else if((temp.getVendorID() + "").indexOf(lower) != -1) {//check vendor id
-				toReturn.add(temp);
+			if(temp.isEnabled()) {
+				if(temp.getDisplayName().toLowerCase().indexOf(lower) != -1) {//check name
+					toReturn.add(temp);
+				} else if(temp.getDescription().toLowerCase().indexOf(lower) != -1) {//check description
+					toReturn.add(temp);
+				} else if(temp.getProf().toString().toLowerCase().indexOf(lower) != -1) {//check description
+					toReturn.add(temp);
+				} else if((temp.getExtendedItemID() + "").indexOf(lower) != -1) {//check itemid
+					toReturn.add(temp);
+				} else if((temp.getPrice() + "").indexOf(lower) != -1) {//check price
+					toReturn.add(temp);
+				} else if((temp.getVendorID() + "").indexOf(lower) != -1) {//check vendor id
+					toReturn.add(temp);
+				}
 			}
 		}
 		return toReturn;
@@ -364,7 +365,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	public List<ItemInfo> searchByProfessor(Professor prof){
 		return catalogue.entrySet().stream()
-				 .filter(e -> e.getValue().getProf() == prof)
+				 .filter(e -> (e.getValue().getProf() == prof) && (e.getValue().isEnabled()))
 				 .map(e -> e.getValue())
 				 .collect(Collectors.toList());
 	}
