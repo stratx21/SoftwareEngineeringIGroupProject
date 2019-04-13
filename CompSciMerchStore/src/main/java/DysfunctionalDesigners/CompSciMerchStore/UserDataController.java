@@ -70,7 +70,19 @@ public class UserDataController {
         List<Sale> storeSales = new ArrayList<>();
         List<String> validAdmins = getAdminUsernames();
 
-        
+        validAdmins.forEach(e -> {
+            File nxtAdminFile = new File("./src/main/resources/UserData/" + e + ".json");
+            ObjectMapper mapper = new ObjectMapper();
+            Administrator nextAdmin = null;
+            try {
+                nextAdmin = mapper.readValue(nxtAdminFile, Administrator.class);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            storeSales.addAll(nextAdmin.getPastSales());
+        });
+
+        return storeSales;
     }
 
     public List<String> getCustomerUsernames() {
