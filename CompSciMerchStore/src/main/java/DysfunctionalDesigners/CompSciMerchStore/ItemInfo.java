@@ -13,6 +13,8 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ItemInfo {
 	public static final int EXTENDED_ID_LENGTH = 5;
 	private static Font DESC_FONT=new Font("Ariel",Font.PLAIN,27);
@@ -123,6 +125,7 @@ public class ItemInfo {
 	 * @param promoKeys the list of promotion strings associated with this product
 	 * @return discount the decimal percent (.1 = 10%) off the product is
 	 */
+	@JsonIgnore
 	public double getTotalDiscount(List<String> promoKeys) {
 		if(!this.promoDiscounts.isEmpty()) {
 			double total = saleDiscount;
@@ -144,6 +147,7 @@ public class ItemInfo {
 	 * 
 	 * @return discount the decimal percent (.1 = 10%) off the product is
 	 */
+	@JsonIgnore
 	public double getTotalDiscount() {
 		return saleDiscount;
 	}
@@ -153,6 +157,7 @@ public class ItemInfo {
 	 * 
 	 * @return discount the decimal percent (.1 = 10%) off the product is
 	 */
+	@JsonIgnore
 	public double getTotalPrice(List<String> promoKeys) {
 		return this.price - this.price*this.getTotalDiscount(promoKeys);
 	}
@@ -162,6 +167,7 @@ public class ItemInfo {
 	 * 
 	 * @return discount the decimal percent (.1 = 10%) off the product is
 	 */
+	@JsonIgnore
 	public double getTotalPrice() {
 		return this.price - this.price*this.getTotalDiscount();
 	}
