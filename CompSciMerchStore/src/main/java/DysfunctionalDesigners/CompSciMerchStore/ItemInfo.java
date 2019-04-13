@@ -42,14 +42,20 @@ public class ItemInfo {
 		this.price = -1;
 		this.promoDiscounts = null;
 		this.reviews = null;
+		this.prof = null;
 	}
+	
+	/**
+	 * Required for JSON serializing by Jackson.
+	 */
+	public ItemInfo() {}
 	
 	/**
 	 * Creates an ItemInfo with the specified fields (and auto sets the id)
 	 * @throws Exception if NEXT_ID hasn't been set yet
 	 */
-	public ItemInfo(String description, String displayName, int stock, int vendorID, double price) throws Exception {
-		this(description, displayName, stock, vendorID, price, NEXT_ID);
+	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, Professor p) throws Exception {
+		this(description, displayName, stock, vendorID, price, NEXT_ID, p);
 		if(NEXT_ID == 0) {
 			throw new Exception("ERROR: NEXT_ID HASN'T BEEN SET YET, CALL CATALOGUE SETID FUNCTION BASED ON CATALOGUE DATA FILE");
 		} else {
@@ -66,11 +72,11 @@ public class ItemInfo {
 	 * @param price
 	 * @param id
 	 */
-	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id) {
+	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id, Professor p) {
 		super();
 		this.description = description;
 		this.displayName = displayName;
-		this.itemID = id;///////////////////////////////////////////this will need to be changed to be incorporated into one of the files so new items don't get set to old item's numbers
+		this.itemID = id;
 		this.extendedItemID = String.format("%0" + EXTENDED_ID_LENGTH + "d", this.itemID);
 		this.stock = stock;
 		this.vendorID = vendorID;
@@ -78,6 +84,7 @@ public class ItemInfo {
 		this.promoDiscounts = new HashMap<String, Double>();
 		this.price = price;
 		this.reviews = new ArrayList<Review>();
+		this.prof = p;
 	}
 	
 	/**
@@ -268,6 +275,8 @@ public class ItemInfo {
 	public double getPrice() { return price; }
 	public Professor getProf() { return prof; }
 	public List<Review> getReviews(){ return this.reviews; }
+	@JsonIgnore
+	public static int getNEXTID() { return ItemInfo.NEXT_ID; }
 	
 	public void enable() { this.enabled = true; }
 	public void disable() { this.enabled = false; }
