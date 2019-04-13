@@ -85,6 +85,44 @@ public class UserDataController {
         return storeSales;
     }
 
+    public List<Administrator> getAdmins() {
+        List<Administrator> admins = new ArrayList<>();
+        List<String> validAdmins = getAdminUsernames();
+
+        validAdmins.forEach(e -> {
+            File nxtAdminFile = new File("./src/main/resources/UserData/" + e + ".json");
+            ObjectMapper mapper = new ObjectMapper();
+            Administrator nextAdmin = null;
+            try {
+                nextAdmin = mapper.readValue(nxtAdminFile, Administrator.class);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            admins.add(nextAdmin);
+        });
+
+        return admins;
+    }
+
+    public List<Customer> getAllCustomers() {
+        List<Customer> customers = new ArrayList<>();
+        List<String> validCustomers = getCustomerUsernames();
+
+        validCustomers.forEach(e -> {
+            File nxtCustFile = new File("./src/main/resources/UserData/" + e + ".json");
+            ObjectMapper mapper = new ObjectMapper();
+            Customer nextCust = null;
+            try {
+                nextCust = mapper.readValue(nxtCustFile, Customer.class);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            customers.add(nextCust);
+        });
+
+        return customers;
+    }
+
     public List<String> getCustomerUsernames() {
         List<String> usernames = new ArrayList<>();
 
