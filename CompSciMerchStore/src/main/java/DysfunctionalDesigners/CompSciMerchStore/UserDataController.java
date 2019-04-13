@@ -161,6 +161,38 @@ public class UserDataController {
         return usernames;
     }
 
+    public void writeAdmin(Administrator adminToWrite) {
+        File adminFile = new File("./src/main/resources/UserData/" + adminToWrite.getUserName() + ".json");
+        try {
+            adminFile.createNewFile(); //creates  new file if it doesn't exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(adminFile, adminToWrite);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeCustomer(Customer custToWrite) {
+        File custFile = new File("./src/main/resources/UserData/" + custToWrite.getUserName() + ".json");
+        try {
+            custFile.createNewFile(); //creates  new file if it doesn't exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(custFile, custToWrite);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void addNamesToList(BufferedReader reader, List<String> listToAddTo) {
         String line;
         try {
