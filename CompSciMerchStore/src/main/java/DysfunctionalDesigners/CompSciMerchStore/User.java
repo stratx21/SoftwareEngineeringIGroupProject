@@ -1,15 +1,8 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 public abstract class User {
-	String email;
-	String motherMaidenName;
-	String userName;
-	String password;
-	String name;
-	
-	Integer userID;
-	public String getEmail() {return email;	}
-	
+	private String email, motherMaidenName, userName, password, name;
+	private Integer userID;
 	
 	public void setEmail(String email) {this.email = email;	}
 	public void setMotherMaidenName(String motherMaidenName) {this.motherMaidenName = motherMaidenName;}
@@ -18,6 +11,7 @@ public abstract class User {
 	public void setName(String name) {this.name = name;}
 	public void setUserID(int userID) {this.userID = userID;}
 	
+	public String getEmail() {return email;	}
 	public String getMotherMaidenName() {return motherMaidenName;}
 	public String getUserName() {return userName;}
 	public String getPassword() {return password;}
@@ -46,9 +40,11 @@ public abstract class User {
 		this.userID = Integer.parseInt(d[5]);
 	}
 	
+	/**
+	 * Jackson Json deserializer requires this
+	 */
 	@SuppressWarnings("unused")
-	public User() {
-	}
+	public User() {}
 	
 	public String toStringDisplay() {
 		return "User [email=" + email + ", motherMaidenName=" + motherMaidenName + ", userName=" + userName
@@ -59,14 +55,11 @@ public abstract class User {
 		String jsonFormat = "";
 		jsonFormat += "{\n";
 		
-		
 		jsonFormat += "\t\"email\"    : \"" + this.email    + "\",\n";
 		jsonFormat += "\t\"motherMaidenName\" : \"" + this.motherMaidenName + "\",\n";
 		jsonFormat += "\t\"username\" : \"" + this.userName + "\",\n";
 		jsonFormat += "\t\"password\" : \"" + this.password + "\",\n";
 		jsonFormat += "\t\"userID\"   : " + this.userID   + ",\n";
-		
-		
 		
 		jsonFormat+="}";
 		return jsonFormat;
@@ -81,8 +74,4 @@ public abstract class User {
 			return false;
 		}
 	}
-	
-	
-	
-	
 }

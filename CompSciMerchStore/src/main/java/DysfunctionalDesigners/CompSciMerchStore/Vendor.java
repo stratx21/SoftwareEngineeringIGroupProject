@@ -3,16 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 public abstract class Vendor extends User{
 
-	List<Integer> uploadedItems;
-	List<Sale> pastSales;
+	private List<Integer> uploadedItems;
+	private List<Sale> pastSales;
 	
 	
 	/**
 	 * This function constructs a vendor object based on a string array for the super class, and creates
-	 * empty lists for uploadedItems and pastSales.
+	 * 	empty lists for uploadedItems and pastSales.
 	 * @param d the string array containing all pertinent information to be passed to the superclass.
 	 */
-
 	public Vendor(String d[]) {
 		super(d);
 		this.uploadedItems = new ArrayList<Integer>();

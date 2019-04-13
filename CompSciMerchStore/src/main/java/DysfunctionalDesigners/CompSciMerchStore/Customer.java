@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 enum MemberLevel{
-	
 	GENERAL, MIDDLE, ELITE;
 }
 
 public class Customer extends Vendor{
-
-	MemberLevel status;
-	List<PaymentInfo> paymentInfo;
-	Address shippingAddr;
-	List<Integer> wishList;
-	Sale cart;
-	List<Sale> previousPurchases;	
+	private MemberLevel status;
+	private List<PaymentInfo> paymentInfo;
+	private Address shippingAddr;
+	private List<Integer> wishList;
+	private Sale cart;
+	private List<Sale> previousPurchases;	
 	
 	
 	/**
