@@ -1,12 +1,17 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class Sale {
 	static final double SHIPPING = 68, TAX = 0.08;//$, %
@@ -181,6 +186,50 @@ public class Sale {
 				Catalogue.getInstance().decreaseQuantity(li.getItemID(), li.getQuantity());
 			}
 			this.dateTime = new Date();
+			
+			//add sale to vendor who has it
+			UserDataController data = UserDataController.getInstance();
+			List<Administrator> admins = data.getAllAdmins();
+			List<Customer> cust = data.getAllCustomers();
+			Catalogue c = Catalogue.getInstance();
+			Set<Administrator> adminsChanged = new HashSet<>();
+			Set<Customer> custChanged = new HashSet<>();
+			
+			this.itemList.entrySet().stream().forEach(e -> {
+				String id = (c.getItem(e.getValue().getItemID()).getVendorID() + "");
+				switch(id.charAt(0)) {
+					case '4':
+						Administrator a = admins.stream()
+											    .filter(ads -> (ads.getUserID()+"").compareTo(id) == 0)
+												.collect(Collectors.toList()).get(0);
+						if(a != null) {
+							//a is a reference, at the end, write all changed users back to file
+							a.addNewSale(this);
+							adminsChanged.add(a);
+						} else {
+							//TODO:: logger log severe couldn't find administrator
+						}
+						break;
+					case '1':
+						Customer a1 = cust.stream()
+										 .filter(ads -> (ads.getUserID()+"").compareTo(id) == 0)
+										 .collect(Collectors.toList()).get(0);
+						if(a1 != null) {
+							//a is a reference, at the end, write all changed users back to file
+							a1.addNewSale(this);
+							custChanged.add(a1);
+						} else {
+							//TODO:: logger log severe couldn't find customer
+						}
+						break;
+					default:
+						//why are we even here
+						//TODO:: LOGGER SEVERE ID NOT RECOGNIZED
+				}
+			});
+			
+			adminsChanged.stream().forEach(e -> data.writeAdmin(e));
+			custChanged.stream().forEach(e -> data.writeCustomer(e));
 			/////////here is where we would add some of the database and remote
 			/////////stuff if this was a real online store
 		}

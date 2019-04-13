@@ -85,7 +85,7 @@ public class UserDataController {
         return storeSales;
     }
 
-    public List<Administrator> getAdmins() {
+    public List<Administrator> getAllAdmins() {
         List<Administrator> admins = new ArrayList<>();
         List<String> validAdmins = getAdminUsernames();
 

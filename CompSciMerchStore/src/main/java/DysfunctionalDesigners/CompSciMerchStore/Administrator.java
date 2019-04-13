@@ -19,10 +19,6 @@ public class Administrator extends Vendor{
     	super();
     }
 
-    public void addItemToCatalogue(ItemInfo itemInfo) {
-        Catalogue.getInstance().addItem(itemInfo);
-    }
-
     public void removeItemFromCatalogue(int id) {
         Catalogue.getInstance().removeItem(id);
     }
