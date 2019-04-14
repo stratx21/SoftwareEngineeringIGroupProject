@@ -270,7 +270,7 @@ public class GUIdo_Frame extends JFrame{
 					//TODO set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.AARSHAIRY);
 				} else if(e.getActionCommand().equals("maurer"))  {
-					title = "Dr. Maurer, the Baldest Aars";
+					title = "Dr. Maurer";
 					//TODO set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.MAURER);
 				} else {

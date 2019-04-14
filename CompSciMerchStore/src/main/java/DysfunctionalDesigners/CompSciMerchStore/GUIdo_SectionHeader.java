@@ -30,12 +30,12 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		section4.setActionListener_clicked(done);
 		section4.setBackground(new Color(255,181,9));
 		
-		GUIdo_CButton section5 = new GUIdo_CButton(x+4*width/SECTIONS,y,width/SECTIONS,height,"Bald Aars");
+		GUIdo_CButton section5 = new GUIdo_CButton(x+4*width/SECTIONS,y,width/SECTIONS,height,"Professor Bald Aars");
 		section5.setActionCommand("baldaars");
 		section5.setActionListener_clicked(done);
 		section5.setBackground(new Color(255,181,9));
 		
-		GUIdo_CButton section6 = new GUIdo_CButton(x+5*width/SECTIONS,y,width/SECTIONS,height,"Hairy Aars");
+		GUIdo_CButton section6 = new GUIdo_CButton(x+5*width/SECTIONS,y,width/SECTIONS,height,"Professor Hairy Aars");
 		section6.setActionCommand("hairyaars");
 		section6.setActionListener_clicked(done);
 		section6.setBackground(new Color(255,181,9));
