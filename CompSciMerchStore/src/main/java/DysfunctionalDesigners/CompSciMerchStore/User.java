@@ -1,8 +1,12 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class User {
 	private String email, motherMaidenName, userName, password, name;
 	private Integer userID;
+	
+	
 	
 	public void setEmail(String email) {this.email = email;	}
 	public void setMotherMaidenName(String motherMaidenName) {this.motherMaidenName = motherMaidenName;}
@@ -18,6 +22,11 @@ public abstract class User {
 	public String getName() {return name;}	
 	public int getUserID() {return userID;}
 
+	@JsonIgnore
+	/**
+	 * 
+	 * @return a string with the proper format of a filed complaint; user ID + correct prefix
+	 */
 	public String getComplaintPrefix() {
 		return this.userID + ":|: ";
 	}
@@ -51,20 +60,28 @@ public abstract class User {
 				+ ", password=" + password + ", name=" + name + ", userID=" + userID + "]";
 	}
 	
-	public String toStringFile() {
-		String jsonFormat = "";
-		jsonFormat += "{\n";
-		
-		jsonFormat += "\t\"email\"    : \"" + this.email    + "\",\n";
-		jsonFormat += "\t\"motherMaidenName\" : \"" + this.motherMaidenName + "\",\n";
-		jsonFormat += "\t\"username\" : \"" + this.userName + "\",\n";
-		jsonFormat += "\t\"password\" : \"" + this.password + "\",\n";
-		jsonFormat += "\t\"userID\"   : " + this.userID   + ",\n";
-		
-		jsonFormat+="}";
-		return jsonFormat;
-	}
+	/** 
+	 * 
+	 * @return User data in JSON format
+	 */
+//	public String toStringFile() {
+//		String jsonFormat = "";
+//		jsonFormat += "{\n";
+//		
+//		jsonFormat += "\t\"email\"    : \"" + this.email    + "\",\n";
+//		jsonFormat += "\t\"motherMaidenName\" : \"" + this.motherMaidenName + "\",\n";
+//		jsonFormat += "\t\"username\" : \"" + this.userName + "\",\n";
+//		jsonFormat += "\t\"password\" : \"" + this.password + "\",\n";
+//		jsonFormat += "\t\"userID\"   : " + this.userID   + ",\n";
+//		
+//		jsonFormat+="}";
+//		return jsonFormat;
+//	}
 	
+	/**
+	 * 
+	 * @return whether or not a user object is an admin based on the ID
+	 */
 	public boolean isAdmin() {
 		String id = Integer.toString(this.userID);
 		if(id.charAt(0) == '4') {
