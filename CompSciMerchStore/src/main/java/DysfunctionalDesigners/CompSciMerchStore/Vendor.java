@@ -18,6 +18,20 @@ public abstract class Vendor extends User{
 		this.pastSales = new ArrayList<Sale>();
 	}
 
+	/**
+	 * 
+	 * @param email
+	 * @param motherMaidenName
+	 * @param userName
+	 * @param password
+	 * @param name
+	 * @param userID
+	 * @param uploadedItems
+	 * @param pastSales
+	 * 
+	 * This constructor takes all of the fields, passes necessary ones in to the super constructor, and sets uploadedItems
+	 * and pastSales.
+	 */
 	public Vendor(String email, String motherMaidenName, String userName, String password, String name, int userID, List<Integer> uploadedItems, List<Sale> pastSales) {
 		super(email, motherMaidenName, userName, password, name, userID);
 		this.uploadedItems = uploadedItems;
@@ -36,6 +50,9 @@ public abstract class Vendor extends User{
 		this.pastSales = sales;
 	}
 	
+	/**
+	 * Required by Jackson JSON
+	 */
 	public Vendor() {
 		super();
 	}
@@ -57,6 +74,10 @@ public abstract class Vendor extends User{
 		
 	}
 	
+	/**
+	 * Adds an item to the catalogue and to the vendors uploaded items.
+	 * @param info item to be added
+	 */
 	public void addItemToCatalogue(ItemInfo info) {
 		this.uploadedItems.add(info.getItemID());
 		Catalogue.getInstance().addItem(info);
@@ -87,6 +108,10 @@ public abstract class Vendor extends User{
 		return pastSales;
 	}
 	
+	/**
+	 * Removes an item from the catalogue IF this vendor is original uploader.
+	 * @param id The item id to be removed.
+	 */
 	public void removeItemFromCatalogue(int id) {
 		if(this.uploadedItems.contains(id))
 			Catalogue.getInstance().removeItem(id);

@@ -1,8 +1,12 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class User {
 	private String email, motherMaidenName, userName, password, name;
 	private Integer userID;
+	
+	
 	
 	public void setEmail(String email) {this.email = email;	}
 	public void setMotherMaidenName(String motherMaidenName) {this.motherMaidenName = motherMaidenName;}
@@ -18,10 +22,20 @@ public abstract class User {
 	public String getName() {return name;}	
 	public int getUserID() {return userID;}
 
+	@JsonIgnore
+	/**
+	 * 
+	 * @return a string with the proper format of a filed complaint; user ID + correct prefix
+	 */
 	public String getComplaintPrefix() {
 		return this.userID + ":|: ";
 	}
 
+	/**
+	 * Generates the user ID based on the user ID.
+	 * @param userName Username
+	 * @return Created ID.
+	 */
 	public static String hashUserNameToCustomerID(String userName) {
 		final int prime = 31;
 		String result = (prime + ((userName == null) ? 0 : userName.hashCode())) + "";
@@ -39,6 +53,10 @@ public abstract class User {
 		this.name = name;
 		this.userID = userID;
 	}
+	/**
+	 * Basic constructor
+	 * @param d Contains all fields
+	 */
 	protected User(String[] d) {
 		this.email = d[0];
 		this.motherMaidenName = d[1];
@@ -59,20 +77,28 @@ public abstract class User {
 				+ ", password=" + password + ", name=" + name + ", userID=" + userID + "]";
 	}
 	
-	public String toStringFile() {
-		String jsonFormat = "";
-		jsonFormat += "{\n";
-		
-		jsonFormat += "\t\"email\"    : \"" + this.email    + "\",\n";
-		jsonFormat += "\t\"motherMaidenName\" : \"" + this.motherMaidenName + "\",\n";
-		jsonFormat += "\t\"username\" : \"" + this.userName + "\",\n";
-		jsonFormat += "\t\"password\" : \"" + this.password + "\",\n";
-		jsonFormat += "\t\"userID\"   : " + this.userID   + ",\n";
-		
-		jsonFormat+="}";
-		return jsonFormat;
-	}
+	/** 
+	 * 
+	 * @return User data in JSON format
+	 */
+//	public String toStringFile() {
+//		String jsonFormat = "";
+//		jsonFormat += "{\n";
+//		
+//		jsonFormat += "\t\"email\"    : \"" + this.email    + "\",\n";
+//		jsonFormat += "\t\"motherMaidenName\" : \"" + this.motherMaidenName + "\",\n";
+//		jsonFormat += "\t\"username\" : \"" + this.userName + "\",\n";
+//		jsonFormat += "\t\"password\" : \"" + this.password + "\",\n";
+//		jsonFormat += "\t\"userID\"   : " + this.userID   + ",\n";
+//		
+//		jsonFormat+="}";
+//		return jsonFormat;
+//	}
 	
+	/**
+	 * 
+	 * @return whether or not a user object is an admin based on the ID
+	 */
 	public boolean isAdmin() {
 		String id = Integer.toString(this.userID);
 		if(id.charAt(0) == '4') {

@@ -7,6 +7,7 @@ public enum Professor {
 	FRY,
 	AARSBALD,
 	AARSHAIRY,
-	MAURER;
+	MAURER,
+	DYS_DES;
 	
 }

@@ -21,6 +21,8 @@ public class UserDataController {
         return instance;
     }
 
+    protected UserDataController() {}
+    
     public List<User> getCustomers(List<String> usernames) {
         List<User> users = new ArrayList<>();
         List<String> validCustomerUsernames = getCustomerUsernames();

@@ -273,13 +273,18 @@ public class GUIdo_Frame extends JFrame{
 					title = "Dr. Maurer";
 					//TODO set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.MAURER);
-				} else {
+				} else if(e.getActionCommand().equals("dys_des"))  {
+					title = "Dysfunctional Designers";
+					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.DYS_DES);
+				}else {
 					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
 					return;//throw exception???
 				}
 				current_panel = new GUIdo_ItemCollection(getWidth(),display_items,title,toItemDisplay,current_user);
 				scrollpane.getViewport().add(current_panel);
+				scrollpane.repaint();
 			}
 		});
 		
@@ -295,9 +300,10 @@ public class GUIdo_Frame extends JFrame{
 
 			public void adjustmentValueChanged(AdjustmentEvent arg0) {
 				// TODO Auto-generated method stub
+				//******THIS is what seems to be causing re-clicking the button to repaint the page over itself
 				
 				scrollpane.repaint();
-				toolbar.repaint();
+//				toolbar.repaint();
 				
 			}
 			

@@ -293,6 +293,33 @@ public class Sale {
 	public static double getTax() { return TAX; }
 	public Address getShippingAddr() { return shippingAddr; }
 	public boolean getFinalized() { return finalized; }
-	
-	
+
+    @Override
+    public String toString() {
+        String toReturnStr = "Sale Number " + getSaleID() + "::\n";
+        toReturnStr += "Payment Info: " + getPayment() + "\n";
+        toReturnStr += "Date of Purchase: " + getDateTime() + "\n";
+        toReturnStr += "Customer ID: " + getCustomerID() + "\n";
+        toReturnStr += "Shipping Cost: " + getShipping() + "\n";
+        toReturnStr += "Tax Amount: " + getTax() + "\n";
+        toReturnStr += "Shipping Address: " + getShippingAddr() + "\n";
+        toReturnStr += "Item List: \n";
+        Map<Integer, LineItem> items = getItemList();
+
+        Set<Entry<Integer,LineItem>> entrySet = items.entrySet();
+        int itemNum = 1;
+        StringBuilder builder = new StringBuilder(toReturnStr);
+        Catalogue thisInstance = Catalogue.getInstance();
+        for (Entry<Integer, LineItem> integerLineItemEntry : entrySet) {
+            LineItem next = integerLineItemEntry.getValue();
+            builder.append("Line Item ").append(itemNum).append(":\n");
+            builder.append("\t").append("Item ID and Name: ").append(next.getItemID()).append(", ")
+                    .append(thisInstance.getItem(next.getItemID()).getDisplayName()).append("\n");
+            builder.append("\tItem Quantity: ").append(next.getQuantity()).append("\n");
+            itemNum++;
+        }
+
+        toReturnStr = builder.toString();
+        return toReturnStr;
+    }
 }
