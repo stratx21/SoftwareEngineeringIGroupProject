@@ -118,6 +118,21 @@ public class GUIdo_Frame extends JFrame{
 	 * This function sets up the login screen and adds it to this frame.
 	 */
 	private void to_login() {
+		toolbar.disable_all_buttons();
+		//save the data
+		if(current_user != null) {
+			if(!current_user.getUserName().equals("guest")) {
+				UserDataController dataControl = UserDataController.getInstance();
+				switch((current_user.getUserID() + "").charAt(0)){
+					case '4': dataControl.writeAdmin((Administrator) current_user); break;
+					case '1': dataControl.writeCustomer((Customer) current_user); break;
+					default:
+						//TODO:: logger log invalid user detected
+				}
+			}
+			current_user = null;
+		}
+		
 		current_panel = new GUIdo_LoginScreen(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				login_call(e);
@@ -137,7 +152,19 @@ public class GUIdo_Frame extends JFrame{
 		if(e.getActionCommand().equals("Enter")) {
 			current_user = (User)e.getSource();
 			
-			this.cart = new Sale(this.current_user.getUserID());
+			
+			
+			if(!this.current_user.isAdmin() && !this.current_user.getName().equals("guest")) {
+				if(((Customer) this.current_user).getCart() == null) {
+					this.cart = new Sale(this.current_user.getUserID());
+					((Customer) this.current_user).setCart(this.cart);
+				} else {
+					this.cart = ((Customer) this.current_user).getCart();
+				}
+			} else {
+				this.cart = new Sale(this.current_user.getUserID());
+			}
+			
 			toolbar.enable_all_buttons();
 			to_homescreen();
 		} else if(e.getActionCommand().equals("Continue as a guest!")) {

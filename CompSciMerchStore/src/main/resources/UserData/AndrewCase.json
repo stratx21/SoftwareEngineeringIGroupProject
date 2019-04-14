@@ -1,0 +1,30 @@
+{
+  "email" : "andrew@cs.baylor.edu",
+  "motherMaidenName" : "johnson",
+  "userName" : "AndrewCase",
+  "password" : "hAvEyOuHeArDaBoUtMyMaC",
+  "name" : "Andrew Case",
+  "userID" : 10001,
+  "uploadedItems" : [ ],
+  "pastSales" : [ ],
+  "status" : "GENERAL",
+  "paymentInfo" : [ ],
+  "shippingAddr" : null,
+  "wishList" : [ 1 ],
+  "cart" : {
+    "payment" : null,
+    "dateTime" : null,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "totalPrice" : 0.01
+      }
+    },
+    "shippingAddr" : null,
+    "finalized" : false
+  },
+  "previousPurchases" : [ ]
+}
