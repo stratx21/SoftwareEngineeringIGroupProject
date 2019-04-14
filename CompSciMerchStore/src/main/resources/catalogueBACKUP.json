@@ -56,7 +56,7 @@
   "reviews" : [ ]
 },
 "4" : {
-  "description" : "A day-of-the-week calendar! This way, you'll never have to wonder what day it is, or whether or not you have class!",
+  "description" : "A day-of-the-week calendar! This way, you'll never have to wonder what day it is, or whether or not you have class! And - they come with daily quotes. Stay tuned for your surprise of the day!",
   "displayName" : "Day-Of-The-Week Calendar",
   "extendedItemID" : "00004",
   "itemID" : 4,
@@ -155,7 +155,7 @@
 },
 "11" : {
   "description" : "A fashion-forward hat to support your favorite professor!",
-  "displayName" : "Team Cerny Hat",
+  "displayName" : "Team Cerny Hat, Yellow on Pink",
   "extendedItemID" : "00011",
   "itemID" : 11,
   "stock" : 10,
@@ -435,7 +435,7 @@
 },
 "31" : {
   "description" : "Do you miss Professor Hairy Aars when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Professor Hairy Aars Bobble Head today!",
-  "displayName" : "Professor Bald Hair Bobblehead",
+  "displayName" : "Professor Hairy Aars Bobblehead",
   "extendedItemID" : "00031",
   "itemID" : 31,
   "stock" : 3,
@@ -529,6 +529,62 @@
   "promoDiscounts" : { },
   "enabled" : true,
   "prof" : "MAURER",
+  "reviews" : [ ]
+},
+"38" : {
+  "description" : "A fashion-forward hat to support your favorite professor!",
+  "displayName" : "Team Cerny Hat, Pink on Yellow",
+  "extendedItemID" : "00038",
+  "itemID" : 38,
+  "stock" : 10,
+  "vendorID" : 40000,
+  "saleDiscount" : 0.0,
+  "price" : 5.0,
+  "promoDiscounts" : { },
+  "enabled" : true,
+  "prof" : "CERNY",
+  "reviews" : [ ]
+},
+"39" : {
+  "description" : "An amazingly relatable shirt to feature what it really takes to get through this major.",
+  "displayName" : "CS T-shirt",
+  "extendedItemID" : "00039",
+  "itemID" : 39,
+  "stock" : 10,
+  "vendorID" : 40000,
+  "saleDiscount" : 0.0,
+  "price" : 50.0,
+  "promoDiscounts" : { },
+  "enabled" : true,
+  "prof" : "HAMERLY",
+  "reviews" : [ ]
+},
+"40" : {
+  "description" : "Cashion, the building. You're always welcome to remodel us. Give us a new building. Give us a fourth floor. Please.",
+  "displayName" : "Cashion",
+  "extendedItemID" : "00040",
+  "itemID" : 40,
+  "stock" : 1,
+  "vendorID" : 40000,
+  "saleDiscount" : 0.0,
+  "price" : 0.01,
+  "promoDiscounts" : { },
+  "enabled" : true,
+  "prof" : "CERNY",
+  "reviews" : [ ]
+},
+"41" : {
+  "description" : "Wish you could've been there yourself? At least you can buy it on a t-shirt!",
+  "displayName" : "Cerny Wedding T-Shirt",
+  "extendedItemID" : "00041",
+  "itemID" : 41,
+  "stock" : 20000,
+  "vendorID" : 40000,
+  "saleDiscount" : 0.0,
+  "price" : 1000.99,
+  "promoDiscounts" : { },
+  "enabled" : true,
+  "prof" : "CERNY",
   "reviews" : [ ]
 }
 }

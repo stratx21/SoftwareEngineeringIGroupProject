@@ -530,5 +530,61 @@
     "enabled" : true,
     "prof" : "MAURER",
     "reviews" : [ ]
+  },
+  "38" : {
+    "description" : "A fashion-forward hat to support your favorite professor!",
+    "displayName" : "Team Cerny Hat, Pink on Yellow",
+    "extendedItemID" : "00038",
+    "itemID" : 38,
+    "stock" : 10,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 5.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "CERNY",
+    "reviews" : [ ]
+  },
+  "39" : {
+    "description" : "An amazingly relatable shirt to feature what it really takes to get through this major.",
+    "displayName" : "CS T-shirt",
+    "extendedItemID" : "00039",
+    "itemID" : 39,
+    "stock" : 10,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 50.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "HAMERLY",
+    "reviews" : [ ]
+  },
+  "40" : {
+    "description" : "Cashion, the building. You're always welcome to remodel us. Give us a new building. Give us a fourth floor. Please.",
+    "displayName" : "Cashion",
+    "extendedItemID" : "00040",
+    "itemID" : 40,
+    "stock" : 1,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 0.01,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "CERNY",
+    "reviews" : [ ]
+  },
+  "41" : {
+    "description" : "Wish you could've been there yourself? At least you can buy it on a t-shirt!",
+    "displayName" : "Cerny Wedding T-Shirt",
+    "extendedItemID" : "00041",
+    "itemID" : 41,
+    "stock" : 20000,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 1000.99,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "CERNY",
+    "reviews" : [ ]
   }
 }
