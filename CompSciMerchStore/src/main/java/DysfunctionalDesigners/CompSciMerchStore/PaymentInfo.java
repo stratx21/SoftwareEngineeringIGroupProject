@@ -1,24 +1,14 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 public class PaymentInfo {
-    private double amount;
     private String cardNumber;
     private Address billingAddress;
     private int CCV;
 
-    public PaymentInfo(double amount, String cardNumber, Address billingAddress, int CCV) {
-        this.amount = amount;
+    public PaymentInfo(String cardNumber, Address billingAddress, int CCV) {
         this.cardNumber = cardNumber;
         this.billingAddress = billingAddress;
         this.CCV = CCV;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public String getCardNumber() {
@@ -52,7 +42,6 @@ public class PaymentInfo {
 
         PaymentInfo that = (PaymentInfo) o;
 
-        if (Double.compare(that.amount, amount) != 0) return false;
         if (CCV != that.CCV) return false;
         if (!cardNumber.equals(that.cardNumber)) return false;
         return billingAddress.equals(that.billingAddress);
@@ -60,23 +49,18 @@ public class PaymentInfo {
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(amount);
-        result = (int) (temp ^ (temp >>> 32));
-        result = 31 * result + cardNumber.hashCode();
-        result = 31 * result + billingAddress.hashCode();
-        result = 31 * result + CCV;
+        int result = getCardNumber().hashCode();
+        result = 31 * result + getBillingAddress().hashCode();
+        result = 31 * result + getCCV();
         return result;
     }
 
     @Override
     public String toString() {
         return "PaymentInfo{" +
-                "amount=" + amount +
-                ", cardNumber='" + cardNumber + '\'' +
-                ", billingAddress=" + billingAddress +
-                ", CCV=" + CCV +
+                "cardNumber='" + cardNumber + '\'' +
+                "\n billingAddress=" + billingAddress +
+                "\n CCV=" + CCV +
                 '}';
     }
 }
