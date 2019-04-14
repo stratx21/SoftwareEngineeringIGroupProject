@@ -109,7 +109,7 @@ public class ItemInfo {
 		}
 		
 		
-		g.drawImage(this.image, 
+		g.drawImage(this.image,
 				x,y,width,currenty-y, null);
 		
 		
