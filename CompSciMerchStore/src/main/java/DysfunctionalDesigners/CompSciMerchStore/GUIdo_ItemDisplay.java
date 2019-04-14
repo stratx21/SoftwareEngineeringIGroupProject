@@ -50,7 +50,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		name.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*1/10, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(name);
 		
-		JLabel price =  new JLabel("$"+new DecimalFormat("#.00").format(this.item.getPrice()));
+		JLabel price =  new JLabel("$"+new DecimalFormat("0.00").format(this.item.getPrice()));
 		price.setFont(new Font("Calibri",Font.PLAIN,35));
 		price.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*5/35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(price);
@@ -63,7 +63,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		int currenty = stock.getY()+stock.getHeight()+5;
 		final int DESC_LINE_HEIGHT = 40;//g.getFontMetrics(DESC_FONT).getHeight();
 		
-		ArrayList<String> desc_lines = GUIdo_OutputTools.formatStringForPrompt(this.item.getDescription(), DESC_FONT, this.getWidth()/2-this.getWidth()/10);
+		ArrayList<String> desc_lines = GUIdo_OutputTools.formatStringForPrompt(this.item.getDescription(), DESC_FONT, this.getWidth()/2-this.getWidth()/10-50);
 		
 		JLabel desc = null;
 		
@@ -175,7 +175,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	public void paintComponent(Graphics g) {
 		
 		int width = (int)(this.getWidth()/2*this.image_ratio);
-		int height = this.getWidth()/2;
+		int height = (int)(this.getWidth()/2/this.image_ratio);
 		
 		if(width > this.getWidth()/2) {
 			height *= (width*1.0/(this.getWidth()/2));
