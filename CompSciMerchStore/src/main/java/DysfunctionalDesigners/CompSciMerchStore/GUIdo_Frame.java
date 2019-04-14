@@ -80,8 +80,14 @@ public class GUIdo_Frame extends JFrame{
 		if(e.getActionCommand().equals("search")) {
 			//the flow for the search, when the search is submitted
 			if(!toolbar.getButtons_disabled()) {
+				ActionListener toItemDisplay = new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						display_item((ItemInfo)(e.getSource()));
+					}
+				};
 				String searched = (String)e.getSource();
-				
+				current_panel = new GUIdo_ItemCollection(getWidth(),Catalogue.getInstance().search(searched),"Search: \""+searched+"\"",toItemDisplay,current_user);
+				scrollpane.getViewport().add(current_panel);
 			}
 		} else if(e.getActionCommand().equals("home")) {
 			to_homescreen();
@@ -89,8 +95,6 @@ public class GUIdo_Frame extends JFrame{
 			to_wishlist(current_user);
 		} else if(e.getActionCommand().equals("login")) {
 			to_login();
-			
-			
 		} else if(e.getActionCommand().equals("cart")) {
 			to_cart(cart);
 		}
@@ -102,7 +106,7 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	public void to_wishlist(User user_to_see) {
 		List<ItemInfo> items_for_wishlist = Catalogue.getInstance().getItems(((Customer)user_to_see).getWishList());
-		this.current_panel = new GUIdo_ItemCollection(items_for_wishlist,"Wishlist",new ActionListener() {
+		this.current_panel = new GUIdo_ItemCollection(this.getWidth(),items_for_wishlist,"Wishlist",new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				display_item((ItemInfo)(e.getSource()));
 			}
@@ -244,27 +248,38 @@ public class GUIdo_Frame extends JFrame{
 				if(e.getActionCommand().equals("cerny"))          {
 					title = "Dr. Cerny";
 					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.CERNY);
 				} else if(e.getActionCommand().equals("booth"))   {
 					title = "Dr. Booth";
 					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.BOOTH);
 				} else if(e.getActionCommand().equals("fry"))     {
 					title = "Professor Fry";
 					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.FRY);
 				} else if(e.getActionCommand().equals("hamerly")) {
 					title = "Dr. Hamerly";
 					//TODO set display_items to the items given by the professor list
-				} else if(e.getActionCommand().equals("aars"))    {
-					title = "Bald and Balding Aars";
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.HAMERLY);
+				} else if(e.getActionCommand().equals("baldaars"))    {
+					title = "Bald Aars";
 					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.AARSBALD);
+				} else if(e.getActionCommand().equals("hairyaars"))    {
+					title = "Hairy Aars";
+					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.AARSHAIRY);
 				} else if(e.getActionCommand().equals("maurer"))  {
 					title = "Dr. Maurer, the Baldest Aars";
 					//TODO set display_items to the items given by the professor list
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.MAURER);
 				} else {
 					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
 					return;//throw exception???
 				}
-				current_panel = new GUIdo_ItemCollection(display_items,title,toItemDisplay,current_user);
+				current_panel = new GUIdo_ItemCollection(getWidth(),display_items,title,toItemDisplay,current_user);
+				scrollpane.getViewport().add(current_panel);
 			}
 		});
 		

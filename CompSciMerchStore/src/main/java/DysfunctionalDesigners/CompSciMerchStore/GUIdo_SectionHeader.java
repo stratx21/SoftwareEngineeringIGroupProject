@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	
-	final int SECTIONS=6;
+	final int SECTIONS=7;
 	
 	public GUIdo_SectionHeader(int x, int y, int width, int height, final ActionListener done) {
 		this.setSize(width, height);
@@ -30,15 +30,20 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		section4.setActionListener_clicked(done);
 		section4.setBackground(new Color(255,181,9));
 		
-		GUIdo_CButton section5 = new GUIdo_CButton(x+4*width/SECTIONS,y,width/SECTIONS,height,"Drs. Bald and Hairy Aars");
-		section5.setActionCommand("aars");
+		GUIdo_CButton section5 = new GUIdo_CButton(x+4*width/SECTIONS,y,width/SECTIONS,height,"Bald Aars");
+		section5.setActionCommand("baldaars");
 		section5.setActionListener_clicked(done);
 		section5.setBackground(new Color(255,181,9));
 		
-		GUIdo_CButton section6 = new GUIdo_CButton(x+5*width/SECTIONS,y,width/SECTIONS,height,"Dr. Maurer");
-		section6.setActionCommand("maurer");
+		GUIdo_CButton section6 = new GUIdo_CButton(x+5*width/SECTIONS,y,width/SECTIONS,height,"Hairy Aars");
+		section6.setActionCommand("hairyaars");
 		section6.setActionListener_clicked(done);
 		section6.setBackground(new Color(255,181,9));
+		
+		GUIdo_CButton section7 = new GUIdo_CButton(x+6*width/SECTIONS,y,width/SECTIONS,height,"Dr. Maurer");
+		section7.setActionCommand("maurer");
+		section7.setActionListener_clicked(done);
+		section7.setBackground(new Color(255,181,9));
 		
 		this.add(section1);
 		this.add(section2);
@@ -46,6 +51,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		this.add(section4);
 		this.add(section5);
 		this.add(section6);
+		this.add(section7);
 		
 		this.repaint();
 	}
