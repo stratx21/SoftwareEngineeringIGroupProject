@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Administrator extends Vendor{
@@ -68,12 +71,51 @@ public class Administrator extends Vendor{
         try {
             writer = new BufferedWriter(new FileWriter(salesReportFile));
             writer.write("Customer Sales: \n");
+            Catalogue catalogue = Catalogue.getInstance();
+
+            //For each sale in the customer's sales;
+            List<Administrator> admins = dataController.getAllAdmins();
             for (Sale uniqueCustSale : uniqueCustSales) {
+                //Print the sale to the file with the Sale's to string function.
                 writer.write(uniqueCustSale.toString());
-                
+
+                //Gets the entry set to the map in the sale obj.
+                //then, for each entry in the set, get the item from the catalogue
+                //with the itemID stored in the LineItem in the Entry.
+                //Then get the vendor id and use that to get the customer object that belongs to that id.
+                //Then print the item name with the username of the vendor that sold it
+                Set<Entry<Integer, LineItem>> entrySet = uniqueCustSale.getItemList().entrySet();
+                for (Entry<Integer, LineItem> integerLineItemEntry : entrySet) {
+                    ItemInfo nextItem = catalogue.getItem(integerLineItemEntry.getValue().getItemID());
+                    Customer theVendor = custs.stream()
+                            .filter(e -> e.getUserID() == nextItem.getVendorID())
+                            .collect(Collectors.toList())
+                            .get(0);
+                    writer.write("Item " + nextItem.getDisplayName() + " was sold by " + theVendor.getUserName()+"\n");
+                }
             }
+
+            writer.write("Store Sales:\n");
+            //for each sale in the store's sales
+            for (Sale storeSale : storeSales) {
+                //Print the sale to the file with the Sale's to string function.
+                writer.write(storeSale.toString());
+
+                //Gets the entry set to the map in the sale obj.
+                //then, for each entry in the set, get the item from the catalogue
+                //with the itemID stored in the LineItem in the Entry.
+                //Then print out the item name and that it was sold by the store
+                Set<Entry<Integer, LineItem>> entrySet = storeSale.getItemList().entrySet();
+                for (Entry<Integer, LineItem> integerLineItemEntry : entrySet) {
+                    ItemInfo nextItem = catalogue.getItem(integerLineItemEntry.getValue().getItemID());
+                    writer.write("Item " + nextItem.getDisplayName() + " was sold by the store\n");
+                }
+            }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }
