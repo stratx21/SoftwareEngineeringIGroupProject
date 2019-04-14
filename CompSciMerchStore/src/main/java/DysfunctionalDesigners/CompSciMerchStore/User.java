@@ -31,6 +31,11 @@ public abstract class User {
 		return this.userID + ":|: ";
 	}
 
+	/**
+	 * Generates the user ID based on the user ID.
+	 * @param userName Username
+	 * @return Created ID.
+	 */
 	public static String hashUserNameToCustomerID(String userName) {
 		final int prime = 31;
 		String result = (prime + ((userName == null) ? 0 : userName.hashCode())) + "";
@@ -48,6 +53,10 @@ public abstract class User {
 		this.name = name;
 		this.userID = userID;
 	}
+	/**
+	 * Basic constructor
+	 * @param d Contains all fields
+	 */
 	protected User(String[] d) {
 		this.email = d[0];
 		this.motherMaidenName = d[1];
