@@ -99,7 +99,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 				
 				//is customer, add wishlist button 
 				wishlist_button = new GUIdo_CButton(x,y-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT/*-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT*/,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
-				if(customer.getWishList().contains(itemIndex)) {
+				if(customer.getWishList().contains(display_items.get(itemIndex).getItemID())) {
 					wishlist_button.enableIcons(onlist1,onlist2,onlist3);
 				} else {
 					wishlist_button.enableIcons(offlist1,offlist2,offlist3);
