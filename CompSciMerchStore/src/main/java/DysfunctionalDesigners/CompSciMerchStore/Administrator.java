@@ -117,5 +117,7 @@ public class Administrator extends Vendor{
         }
     }
 
-
+    public void generateAllUsersReport() {
+        
+    }
 }
