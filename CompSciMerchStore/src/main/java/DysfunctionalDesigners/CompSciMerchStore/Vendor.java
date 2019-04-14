@@ -36,7 +36,6 @@ public abstract class Vendor extends User{
 		this.pastSales = sales;
 	}
 	
-	@SuppressWarnings("unused")
 	public Vendor() {
 		super();
 	}
