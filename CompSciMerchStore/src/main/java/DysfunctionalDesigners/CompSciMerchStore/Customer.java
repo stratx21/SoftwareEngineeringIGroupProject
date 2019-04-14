@@ -16,7 +16,7 @@ public class Customer extends Vendor{
 	private List<Sale> previousPurchases;
 	
 	/**
-	 * 
+	 * Sets everything for a customer object, passing necessary things to superconstructor.
 	 * @param d
 	 * @param status
 	 * @param paymentInfo
@@ -35,6 +35,10 @@ public class Customer extends Vendor{
 		this.cart = cart;
 		this.previousPurchases = previousPurchases;
 	}
+	/**
+	 * Creates empty versions of customer data, passes necessary information to super.
+	 * @param d
+	 */
 	public Customer(String [] d) {
 		super(d);
 		this.status = MemberLevel.GENERAL;
@@ -44,7 +48,9 @@ public class Customer extends Vendor{
 		this.cart = null;
 		this.previousPurchases = new ArrayList<Sale>();
 	}
-	
+	/**
+	 * Uses implicit super constructor, all other members are default/empty.
+	 */
 	public Customer() {
 		super();
 		this.paymentInfo = new ArrayList<PaymentInfo>();
@@ -63,7 +69,10 @@ public class Customer extends Vendor{
 	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
 	public void setWishList(List<Integer> wishList) {this.wishList = wishList;}
 	
-	
+	/**
+	 * A customer adds an item to their own wishlist. Wishlist is created if needed.
+	 * @param id Item to be added
+	 */
 	public void addItemToWishlist(Integer id) {
 		if(this.wishList == null) {
 			this.wishList = new ArrayList<Integer>();
@@ -72,18 +81,32 @@ public class Customer extends Vendor{
 		
 	}
 	
+	/**
+	 * A customer removes an item from their wishlist, IF the wishlist has the item.
+	 * @param id
+	 */
 	public void removeItemFromWishlist(Integer id) {
 		if(this.wishList.contains(id)) {
 			this.wishList.remove(id);
 		}
 	}
 	
+	/**
+	 * Adds an item to the cart. Creates the cart if needed.
+	 * @param id Item id of item added.
+	 * @param q  Quantity of how many items.
+	 */
 	public void addToCart(int id, int q) {
 		if(this.cart == null) {
 			this.cart = new Sale(this.getUserID());
 		}
 		this.cart.addItem(q, id);
 	}
+	
+	/**
+	 * After a customer makes a purchase, the sale is added.
+	 * @param sale The completed sale.
+	 */
 	public void updatePreviousPurchases(Sale sale) {
 		if(this.previousPurchases == null) {
 			this.previousPurchases = new ArrayList<Sale>();
