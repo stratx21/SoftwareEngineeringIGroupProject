@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 public class GUIdo_CreateAccount extends GUIdo_CPanel{
 	
-	//email, confirm email, mother's name, user, pass, confirm pass, name, create account
+	//whatever, email, confirm email, mother's name, user, pass, confirm pass, name, create account
 	JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9;
 	//email, confirm email, mother's name, user, pass, confirm pass, name
 	JTextField tf1, tf2, tf3, tf4, tf5, tf6, tf7;
