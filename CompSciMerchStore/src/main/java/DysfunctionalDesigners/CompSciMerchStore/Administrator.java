@@ -3,7 +3,9 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Administrator extends Vendor{
     public Administrator(String[] d) {
@@ -31,41 +33,47 @@ public class Administrator extends Vendor{
     //}
 
     public void generateAllSalesReport() {
-        BufferedReader readCust = null;
-        try {
-            readCust = new BufferedReader(
-                    new InputStreamReader(
-                            new FileInputStream(
-                                    new File("./src/main/resources/UserData/customers.txt"))));
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        }
+        UserDataController dataController = UserDataController.getInstance();
+        List<Sale> salesFromCust = new ArrayList<>();
+        List<Sale> storeSales = dataController.getStoreSales();
 
-        try {
-            String line;
-            while((line = readCust.readLine()) != null) {
-                String[] lineSplit = null;
-                try {
-                    lineSplit = line.split(" ");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                ObjectMapper mapper = new ObjectMapper();
-                Customer tempUsr = null;
-                File usrFile = new File("./src/main/resources/UserData/" + lineSplit[0] + ".json");
-
-                tempUsr = mapper.readValue(usrFile, Customer.class);
-                if(tempUsr.isAdmin()) {
-                    continue;
-                }
-
-
+        //Get all customer sales. Gets each customer and then
+        //for each customer it gets their past sales list. If the list
+        //is not empty, add it to the salesFromCust list.
+        List<Customer> custs = dataController.getAllCustomers();
+        custs.forEach(e -> {
+            List<Sale> nextSales = new ArrayList<>();
+            try {
+                nextSales = dataController.getUserSales(e.getUserName());
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
+            if(!nextSales.isEmpty()) {
+                salesFromCust.addAll(nextSales);
+            }
+        });
+
+        //filters all cust Sales to only unique ones
+        List<Sale> uniqueCustSales = salesFromCust.stream().distinct().collect(Collectors.toList());
+        storeSales = storeSales.stream().distinct().collect(Collectors.toList());
+
+        File salesReportFile = new File("./src/main/resources/reports/salesReport.txt");
+        try {
+            salesReportFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(salesReportFile));
+            writer.write("Customer Sales: \n");
+            for (Sale uniqueCustSale : uniqueCustSales) {
+                writer.write(uniqueCustSale.toString());
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
