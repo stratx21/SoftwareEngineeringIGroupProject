@@ -62,15 +62,15 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 		tf6.setBounds(50, 440, 200, 30);
 		tf7.setBounds(50, 510, 200, 30);
 		
-		String[] toInput;
+		String[] toInput = new String[6];
 		btn1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(tf1.getText() != tf2.getText()) {
+				if(!tf1.getText().equals(tf2.getText())) {
 					JOptionPane.showMessageDialog(panel, "Emails are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
-				}else if(tf5.getText() != tf6.getText()) {
+				}else if(!tf5.getText().equals(tf6.getText())) {
 					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
 				} else if(control.getCustomerUsernames().contains(tf4.getText())){
 					JOptionPane.showMessageDialog(panel, "Username is taken already!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -84,6 +84,14 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 					}
 				}
 				
+				toInput[0] = tf1.getText(); 
+				toInput[1] = tf3.getText();
+				toInput[2] = tf4.getText();
+				toInput[3] = tf5.getText();
+				toInput[4] = tf7.getText();
+				toInput[5] = User.hashUserNameToCustomerID(tf4.getText());
+				
+				control.writeCustomer(new Customer(toInput));
 			}
 			
 		});
