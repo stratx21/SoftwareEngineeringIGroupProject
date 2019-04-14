@@ -1,9 +1,7 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +13,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,25 +47,25 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param bf the file to read from
 	 * @throws Exception if it can't read from the catalogue
 	 */
-	private void readFile(BufferedReader bf) throws Exception {
-		String line;
-		String[] splitLine;
-		try {
-			line = bf.readLine();
-			numItems = Integer.parseInt((line.split(" "))[1]);
-			ItemInfo.setNextID(numItems);
-			
-			while((line = bf.readLine()) != "" && line != null) {
-				splitLine = line.split(", ");
-				int id = Integer.parseInt(splitLine[0]);
-				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[3]), 
-							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[5]), id, Professor.valueOf(splitLine[6])));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new Exception("Couldn't read catalogue from file stack trace");
-		}		
-	}
+//	private void readFile(BufferedReader bf) throws Exception {
+//		String line;
+//		String[] splitLine;
+//		try {
+//			line = bf.readLine();
+//			numItems = Integer.parseInt((line.split(" "))[1]);
+//			ItemInfo.setNextID(numItems);
+//			
+//			while((line = bf.readLine()) != "" && line != null) {
+//				splitLine = line.split(", ");
+//				int id = Integer.parseInt(splitLine[0]);
+//				catalogue.put(id, new ItemInfo(splitLine[2], splitLine[1], Integer.parseInt(splitLine[3]), 
+//							  Integer.parseInt(splitLine[4]), Double.parseDouble(splitLine[5]), id, Professor.valueOf(splitLine[6])));
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			throw new Exception("Couldn't read catalogue from file stack trace");
+//		}		
+//	}
 	
 	/**
 	 * Reads the catalogue from a JSON file and sets the next itemid to add.
