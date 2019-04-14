@@ -292,5 +292,61 @@
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
+  },
+  "21" : {
+    "description" : "If you've taken Intro to Computer Systems, you know how important it is to know your multiples of 16. To make sure you never forget, invest in some flashcards now!",
+    "displayName" : "16's flashcards",
+    "extendedItemID" : "00021",
+    "itemID" : 21,
+    "stock" : 3,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 16.16,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "FRY",
+    "reviews" : [ ]
+  },
+  "22" : {
+    "description" : "Did you get a bad grade? Can you not remember the order that registers pop off the stack? Well that's a... bummer.",
+    "displayName" : "Bummer Button",
+    "extendedItemID" : "00022",
+    "itemID" : 22,
+    "stock" : 190,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 80.33,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "FRY",
+    "reviews" : [ ]
+  },
+  "23" : {
+    "description" : "A fashion-forward hat to support your favorite professor!",
+    "displayName" : "Team Fry Hat",
+    "extendedItemID" : "00023",
+    "itemID" : 23,
+    "stock" : 10,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 5.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "FRY",
+    "reviews" : [ ]
+  },
+  "24" : {
+    "description" : "Do you miss Professor Fry when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Professor Fry Bobble Head today!",
+    "displayName" : "Professor Fry Bobblehead",
+    "extendedItemID" : "00024",
+    "itemID" : 24,
+    "stock" : 3,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 2000.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "FRY",
+    "reviews" : [ ]
   }
 }
