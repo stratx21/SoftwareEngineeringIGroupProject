@@ -2,54 +2,91 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 //Creates screen, doesn't have things in correct place. Adjust values to get spacing and placement right.
 
 public class GUIdo_CreateAccount extends GUIdo_CPanel{
 	
-	//user, pass, confirm pass, email, confirm email, create an account
-	JLabel l1, l2, l3, l4, l5, l6, l7;
-	//user, pass, confirm pass, email, confirm email
-	JTextField tf1, tf2, tf3, tf4, tf5;
+	//email, confirm email, mother's name, user, pass, confirm pass, name, create account
+	JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9;
+	//email, confirm email, mother's name, user, pass, confirm pass, name
+	JTextField tf1, tf2, tf3, tf4, tf5, tf6, tf7;
 	//sign up
 	GUIdo_CButton btn1;
 	
 	GUIdo_CreateAccount(final ActionListener al){
-		super(600);
+		super(700);
 		GUIdo_CPanel panel = this;
+		UserDataController control = UserDataController.getInstance();
 		l1 = new JLabel("Username");
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Arial", Font.BOLD, 20));
 		
-		l2 = new JLabel("Select a Username:");
-		l3 = new JLabel("Enter a Password:");
-		l4 = new JLabel("Confirm Password:");
-		l5 = new JLabel("Enter email:");
-		l6 = new JLabel("Confirm email:");
-		l7 = new JLabel("Create an Account");
+		l2 = new JLabel("Enter email:");
+		l3 = new JLabel("Confirm email:");
+		l4 = new JLabel("Enter mother's maiden name:");
+		l5 = new JLabel("Enter username:");
+		l6 = new JLabel("Enter password:");
+		l7 = new JLabel("Confirm password:");
+		l8 = new JLabel("Enter name:");
+		l9 = new JLabel("Create an Account");
 		tf1 = new JTextField();
 		tf2 = new JTextField();
 		tf3 = new JTextField();
 		tf4 = new JTextField();
 		tf5 = new JTextField();
-		btn1 = new GUIdo_CButton(550, 550, 170, 30, "Sign Up!");
+		tf6 = new JTextField();
+		tf7 = new JTextField();
+		btn1 = new GUIdo_CButton(650, 650, 170, 30, "Sign Up!");
 		
 		l2.setBounds(50, 50, 200, 30);
-		l3.setBounds(50, 100, 200, 30);
-		l4.setBounds(50, 150, 200, 30);
-		l5.setBounds(50, 200, 200, 30);
-		l6.setBounds(50, 250, 200, 30);
-		l7.setBounds(200, 30, 200, 30);
+		l3.setBounds(50, 120, 200, 30);
+		l4.setBounds(50, 190, 200, 30);
+		l5.setBounds(50, 260, 200, 30);
+		l6.setBounds(50, 330, 200, 30);
+		l7.setBounds(50, 400, 200, 30);
+		l8.setBounds(50, 470, 200, 30);
+		l9.setBounds(200, 30, 200, 30);
 		
-		tf1.setBounds(50, 60, 200, 30);
-		tf2.setBounds(50, 110, 200, 30);
-		tf3.setBounds(50, 160, 200, 30);
-		tf4.setBounds(50, 210, 200, 30);
-		tf5.setBounds(50, 260, 200, 30);
+		tf1.setBounds(50, 90, 200, 30);
+		tf2.setBounds(50, 160, 200, 30);
+		tf3.setBounds(50, 230, 200, 30);
+		tf4.setBounds(50, 300, 200, 30);
+		tf5.setBounds(50, 370, 200, 30);
+		tf6.setBounds(50, 440, 200, 30);
+		tf7.setBounds(50, 510, 200, 30);
+		
+		String[] toInput;
+		btn1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(tf1.getText() != tf2.getText()) {
+					JOptionPane.showMessageDialog(panel, "Emails are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
+				}else if(tf5.getText() != tf6.getText()) {
+					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
+				} else if(control.getCustomerUsernames().contains(tf4.getText())){
+					JOptionPane.showMessageDialog(panel, "Username is taken already!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				if(!tf1.getText().isEmpty()) {
+					for(int i = 0; i < control.getAllCustomers().size(); i++) {
+						if(tf1.getText().equals(control.getAllCustomers().get(i).getEmail())){
+							JOptionPane.showMessageDialog(panel, "Email already has an account!", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+				
+			}
+			
+		});
 		
 		this.add(l1);
 		this.add(l2);
@@ -58,11 +95,15 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 		this.add(l5);
 		this.add(l6);
 		this.add(l7);
+		this.add(l8);
+		this.add(l9);
 		this.add(tf1);
 		this.add(tf2);
 		this.add(tf3);
 		this.add(tf4);
 		this.add(tf5);
+		this.add(tf6);
+		this.add(tf7);
 		this.add(btn1);
 		
 	}
