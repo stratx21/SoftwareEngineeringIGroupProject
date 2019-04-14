@@ -22,6 +22,14 @@ public abstract class User {
 		return this.userID + ":|: ";
 	}
 
+	public static String hashUserNameToCustomerID(String userName) {
+		final int prime = 31;
+		String result = (prime + ((userName == null) ? 0 : userName.hashCode())) + "";
+		result = (Integer.parseInt(result) % 10000) + "";
+		result = "1" + result;
+		return result;
+	}
+	
 	protected User(String email, String motherMaidenName, String userName, String password, String name, int userID) {
 		super();
 		this.email = email;
