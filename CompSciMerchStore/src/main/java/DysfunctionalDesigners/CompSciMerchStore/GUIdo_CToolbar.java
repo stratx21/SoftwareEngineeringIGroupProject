@@ -71,7 +71,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		wishlist.setBackground(new Color(255,181,9));
 		wishlist.setHoverColor(new Color(242,170,0));
 		
-		GUIdo_CButton login = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGIN");
+		GUIdo_CButton login = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
 		login.setActionCommand("login");
 		login.setActionListener_clicked(done);
 		login.setBackground(new Color(255,181,9));
