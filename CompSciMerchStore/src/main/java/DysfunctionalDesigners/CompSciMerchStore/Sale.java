@@ -248,7 +248,6 @@ public class Sale {
 							a.addNewSale(this);
 							adminsChanged.add(a);
 						} else {
-							//TODO:: logger log severe couldn't find administrator
 							logger.severe("SALE " + this.saleID + " of user " + this.customerID + ": COULDN'T FIND ADMINISTRATOR \'" + id + "\'");
 						}
 						break;
@@ -261,13 +260,11 @@ public class Sale {
 							a1.addNewSale(this);
 							custChanged.add(a1);
 						} else {
-							//TODO:: logger log severe couldn't find customer
 							logger.severe("SALE " + this.saleID + " of user " + this.customerID + ": COULDN'T FIND CUSTOMER \'" + id + "\'");
 						}
 						break;
 					default:
 						//why are we even here
-						//TODO:: LOGGER SEVERE ID NOT RECOGNIZED
 						logger.severe("SALE " + this.saleID + " of user " + this.customerID + ": COULDN'T FIND USER WITH IMPROPER ID \'" + id + "\'");
 				}
 			});

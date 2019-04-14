@@ -118,10 +118,15 @@ public class ItemInfo {
 		currenty+=line_height;
 		
 		ArrayList<String> lines = GUIdo_OutputTools.formatStringForPrompt(this.displayName,DESC_FONT,width);
-		for(String line : lines) {
-			g.drawString(line, x, currenty);
-			currenty+=line_height;
+		String namestr = lines.get(0);
+		
+		if(lines.size()>1) {
+			namestr += "...";
 		}
+		
+		g.drawString(namestr, x, currenty);
+		currenty+=line_height;
+		
 		g.drawString("$"+new DecimalFormat("#.00").format(this.price), x, currenty);
 		currenty+=line_height;
 	}
