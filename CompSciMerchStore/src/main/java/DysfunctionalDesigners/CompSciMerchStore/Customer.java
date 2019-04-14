@@ -38,7 +38,7 @@ public class Customer extends Vendor{
 	public Customer(String [] d) {
 		super(d);
 		this.status = MemberLevel.GENERAL;
-		this.paymentInfo = null;
+		this.paymentInfo = new ArrayList<PaymentInfo>();
 		this.shippingAddr = null;
 		this.wishList = new ArrayList<Integer>();
 		this.cart = null;
@@ -47,7 +47,7 @@ public class Customer extends Vendor{
 	
 	public Customer() {
 		super();
-		this.paymentInfo = null;
+		this.paymentInfo = new ArrayList<PaymentInfo>();
 		this.cart = null;
 		this.shippingAddr = null;
 		this.wishList = new ArrayList<Integer>();
@@ -57,6 +57,7 @@ public class Customer extends Vendor{
 	public MemberLevel getStatus() {return status;}
 	public Address getShippingAddr() {return shippingAddr;}
 	public List<Integer> getWishList() {return wishList;}
+	public List<PaymentInfo> getPaymentInfo() { return this.paymentInfo; }
 	
 	public void setStatus(MemberLevel status) {this.status = status;}
 	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
