@@ -55,7 +55,12 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		price.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*5/35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(price);
 		
-		JLabel stock = new JLabel("Only " + this.item.getStock() + " left! Get it before it runs out!");
+		int amount = 0;
+		if(cart.getItemList().containsKey(item.getItemID())) {
+			amount = cart.getItemList().get(item.getItemID()).getQuantity();
+		}
+		
+		JLabel stock = new JLabel("Only " + (this.item.getStock()-amount) + " left! Get it before it runs out!");
 		stock.setBounds(price.getX(), price.getY()+35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(stock);
 		
@@ -83,13 +88,16 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		ArrayList<String> options = new ArrayList<>();
 		
-		for(int i = 1; i <= item.getStock() && i < 10; i++) {
+		
+		for(int i = 1; i <= item.getStock() - amount && i < 10; i++) {
 			options.add(i+"");
 		}
 		
 		
 		JComboBox quantity = new JComboBox(options.toArray());
-	    quantity.setSelectedIndex(0);
+		if(!options.isEmpty()) {
+			quantity.setSelectedIndex(0);
+		}
 	    quantity.setBounds(quantityis.getX()+quantityis.getWidth()+5,quantityis.getY(), 50, 25);
 	    
 	    
