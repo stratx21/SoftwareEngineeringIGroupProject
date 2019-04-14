@@ -127,7 +127,7 @@ public class ItemInfo {
 		g.drawString(namestr, x, currenty);
 		currenty+=line_height;
 		
-		g.drawString("$"+new DecimalFormat("#.00").format(this.price), x, currenty);
+		g.drawString("$"+new DecimalFormat("0.00").format(this.price), x, currenty);
 		currenty+=line_height;
 	}
 
