@@ -2,10 +2,13 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	
 	final int SECTIONS=8;
+	
+	private ArrayList<GUIdo_CButton> buttons = new ArrayList<>();
 	
 	public GUIdo_SectionHeader(int x, int y, int width, int height, final ActionListener done) {
 		this.setSize(width, height);
@@ -57,11 +60,32 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		this.add(section4);
 		this.add(section5);
 		this.add(section6);
-		
 		this.add(section7);
 		this.add(section8);
 		
+		buttons.add(section1);
+		buttons.add(section2);
+		buttons.add(section3);
+		buttons.add(section4);
+		buttons.add(section5);
+		buttons.add(section6);
+		buttons.add(section7);
+		buttons.add(section8);
+		
+		
 		//this.repaint();
+	}
+	
+	public void disable_all_buttons() {
+		for(GUIdo_CButton button : buttons) {
+			button.disable();
+		}
+	}
+	
+	public void enable_all_buttons() {
+		for(GUIdo_CButton button : buttons) {
+			button.enable();
+		}
 	}
 	
 }
