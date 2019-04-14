@@ -408,7 +408,7 @@
   "29" : {
     "description" : "Professor Hairy Aars is all about his students finding what they love in life. He'll even sit on the floor with them and talk about it. If you need a little help, this book might be for you!",
     "displayName" : "Find What You Love Book",
-    "extendedItemID" : "0029",
+    "extendedItemID" : "00029",
     "itemID" : 29,
     "stock" : 300,
     "vendorID" : 40000,
