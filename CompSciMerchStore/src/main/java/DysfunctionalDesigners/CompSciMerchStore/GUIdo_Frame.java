@@ -284,6 +284,7 @@ public class GUIdo_Frame extends JFrame{
 				}
 				current_panel = new GUIdo_ItemCollection(getWidth(),display_items,title,toItemDisplay,current_user);
 				scrollpane.getViewport().add(current_panel);
+				scrollpane.repaint();
 			}
 		});
 		
