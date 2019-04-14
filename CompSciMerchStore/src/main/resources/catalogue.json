@@ -556,7 +556,7 @@
     "price" : 50.0,
     "promoDiscounts" : { },
     "enabled" : true,
-    "prof" : "HAMERLY",
+    "prof" : "DYS_DES",
     "reviews" : [ ]
   },
   "40" : {
@@ -570,7 +570,7 @@
     "price" : 0.01,
     "promoDiscounts" : { },
     "enabled" : true,
-    "prof" : "CERNY",
+    "prof" : "DYS_DES",
     "reviews" : [ ]
   },
   "41" : {

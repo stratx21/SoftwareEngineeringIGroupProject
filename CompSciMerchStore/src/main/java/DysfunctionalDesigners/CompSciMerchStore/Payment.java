@@ -16,7 +16,7 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "amount=" + amount +
-                ", paymentInfo=" + paymentInfo +
+                "\n paymentInfo=" + paymentInfo +
                 '}';
     }
 
