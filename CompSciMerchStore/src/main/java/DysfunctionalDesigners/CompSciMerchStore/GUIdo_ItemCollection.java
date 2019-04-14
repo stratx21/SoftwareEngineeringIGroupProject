@@ -15,7 +15,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 
 	private List<ItemInfo> items_to_display = null;
 	
-	private static final int ITEM_DISPLAY_HEIGHT = 300;
+	private static final int ITEM_DISPLAY_HEIGHT = 600;
 	
 	private static final int VIEW_BUTTON_HEIGHT = 50;
 	
@@ -33,7 +33,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	
 	private int item_display_width;
 	
-	private static final int ITEMS_PER_ROW = 3;
+	private static final int ITEMS_PER_ROW = 5;
 	
 //	private static final int ITEMS_PER_PAGE = 30;
 	
@@ -65,14 +65,15 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	
 	//for pages ? page numbers, loop, for i, while i*items_per_page < display_items.size()
 	
-	public GUIdo_ItemCollection(List<ItemInfo> display_items, String title, ActionListener done, User user) {
-		super(ITEM_DISPLAY_HEIGHT*display_items.size()/ITEMS_PER_ROW+800);//item display height * item rows + const
+	public GUIdo_ItemCollection(int width, List<ItemInfo> display_items, String title, ActionListener done, User user) {
+		super(/*width,*/ITEM_DISPLAY_HEIGHT*display_items.size()/ITEMS_PER_ROW+800);//item display height * item rows + const
 		this.item_count=display_items.size();
 //		this.current_page=1;
 		this.items_to_display=display_items;
 		this.title = title;
 		
-		this.item_display_width= this.getWidth()-2*ORIGINAL_X-this.ITEMS_PER_ROW*this.GAP_X;
+		this.item_display_width= (width-2*ORIGINAL_X-GUIdo_ItemCollection.ITEMS_PER_ROW*GUIdo_ItemCollection.GAP_X)/ITEMS_PER_ROW;
+		
 		
 		GUIdo_CButton button_to_add = null;
 		GUIdo_CButton wishlist_button = null;
@@ -83,7 +84,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 		}
 		
 		int x = ORIGINAL_X;
-		int y = GUIdo_ItemCollection.ITEM_DISPLAY_HEIGHT-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT;
+		int y = GUIdo_ItemCollection.ITEM_DISPLAY_HEIGHT-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT+70;
 		
 		for(int itemIndex = 0; itemIndex < this.item_count; itemIndex++) {
 			button_to_add = new GUIdo_CButton(x,y,this.item_display_width,GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT,"view");
@@ -97,7 +98,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 			if(wishlist_button != null) {
 				
 				//is customer, add wishlist button 
-				wishlist_button = new GUIdo_CButton(x,y-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
+				wishlist_button = new GUIdo_CButton(x,y-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT/*-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT*/,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
 				if(customer.getWishList().contains(itemIndex)) {
 					wishlist_button.enableIcons(onlist1,onlist2,onlist3);
 				} else {
@@ -158,11 +159,11 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	public void paintComponent(Graphics g) {
 		
 		int x=ORIGINAL_X,
-		    y=ORIGINAL_X;
+		    y=ORIGINAL_X+70;
 		
 		
-		g.setFont(this.TITLE_FONT);
-		g.drawString(this.title, this.getWidth()/2-GUIdo_OutputTools.getPixelWidth(this.title, this.TITLE_FONT)/2, this.TITLE_Y);
+		g.setFont(GUIdo_ItemCollection.TITLE_FONT);
+		g.drawString(this.title, this.getWidth()/2-GUIdo_OutputTools.getPixelWidth(this.title, GUIdo_ItemCollection.TITLE_FONT)/2, GUIdo_ItemCollection.TITLE_Y);
 		
 		for(int itemIndex = 0; itemIndex < this.item_count; itemIndex++) {
 			this.items_to_display.get(itemIndex).drawDisplay(g, x, y, this.item_display_width, GUIdo_ItemCollection.ITEM_DISPLAY_HEIGHT-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);

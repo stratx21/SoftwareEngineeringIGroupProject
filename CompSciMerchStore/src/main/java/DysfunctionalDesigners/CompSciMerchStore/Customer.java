@@ -13,8 +13,7 @@ public class Customer extends Vendor{
 	private Address shippingAddr;
 	private List<Integer> wishList;
 	private Sale cart;
-	private List<Sale> previousPurchases;	
-	
+	private List<Sale> previousPurchases;
 	
 	/**
 	 * 
@@ -58,10 +57,10 @@ public class Customer extends Vendor{
 	public MemberLevel getStatus() {return status;}
 	public Address getShippingAddr() {return shippingAddr;}
 	public List<Integer> getWishList() {return wishList;}
-		
+	
 	public void setStatus(MemberLevel status) {this.status = status;}
 	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
-	public void setWishList(List<Integer> wishList) {this.wishList = wishList;	}
+	public void setWishList(List<Integer> wishList) {this.wishList = wishList;}
 	
 	
 	public void addItemToWishlist(Integer id) {
