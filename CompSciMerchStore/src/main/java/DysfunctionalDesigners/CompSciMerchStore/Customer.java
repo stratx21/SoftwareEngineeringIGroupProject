@@ -64,6 +64,8 @@ public class Customer extends Vendor{
 	public Address getShippingAddr() {return shippingAddr;}
 	public List<Integer> getWishList() {return wishList;}
 	public List<PaymentInfo> getPaymentInfo() { return this.paymentInfo; }
+	public List<Sale> getPreviousPurchases() { return this.previousPurchases; }
+	public Sale getCart() { return this.cart; }
 	
 	public void setStatus(MemberLevel status) {this.status = status;}
 	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
