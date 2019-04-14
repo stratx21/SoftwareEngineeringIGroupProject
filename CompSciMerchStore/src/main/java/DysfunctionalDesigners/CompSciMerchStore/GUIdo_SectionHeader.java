@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	
-	final int SECTIONS=7;
+	final int SECTIONS=8;
 	
 	public GUIdo_SectionHeader(int x, int y, int width, int height, final ActionListener done) {
 		this.setSize(width, height);
@@ -45,15 +45,23 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		section7.setActionListener_clicked(done);
 		section7.setBackground(new Color(255,181,9));
 		
+		GUIdo_CButton section8 = new GUIdo_CButton(x+7*width/SECTIONS,y,width/SECTIONS,height,"Dysfunctional Designers");
+		section8.setActionCommand("dys_des");
+		section8.setActionListener_clicked(done);
+//		section8.setVisible(true);
+		section8.setBackground(new Color(255,181,9));
+		
 		this.add(section1);
 		this.add(section2);
 		this.add(section3);
 		this.add(section4);
 		this.add(section5);
 		this.add(section6);
-		this.add(section7);
 		
-		this.repaint();
+		this.add(section7);
+		this.add(section8);
+		
+		//this.repaint();
 	}
 	
 }
