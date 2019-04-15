@@ -60,7 +60,17 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			amount = cart.getItemList().get(item.getItemID()).getQuantity();
 		}
 		
-		JLabel stock = new JLabel("Only " + (this.item.getStock()-amount) + " left! Get it before it runs out!");
+		String quantity_ad;
+		int quantitycount = this.item.getStock()-amount;
+		if(quantitycount == 0) {
+			quantity_ad = "This item is out of stock!";
+		} else if(quantitycount <= 8) {
+			quantity_ad = "Only " + quantitycount + " left! Get it before it runs out!";
+		} else {
+			quantity_ad = quantitycount + " in stock!";
+		}
+		
+		JLabel stock = new JLabel(quantity_ad);
 		stock.setBounds(price.getX(), price.getY()+35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(stock);
 		
