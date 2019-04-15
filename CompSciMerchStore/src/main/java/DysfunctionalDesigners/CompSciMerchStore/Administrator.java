@@ -3,11 +3,11 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Administrator extends Vendor{
@@ -118,6 +118,55 @@ public class Administrator extends Vendor{
     }
 
     public void generateAllUsersReport() {
-        
+        UserDataController dataController = UserDataController.getInstance();
+        BufferedWriter writer = null;
+        File userReportFile = new File("./src/main/resources/reports/usersReport.txt");
+        int numberOfUsers, numberOfAdmins;
+
+
+        try {
+            userReportFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writer = new BufferedWriter(new FileWriter(userReportFile));
+
+            Path userFile = Paths.get("./src/main/resources/UserData/customers.txt");
+            Path adminPath = Paths.get("./src/main/resources/UserData/admins.txt");
+            numberOfUsers = (int)Files.lines(userFile).count();
+            numberOfAdmins = (int)Files.lines(adminPath).count();
+
+            writer.write("Number of Users/Customers: " + numberOfUsers + "\n");
+            writer.write("Number of admins: " + numberOfAdmins + "\n");
+
+            List<String> allUsernames = new ArrayList<>();
+            allUsernames.addAll(dataController.getCustomerUsernames());
+            allUsernames.addAll(dataController.getAdminUsernames());
+            Collections.sort(allUsernames);
+
+            writer.write("All Usernames: \n");
+            for (String username : allUsernames) {
+                writer.write("\t" + username + "\n");
+            }
+
+            //Calculate user with the most purchases
+            Customer custWithMostPurchases = null;
+            List<Customer> allCustomerObjects = dataController.getAllCustomers();
+            List<Integer> numberOfPurchasesPerCust = allCustomerObjects.stream()
+                    .map(e -> e.getPreviousPurchases().size())
+                    .collect(Collectors.toList());
+            int biggestAmount = Collections.max(numberOfPurchasesPerCust);
+            custWithMostPurchases = allCustomerObjects.get(numberOfPurchasesPerCust.indexOf(biggestAmount));
+
+            writer.write("User with the most Purchases: " + custWithMostPurchases.getUserName() + "\n");
+
+            //TODO:Find vendor with most uploaded items
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
