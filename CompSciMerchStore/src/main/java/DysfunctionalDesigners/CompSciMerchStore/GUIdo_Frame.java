@@ -11,6 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -61,6 +62,10 @@ public class GUIdo_Frame extends JFrame{
 	 * the current panel that is being used for the page to scroll through
 	 */
 	GUIdo_CPanel current_panel;
+	
+	private List<Integer> generalMemberDeals = Arrays.asList(1,2,3);
+	private List<Integer> middleMemberDeals = Arrays.asList(1,2,3,4,5,6);
+	private List<Integer> eliteMemberDeals = Arrays.asList(1,2,3,4,5,6,7,8,9);
 	
 	/**
 	 * This initializes the GUIdo_Frame instance; it calls initialize to
@@ -180,6 +185,8 @@ public class GUIdo_Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
 					display_item((ItemInfo)e.getSource());
+				} else if(e.getActionCommand().equals("memberdeals")) {
+					to_MemberDeals();
 				}
 			}
 		}, scrollpane.getWidth());
@@ -200,6 +207,25 @@ public class GUIdo_Frame extends JFrame{
 				}
 			}
 		},current_user);
+		scrollpane.getViewport().add(current_panel);
+	}
+	
+	
+	private void to_MemberDeals() {
+		List<List<Integer>> deals = new ArrayList<List<Integer>>();
+		deals.add(generalMemberDeals);
+		deals.add(middleMemberDeals);
+		deals.add(eliteMemberDeals);
+		
+		if((!((Customer) current_user).isAdmin())) {
+			
+			current_panel = new GUIdo_MemberDeals(deals, (Customer)current_user);
+		}
+		else {
+			current_panel = new GUIdo_MemberDeals(eliteMemberDeals, (Administrator)current_user);
+		}
+		
+			
 		scrollpane.getViewport().add(current_panel);
 	}
 	
