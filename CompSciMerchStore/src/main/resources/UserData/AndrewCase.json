@@ -19,8 +19,7 @@
     "itemList" : {
       "40" : {
         "quantity" : 1,
-        "itemID" : 40,
-        "totalPrice" : 0.01
+        "itemID" : 40
       }
     },
     "shippingAddr" : null,
