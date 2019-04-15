@@ -190,7 +190,9 @@ public class GUIdo_Frame extends JFrame{
 			scrollpane.getViewport().add(current_panel);
 			
 		} else if(e.getActionCommand().equals("Forgot Password?")) {
-			
+			ActionListener l = null;
+			current_panel = new GUIdo_ForgotPassword(l);
+			scrollpane.getViewport().add(current_panel);
 		}
 	}
 	

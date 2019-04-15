@@ -2,9 +2,11 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class GUIdo_ForgotPassword extends GUIdo_CPanel{
@@ -48,6 +50,31 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		tf3.setBounds(50, 230, 200, 30);
 		tf4.setBounds(50, 300, 200, 30);
 		
+		btn1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(!tf3.getText().equals(tf4.getText())) {
+					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if(!tf1.getText().isEmpty()) {
+					for(int i = 0; i < control.getAllCustomers().size(); i++) {
+						if(tf1.getText().equals(control.getAllCustomers().get(i).getUserName())) {
+							if(tf2.getText().equals(control.getAllCustomers().get(i).getMotherMaidenName())) {
+								control.getAllCustomers().get(i).setPassword(tf3.getText());
+							}else {
+								JOptionPane.showMessageDialog(panel, "Mother's maiden name doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+						}else {
+							JOptionPane.showMessageDialog(panel, "Username doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			}
+			
+		});
+		
 		this.add(l1);
 		this.add(l2);
 		this.add(l3);
@@ -59,6 +86,8 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		this.add(tf2);
 		this.add(tf3);
 		this.add(tf4);
+		
+		this.add(btn1);
 		
 	}
 
