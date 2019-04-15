@@ -14,17 +14,45 @@ import java.util.ArrayList;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
 	
+	/**
+	 * This function tells if the buttons are disabled. 
+	 * @return a boolean concerning if the buttons are
+	 * 	disabled. 
+	 */
 	public boolean getButtons_disabled() {
-		return buttons_disabled;
+		return disabled;
 	}
 
+	/**
+	 * The text field that is used for the search bar to search the store. 
+	 */
 	private JTextField searchBar;
 	
-	private boolean buttons_disabled = false;
+	/**
+	 * The boolean to tell if the buttons and search bar are disabled; This is 
+	 *  used to disable the search bar. 
+	 */
+	private boolean disabled;
 	
+	/**
+	 * The list of buttons in the toolbar to be used so that they can be disabled
+	 *  and enabled. 
+	 */
 	private ArrayList<GUIdo_CButton> buttons = new ArrayList<>();
 	
+	/**
+	 * This sets up the toolbar using an x and y position, a width and height used to restrict the 
+	 * 	toolbar to where it needs to be, and an ActionListener instance used to go to whatever page
+	 *  it needs to go to once an option is chosen. 
+	 * @param x the x value to put the toolbar at 
+	 * @param y the y value to put the toolbar at 
+	 * @param width the width of the toolbar in the frame 
+	 * @param height the height of the toolbar in the frame 
+	 * @param done the ActionListener instance that is used to go to whatever page it needs to go
+	 *  to based on what option is chosen. 
+	 */
 	public GUIdo_CToolbar(int x, int y, int width, int height, final ActionListener done) {
+		disabled = false;
 //		super();
 		//general setup:
 		this.setSize(width, height);
@@ -41,6 +69,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		cart.setHoverColor(new Color(242,170,0));
 //		cart.setPressedColor(new Color(230,160,0));
 		
+		//add the home button in the top left 
 		GUIdo_CButton home_button= null;
 		try  {
 			home_button  =  new GUIdo_CButton(x,y,height,height,
@@ -56,6 +85,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		home_button.setBackground(new Color(255,181,9));
 		home_button.setHoverColor(new Color(242,170,0));
 		
+		//set up the wishlist button for the toolbar to see the User's wishlist 
 		GUIdo_CButton wishlist=null;
 		try {
 			wishlist = new GUIdo_CButton(x+width-height*3,y,height,height,
@@ -66,16 +96,17 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		wishlist.setActionCommand("wishlist");
+		wishlist.setActionCommand("wishlist");//command to check by to ensure the wishlist action choice 
 		wishlist.setActionListener_clicked(done);
 		wishlist.setBackground(new Color(255,181,9));
 		wishlist.setHoverColor(new Color(242,170,0));
 		
-		GUIdo_CButton login = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
-		login.setActionCommand("login");
-		login.setActionListener_clicked(done);
-		login.setBackground(new Color(255,181,9));
-		login.setHoverColor(new Color(242,170,0));
+		//set up the logout button 
+		GUIdo_CButton logout = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
+		logout.setActionCommand("login");
+		logout.setActionListener_clicked(done);
+		logout.setBackground(new Color(255,181,9));
+		logout.setHoverColor(new Color(242,170,0));
 		
 		
 		//search bar:
@@ -84,15 +115,14 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		searchBar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO: implement search algorithm here:
-				System.out.println("SEARCH invoked with string \"" + searchBar.getText() + "\"");
+//				System.out.println("SEARCH invoked with string \"" + searchBar.getText() + "\"");
 				
-				//use searchBar.getText() to get the String of text entered to search
-				
-				ActionEvent forPerformed = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search");
-				forPerformed.setSource(searchBar.getText());
-				
-				done.actionPerformed(forPerformed);
+				if(!disabled) {
+					ActionEvent forPerformed = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search");
+					forPerformed.setSource(searchBar.getText());
+					
+					done.actionPerformed(forPerformed);
+				}
 			}
 		});
 		searchBar.setSize(width-height*5, height/2);
@@ -100,16 +130,17 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		searchBar.setBackground(new Color(255,181,9));
 		
-		
+		//add all buttons 
 		this.add(home_button);
 		this.add(searchBar);
 		this.add(wishlist);
-		this.add(login);
+		this.add(logout);
 		this.add(cart);
 		
+		//add the buttons so they can be disabled 
 		buttons.add(home_button);
 		buttons.add(wishlist);
-		buttons.add(login);
+		buttons.add(logout);
 		buttons.add(cart);
 		
 		home_button.repaint();
@@ -117,19 +148,25 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		this.repaint();
 	}
 	
-	
+	/**
+	 * disable the functionality of all the toolbar buttons and the 
+	 * search bar. 
+	 */
 	public void disable_all_buttons() {
+		disabled = true;
 		for(GUIdo_CButton button : buttons) {
 			button.disable();
 		}
-		buttons_disabled=true;
 	}
 	
+	/**
+	 * enable the functionality of the toolbar buttons and the search bar. 
+	 */
 	public void enable_all_buttons() {
+		disabled = false;
 		for(GUIdo_CButton button : buttons) {
 			button.enable();
 		}
-		buttons_disabled=false;
 	}
 	
 }
