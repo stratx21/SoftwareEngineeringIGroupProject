@@ -18,18 +18,49 @@ import javax.swing.JLabel;
 
 public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	
+	/**
+	 * The BufferedImage instance that is used as the image to represent the item
+	 * 	graphically. 
+	 */
 	private BufferedImage item_image = null;
 	
+	/**
+	 * The item instance that is being displayed. 
+	 */
 	private ItemInfo item = null;
 	
+	/**
+	 * The Font instance that is used for the description for the item. 
+	 */
 	private static final Font DESC_FONT = new Font("Calibri",Font.PLAIN,35);
 	
+	/**
+	 * The quantity chosen of the item that is being displayed. 
+	 */
 	private int quantity_chosen = 1;
 	
+	/**
+	 * The image ratio to use to scale the image; it is the width of the image divided by
+	 * 	the height of the image. 
+	 */
 	private double image_ratio = 0;
 	
+	/**
+	 * the current user instance that is logged in. 
+	 */
 	private User current_user = null;
 	
+	/**
+	 * This sets up the item display to display the information for the ItemInfo itemToDisplay given by
+	 * 	parameter. 
+	 * 
+	 * @param itemToDisplay the item to display information for.  
+	 * @param width the width in pixels of the page. 
+	 * @param cart the Sale Object to add items to to put in the cart. 
+	 * @param done the ActionListener instance that is used to return based on whatever action was performed
+	 * 	that merits leaving the item page. 
+	 * @param user the current logged in user.
+	 */
 	public GUIdo_ItemDisplay(ItemInfo itemToDisplay,int width, Sale cart,ActionListener done, User user) {
 		super(1500);
 		this.current_user=user;
@@ -189,6 +220,13 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		this.add(wishlist_button);
 	}
 	
+	/**
+	 * This overrides the function paintComponent for the panel that draws on
+	 * 	the panel using the Java.awt.Graphics instance to draw the information
+	 * 	such as the image for the item to be displayed. 
+	 * 
+	 * @param g the Java.awt.Graphics instance that is used for drawing on the panel. 
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		
