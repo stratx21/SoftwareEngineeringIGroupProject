@@ -3,6 +3,8 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class LineItem {
 	private int quantity;
 	private int itemID;
@@ -29,7 +31,7 @@ public class LineItem {
 	 * @return the total price
 	 */
 	
-	
+	@JsonIgnore 
 	public double getTotalPrice() {
 		return this.quantity * Catalogue.getInstance().getItem(this.itemID).getTotalPrice(this.promoCodes);
 	}

@@ -22,7 +22,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 
 	JLabel l1, l2, l3;
 	JTextField tf1;
-	GUIdo_CButton btn1, btn2, btn3, btn4;
+	GUIdo_CButton btn1, btn2, btn3, btn4, btn5;
 	JPasswordField p1;
 	
 	public GUIdo_LoginScreen(final ActionListener al) {
@@ -36,14 +36,17 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		l3 = new JLabel("Password");
 		tf1 = new JTextField();
 		p1 = new JPasswordField();
-		btn1 = new GUIdo_CButton(150, 160, 170, 30, "Login");
+		btn1 = new GUIdo_CButton(150, 210, 170, 30, "Login as ADMIN");
+		btn5 = new GUIdo_CButton(150, 160, 170, 30, "Login as CUSTOMER");
 		btn2 = new GUIdo_CButton(330, 160, 170, 30, "Be our guest");
 		btn3 = new GUIdo_CButton(150, 260, 170, 30, "Create Account");
 		btn4 = new GUIdo_CButton(330, 260, 170, 30, "Forgot Password");
 		
-		btn1.setActionCommand("Enter");
-//		btn1.setActionListener_clicked(al);
+		btn1.setActionCommand("Enter Admin");
 		btn1.setBackground(new Color(255,181,9));
+		
+		btn5.setActionCommand("Enter Customer");
+		btn5.setBackground(new Color(255,181,9));
 		
 		btn2.setActionCommand("Continue as a guest!");
 		btn2.setActionListener_clicked(al);
@@ -66,58 +69,58 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
 				String uname = tf1.getText();
 				String pass = p1.getText();
-				BufferedReader br = null, userData = null;
-				String fileLine, userLine;
-				String[] fileInfo, userInfo;
-				List<User> users = new ArrayList<User>();
+				UserDataController dataControl = UserDataController.getInstance();
+				BufferedReader reader;
+				List<String> usernames = new ArrayList<>(), passwords = new ArrayList<>();
+				List<User> users = new ArrayList<>();
 				boolean userexists=false, wrongpass=true;
 				
 				try {
-					br = new BufferedReader(new FileReader(new File("src/main/resources/UserData/usernames.txt")));
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				try {  //                 not empty          and     not found yet 
-					while((fileLine = br.readLine() )!= null && !(userexists && !wrongpass)) {
-						fileInfo = fileLine.split(" ");
-						if(uname.equals(fileInfo[0])){
-							userexists=true;
-							if(pass.equals(fileInfo[1])) {
-								//user and password found
-								
-								wrongpass=false;
-								userData = new BufferedReader(new FileReader(new File("src/main/resources/UserData/" + uname + ".txt")));
-								userLine = userData.readLine();
-								fileInfo = userLine.split(",");
-								fileInfo[5] = fileInfo[5].replaceAll(" ", "");
-								int id = Integer.parseInt(fileInfo[5]);
-								if(id >= 40000) {
-									users.add(new Administrator(fileInfo));
-								} else if(id >= 10000) {
-									users.add(new Customer(fileInfo));
+					if(e.getActionCommand().equals("Login as ADMIN")) {
+						reader = new BufferedReader(new FileReader(new File("src/main/resources/UserData/admins.txt")));
+						dataControl.getUsernamesAndPasswords(reader, usernames, passwords);
+						
+						for(int i=0;i<usernames.size();i++) {
+							if(usernames.get(i).equals(uname)) {
+								userexists = true;
+								if(passwords.get(i).equals(pass)) {
+									List<String> temp = new ArrayList<>();
+									temp.add(usernames.get(i));
+									users = dataControl.getAdmins(temp);
+									wrongpass = false;
+								} else {
+									//TODO:: logger event fine incorrect password admin
 								}
-								else {
-									try {
-										throw new Exception("Unknown user id in file " + uname + ".txt");
-									} catch (Exception e1) {
-										
-										e1.printStackTrace();
-									}
+							} else {
+								//TODO:: logger event fine incorrect username admin
+							}
+						}
+					} else if(e.getActionCommand().equals("Login as CUSTOMER")){
+						reader = new BufferedReader(new FileReader(new File("src/main/resources/UserData/customers.txt")));
+						dataControl.getUsernamesAndPasswords(reader, usernames, passwords);
+
+						for(int i=0;i<usernames.size();i++) {
+							if(usernames.get(i).equals(uname)) {
+								userexists = true;
+								if(passwords.get(i).equals(pass)) {
+									List<String> temp = new ArrayList<>();
+									temp.add(usernames.get(i));
+									users = dataControl.getCustomers(temp);
+									wrongpass = false;
+								} else {
+									//TODO:: logger event fine incorrect password customer
 								}
+							} else {
+								//TODO:: logger event fine incorrect username customer
 							}
 						}
 					}
-				} catch (IOException e2) {
+				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				
+					e1.printStackTrace();
+				}	
 				if(!userexists) {
 					JOptionPane.showMessageDialog(panel, "User does not exist", 
 						      "Error", JOptionPane.ERROR_MESSAGE); 
@@ -131,12 +134,68 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 					
 					al.actionPerformed(forPerformed);
 				}
+				
+				
+//				BufferedReader br = null, userData = null;
+//				String fileLine, userLine;
+//				String[] fileInfo, userInfo;
+				
+				
+//				List<User> users = dataControl.getAllCustomers();
+//				users.addAll(dataControl.getAllAdmins());
+//				List<User> users = new ArrayList<User>();
+				
+				
+//				try {
+//					br = new BufferedReader(new FileReader(new File("src/main/resources/UserData/usernames.txt")));
+//				} catch (FileNotFoundException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+				
+//				try {  //                 not empty          and     not found yet 
+//					while((fileLine = br.readLine() )!= null && !(userexists && !wrongpass)) {
+//						fileInfo = fileLine.split(" ");
+//						if(uname.equals(fileInfo[0])){
+//							userexists=true;
+//							if(pass.equals(fileInfo[1])) {
+//								//user and password found
+//								
+//								wrongpass=false;
+//								userData = new BufferedReader(new FileReader(new File("src/main/resources/UserData/" + uname + ".txt")));
+//								userLine = userData.readLine();
+//								fileInfo = userLine.split(",");
+//								fileInfo[5] = fileInfo[5].replaceAll(" ", "");
+//								int id = Integer.parseInt(fileInfo[5]);
+//								if(id >= 40000) {
+//									users.add(new Administrator(fileInfo));
+//								} else if(id >= 10000) {
+//									users.add(new Customer(fileInfo));
+//								}
+//								else {
+//									try {
+//										throw new Exception("Unknown user id in file " + uname + ".txt");
+//									} catch (Exception e1) {
+//										
+//										e1.printStackTrace();
+//									}
+//								}
+//							}
+//						}
+//					}
+//				} catch (IOException e2) {
+//					// TODO Auto-generated catch block
+//					e2.printStackTrace();
+//				}
+				
+				
 			}
 			
 		};
-		tf1.addActionListener(alistener);
-		p1.addActionListener(alistener);
+//		tf1.addActionListener(alistener);
+//		p1.addActionListener(alistener);
 		btn1.addActionListener(alistener);
+		btn5.addActionListener(alistener);
 		
 		this.add(l1);
 		this.add(l2); 
@@ -147,7 +206,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		this.add(btn2); 
 		this.add(btn3); 
 		this.add(btn4);
-		 		
+		this.add(btn5);	
 		//panel.setSize(new Dimension(400, 400));
 		
 	}

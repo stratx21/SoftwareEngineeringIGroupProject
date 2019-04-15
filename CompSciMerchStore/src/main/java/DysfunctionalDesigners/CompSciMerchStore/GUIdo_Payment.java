@@ -31,7 +31,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		this.setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
-		DecimalFormat df2 = new DecimalFormat("0.00");
+//		DecimalFormat df2 = new DecimalFormat("0.00");
 		MaskFormatter card = null;
 		try {
 			card = new MaskFormatter("################");
