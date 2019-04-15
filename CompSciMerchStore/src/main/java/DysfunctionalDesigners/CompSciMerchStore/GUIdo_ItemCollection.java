@@ -29,6 +29,8 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	
 	private static final int GAP_X = 15;
 	
+	private static final int HEIGHT_ADJUSTER = 70;
+	
 	public static ImageIcon onlist1 ,onlist2,onlist3,offlist1,offlist2,offlist3;
 	
 	private int item_display_width;
@@ -84,7 +86,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 		}
 		
 		int x = ORIGINAL_X;
-		int y = GUIdo_ItemCollection.ITEM_DISPLAY_HEIGHT-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT+70;
+		int y = GUIdo_ItemCollection.ITEM_DISPLAY_HEIGHT-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT+GUIdo_ItemCollection.HEIGHT_ADJUSTER;
 		
 		for(int itemIndex = 0; itemIndex < this.item_count; itemIndex++) {
 			button_to_add = new GUIdo_CButton(x,y,this.item_display_width,GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT,"view");
@@ -99,7 +101,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 				
 				//is customer, add wishlist button 
 				wishlist_button = new GUIdo_CButton(x,y-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT/*-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT*/,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
-				if(customer.getWishList().contains(itemIndex)) {
+				if(customer.getWishList().contains(display_items.get(itemIndex).getItemID())) {
 					wishlist_button.enableIcons(onlist1,onlist2,onlist3);
 				} else {
 					wishlist_button.enableIcons(offlist1,offlist2,offlist3);
@@ -159,7 +161,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	public void paintComponent(Graphics g) {
 		
 		int x=ORIGINAL_X,
-		    y=ORIGINAL_X+70;
+		    y=ORIGINAL_X+GUIdo_ItemCollection.HEIGHT_ADJUSTER;
 		
 		
 		g.setFont(GUIdo_ItemCollection.TITLE_FONT);
@@ -169,9 +171,9 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 			this.items_to_display.get(itemIndex).drawDisplay(g, x, y, this.item_display_width, GUIdo_ItemCollection.ITEM_DISPLAY_HEIGHT-GUIdo_ItemCollection.VIEW_BUTTON_HEIGHT-GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
 			if(itemIndex%ITEMS_PER_ROW==ITEMS_PER_ROW-1) {
 				x=ORIGINAL_X;
-				y+=ITEM_DISPLAY_HEIGHT+this.GAP_Y;
+				y+=ITEM_DISPLAY_HEIGHT+GUIdo_ItemCollection.GAP_Y;
 			} else {
-				x+=this.item_display_width+this.GAP_X;
+				x+=this.item_display_width+GUIdo_ItemCollection.GAP_X;
 			}
 		}
 	}

@@ -18,18 +18,49 @@ import javax.swing.JLabel;
 
 public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	
+	/**
+	 * The BufferedImage instance that is used as the image to represent the item
+	 * 	graphically. 
+	 */
 	private BufferedImage item_image = null;
 	
+	/**
+	 * The item instance that is being displayed. 
+	 */
 	private ItemInfo item = null;
 	
+	/**
+	 * The Font instance that is used for the description for the item. 
+	 */
 	private static final Font DESC_FONT = new Font("Calibri",Font.PLAIN,35);
 	
+	/**
+	 * The quantity chosen of the item that is being displayed. 
+	 */
 	private int quantity_chosen = 1;
 	
+	/**
+	 * The image ratio to use to scale the image; it is the width of the image divided by
+	 * 	the height of the image. 
+	 */
 	private double image_ratio = 0;
 	
+	/**
+	 * the current user instance that is logged in. 
+	 */
 	private User current_user = null;
 	
+	/**
+	 * This sets up the item display to display the information for the ItemInfo itemToDisplay given by
+	 * 	parameter. 
+	 * 
+	 * @param itemToDisplay the item to display information for.  
+	 * @param width the width in pixels of the page. 
+	 * @param cart the Sale Object to add items to to put in the cart. 
+	 * @param done the ActionListener instance that is used to return based on whatever action was performed
+	 * 	that merits leaving the item page. 
+	 * @param user the current logged in user.
+	 */
 	public GUIdo_ItemDisplay(ItemInfo itemToDisplay,int width, Sale cart,ActionListener done, User user) {
 		super(1500);
 		this.current_user=user;
@@ -50,12 +81,27 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		name.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*1/10, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(name);
 		
-		JLabel price =  new JLabel("$"+new DecimalFormat("#.00").format(this.item.getPrice()));
+		JLabel price =  new JLabel("$"+new DecimalFormat("0.00").format(this.item.getPrice()));
 		price.setFont(new Font("Calibri",Font.PLAIN,35));
 		price.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*5/35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(price);
 		
-		JLabel stock = new JLabel("Only " + this.item.getStock() + " left! Get it before it runs out!");
+		int amount = 0;
+		if(cart.getItemList().containsKey(item.getItemID())) {
+			amount = cart.getItemList().get(item.getItemID()).getQuantity();
+		}
+		
+		String quantity_ad;
+		int quantitycount = this.item.getStock()-amount;
+		if(quantitycount == 0) {
+			quantity_ad = "This item is out of stock!";
+		} else if(quantitycount <= 8) {
+			quantity_ad = "Only " + quantitycount + " left! Get it before it runs out!";
+		} else {
+			quantity_ad = quantitycount + " in stock!";
+		}
+		
+		JLabel stock = new JLabel(quantity_ad);
 		stock.setBounds(price.getX(), price.getY()+35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(stock);
 		
@@ -63,7 +109,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		int currenty = stock.getY()+stock.getHeight()+5;
 		final int DESC_LINE_HEIGHT = 40;//g.getFontMetrics(DESC_FONT).getHeight();
 		
-		ArrayList<String> desc_lines = GUIdo_OutputTools.formatStringForPrompt(this.item.getDescription(), DESC_FONT, this.getWidth()/2-this.getWidth()/10);
+		ArrayList<String> desc_lines = GUIdo_OutputTools.formatStringForPrompt(this.item.getDescription(), DESC_FONT, this.getWidth()/2-this.getWidth()/10-50);
 		
 		JLabel desc = null;
 		
@@ -83,13 +129,16 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		ArrayList<String> options = new ArrayList<>();
 		
-		for(int i = 1; i <= item.getStock() && i < 10; i++) {
+		
+		for(int i = 1; i <= item.getStock() - amount && i < 10; i++) {
 			options.add(i+"");
 		}
 		
 		
 		JComboBox quantity = new JComboBox(options.toArray());
-	    quantity.setSelectedIndex(0);
+		if(!options.isEmpty()) {
+			quantity.setSelectedIndex(0);
+		}
 	    quantity.setBounds(quantityis.getX()+quantityis.getWidth()+5,quantityis.getY(), 50, 25);
 	    
 	    
@@ -171,11 +220,18 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		this.add(wishlist_button);
 	}
 	
+	/**
+	 * This overrides the function paintComponent for the panel that draws on
+	 * 	the panel using the Java.awt.Graphics instance to draw the information
+	 * 	such as the image for the item to be displayed. 
+	 * 
+	 * @param g the Java.awt.Graphics instance that is used for drawing on the panel. 
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		
 		int width = (int)(this.getWidth()/2*this.image_ratio);
-		int height = this.getWidth()/2;
+		int height = (int)(this.getWidth()/2/this.image_ratio);
 		
 		if(width > this.getWidth()/2) {
 			height *= (width*1.0/(this.getWidth()/2));

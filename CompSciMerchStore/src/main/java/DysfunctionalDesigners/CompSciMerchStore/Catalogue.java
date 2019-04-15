@@ -13,7 +13,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -338,17 +337,19 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		for(Entry<Integer, ItemInfo> i : catalogue.entrySet()) {
 			ItemInfo temp = i.getValue();
 			if(temp.isEnabled()) {
-				if(temp.getDisplayName().toLowerCase().indexOf(lower) != -1) {//check name
+				if(temp.getDisplayName().toLowerCase().contains(lower)) {//check name
 					toReturn.add(temp);
-				} else if(temp.getDescription().toLowerCase().indexOf(lower) != -1) {//check description
+				} 
+				//else if(temp.getDescription().toLowerCase().contains(lower)) {//check description
+				//	toReturn.add(temp);
+				//} 
+				else if(temp.getProf().toString().toLowerCase().contains(lower)) {//check description
 					toReturn.add(temp);
-				} else if(temp.getProf().toString().toLowerCase().indexOf(lower) != -1) {//check description
+				} else if((temp.getExtendedItemID() + "").contains(lower)) {//check itemid
 					toReturn.add(temp);
-				} else if((temp.getExtendedItemID() + "").indexOf(lower) != -1) {//check itemid
+				} else if((temp.getPrice() + "").contains(lower)) {//check price
 					toReturn.add(temp);
-				} else if((temp.getPrice() + "").indexOf(lower) != -1) {//check price
-					toReturn.add(temp);
-				} else if((temp.getVendorID() + "").indexOf(lower) != -1) {//check vendor id
+				} else if((temp.getVendorID() + "").contains(lower)) {//check vendor id
 					toReturn.add(temp);
 				}
 			}

@@ -50,6 +50,34 @@ public class UserDataController {
 
         return users;
     }
+    
+    public List<User> getAdmins(List<String> usernames) {
+        List<User> users = new ArrayList<>();
+        List<String> validAdminUsernames = getAdminUsernames();
+
+        //Filter to only usernames existing in the usernames.txt file
+        usernames = usernames.stream()
+                .filter(e -> validAdminUsernames.contains(e))
+                .collect(Collectors.toList());
+
+        //For each username, go to the user file and deserialize rom JSON to a Customer Object
+        //and add it to the list of User objects
+        for (String username : usernames) {
+            ObjectMapper mapper = new ObjectMapper();
+            Administrator nextCust = null;
+            File usrFile = new File("./src/main/resources/UserData/" + username + ".json");
+
+            try {
+                nextCust = mapper.readValue(usrFile, Administrator.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            users.add(nextCust);
+        }
+
+        return users;
+    }
 
     public List<Sale> getUserSales(String username) throws Exception {
         List<String> validUsernames = getCustomerUsernames();
@@ -142,6 +170,24 @@ public class UserDataController {
         addNamesToList(reader, usernames);
 
         return usernames;
+    }
+    
+    public void getUsernamesAndPasswords(BufferedReader reader, List<String> usernames, List<String> passwords) {
+    	String line;
+        try {
+//        	BufferedReader reader = new BufferedReader(new FileReader(new File("/src/main/resources/UserData/customers.txt")));
+            while((line = reader.readLine()) != null) {
+                String[] split = line.split(" ");
+                if(split.length != 2) {
+                    continue;
+                }
+                usernames.add(split[0]);
+                passwords.add(split[1]);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> getAdminUsernames() {

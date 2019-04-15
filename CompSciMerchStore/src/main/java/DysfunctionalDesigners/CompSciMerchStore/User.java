@@ -99,6 +99,7 @@ public abstract class User {
 	 * 
 	 * @return whether or not a user object is an admin based on the ID
 	 */
+	@JsonIgnore
 	public boolean isAdmin() {
 		String id = Integer.toString(this.userID);
 		if(id.charAt(0) == '4') {

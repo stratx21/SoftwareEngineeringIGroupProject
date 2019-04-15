@@ -70,7 +70,7 @@ public class Customer extends Vendor{
 	public void setStatus(MemberLevel status) {this.status = status;}
 	public void setShippingAddr(Address shippingAddr) {this.shippingAddr = shippingAddr;}		
 	public void setWishList(List<Integer> wishList) {this.wishList = wishList;}
-	
+	public void setCart(Sale cart) { this.cart = cart; }
 	/**
 	 * A customer adds an item to their own wishlist. Wishlist is created if needed.
 	 * @param id Item to be added
