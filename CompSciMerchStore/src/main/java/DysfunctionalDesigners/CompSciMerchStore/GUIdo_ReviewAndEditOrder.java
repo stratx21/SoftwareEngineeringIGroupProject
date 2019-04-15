@@ -58,6 +58,16 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		GUIdo_CButton proceed = new GUIdo_CButton(965, 415, 200, 50, "Proceed to Checkout");
 		this.add(proceed);
 		
+		proceed.setActionListener_clicked(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// save payment data
+				
+			}
+			
+		});
+		
 		// initial subtotal box component
 		JLabel od = new JLabel("Order Details");
 		JLabel subtotal = null;

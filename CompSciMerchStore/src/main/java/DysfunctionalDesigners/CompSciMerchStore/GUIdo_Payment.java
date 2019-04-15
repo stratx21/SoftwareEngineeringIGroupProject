@@ -73,9 +73,11 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// save payment data
+				Address ba = new Address();
+				PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
 				
 			}
-			
+		
 		});
 		
 		layout.setVerticalGroup(layout.createSequentialGroup()
