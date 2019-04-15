@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -20,12 +21,14 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	private Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private int numItems = 0;
 	private static Catalogue instance = null;
+	private static Logger logger = Logger.getLogger(Catalogue.class.getName());
 	
 	public static Catalogue getInstance() {
 		if(instance == null) {
 			synchronized (Catalogue.class) {
 				if(instance == null) {
 					instance = new Catalogue();
+					logger.info("Created catalogue singleton");
 				}
             }
 		}
@@ -36,8 +39,10 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		try{
 //    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
 			this.readJSONFile();
+			logger.info("Successfully imported the JSON catalogue file");
     	} catch(Exception e) {
-    		System.out.println("Error importing the Catalogue: ");
+    		logger.severe("ERROR IMPORTING THE CATALOGUE:" + e.getMessage());
+//    		System.out.println("Error importing the Catalogue: ");
     		e.printStackTrace();
     	}
 	}
@@ -77,6 +82,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		int nextNum = scan.nextInt();
 		ItemInfo.setNextID(nextNum);
 		scan.close();
+		logger.info("Read in the next item id: " + nextNum);
 		
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -85,8 +91,10 @@ public class Catalogue {//all should be static as the top-level class unfortunat
         File in = new File("src/main/resources/catalogue.json");
         try {
         	catalogue = mapper.readValue(in, new TypeReference<HashMap<Integer, ItemInfo>>(){});
+        	logger.info("Successfully parsed the catalogue from the file.");
         } catch (IOException e) {
             e.printStackTrace();
+            logger.severe("ERROR: COULD NOT PARSE THE CATALOGUE FROM THE FILE!" + e.getMessage());
         }
         
       //pretty print
@@ -107,7 +115,9 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	
 	        try {
 	            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/catalogue.json"), this.catalogue);
+	            logger.info("Successfully printed catalogue to catalogue.json");
 	        } catch (IOException e) {
+	            logger.severe("ERROR: COULD NOT WRITE CATALOGUE TO SRC/MAIN/RESOURCES/CATALOGUE.JSON! " + e.getMessage());
 	            e.printStackTrace();
 	        }
 	        
@@ -115,9 +125,10 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 				BufferedWriter bf = new BufferedWriter(new FileWriter(new File("src/main/resources/NEXT_ID.txt")));
 				bf.write(ItemInfo.getNEXTID() + "");
 				bf.close();
+				logger.info("Successfully wrote next id to file: " + ItemInfo.getNEXTID());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				logger.severe("ERROR: COULD NOT PRINT NEXT_ID FROM ITEMINFO TO FILE: " + e.getMessage());
 			}
 	        
 	//		String jsonString = "";
@@ -130,7 +141,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	//        System.out.println(jsonString);
 	//		return jsonString;
 		} else {
-			//TODO: LOG IT UNDER SEVERE
+			logger.severe("ERROR: CATALOGUE IS _NULL_ AND TRYING TO WRITE IT IN JSON TO A FILE!");
 		}
 	}
 	
@@ -142,7 +153,10 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	public void addItem(ItemInfo e) {
 		if(catalogue.put(e.getItemID(), e) == null) {
+			logger.info("Adding item " + e.getExtendedItemID() + " to the catalogue.");
 			numItems++;
+		} else {
+			logger.info("Updating item " + e.getExtendedItemID() + " in the catalogue.");
 		}
 	}
 	
@@ -152,6 +166,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param itemID the item to remove
 	 */
 	public void removeItem(int itemID) {
+		logger.info("Disabling item " + itemID + " in the catalogue (from removeItem redirect).");
 		disableItem(itemID);
 //		if(catalogue.remove(itemID) != null) {
 //			numItems--;
@@ -168,9 +183,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		if(checkAmount(itemID, amount)) {
 			try {
 				catalogue.get(itemID).decreaseAmount(amount);
+				logger.info("Decreased quantity of item " + itemID + " by " + amount);
 			} catch (Exception e) {
 				System.err.println("ERROR: checkAmount failed");
 				e.printStackTrace();
+				logger.severe("ERROR: CHECKAMOUNT FAILED AHH: " + e.getMessage());
 			}
 		}
 	}
@@ -184,6 +201,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	public void increaseQuantity(int itemID, int amount) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).increaseAmount(amount);
+			logger.info("Increased quantity of item " + itemID + " by " + amount);
 		}
 	}
 	
@@ -194,6 +212,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	public void disableItem(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).disable();
+			logger.info("Disabling item " + itemID + " in the catalogue.");
 		}
 	}
 	
@@ -204,6 +223,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	public void enableItem(int itemID) {
 		if(catalogue.containsKey(itemID)) {
 			catalogue.get(itemID).enable();
+			logger.info("Enabling item " + itemID + " in the catalogue.");
 		}
 	}
 	
@@ -215,9 +235,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	public void updateItem(int itemID, ItemInfo info) throws Exception {
 		if(info.getItemID() != itemID) {
+			logger.severe("ERROR: TRYING TO UPDATE AN ITEM THAT DOESN'T EXIST (ITEMID " + itemID + ")");
 			throw new Exception("New ItemInfo ID does NOT match given itemID");
 		}
 		catalogue.put(itemID, info);
+		logger.info("Updating item " + itemID + " in the catalogue.");
 	}
 	
 	/**
@@ -231,6 +253,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param discount the discount to be applied
 	 */
 	public void addDiscountToAll(Double discount){//will be a sale discount
+		logger.info("Adding a discount to all items: " + discount);
 		for(Entry<Integer, ItemInfo> item : catalogue.entrySet()) {
 			if(discount > item.getValue().getSaleDiscount()) {
 				item.getValue().setSaleDiscount(discount);
@@ -244,6 +267,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param code the promo code to apply
 	 */
 	public void addDiscountToAll(Double discount, String code){
+		logger.info("Adding a discount to all items: " + discount + " (code: " + code + ").");
 		catalogue.entrySet().stream().forEach(e -> e.getValue().addPromoDiscount(code, discount));
 	}
 	
@@ -253,6 +277,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param prof the professor to search for
 	 */
 	public void addDiscountToAll(Double discount, Professor prof){
+		logger.info("Adding a discount to all items: " + discount + " (prof: " + prof.name() + ").");
 		searchByProfessor(prof).stream().forEach(e -> {
 			if(discount > e.getSaleDiscount()) {
 				e.setSaleDiscount(discount);
@@ -267,6 +292,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param prof the professor to apply it to
 	 */
 	public void addDiscountToAll(Double discount, String code, Professor prof){
+		logger.info("Adding a discount to all items: " + discount + " (code: " + code + ", prof: " + prof.name() + ").");
 		searchByProfessor(prof).stream().forEach(e -> e.addPromoDiscount(code, discount));
 	}
 	
@@ -332,6 +358,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @return the list of ItemInfos which match the keywords
 	 */
 	public List<ItemInfo> search(String keywords){
+		logger.info("Searching for keywords \"" + keywords + "\" in catalogue.");
 		List<ItemInfo> toReturn = new ArrayList<ItemInfo>();
 		String lower = keywords.toLowerCase();
 		for(Entry<Integer, ItemInfo> i : catalogue.entrySet()) {
@@ -354,6 +381,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 				}
 			}
 		}
+		logger.info("Found " + toReturn.size() + " matches to \"" + keywords + "\"");
 		return toReturn;
 	}
 	
@@ -363,6 +391,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @return the list of ItemInfos which match the professor
 	 */
 	public List<ItemInfo> searchByProfessor(Professor prof){
+		logger.info("Searching by professor " + prof.name() + " in catalogue.");
 		return catalogue.entrySet().stream()
 				 .filter(e -> (e.getValue().getProf() == prof) && (e.getValue().isEnabled()))
 				 .map(e -> e.getValue())

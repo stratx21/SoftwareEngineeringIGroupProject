@@ -110,12 +110,16 @@ public class GUIdo_Frame extends JFrame{
 	 * @param user_to_see the user to see the wishlist page for.
 	 */
 	public void to_wishlist(User user_to_see) {
+		//get the items in the user's wishlist: 
 		List<ItemInfo> items_for_wishlist = Catalogue.getInstance().getItems(((Customer)user_to_see).getWishList());
+		//this page is a new ItemCollection that is for the wishlist, having the items in the user's wishlist, a title of Wishlist,
+		//and other necessary information that is from the frame data
 		this.current_panel = new GUIdo_ItemCollection(this.getWidth(),items_for_wishlist,"Wishlist",new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				display_item((ItemInfo)(e.getSource()));
 			}
 		},user_to_see);
+		//add again 
 		scrollpane.getViewport().add(current_panel);
 	}
 	
@@ -123,6 +127,7 @@ public class GUIdo_Frame extends JFrame{
 	 * This function sets up the login screen and adds it to this frame.
 	 */
 	private void to_login() {
+		//disable all buttons before allowing a login to not exit the login screen 
 		toolbar.disable_all_buttons();
 		//save the data
 		if(current_user != null) {
@@ -138,6 +143,8 @@ public class GUIdo_Frame extends JFrame{
 			current_user = null;
 		}
 		
+		//go to the login screen to allow the user to login, using simply an ActionListener instance 
+		//to allow the login to finish 
 		current_panel = new GUIdo_LoginScreen(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				login_call(e);
@@ -158,7 +165,7 @@ public class GUIdo_Frame extends JFrame{
 			current_user = (User)e.getSource();
 			
 			
-			
+			//if the user is not an admin and is not the guest 
 			if(!this.current_user.isAdmin() && !this.current_user.getName().equals("guest")) {
 				if(((Customer) this.current_user).getCart() == null) {
 					this.cart = new Sale(this.current_user.getUserID());
@@ -170,12 +177,14 @@ public class GUIdo_Frame extends JFrame{
 				this.cart = new Sale(this.current_user.getUserID());
 			}
 			
+			//re-enable all the buttons 
 			toolbar.enable_all_buttons();
+			//go to the homescreen 
 			to_homescreen();
 		} else if(e.getActionCommand().equals("Continue as a guest!")) {
-			
+			//login as the guest 
 			this.current_user = new Customer(new String[]{"guest@email.com", "guesty", "guest", "guestPass", "Guest", "19999"});
-			
+			//reset the cart 
 			this.cart = new Sale(this.current_user.getUserID());
 			toolbar.enable_all_buttons();
 			to_homescreen();
@@ -186,7 +195,9 @@ public class GUIdo_Frame extends JFrame{
 			scrollpane.getViewport().add(current_panel);
 			
 		} else if(e.getActionCommand().equals("Forgot Password?")) {
-			
+			ActionListener l = null;
+			current_panel = new GUIdo_ForgotPassword(l);
+			scrollpane.getViewport().add(current_panel);
 		}
 	}
 	
@@ -198,6 +209,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 	the cart. 
 	 */
 	private void to_cart(Sale sale) {
+		//set the current page to a review and edit order to see the cart 
 		this.current_panel = new GUIdo_ReviewAndEditOrder(sale);
 		scrollpane.getViewport().add(this.current_panel);
 		scrollpane.repaint();
@@ -208,6 +220,7 @@ public class GUIdo_Frame extends JFrame{
 	 * This function goes to and sets up the homescreen. 
 	 */
 	private void to_homescreen() {
+		//set up the homescreen using an ActionListener for the 2 featured items and the width
 		current_panel = new GUIdo_Homescreen(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
@@ -226,6 +239,9 @@ public class GUIdo_Frame extends JFrame{
 	 * @param item the item to display information for. 
 	 */
 	private void display_item(ItemInfo item) {
+		//display a singular item's information and allow the user to add it to the cart and choose a quantity
+		//uses the item to display, given by display_item function (this function) parameter, the width of the
+		//page, and an ActionListener instance for when an item is added to the cart.
 		current_panel = new GUIdo_ItemDisplay(item,scrollpane.getWidth(),cart,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("item_added")) {
@@ -264,7 +280,10 @@ public class GUIdo_Frame extends JFrame{
 	public void initialize() {
 		
 		//frame setup:
+		//dispose of the frame on close, but do not exit the program
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		//add a window listener in order to have actions when the frame is closed 
 		this.addWindowListener(new WindowAdapter() {
 		    @Override
 		    public void windowClosed(WindowEvent windowEvent) {
@@ -273,82 +292,104 @@ public class GUIdo_Frame extends JFrame{
 		    }
 		});
 		
+		//make it look pretty 
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.setTitle("Computer Science Merchandise Store");
+		//get the screen size in a Dimension object to set the size of the frame to the size of
+		//the user's screen. 
 		Dimension screen_size = Toolkit.getDefaultToolkit().getScreenSize();
+		//set the size to the size of the user's screen 
 		this.setSize(screen_size);
+		//make the frame full-screen justified 
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setResizable(true);
+		//don't allow the user to resize the frame
+		this.setResizable(false);
 		
-		
+		//initialize the top toolbar with the home button, the search bar, a wishlist button to access
+		//the wishlist, and a logout button. It is initialized to be at the top, with the width of the frame,
+		//the static final height given for the toolbar, and an ActionListener to control the flow based on
+		//what button was clicked
 		toolbar = new GUIdo_CToolbar(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				toolbar_call(e);
 			}
 		});
 		
+		//add the section header that shows the section buttons for each professor 
 		professorHeader = new GUIdo_SectionHeader(0,0,this.getWidth(),this.TOOLBAR_HEIGHT,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//an ActionListener to display a singular item if/when one of the items in a section is chosen 
 				ActionListener toItemDisplay = new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						display_item((ItemInfo)(e.getSource()));
 					}
 				};
+				
+				//set the List of items and the title to display the list of items for the given professor: 
+				
 				List<ItemInfo> display_items=null;
 				String title=null;
 				//set display_items to the items given by the professor list
 				//set title to the professor's name
 				if(e.getActionCommand().equals("cerny"))          {
 					title = "Dr. Cerny";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.CERNY);
 				} else if(e.getActionCommand().equals("booth"))   {
 					title = "Dr. Booth";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.BOOTH);
 				} else if(e.getActionCommand().equals("fry"))     {
 					title = "Professor Fry";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.FRY);
 				} else if(e.getActionCommand().equals("hamerly")) {
 					title = "Dr. Hamerly";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.HAMERLY);
 				} else if(e.getActionCommand().equals("baldaars"))    {
 					title = "Bald Aars";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.AARSBALD);
 				} else if(e.getActionCommand().equals("hairyaars"))    {
 					title = "Hairy Aars";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.AARSHAIRY);
 				} else if(e.getActionCommand().equals("maurer"))  {
 					title = "Dr. Maurer";
-					//TODO set display_items to the items given by the professor list
+					// set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.MAURER);
 				} else if(e.getActionCommand().equals("dys_des"))  {
 					title = "Dysfunctional Designers";
-					//TODO set display_items to the items given by the professor list
+					//set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.DYS_DES);
 				}else {
 					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
 					return;//throw exception???
 				}
+				//set the current panel to an item collection that shows the items based on the professor 
 				current_panel = new GUIdo_ItemCollection(getWidth(),display_items,title,toItemDisplay,current_user);
 				scrollpane.getViewport().add(current_panel);
 				scrollpane.repaint();
 			}
 		});
 		
-		
+		//set the scrollpane to scroll on the current page, by the current_panel 
+		//always show the vertical scrollbar but only show the horizontal scrollbar
+		//when it is needed, when there is more on the sides than can be seen in the
+		//span given 
 		scrollpane = new JScrollPane(current_panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollpane.setAutoscrolls(true);
 		
 		scrollpane.setLocation(0, TOOLBAR_HEIGHT);
+		
+		//set the size based on the size of this frame, compensating for the toolbars 
 		scrollpane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-4*TOOLBAR_HEIGHT));
+		//scroll faster: 
 		scrollpane.getVerticalScrollBar().setUnitIncrement(5);
 		
+		//add an action listener to repaint when the scrollpane is scrolled in
 		scrollpane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 
 			public void adjustmentValueChanged(AdjustmentEvent arg0) {
@@ -362,7 +403,7 @@ public class GUIdo_Frame extends JFrame{
 			
 		});
 		
-		
+		//get a new panel to put everything in to put within the frame 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		
@@ -372,12 +413,12 @@ public class GUIdo_Frame extends JFrame{
 		panel.add(scrollpane);
 		this.add(panel);
 		
-		
-		this.addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent evt) {
-				JFrame thisframe = (JFrame)evt.getSource();
-			}
-		});
+		//
+//		this.addComponentListener(new ComponentAdapter() {
+//			public void componentResized(ComponentEvent evt) {
+//				JFrame thisframe = (JFrame)evt.getSource();
+//			}
+//		});
 		
 		
 		//set visible after adding Components: 
