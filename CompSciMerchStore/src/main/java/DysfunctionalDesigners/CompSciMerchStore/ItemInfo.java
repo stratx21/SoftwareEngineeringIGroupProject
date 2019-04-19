@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ItemInfo {
+	private static Logger logger = Logger.getLogger(ItemInfo.class.getName());
 	public static final int EXTENDED_ID_LENGTH = 5;
 	private static Font DESC_FONT=new Font("Ariel",Font.PLAIN,27);
 	private static int NEXT_ID = 0;
@@ -43,6 +45,7 @@ public class ItemInfo {
 		this.promoDiscounts = null;
 		this.reviews = null;
 		this.prof = null;
+		logger.info("INITIATED TEMPORARY ITEMINFO");
 	}
 	
 	/**
@@ -57,6 +60,7 @@ public class ItemInfo {
 	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, Professor p) throws Exception {
 		this(description, displayName, stock, vendorID, price, NEXT_ID, p);
 		if(NEXT_ID == 0) {
+			logger.severe("ERROR: TRYING TO ACCESS CONSTRUTOR WITH FIELDS WITHOUT FIRST SETTING THE NEXT_ID STATIC FIELD");
 			throw new Exception("ERROR: NEXT_ID HASN'T BEEN SET YET, CALL CATALOGUE SETID FUNCTION BASED ON CATALOGUE DATA FILE");
 		} else {
 			NEXT_ID++;
@@ -85,13 +89,14 @@ public class ItemInfo {
 		this.price = price;
 		this.reviews = new ArrayList<Review>();
 		this.prof = p;
+		logger.info("Added a new itemInfo with id " + id + "(" + displayName + ")");
 	}
 	
 	/**
 	 * Sets the next id to assign
 	 * @param id the next id to assign
 	 */
-	public static void setNextID(int id) { NEXT_ID = id; }
+	public static void setNextID(int id) { NEXT_ID = id; logger.info("NEXT_ID set to " + id);}
 	
 	private BufferedImage image=null;
 	
@@ -147,7 +152,7 @@ public class ItemInfo {
 					total += this.promoDiscounts.get(key);
 				}
 			}
-			
+		
 			return (total >= 1 ? 1 : total);
 		} else {
 			return saleDiscount;
@@ -192,6 +197,7 @@ public class ItemInfo {
 	 */
 	public void addPromoDiscount(String keyword, double discount) {
 		//key will be keyword
+		logger.info("Adding promo discount code \"" + keyword +  "\": " + discount + " to item " + this.extendedItemID);
 		this.promoDiscounts.put(keyword, (discount > 1 ? 1 : discount));
 	}
 	
@@ -202,6 +208,11 @@ public class ItemInfo {
 	 * @param discount the amount off the discount adds
 	 */
 	public void updatePromoDiscount(String key, double discount) {
+		if(this.promoDiscounts.get(key) != null) {
+			logger.info("Updating promo discount code \"" + key +  "\" from " + this.promoDiscounts.get(key) + " to " + discount + " on item " + this.extendedItemID);
+		} else {
+			logger.info("Adding promo discount code \"" + key +  "\": " + discount + " to item " + this.extendedItemID);
+		}
 		this.promoDiscounts.put(key, (discount > 1 ? 1 : discount));
 	}
 	
@@ -211,6 +222,7 @@ public class ItemInfo {
 	 * @param key the promo code to remove
 	 */
 	public void removePromoDiscount(String key) {
+		logger.info("Removing promo discount " + key + " from item " + this.extendedItemID);
 		this.promoDiscounts.remove(key);
 	}
 	
@@ -230,8 +242,10 @@ public class ItemInfo {
 	 */
 	public void decreaseAmount(int amount) throws Exception { 
 		if(amount > this.stock) {
+			logger.severe("TRYING TO REDUCE STOCK BY GREATER THAN STOCK AMOUNT: " + amount + " STOCK: " + this.stock);
 			throw new Exception("ERROR: Not enough stock");
 		} else if(amount > 0){
+			logger.info("Removing " + amount + " of item " + this.extendedItemID);
 			this.stock -= amount;
 		}
 	}
@@ -242,6 +256,7 @@ public class ItemInfo {
 	 */
 	public void increaseAmount(int amount) { 
 		if(amount > 0) {
+			logger.info("Increasing stock for item " + this.extendedItemID + " by " + amount);
 			this.stock += amount;
 		}
 	}
