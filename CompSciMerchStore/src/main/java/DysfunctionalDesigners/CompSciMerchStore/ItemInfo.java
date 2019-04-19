@@ -309,7 +309,5 @@ public class ItemInfo {
 	public void setPromoDiscounts(Map<String, Double> promoDiscounts) { this.promoDiscounts = promoDiscounts; }
 	public void setProf(Professor prof) { this.prof = prof; }
 	public void setReviews(List<Review> reviews) { this.reviews = reviews; }
-	public void addReview(Review review) {
-		
-	}
+	public void addReview(Review review) { this.reviews.add(review); }
 }
