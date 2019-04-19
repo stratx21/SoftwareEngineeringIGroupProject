@@ -25,7 +25,7 @@ public class Review {
 		this.userID = userID;
 		this.rating = (rating > 5 ? 5 : (rating < 0 ? 0 : rating));//0 <= rating <= 5
 		this.date = new Date();
-		logger.info("Initialized a review with userID" + userID + " for " + rating + " stars on " + (new SimpleDateFormat("MM dd, YYYY")).format(this.date));
+		logger.info("Initialized a review with userID" + userID + " for " + this.rating + " stars on " + (new SimpleDateFormat("MM dd, YYYY")).format(this.date));
 	}
 
 	/**
