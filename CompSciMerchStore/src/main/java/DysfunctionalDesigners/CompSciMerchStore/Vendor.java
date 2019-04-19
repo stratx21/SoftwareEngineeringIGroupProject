@@ -1,7 +1,9 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 public abstract class Vendor extends User{
+	private static Logger logger = Logger.getLogger(Vendor.class.getName());
 
 	private List<Integer> uploadedItems;
 	private List<Sale> pastSales;
@@ -16,9 +18,12 @@ public abstract class Vendor extends User{
 		super(d);
 		this.uploadedItems = new ArrayList<Integer>();
 		this.pastSales = new ArrayList<Sale>();
+		logger.info("New instance of a vendor with id " + this.getUserID() + " username " + this.getUserName() + " id " + this.getUserID());
 	}
 
 	/**
+	 * This constructor takes all of the fields, passes necessary ones in to the super constructor, and sets uploadedItems
+	 * and pastSales.
 	 * 
 	 * @param email
 	 * @param motherMaidenName
@@ -28,14 +33,12 @@ public abstract class Vendor extends User{
 	 * @param userID
 	 * @param uploadedItems
 	 * @param pastSales
-	 * 
-	 * This constructor takes all of the fields, passes necessary ones in to the super constructor, and sets uploadedItems
-	 * and pastSales.
 	 */
 	public Vendor(String email, String motherMaidenName, String userName, String password, String name, int userID, List<Integer> uploadedItems, List<Sale> pastSales) {
 		super(email, motherMaidenName, userName, password, name, userID);
 		this.uploadedItems = uploadedItems;
 		this.pastSales = pastSales;
+		logger.info("New instance of a vendor with id " + this.getUserID() + " username " + this.getUserName() + " id " + this.getUserID());
 	}
 
 	/**
@@ -48,6 +51,7 @@ public abstract class Vendor extends User{
 		super(d);
 		this.uploadedItems = items;
 		this.pastSales = sales;
+		logger.info("New instance of a vendor with id " + this.getUserID() + " username " + this.getUserName() + " id " + this.getUserID());
 	}
 	
 	/**
@@ -66,8 +70,9 @@ public abstract class Vendor extends User{
 		if(this.uploadedItems.contains(id)) {
 			try {
 				Catalogue.getInstance().updateItem(id, info);
+				logger.info("Updated item id " + id + " with new item info from user.");
 			} catch (Exception e) {
-				
+				logger.severe("ERROR UPDATING UPLOADED ITEM: " + e.getMessage());
 				e.printStackTrace();
 			}	
 		}
@@ -79,6 +84,7 @@ public abstract class Vendor extends User{
 	 * @param info item to be added
 	 */
 	public void addItemToCatalogue(ItemInfo info) {
+		logger.info("Adding item id " + info.getExtendedItemID() + " to catalogue and uploaded items list for user " + this.getUserID());
 		this.uploadedItems.add(info.getItemID());
 		Catalogue.getInstance().addItem(info);
 	}
@@ -90,6 +96,7 @@ public abstract class Vendor extends User{
 	 * @param sale is the new sale that occurred
 	 */
 	public void addNewSale(Sale sale) {
+		logger.info("Adding a previous sale (id " + sale.getSaleID() + ")");
 		this.pastSales.add(sale);
 	}
 
@@ -113,12 +120,13 @@ public abstract class Vendor extends User{
 	 * @param id The item id to be removed.
 	 */
 	public void removeItemFromCatalogue(int id) {
-		if(this.uploadedItems.contains(id))
+		if(this.uploadedItems.contains(id)) {
 			Catalogue.getInstance().removeItem(id);
+			logger.fine("Removing " + id + " from the catalogue (right now = disabling it)");
+		}
+			
 	}
 	
 //	public void disableItem(Integer id) {}
-	
-	
 	
 }
