@@ -1,8 +1,12 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public abstract class User {
+	private static Logger logger = Logger.getLogger(User.class.getName());
+	
 	private String email, motherMaidenName, userName, password, name;
 	private Integer userID;
 	
@@ -41,6 +45,7 @@ public abstract class User {
 		String result = (prime + ((userName == null) ? 0 : userName.hashCode())) + "";
 		result = (Integer.parseInt(result) % 10000) + "";
 		result = "1" + result;
+		logger.info("Hashed username \"" + userName + "\" to " + result);
 		return result;
 	}
 	
@@ -52,6 +57,7 @@ public abstract class User {
 		this.password = password;
 		this.name = name;
 		this.userID = userID;
+		logger.info("Initializing userName: " + this.userName + " id: " + this.userID);
 	}
 	/**
 	 * Basic constructor
@@ -64,6 +70,7 @@ public abstract class User {
 		this.password = d[3];
 		this.name = d[4];
 		this.userID = Integer.parseInt(d[5]);
+		logger.info("Initializing userName: " + this.userName + " id: " + this.userID);
 	}
 	
 	/**

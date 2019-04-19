@@ -40,7 +40,5 @@ public class Review {
 
 	public void setRating(int rating) { this.rating = (rating > 5 ? 5 : (rating < 0 ? 0 : rating)); }//0 <= rating <= 5
 	public void setDescription(String description) { this.description = description; }
-	public void setDate(Date date) { this.date = date; }
-	
-	
+	public void setDate(Date date) { this.date = date; }	
 }
