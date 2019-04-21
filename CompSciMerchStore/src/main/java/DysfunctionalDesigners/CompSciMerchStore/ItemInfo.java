@@ -199,6 +199,7 @@ public class ItemInfo {
 		//key will be keyword
 		logger.info("Adding promo discount code \"" + keyword +  "\": " + discount + " to item " + this.extendedItemID);
 		this.promoDiscounts.put(keyword, (discount > 1 ? 1 : discount));
+		System.out.println("Adding promp discount to " +this.extendedItemID);
 	}
 	
 	/**
