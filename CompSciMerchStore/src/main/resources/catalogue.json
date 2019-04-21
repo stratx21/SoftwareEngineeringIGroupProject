@@ -22,7 +22,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -36,7 +38,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 70.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -50,7 +55,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 25.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -64,7 +71,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 1.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -78,7 +87,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -134,7 +146,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 50.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "CERNY",
     "reviews" : [ ]
@@ -148,7 +162,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 27.6,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "CERNY",
     "reviews" : [ ]
@@ -232,7 +248,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 12.5,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
@@ -246,7 +265,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 13.7,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
@@ -274,7 +295,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
@@ -316,7 +339,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 80.33,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "FRY",
     "reviews" : [ ]
@@ -358,7 +384,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 0.01,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSBALD",
     "reviews" : [ ]
@@ -372,7 +400,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSBALD",
     "reviews" : [ ]
@@ -386,7 +416,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 2000.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSBALD",
     "reviews" : [ ]
@@ -428,7 +461,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSHAIRY",
     "reviews" : [ ]
@@ -456,7 +491,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 19.99,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "MAURER",
     "reviews" : [ ]
@@ -498,7 +535,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 30.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "MAURER",
     "reviews" : [ ]
@@ -554,7 +594,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 50.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "DYS_DES",
     "reviews" : [ ]

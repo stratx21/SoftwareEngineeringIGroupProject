@@ -16,6 +16,8 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -63,9 +65,9 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	GUIdo_CPanel current_panel;
 	
-	private List<Integer> generalMemberDeals = Arrays.asList(1,2,3);
-	private List<Integer> middleMemberDeals = Arrays.asList(1,2,3,4,5,6);
-	private List<Integer> eliteMemberDeals = Arrays.asList(1,2,3,4,5,6,7,8,9);
+	private List<Integer> generalMemberDeals = Arrays.asList(16,22,35);
+	private List<Integer> middleMemberDeals = Arrays.asList(10,16,22,19,35);
+	private List<Integer> eliteMemberDeals = Arrays.asList(4,9,10,16,22,17,39,35);
 	
 	/**
 	 * This initializes the GUIdo_Frame instance; it calls initialize to
@@ -255,21 +257,86 @@ public class GUIdo_Frame extends JFrame{
 	
 	
 	private void to_MemberDeals() {
-		List<List<Integer>> deals = new ArrayList<List<Integer>>();
-		deals.add(generalMemberDeals);
-		deals.add(middleMemberDeals);
-		deals.add(eliteMemberDeals);
+		Boolean ready = false;
+		String title = "";
+		final String code[] = {""};
+		final double discount[] = {0.0};
 		
-		if((!((Customer) current_user).isAdmin())) {
-			
-			current_panel = new GUIdo_MemberDeals(deals, (Customer)current_user);
+		
+		List<Integer> toiterate = new ArrayList<Integer>();
+		List<ItemInfo> topass = new ArrayList<ItemInfo>();
+		Catalogue cat = Catalogue.getInstance();
+		
+		if(((Customer) current_user).getStatus() == MemberLevel.GENERAL) {		
+			toiterate = generalMemberDeals;	
+			title = "Enter code \"SEROCKS\" for 15% off these items!!!";
+			code[0] = "SEROCKS";
+			discount[0] = 0.15;
+		}
+		else if(((Customer) current_user).getStatus() == MemberLevel.MIDDLE) {			
+			toiterate = middleMemberDeals;
+			title = "Enter code \"COOLPROJECT\" for 20% off these items!!!";
+			code[0] = "COOLPROJECT";
+			discount[0] = 0.2;
+		}
+		else if(((Customer) current_user).getStatus() == MemberLevel.ELITE) {		
+			toiterate = eliteMemberDeals;
+			title = "Enter code \"CERNYISTHEBEST\" for 25% off these items!!!";
+			code[0] = "CERNYISTHEBEST";
+			discount[0] = 0.25;
 		}
 		else {
-			current_panel = new GUIdo_MemberDeals(eliteMemberDeals, (Administrator)current_user);
+			//nah
 		}
 		
-			
+		for(int i = 0; i < toiterate.size(); i++) {
+			cat.getItem(toiterate.get(i)).addPromoDiscount(code[0], discount[0]);
+			topass.add(cat.getItem(toiterate.get(i)));
+			System.out.println(topass.get(i).getDisplayName());
+		}
+		
+		current_panel = new GUIdo_ItemCollection(getWidth(),topass,title,new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				display_item((ItemInfo)(e.getSource()));
+				
+			}}
+			,current_user);
+
+				
 		scrollpane.getViewport().add(current_panel);
+		
+		if(((Customer)current_user).getStatus().equals(MemberLevel.GENERAL) || 
+				((Customer)current_user).getStatus().equals(MemberLevel.MIDDLE)) {
+			final String options[] = {"General", "Middle", "Elite", "No change"};
+			
+			String input = (String) JOptionPane.showInputDialog(null, "Before You Shop:",
+			        "Would you like to change your member level?", JOptionPane.QUESTION_MESSAGE, null, options, options[3]);
+			boolean reload = true;
+			switch(input) {
+			
+			case "General":
+				((Customer) current_user).setStatus(MemberLevel.GENERAL);
+				break;
+			case "Middle":
+				((Customer) current_user).setStatus(MemberLevel.MIDDLE);
+				break;
+			case "Elite":
+				((Customer) current_user).setStatus(MemberLevel.ELITE);
+				break;
+			case "No Change":
+				reload = false;
+				break;
+			default:
+				reload = false;
+			
+			}
+			if(reload) {
+				to_MemberDeals();
+			}
+			
+		}
+		
 	}
 	
 	/**
