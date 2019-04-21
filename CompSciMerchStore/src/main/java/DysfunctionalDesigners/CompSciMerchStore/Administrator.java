@@ -1,16 +1,17 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Administrator extends Vendor{
+	private static Logger logger = Logger.getLogger(Administrator.class.getName());
+	
     public Administrator(String[] d) {
         super(d);
         

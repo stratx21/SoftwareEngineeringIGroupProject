@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class UserDataController {
+	private static Logger logger = Logger.getLogger(UserDataController.class.getName());
     private static UserDataController instance = null;
 
     public static UserDataController getInstance() {

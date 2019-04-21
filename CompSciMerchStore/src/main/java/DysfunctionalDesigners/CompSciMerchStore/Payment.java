@@ -1,6 +1,10 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.util.logging.Logger;
+
 public class Payment {
+	private static Logger logger = Logger.getLogger(Payment.class.getName());
+	
     private double amount;
     private PaymentInfo paymentInfo;
 
@@ -10,6 +14,7 @@ public class Payment {
     public Payment(double amount, PaymentInfo paymentInfo) {
         this.amount = amount;
         this.paymentInfo = paymentInfo;
+        logger.info("Initialized new payment for " + amount);
     }
 
     @Override

@@ -206,11 +206,6 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		this.add(btn2); 
 		this.add(btn3); 
 		this.add(btn4);
-		this.add(btn5);	
-		//panel.setSize(new Dimension(400, 400));
-		
+		this.add(btn5);
 	}
-	
-	
-	
 }

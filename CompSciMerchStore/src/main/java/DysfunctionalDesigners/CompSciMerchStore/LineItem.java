@@ -2,10 +2,13 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class LineItem {
+	private static Logger logger = Logger.getLogger(LineItem.class.getName());
+
 	private int quantity;
 	private int itemID;
 	private List<String> promoCodes;
@@ -14,6 +17,7 @@ public class LineItem {
 		this.quantity = quantity;
 		this.itemID = itemID;
 		this.promoCodes = new ArrayList<String>();
+		logger.info("New LineItem initialized for item " + itemID);
 	}
 	
 	/**
@@ -23,6 +27,7 @@ public class LineItem {
 	public void addPromoCode(String promo) {
 		if(Catalogue.getInstance().getItem(itemID).hasPromoCode(promo)) {
 			this.promoCodes.add(promo);
+			logger.info("Adding promo code \"" + promo + "\" to LineItem " + itemID);
 		}
 	}
 	

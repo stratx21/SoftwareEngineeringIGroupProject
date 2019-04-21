@@ -1,6 +1,10 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.util.logging.Logger;
+
 public class PaymentInfo {
+	private static Logger logger = Logger.getLogger(PaymentInfo.class.getName());
+	
     private String cardNumber;
     private Address billingAddress;
     private int CCV;
@@ -9,6 +13,7 @@ public class PaymentInfo {
         this.cardNumber = cardNumber;
         this.billingAddress = billingAddress;
         this.CCV = CCV;
+        logger.info("Initialized payment info with card number " + cardNumber);
     }
 
     public String getCardNumber() {
