@@ -11,20 +11,43 @@ import java.util.stream.Collectors;
 
 public class Administrator extends Vendor{
 	private static Logger logger = Logger.getLogger(Administrator.class.getName());
-	
+
+    /**
+     * Constructor allowed to take a string array of all the values needed
+     * @param d The string array containing the needed values for construction
+     */
     public Administrator(String[] d) {
         super(d);
         
     }
 
+    /**
+     * Full Constructor in the case of needing to individually feed the values in.
+     * Used by Jackson for JSON serialization
+     * @param email email
+     * @param motherMaidenName mother's maiden name
+     * @param userName The username associated with this admin account
+     * @param password the password for this account
+     * @param name The real name of the user
+     * @param userID the User's id number
+     * @param uploadedItems items previously uploaded to the store by the user
+     * @param pastSales previous sales made
+     */
     public Administrator(String email, String motherMaidenName, String userName, String password, String name, int userID, List<Integer> uploadedItems, List<Sale> pastSales) {
         super(email, motherMaidenName, userName, password, name, userID, uploadedItems, pastSales);
     }
-    
+
+    /**
+     * Default constructor also used by Jackson for JSON
+     */
     public Administrator() {
     	super();
     }
 
+    /**
+     * Removes the item with the associated ID from the catalogue
+     * @param id The item id to be removed.
+     */
     public void removeItemFromCatalogue(int id) {
         Catalogue.getInstance().removeItem(id);
     }
@@ -32,10 +55,19 @@ public class Administrator extends Vendor{
     //public void disableItem(int id) {}
 
     //TODO: When we decide how complaints are written. Write this
+
+    /**
+     * Returns all the complaints made that have been written to the file containing all complaints
+     * @return A string array of the complaints
+     */
     //public String[] getAllComplaints() {
 
     //}
 
+    /**
+     * A method that generates a report of all sales made on the store and writes it to a file
+     * @return Returns true if the report was successfully generated
+     */
     public boolean generateAllSalesReport() {
         UserDataController dataController = UserDataController.getInstance();
         List<Sale> salesFromCust = new ArrayList<>();
@@ -121,6 +153,11 @@ public class Administrator extends Vendor{
         return true;
     }
 
+    /**
+     * Generates a report on some info about all users on the store. Also gives some info on certain users
+     * who had significant usage.
+     * @return Returns true if the report was generated successfully.
+     */
     public boolean generateAllUsersReport() {
         UserDataController dataController = UserDataController.getInstance();
         BufferedWriter writer = null;
