@@ -234,6 +234,10 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @throws Exception
 	 */
 	public void updateItem(int itemID, ItemInfo info) throws Exception {
+		if(info == null) {
+			logger.severe("ERROR: TRYING TO UPDATE AN ITEM WITH A NULL ITEM");
+			throw new NullPointerException();
+		}
 		if(info.getItemID() != itemID) {
 			logger.severe("ERROR: TRYING TO UPDATE AN ITEM THAT DOESN'T EXIST (ITEMID " + itemID + ")");
 			throw new Exception("New ItemInfo ID does NOT match given itemID");
