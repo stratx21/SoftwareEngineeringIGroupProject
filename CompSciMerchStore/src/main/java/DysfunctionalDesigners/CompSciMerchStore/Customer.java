@@ -111,7 +111,13 @@ public class Customer extends Vendor{
 		if(this.cart == null) {
 			this.cart = new Sale(this.getUserID());
 		}
-		this.cart.addItem(q, id);
+		if(q > 0) {
+			this.cart.addItem(q, id);	
+		}
+		else {
+			logger.fine("ATTEMPTING TO ADD QUANTITY 0 OF ITEM " + id + " TO CART OF USER " + this.getUserName());
+		}
+		
 	}
 	
 	/**
