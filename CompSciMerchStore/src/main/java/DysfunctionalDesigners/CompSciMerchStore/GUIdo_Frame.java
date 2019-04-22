@@ -82,7 +82,7 @@ public class GUIdo_Frame extends JFrame{
 			if(!toolbar.getButtons_disabled()) {
 				ActionListener toItemDisplay = new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						display_item((ItemInfo)(e.getSource()));
+						display_item((ItemInfo)(e.getSource()), current_user);
 					}
 				};
 				String searched = (String)e.getSource();
@@ -96,7 +96,7 @@ public class GUIdo_Frame extends JFrame{
 		} else if(e.getActionCommand().equals("login")) {
 			to_login();
 		} else if(e.getActionCommand().equals("cart")) {
-			to_cart(cart);
+			to_cart(cart, (Customer) current_user);
 		}
 	}
 	
@@ -111,7 +111,7 @@ public class GUIdo_Frame extends JFrame{
 		//and other necessary information that is from the frame data
 		this.current_panel = new GUIdo_ItemCollection(this.getWidth(),items_for_wishlist,"Wishlist",new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				display_item((ItemInfo)(e.getSource()));
+				display_item((ItemInfo)(e.getSource()), user_to_see);
 			}
 		},user_to_see);
 		//add again 
@@ -203,9 +203,9 @@ public class GUIdo_Frame extends JFrame{
 	 * @param sale the Sale object that is being used for the Cart to be able to display
 	 * 	the cart. 
 	 */
-	private void to_cart(Sale sale) {
+	private void to_cart(Sale sale, Customer cust) {
 		//set the current page to a review and edit order to see the cart 
-		this.current_panel = new GUIdo_ReviewAndEditOrder(sale);
+		this.current_panel = new GUIdo_ReviewAndEditOrder(sale, cust);
 		scrollpane.getViewport().add(this.current_panel);
 		scrollpane.repaint();
 		this.current_panel.repaint();
@@ -219,7 +219,7 @@ public class GUIdo_Frame extends JFrame{
 		current_panel = new GUIdo_Homescreen(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
-					display_item((ItemInfo)e.getSource());
+					display_item((ItemInfo)e.getSource(), current_user);
 				}
 			}
 		}, scrollpane.getWidth());
@@ -231,7 +231,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 	details for the user to see.
 	 * @param item the item to display information for. 
 	 */
-	private void display_item(ItemInfo item) {
+	private void display_item(ItemInfo item, User user) {
 		//display a singular item's information and allow the user to add it to the cart and choose a quantity
 		//uses the item to display, given by display_item function (this function) parameter, the width of the
 		//page, and an ActionListener instance for when an item is added to the cart.
@@ -239,7 +239,7 @@ public class GUIdo_Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("item_added")) {
 					cart = (Sale)e.getSource();
-					to_cart(cart);
+					to_cart(cart, (Customer) user);
 				}
 			}
 		},current_user);
@@ -295,7 +295,7 @@ public class GUIdo_Frame extends JFrame{
 				//an ActionListener to display a singular item if/when one of the items in a section is chosen 
 				ActionListener toItemDisplay = new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						display_item((ItemInfo)(e.getSource()));
+						display_item((ItemInfo)(e.getSource()), current_user);
 					}
 				};
 				
