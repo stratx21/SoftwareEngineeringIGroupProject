@@ -46,6 +46,20 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		MaskFormatter stateFormat = null;
+		try {
+			stateFormat = new MaskFormatter("UU");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		MaskFormatter zipFormat = null;
+		try {
+			zipFormat = new MaskFormatter("#####");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		JLabel label = new JLabel("Payment Information");
 		label.setHorizontalAlignment(JLabel.CENTER);
@@ -66,6 +80,16 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		JLabel cvv = new JLabel("CVV");
 		JFormattedTextField cvvNum = new JFormattedTextField(cvvFormat);
 		
+		JLabel bAddress1 = new JLabel("Address Line 1");
+		JFormattedTextField addressLine1 = new JFormattedTextField();
+		JLabel bCity = new JLabel("City");
+		JFormattedTextField city = new JFormattedTextField();
+		JLabel bState = new JLabel("State");
+		JFormattedTextField state = new JFormattedTextField(stateFormat);
+		JLabel bZip = new JLabel("Zipcode");
+		JFormattedTextField zip = new JFormattedTextField(zipFormat);
+		
+		
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
 		
 		addCardButton.setActionListener_clicked(new ActionListener() {
@@ -74,8 +98,12 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				// save payment data
 				Address ba = new Address();
+				ba.setStreet(addressLine1.getText());
+				ba.setCity(city.getText());
+				ba.setState(state.getText());
+				ba.setZipCode(Integer.valueOf(zip.getText()));
 				PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
-				
+				customer.getPaymentInfo().add(card);
 			}
 		
 		});
