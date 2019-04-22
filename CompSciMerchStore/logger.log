@@ -1,0 +1,16 @@
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.User <init> Initializing userName: guest id: 19999
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Vendor <init> New instance of a vendor with id 19999 username guest id 19999
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Customer <init> Initing CUSTOMER id 19999: guest who is Guest
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Sale <init> New sale (id 70) created for user 19999
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.ItemInfo setNextID NEXT_ID set to 40
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Catalogue readJSONFile Read in the next item id: 40
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Catalogue readJSONFile Successfully parsed the catalogue from the file.
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Catalogue <init> Successfully imported the JSON catalogue file
+2019-04-22 12:33:48 INFO DysfunctionalDesigners.CompSciMerchStore.Catalogue getInstance Created catalogue singleton
+2019-04-22 12:33:50 INFO DysfunctionalDesigners.CompSciMerchStore.ItemInfo addPromoDiscount Adding promo discount code "SEROCKS": 0.15 to item 00016
+2019-04-22 12:33:50 INFO DysfunctionalDesigners.CompSciMerchStore.ItemInfo addPromoDiscount Adding promo discount code "SEROCKS": 0.15 to item 00022
+2019-04-22 12:33:50 INFO DysfunctionalDesigners.CompSciMerchStore.ItemInfo addPromoDiscount Adding promo discount code "SEROCKS": 0.15 to item 00035
+2019-04-22 12:33:53 INFO DysfunctionalDesigners.CompSciMerchStore.LineItem <init> New LineItem initialized for item 35
+2019-04-22 12:33:53 INFO DysfunctionalDesigners.CompSciMerchStore.Sale addItem SALE 70 of user 19999: Added 1 35s (new item)
+2019-04-22 12:33:59 INFO DysfunctionalDesigners.CompSciMerchStore.Catalogue catalogueToJSON Successfully printed catalogue to catalogue.json
+2019-04-22 12:33:59 INFO DysfunctionalDesigners.CompSciMerchStore.Catalogue catalogueToJSON Successfully wrote next id to file: 40

@@ -17,10 +17,8 @@ public class App
     {
     	try {//ask how to disable all java.awt logging
 			InputStream configFile = new FileInputStream("src/main/resources/logger.properties");
-			System.out.println(configFile.available());
 			LogManager.getLogManager().readConfiguration(configFile);
 			configFile.close();
-			System.out.println(App.class.getClassLoader().getResource("logger.properties"));//src/main/resources/
 		} catch (IOException ex) {
 			System.out.println("WARNING: Could not open configuration file");
 		    System.out.println("WARNING: Logging not configured (console output only)");
