@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * Hello world!
@@ -11,16 +12,20 @@ import java.util.logging.LogManager;
  */
 public class App 
 {
+	private static Logger logger = Logger.getLogger(App.class.getName());
     public static void main( String[] args )
     {
     	try {//ask how to disable all java.awt logging
 			InputStream configFile = new FileInputStream("src/main/resources/logger.properties");
+			System.out.println(configFile.available());
 			LogManager.getLogManager().readConfiguration(configFile);
 			configFile.close();
+			System.out.println(App.class.getClassLoader().getResource("logger.properties"));//src/main/resources/
 		} catch (IOException ex) {
 			System.out.println("WARNING: Could not open configuration file");
 		    System.out.println("WARNING: Logging not configured (console output only)");
 		}
+    	logger.info("Starting main app");
     	
         new GUIdo_Frame();
     }
