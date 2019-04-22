@@ -65,8 +65,18 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	GUIdo_CPanel current_panel;
 	
+	/**
+	 * list of items for general member deals
+	 */
 	private List<Integer> generalMemberDeals = Arrays.asList(16,22,35);
-	private List<Integer> middleMemberDeals = Arrays.asList(10,16,22,19,35);
+	
+	/**
+	 * list of items for middle member deals
+	 */
+	private List<Integer> middleMemberDeals = Arrays.asList(10,16,22,17,35);
+	/**
+	 * list of items for elite member deals
+	 */
 	private List<Integer> eliteMemberDeals = Arrays.asList(4,9,10,16,22,17,39,35);
 	
 	/**
@@ -228,7 +238,7 @@ public class GUIdo_Frame extends JFrame{
 				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
 					display_item((ItemInfo)e.getSource());
 				} else if(e.getActionCommand().equals("memberdeals")) {
-					to_MemberDeals();
+					to_MemberDeals(true);
 				}
 			}
 		}, scrollpane.getWidth());
@@ -255,8 +265,10 @@ public class GUIdo_Frame extends JFrame{
 		scrollpane.getViewport().add(current_panel);
 	}
 	
-	
-	private void to_MemberDeals() {
+	/**
+	 * Function loads the member deals page
+	 */
+	private void to_MemberDeals(boolean popup) {
 		Boolean ready = false;
 		String title = "";
 		final String code[] = {""};
@@ -279,9 +291,15 @@ public class GUIdo_Frame extends JFrame{
 			code[0] = "COOLPROJECT";
 			discount[0] = 0.2;
 		}
-		else if(((Customer) current_user).getStatus() == MemberLevel.ELITE) {		
+		else if(((Customer) current_user).getStatus() == MemberLevel.ELITE || current_user.isAdmin()) {		
 			toiterate = eliteMemberDeals;
-			title = "Enter code \"CERNYISTHEBEST\" for 25% off these items!!!";
+			if(current_user.isAdmin()) {
+				title = "ADMIN VIEW";
+			}
+			else {
+				title = "Enter code \"CERNYISTHEBEST\" for 25% off these items!!!";	
+			}
+			
 			code[0] = "CERNYISTHEBEST";
 			discount[0] = 0.25;
 		}
@@ -306,40 +324,49 @@ public class GUIdo_Frame extends JFrame{
 				
 		scrollpane.getViewport().add(current_panel);
 		
-		if(((Customer)current_user).getStatus().equals(MemberLevel.GENERAL) || 
-				((Customer)current_user).getStatus().equals(MemberLevel.MIDDLE)) {
-			final String options[] = {"General", "Middle", "Elite", "No change"};
-			
-			String input = (String) JOptionPane.showInputDialog(null, "Before You Shop:",
-			        "Would you like to change your member level?", JOptionPane.QUESTION_MESSAGE, null, options, options[3]);
-			boolean reload = true;
-			if(input != null) {//cancel button
-				switch(input) {
+		if(popup) {
+			boolean same = false;
+			MemberLevel mlem = ((Customer)current_user).getStatus();
+			if(((Customer)current_user).getStatus().equals(MemberLevel.GENERAL) || 
+					((Customer)current_user).getStatus().equals(MemberLevel.MIDDLE)) {
+				final String options[] = {"General", "Middle", "Elite", "No change"};
 				
-				case "General":
-					((Customer) current_user).setStatus(MemberLevel.GENERAL);
-					break;
-				case "Middle":
-					((Customer) current_user).setStatus(MemberLevel.MIDDLE);
-					break;
-				case "Elite":
-					((Customer) current_user).setStatus(MemberLevel.ELITE);
-					break;
-				case "No Change":
-					reload = false;
-					break;
-				default:
+				String input = (String) JOptionPane.showInputDialog(null, "Before You Shop:",
+				        "Would you like to change your member level?", JOptionPane.QUESTION_MESSAGE, null, options, options[3]);
+				boolean reload = true;
+				if(input != null) {//cancel button
+					switch(input) {
+					
+					case "General":
+						((Customer) current_user).setStatus(MemberLevel.GENERAL);
+						break;
+					case "Middle":
+						((Customer) current_user).setStatus(MemberLevel.MIDDLE);
+						break;
+					case "Elite":
+						((Customer) current_user).setStatus(MemberLevel.ELITE);
+						break;
+					case "No Change":
+						reload = false;
+						break;
+					default:
+						reload = false;
+					}
+				} else {
 					reload = false;
 				}
-			} else {
-				reload = false;
+				
+				if(((Customer)current_user).getStatus().equals(mlem)) {
+					same = true;
+				}
+				
+				if(reload && !same) {
+					to_MemberDeals(false);
+				}
+				
 			}
-			
-			if(reload) {
-				to_MemberDeals();
-			}
-			
 		}
+		
 		
 	}
 	

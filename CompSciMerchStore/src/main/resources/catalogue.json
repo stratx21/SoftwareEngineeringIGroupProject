@@ -163,7 +163,8 @@
     "saleDiscount" : 0.0,
     "price" : 27.6,
     "promoDiscounts" : {
-      "CERNYISTHEBEST" : 0.25
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
     },
     "enabled" : true,
     "prof" : "CERNY",
@@ -250,7 +251,8 @@
     "price" : 12.5,
     "promoDiscounts" : {
       "SEROCKS" : 0.15,
-      "CERNYISTHEBEST" : 0.25
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
     },
     "enabled" : true,
     "prof" : "HAMERLY",
@@ -266,7 +268,8 @@
     "saleDiscount" : 0.0,
     "price" : 13.7,
     "promoDiscounts" : {
-      "CERNYISTHEBEST" : 0.25
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
     },
     "enabled" : true,
     "prof" : "HAMERLY",
@@ -296,7 +299,8 @@
     "saleDiscount" : 0.0,
     "price" : 5.0,
     "promoDiscounts" : {
-      "CERNYISTHEBEST" : 0.25
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
     },
     "enabled" : true,
     "prof" : "HAMERLY",
@@ -341,7 +345,8 @@
     "price" : 80.33,
     "promoDiscounts" : {
       "SEROCKS" : 0.15,
-      "CERNYISTHEBEST" : 0.25
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
     },
     "enabled" : true,
     "prof" : "FRY",
@@ -537,7 +542,8 @@
     "price" : 30.0,
     "promoDiscounts" : {
       "SEROCKS" : 0.15,
-      "CERNYISTHEBEST" : 0.25
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
     },
     "enabled" : true,
     "prof" : "MAURER",
