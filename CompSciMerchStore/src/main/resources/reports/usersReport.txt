@@ -1,0 +1,8 @@
+Number of Users/Customers: 2
+Number of admins: 2
+All Usernames: 
+	AndrewCase
+	admin
+	bob
+	cerny
+User with the most Purchases: AndrewCase
