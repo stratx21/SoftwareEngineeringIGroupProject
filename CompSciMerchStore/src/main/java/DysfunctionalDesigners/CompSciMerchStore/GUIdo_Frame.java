@@ -238,7 +238,10 @@ public class GUIdo_Frame extends JFrame{
 				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
 					display_item((ItemInfo)e.getSource(), current_user);
 				} else if(e.getActionCommand().equals("memberdeals")) {
-					to_MemberDeals(true);
+					if(!((Customer)current_user).getUserName().equals("guest")) {
+						to_MemberDeals(true);
+					}
+					
 				}
 			}
 		}, scrollpane.getWidth());
