@@ -76,14 +76,15 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (1).png"))),
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (2).png"))),
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (3).png"))));
+			home_button.setActionCommand("home");
+			home_button.setActionListener_clicked(done);
+			home_button.setBackground(new Color(255,181,9));
+			home_button.setHoverColor(new Color(242,170,0));
 		} catch(Exception e) {
 			System.out.println("ERROR setting up home button initialization");
 			e.printStackTrace();
 		}
-		home_button.setActionCommand("home");
-		home_button.setActionListener_clicked(done);
-		home_button.setBackground(new Color(255,181,9));
-		home_button.setHoverColor(new Color(242,170,0));
+		
 		
 		//set up the wishlist button for the toolbar to see the User's wishlist 
 		GUIdo_CButton wishlist=null;
@@ -92,14 +93,15 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish1.png"))),
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish2.png"))),
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish3.png"))));
+			wishlist.setActionCommand("wishlist");//command to check by to ensure the wishlist action choice 
+			wishlist.setActionListener_clicked(done);
+			wishlist.setBackground(new Color(255,181,9));
+			wishlist.setHoverColor(new Color(242,170,0));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		wishlist.setActionCommand("wishlist");//command to check by to ensure the wishlist action choice 
-		wishlist.setActionListener_clicked(done);
-		wishlist.setBackground(new Color(255,181,9));
-		wishlist.setHoverColor(new Color(242,170,0));
+		
 		
 		//set up the logout button 
 		GUIdo_CButton logout = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
@@ -131,19 +133,31 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		searchBar.setBackground(new Color(255,181,9));
 		
 		//add all buttons 
-		this.add(home_button);
-		this.add(searchBar);
-		this.add(wishlist);
-		this.add(logout);
-		this.add(cart);
+		try {
+			this.add(home_button);
+			this.add(searchBar);
+			this.add(wishlist);
+			this.add(logout);
+			this.add(cart);	
+		}
+		catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+		
 		
 		//add the buttons so they can be disabled 
-		buttons.add(home_button);
-		buttons.add(wishlist);
-		buttons.add(logout);
-		buttons.add(cart);
-		
-		home_button.repaint();
+		try {
+			buttons.add(home_button);
+			buttons.add(wishlist);
+			buttons.add(logout);
+			buttons.add(cart);
+			
+			home_button.repaint();		
+		}
+		catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+	
 		
 		this.repaint();
 	}

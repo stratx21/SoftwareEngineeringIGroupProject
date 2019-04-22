@@ -76,7 +76,13 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			e.printStackTrace();
 		}
 		//set the image ratio to the image's width divided by the images height 
-		this.image_ratio = (this.item_image.getWidth()*1.0/this.item_image.getHeight());
+		try {
+			this.image_ratio = (this.item_image.getWidth()*1.0/this.item_image.getHeight());	
+		}
+		catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+		
 		
 		//add the name of the item 
 		JLabel name =  new JLabel(this.item.getDisplayName());
@@ -228,23 +234,25 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 					ex.printStackTrace();
 				}
 				
-				
-				if(customer.getWishList().contains(item.getItemID())) {
-//					System.out.println("Exists, removing...");
-					//has item, so remove it 
-					customer.removeItemFromWishlist(item.getItemID());
-					thisbutton.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
-				} else {
-					//does not have item, so add it 
-//					System.out.println("Doesn't exist, adding...");
-					customer.addItemToWishlist(item.getItemID());
-					thisbutton.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
-//					System.out.println("wishlist items: ");
-					for(Integer item_id : customer.getWishList()) {
-						System.out.println(Catalogue.getInstance().getItem(item_id).getDisplayName());
+				if(customer.getWishList() != null) {
+					if(customer.getWishList().contains(item.getItemID())) {
+//						System.out.println("Exists, removing...");
+						//has item, so remove it 
+						customer.removeItemFromWishlist(item.getItemID());
+						thisbutton.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
+					} else {
+						//does not have item, so add it 
+//						System.out.println("Doesn't exist, adding...");
+						customer.addItemToWishlist(item.getItemID());
+						thisbutton.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
+//						System.out.println("wishlist items: ");
+						for(Integer item_id : customer.getWishList()) {
+							System.out.println(Catalogue.getInstance().getItem(item_id).getDisplayName());
+						}
 					}
+					thisbutton.repaint();	
 				}
-				thisbutton.repaint();
+				
 			}
 		});
 		wishlist_button.repaint();
