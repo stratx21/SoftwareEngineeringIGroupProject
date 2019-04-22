@@ -121,6 +121,10 @@ public class Sale {
 		if(!this.finalized && Catalogue.getInstance().checkAmount(itemID, newQuantity)) {
 			itemList.get(itemID).setQuantity(newQuantity);
 			logger.info("SALE " + this.saleID + " of user " + this.customerID + ": Changed quantity of " + itemID + " to " + newQuantity);
+			if(newQuantity == 0) {
+				itemList.remove(itemID);
+				logger.info("SALE " + this.saleID + " of user " + this.customerID + ": REMOVED " + itemID);
+			}
 			return true;
 		}
 		return false;
