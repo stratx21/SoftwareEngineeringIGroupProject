@@ -299,7 +299,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 //////////////////accessors
 	/**
 	 * @param itemID the item to get
-	 * @return the ItemInfo for that item
+	 * @return the ItemInfo for that item (or null if item is not present)
 	 */
 	@JsonIgnore
 	public ItemInfo getItem(int itemID) {
