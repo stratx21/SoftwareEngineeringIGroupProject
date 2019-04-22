@@ -360,6 +360,18 @@ public class GUIdo_Frame extends JFrame{
 		    public void windowClosed(WindowEvent windowEvent) {
 		        //code here for exiting the program... 
 		    	Catalogue.getInstance().catalogueToJSON();
+		    	//write user to file
+		    	if(current_user != null) {
+					if(!current_user.getUserName().equals("guest")) {
+						UserDataController dataControl = UserDataController.getInstance();
+						switch((current_user.getUserID() + "").charAt(0)){
+							case '4': dataControl.writeAdmin((Administrator) current_user); break;
+							case '1': dataControl.writeCustomer((Customer) current_user); break;
+							default:
+								//TODO:: logger log invalid user detected
+						}
+					}
+				}
 		    }
 		});
 		
