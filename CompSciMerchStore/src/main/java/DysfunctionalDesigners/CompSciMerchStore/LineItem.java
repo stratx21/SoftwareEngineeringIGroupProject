@@ -48,6 +48,7 @@ public class LineItem {
 	
 	public int getQuantity() { return quantity; }
 	public int getItemID() { return itemID; }
+	public List<String> getPromoCodes(){return promoCodes;}
 	
 	public void setQuantity(int quantity) { this.quantity = quantity; }
 	public void setItem(int itemID) { this.itemID = itemID; }
