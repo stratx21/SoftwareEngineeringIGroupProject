@@ -24,10 +24,10 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	/**
 	 * This sets up the GUIdo_ReviewAndEditOrder instance 
 	 */
-	public GUIdo_ReviewAndEditOrder(Sale sale) {
+	public GUIdo_ReviewAndEditOrder(Sale sale, Customer customer) {
 	    super();
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
-	    this.drawScreen(sale, 0);
+	    this.drawScreen(sale, 0, customer);
   	    this.repaint();
 	}
 
@@ -39,14 +39,14 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	}
 	
 	
-	public void drawScreen(Sale sale, int num) {
+	public void drawScreen(Sale sale, int num, Customer customer) {
 		DecimalFormat df2 = new DecimalFormat("0.00");
 		if(num == 1) {
 			this.removeAll(); // redraw components
 			this.setLayout(null);
 		}
 		
-		this.drawCart(sale);
+		this.drawCart(sale, customer);
 		// title at top of screen
 		JLabel label= new JLabel("Review and Edit Order");
 		label.setHorizontalAlignment(JLabel.CENTER);
@@ -56,18 +56,17 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.add(label);
 		
 		GUIdo_CButton proceed = new GUIdo_CButton(965, 415, 200, 50, "Proceed to Checkout");
-		this.add(proceed);
-		
 		proceed.setActionListener_clicked(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// save payment data
+				System.out.println("proceeding to payment for now");
+				GUIdo_Payment pay = new GUIdo_Payment(sale, customer);
 				
 			}
 			
 		});
-		
+		this.add(proceed);
 		// initial subtotal box component
 		JLabel od = new JLabel("Order Details");
 		JLabel subtotal = null;
@@ -118,7 +117,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void drawCart(Sale sale) {
+	public void drawCart(Sale sale, Customer customer) {
 		int x = 75;
 	    int y = 100;
 	    int w = 250;
@@ -185,7 +184,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 						String command = e.getActionCommand();
 						
 	                    if(sale.editQuantity(Catalogue.getInstance().getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
-	                    	updateOrderDetails(sale);
+	                    	drawScreen(sale, 1, customer);
 	                    	quantity.updateUI();
 	                    }
 					}
@@ -198,6 +197,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    quantity.repaint();
 			    quantity.validate();
 			    this.repaint();
+			   
 			    
 			    /*
 			    JLabel quan = new JLabel();
@@ -215,9 +215,9 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		}
 	}
 	
-	public void updateOrderDetails(Sale sale) {
+	//public void updateOrderDetails(Sale sale) {
 		// update JLabels for order detail components with new data
-		this.drawScreen(sale, 1);
+		//this.drawScreen(sale, 1);
 		/*
 		DecimalFormat df2 = new DecimalFormat("0.00");
 		JLabel subtotal = null;
@@ -256,7 +256,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		estTax.repaint();
 		total.repaint();
 		this.repaint();*/
-	}
+	//}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
