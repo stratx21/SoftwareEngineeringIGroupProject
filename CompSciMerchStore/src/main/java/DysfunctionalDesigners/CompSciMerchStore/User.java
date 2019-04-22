@@ -49,6 +49,15 @@ public abstract class User {
 		return result;
 	}
 	
+	/**
+	 * Custom constructor for user. All parameters are for object fields.
+	 * @param email
+	 * @param motherMaidenName
+	 * @param userName
+	 * @param password
+	 * @param name
+	 * @param userID
+	 */
 	protected User(String email, String motherMaidenName, String userName, String password, String name, int userID) {
 		super();
 		this.email = email;
