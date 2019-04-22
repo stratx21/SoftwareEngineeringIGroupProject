@@ -20,6 +20,10 @@
       "40" : {
         "quantity" : 1,
         "itemID" : 40
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43
       }
     },
     "shippingAddr" : null,
