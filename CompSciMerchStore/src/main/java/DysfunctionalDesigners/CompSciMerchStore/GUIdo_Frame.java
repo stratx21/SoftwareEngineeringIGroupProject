@@ -313,24 +313,28 @@ public class GUIdo_Frame extends JFrame{
 			String input = (String) JOptionPane.showInputDialog(null, "Before You Shop:",
 			        "Would you like to change your member level?", JOptionPane.QUESTION_MESSAGE, null, options, options[3]);
 			boolean reload = true;
-			switch(input) {
-			
-			case "General":
-				((Customer) current_user).setStatus(MemberLevel.GENERAL);
-				break;
-			case "Middle":
-				((Customer) current_user).setStatus(MemberLevel.MIDDLE);
-				break;
-			case "Elite":
-				((Customer) current_user).setStatus(MemberLevel.ELITE);
-				break;
-			case "No Change":
+			if(input != null) {//cancel button
+				switch(input) {
+				
+				case "General":
+					((Customer) current_user).setStatus(MemberLevel.GENERAL);
+					break;
+				case "Middle":
+					((Customer) current_user).setStatus(MemberLevel.MIDDLE);
+					break;
+				case "Elite":
+					((Customer) current_user).setStatus(MemberLevel.ELITE);
+					break;
+				case "No Change":
+					reload = false;
+					break;
+				default:
+					reload = false;
+				}
+			} else {
 				reload = false;
-				break;
-			default:
-				reload = false;
-			
 			}
+			
 			if(reload) {
 				to_MemberDeals();
 			}
