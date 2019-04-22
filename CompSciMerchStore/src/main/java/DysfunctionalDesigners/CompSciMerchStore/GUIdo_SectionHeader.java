@@ -9,7 +9,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	/**
 	 * The number of sections of professors that are shown 
 	 */
-	final int SECTIONS=8;
+	final int SECTIONS=9;
 	
 	/**
 	 * The buttons that are used for each professor 
@@ -79,6 +79,13 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 //		section8.setVisible(true);
 		section8.setBackground(new Color(255,181,9));
 		
+		//the button for the DropDown 
+		GUIdo_CButton section9 = new GUIdo_CButton(x+8*width/SECTIONS,y,width/SECTIONS,height,"Other Options");
+		section9.setActionCommand("dys_des");
+		section9.setActionListener_clicked(done);
+//				section8.setVisible(true);
+		section9.setBackground(new Color(255,181,9));
+		
 		//add to the toolbar panel:
 		this.add(section1);
 		this.add(section2);
@@ -88,6 +95,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		this.add(section6);
 		this.add(section7);
 		this.add(section8);
+		this.add(section9);
 		
 		//add the buttons to the list to allow enabling and disabling 
 		buttons.add(section1);
@@ -98,6 +106,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		buttons.add(section6);
 		buttons.add(section7);
 		buttons.add(section8);
+		buttons.add(section9);
 		
 		
 		//this.repaint();
