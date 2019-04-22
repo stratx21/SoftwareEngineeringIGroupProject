@@ -36,7 +36,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	}
 	
 	/**
-	 * Constructor which reads in teh catalogue from the file the first time the catalogue is needed.
+	 * Constructor which reads in the catalogue from the file the first time the catalogue is needed.
 	 */
 	protected Catalogue() {
 		try{

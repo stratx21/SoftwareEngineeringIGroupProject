@@ -73,7 +73,6 @@ public class CatalogueTester {
 		assertThrows(Exception.class, () -> {
 			c.updateItem(1, i);
 		});
-		ItemInfo temp = new ItemInfo(20000);
 		assertThrows(Exception.class, () -> {
 			c.updateItem(i.getItemID(), null);
 		});
