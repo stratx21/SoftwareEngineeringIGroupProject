@@ -36,7 +36,7 @@ public class Administrator extends Vendor{
 
     //}
 
-    public void generateAllSalesReport() {
+    public boolean generateAllSalesReport() {
         UserDataController dataController = UserDataController.getInstance();
         List<Sale> salesFromCust = new ArrayList<>();
         List<Sale> storeSales = dataController.getStoreSales();
@@ -66,6 +66,7 @@ public class Administrator extends Vendor{
             salesReportFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 
         BufferedWriter writer = null;
@@ -115,10 +116,12 @@ public class Administrator extends Vendor{
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public void generateAllUsersReport() {
+    public boolean generateAllUsersReport() {
         UserDataController dataController = UserDataController.getInstance();
         BufferedWriter writer = null;
         File userReportFile = new File("./src/main/resources/reports/usersReport.txt");
@@ -129,6 +132,7 @@ public class Administrator extends Vendor{
             userReportFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         try {
             writer = new BufferedWriter(new FileWriter(userReportFile));
@@ -168,6 +172,8 @@ public class Administrator extends Vendor{
 
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }
