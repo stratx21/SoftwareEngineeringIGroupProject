@@ -704,5 +704,19 @@
     "enabled" : true,
     "prof" : "CERNY",
     "reviews" : [ ]
+  },
+  "47" : {
+    "description" : "Don't you wish you could cozy up with your very own HORSE at night?! Well, now is your chance!",
+    "displayName" : "Horse Dildo",
+    "extendedItemID" : "00047",
+    "itemID" : 47,
+    "stock" : 1,
+    "vendorID" : 40000,
+    "saleDiscount" : 100.0,
+    "price" : 1000000.0,
+    "promoDiscounts" : { },
+    "enabled" : false,
+    "prof" : "CERNY",
+    "reviews" : [ ]
   }
 }
