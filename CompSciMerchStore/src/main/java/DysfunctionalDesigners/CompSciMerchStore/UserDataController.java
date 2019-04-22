@@ -12,6 +12,10 @@ public class UserDataController {
 	private static Logger logger = Logger.getLogger(UserDataController.class.getName());
     private static UserDataController instance = null;
 
+    /**
+     * Gets an instance of the UserDataController. Double locked  to protect in multithreading
+     * @return An instance of the user data controller
+     */
     public static UserDataController getInstance() {
         if(instance == null) {
             synchronized (UserDataController.class) {
@@ -23,8 +27,17 @@ public class UserDataController {
         return instance;
     }
 
+    /**
+     * Empty default constructor for jackson to use for JSON
+     */
     protected UserDataController() {}
-    
+
+    /**
+     * Gets a list of User objects generated from the specified users registered to the store who's
+     * account info is stored in our files.
+     * @param usernames The usernames of the users that are to be returned
+     * @return a list of user objects created from the info files for each user given
+     */
     public List<User> getCustomers(List<String> usernames) {
         List<User> users = new ArrayList<>();
         List<String> validCustomerUsernames = getCustomerUsernames();
@@ -52,7 +65,13 @@ public class UserDataController {
 
         return users;
     }
-    
+
+    /**
+     * Gets the admins specified by the list given and returns a list of admin objects generated
+     * from the info in the user files found
+     * @param usernames the list of usernames of the admins to fetch the info of
+     * @return A list of admin objects of the users specified
+     */
     public List<User> getAdmins(List<String> usernames) {
         List<User> users = new ArrayList<>();
         List<String> validAdminUsernames = getAdminUsernames();
@@ -81,6 +100,12 @@ public class UserDataController {
         return users;
     }
 
+    /**
+     * Gets all the sales of the user given
+     * @param username The username of the user who's sales info is being retrieved
+     * @return A list of sale objects of the given user's sale info
+     * @throws Exception if the user given is not found an exception is thrown
+     */
     public List<Sale> getUserSales(String username) throws Exception {
         List<String> validUsernames = getCustomerUsernames();
         List<Sale> pastSalesOfUser;
@@ -98,6 +123,11 @@ public class UserDataController {
         return pastSalesOfUser;
     }
 
+    /**
+     * Gets all sales info of items that the store was selling and not ones that a vendor user had uploaded.
+     * (Pretty much all items that start on the store or are uploaded by admins)
+     * @return a list of sale objects
+     */
     public List<Sale> getStoreSales() {
         List<Sale> storeSales = new ArrayList<>();
         List<String> validAdmins = getAdminUsernames();
@@ -117,6 +147,10 @@ public class UserDataController {
         return storeSales;
     }
 
+    /**
+     * Gets all the admins registered to the store
+     * @return A list of all admins
+     */
     public List<Administrator> getAllAdmins() {
         List<Administrator> admins = new ArrayList<>();
         List<String> validAdmins = getAdminUsernames();
@@ -136,6 +170,10 @@ public class UserDataController {
         return admins;
     }
 
+    /**
+     * Gets all customers registered to the store
+     * @return a list of all the users registered
+     */
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         List<String> validCustomers = getCustomerUsernames();
@@ -155,6 +193,10 @@ public class UserDataController {
         return customers;
     }
 
+    /**
+     * Gets all usernames of the customers
+     * @return a list of all registered customer usernames
+     */
     public List<String> getCustomerUsernames() {
         List<String> usernames = new ArrayList<>();
 
@@ -173,7 +215,13 @@ public class UserDataController {
 
         return usernames;
     }
-    
+
+    /**
+     * gets the individual usernames and passwords from the customers file
+     * @param reader The reader to read through the file
+     * @param usernames A list to store the usernames into
+     * @param passwords a list to store the passwords into
+     */
     public void getUsernamesAndPasswords(BufferedReader reader, List<String> usernames, List<String> passwords) {
     	String line;
         try {
@@ -192,6 +240,10 @@ public class UserDataController {
         }
     }
 
+    /**
+     * Gets all admin usernames
+     * @return a list of all usernames associated with admins
+     */
     public List<String> getAdminUsernames() {
         List<String> usernames = new ArrayList<>();
 
@@ -211,6 +263,11 @@ public class UserDataController {
         return usernames;
     }
 
+    /**
+     * Writes the admin object given to its file. Updates the file if info is changed, creates a new file if
+     * the admin file does not exist yet
+     * @param adminToWrite the admin object to write/update
+     */
     public void writeAdmin(Administrator adminToWrite) {
         File adminFile = new File("./src/main/resources/UserData/" + adminToWrite.getUserName() + ".json");
         try {
@@ -227,6 +284,11 @@ public class UserDataController {
         }
     }
 
+    /**
+     * Writes the customer object given to its file. Updates the file if info is changed, creates a new file if
+     * the customer file does not exist yet.
+     * @param custToWrite the customer object to write/update
+     */
     public void writeCustomer(Customer custToWrite) {
         File custFile = new File("./src/main/resources/UserData/" + custToWrite.getUserName() + ".json");
         try {
@@ -242,7 +304,7 @@ public class UserDataController {
             e.printStackTrace();
         }
     }
-
+    
     private void addNamesToList(BufferedReader reader, List<String> listToAddTo) {
         String line;
         try {

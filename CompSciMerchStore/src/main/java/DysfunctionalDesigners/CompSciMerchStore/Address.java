@@ -21,7 +21,14 @@ public class Address {
 	 * Jackson Json parser requires this
 	 */
     public Address() {}
-    
+
+    /**
+     * Constructor to make and address
+     * @param street Street name
+     * @param zipCode Zip code
+     * @param city City for address
+     * @param state State
+     */
     public Address(String street, int zipCode, String city, String state) {
         this.street = street;
         this.zipCode = zipCode;

@@ -476,7 +476,9 @@ public class GUIdo_Frame extends JFrame{
 					title = "Dysfunctional Designers";
 					//set display_items to the items given by the professor list
 					display_items = Catalogue.getInstance().searchByProfessor(Professor.DYS_DES);
-				}else {
+				}else if(e.getActionCommand().equals("other_opt")) {
+					
+				} else {
 					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
 					return;//throw exception???
