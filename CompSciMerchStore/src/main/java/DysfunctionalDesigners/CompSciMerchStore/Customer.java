@@ -2,12 +2,15 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 enum MemberLevel{
 	GENERAL, MIDDLE, ELITE;
 }
 
 public class Customer extends Vendor{
+	private static Logger logger = Logger.getLogger(Customer.class.getName());
+	
 	private MemberLevel status;
 	private List<PaymentInfo> paymentInfo;
 	private Address shippingAddr;
@@ -34,6 +37,7 @@ public class Customer extends Vendor{
 		this.wishList = wishList;
 		this.cart = cart;
 		this.previousPurchases = previousPurchases;
+		logger.info("Initing CUSTOMER id " + this.getUserID() + ": " + this.getUserName() + " who is " + this.getName());
 	}
 	/**
 	 * Creates empty versions of customer data, passes necessary information to super.
@@ -47,6 +51,7 @@ public class Customer extends Vendor{
 		this.wishList = new ArrayList<Integer>();
 		this.cart = null;
 		this.previousPurchases = new ArrayList<Sale>();
+		logger.info("Initing CUSTOMER id " + this.getUserID() + ": " + this.getUserName() + " who is " + this.getName());
 	}
 	/**
 	 * Uses implicit super constructor, all other members are default/empty.
@@ -76,11 +81,11 @@ public class Customer extends Vendor{
 	 * @param id Item to be added
 	 */
 	public void addItemToWishlist(Integer id) {
+		logger.info("Adding item " + id + " to \"" + this.getUserName() + "\"'s wishlist.");
 		if(this.wishList == null) {
 			this.wishList = new ArrayList<Integer>();
 		}
-		this.wishList.add(id);		
-		
+		this.wishList.add(id);
 	}
 	
 	/**
@@ -90,6 +95,9 @@ public class Customer extends Vendor{
 	public void removeItemFromWishlist(Integer id) {
 		if(this.wishList.contains(id)) {
 			this.wishList.remove(id);
+			logger.info("Removed item " + id + " from \"" + this.getUserName() + "\"'s wishlist.");
+		} else {
+			logger.fine("ATTEMPTING TO REMOVE ITEM NOT PRESENT IN WISHLIST (id " + id + " from \"" + this.getUserName() + "\"'s wishlist");
 		}
 	}
 	
@@ -99,10 +107,17 @@ public class Customer extends Vendor{
 	 * @param q  Quantity of how many items.
 	 */
 	public void addToCart(int id, int q) {
+		logger.info("Adding " + q + " of item " + id + " to \"" + this.getUserName() + "\"'s wishlist");
 		if(this.cart == null) {
 			this.cart = new Sale(this.getUserID());
 		}
-		this.cart.addItem(q, id);
+		if(q > 0) {
+			this.cart.addItem(q, id);	
+		}
+		else {
+			logger.fine("ATTEMPTING TO ADD QUANTITY 0 OF ITEM " + id + " TO CART OF USER " + this.getUserName());
+		}
+		
 	}
 	
 	/**

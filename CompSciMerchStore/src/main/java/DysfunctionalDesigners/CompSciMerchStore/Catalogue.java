@@ -149,7 +149,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	/**
 	 * Adds an item (or replaces an old one) to the catalogue
 	 * 
-	 * @param e the item to add
+	 * @param e the item to add (which becomes null)
 	 */
 	public void addItem(ItemInfo e) {
 		if(catalogue.put(e.getItemID(), e) == null) {
@@ -199,7 +199,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 * @param amount the amount to increase by
 	 */
 	public void increaseQuantity(int itemID, int amount) {
-		if(catalogue.containsKey(itemID)) {
+		if(catalogue.containsKey(itemID) && amount > 0) {
 			catalogue.get(itemID).increaseAmount(amount);
 			logger.info("Increased quantity of item " + itemID + " by " + amount);
 		}
@@ -299,7 +299,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 //////////////////accessors
 	/**
 	 * @param itemID the item to get
-	 * @return the ItemInfo for that item
+	 * @return the ItemInfo for that item (or null if item is not present)
 	 */
 	@JsonIgnore
 	public ItemInfo getItem(int itemID) {

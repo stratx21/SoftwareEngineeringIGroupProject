@@ -22,7 +22,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -36,7 +38,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 70.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -50,7 +55,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 25.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -64,7 +71,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 1.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -78,7 +87,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "BOOTH",
     "reviews" : [ ]
@@ -134,7 +146,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 50.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "CERNY",
     "reviews" : [ ]
@@ -148,7 +162,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 27.6,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "CERNY",
     "reviews" : [ ]
@@ -232,7 +249,11 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 12.5,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
@@ -246,7 +267,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 13.7,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
@@ -274,7 +298,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ ]
@@ -316,7 +343,11 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 80.33,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "FRY",
     "reviews" : [ ]
@@ -358,7 +389,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 0.01,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSBALD",
     "reviews" : [ ]
@@ -372,7 +405,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSBALD",
     "reviews" : [ ]
@@ -386,7 +421,10 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 2000.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSBALD",
     "reviews" : [ ]
@@ -428,7 +466,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 5.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "AARSHAIRY",
     "reviews" : [ ]
@@ -456,7 +496,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 19.99,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "MAURER",
     "reviews" : [ ]
@@ -498,7 +540,11 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 30.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "SEROCKS" : 0.15,
+      "CERNYISTHEBEST" : 0.25,
+      "COOLPROJECT" : 0.2
+    },
     "enabled" : true,
     "prof" : "MAURER",
     "reviews" : [ ]
@@ -554,7 +600,9 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 50.0,
-    "promoDiscounts" : { },
+    "promoDiscounts" : {
+      "CERNYISTHEBEST" : 0.25
+    },
     "enabled" : true,
     "prof" : "DYS_DES",
     "reviews" : [ ]
@@ -582,6 +630,76 @@
     "vendorID" : 40000,
     "saleDiscount" : 0.0,
     "price" : 1000.99,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "CERNY",
+    "reviews" : [ ]
+  },
+  "42" : {
+    "description" : "What do you call a fish with no eyes...?",
+    "displayName" : "A FSH",
+    "extendedItemID" : "00042",
+    "itemID" : 42,
+    "stock" : 20,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 16.99,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "BOOTH",
+    "reviews" : [ ]
+  },
+  "43" : {
+    "description" : "Support your favorite Designers!",
+    "displayName" : "Team Shirt",
+    "extendedItemID" : "00043",
+    "itemID" : 43,
+    "stock" : 20,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 60.6,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "DYS_DES",
+    "reviews" : [ ]
+  },
+  "44" : {
+    "description" : "Posters are now available! You won't want to miss it!",
+    "displayName" : "Empire Strikes Back Poster",
+    "extendedItemID" : "00044",
+    "itemID" : 44,
+    "stock" : 200,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 100.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "DYS_DES",
+    "reviews" : [ ]
+  },
+  "45" : {
+    "description" : "If you need to say thanks, this shirt will be perfect!",
+    "displayName" : "Thank You Shirt",
+    "extendedItemID" : "00045",
+    "itemID" : 45,
+    "stock" : 2,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 17.99,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "DYS_DES",
+    "reviews" : [ ]
+  },
+  "46" : {
+    "description" : "Don't you wish you could cozy up with your very own GOLLUM at night?! Well, now is your chance!",
+    "displayName" : "Gollum Plushie",
+    "extendedItemID" : "00046",
+    "itemID" : 46,
+    "stock" : 29,
+    "vendorID" : 40000,
+    "saleDiscount" : 0.0,
+    "price" : 29.81,
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
