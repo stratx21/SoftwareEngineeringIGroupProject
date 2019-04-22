@@ -18,12 +18,12 @@ public class GUIdo_AboutUs extends GUIdo_CPanel{
 		l1.setForeground(Color.blue);
 		l1.setFont(new Font("Arial", Font.BOLD, 20));
 		
-		l2 = new JLabel("We are Dysfunctional Designers! "
-				+ "We are Computer Science Students in CSI 3471." 
+		l2 = new JLabel("We are Dysfunctional Designers!\n "
+				+ "We are Computer Science Students in CSI 3471.\n" 
 				+ "Our team consists of 6 people: Ethan Dickey, Josh Holland,"
-				+ "Mackenna Semeyn, Em Lakin, Harrison Rogers, and Josh Hanscheck."
-				+ "You can find us in the second row on the left side during class and"
-				+ " our favorite theme when presenting is imitating the great and powerful Dr. Booth.");
+				+ "Mackenna Semeyn, Em Lakin, Harrison Rogers, and Josh Hanscheck.\n"
+				+ "You can find us in the second row on the left side during class and\n"
+				+ "our favorite theme when presenting is imitating the great and powerful Dr. Booth.\n");
 		l3 = new JLabel("About Us!");
 		
 		l2.setBounds(50, 50, 400, 500);
