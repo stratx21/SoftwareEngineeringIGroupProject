@@ -19,11 +19,13 @@
     "itemList" : {
       "40" : {
         "quantity" : 1,
-        "itemID" : 40
+        "itemID" : 40,
+        "promoCodes" : [ ]
       },
       "43" : {
         "quantity" : 1,
-        "itemID" : 43
+        "itemID" : 43,
+        "promoCodes" : [ ]
       }
     },
     "shippingAddr" : null,
