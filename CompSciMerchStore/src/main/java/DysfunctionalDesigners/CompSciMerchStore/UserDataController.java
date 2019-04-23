@@ -17,9 +17,12 @@ public class UserDataController {
      * @return An instance of the user data controller
      */
     public static UserDataController getInstance() {
+        logger.info("Returning instance of UserDataController");
         if(instance == null) {
+            logger.info("UserDataController not yet initialized.");
             synchronized (UserDataController.class) {
                 if(instance == null) {
+                    logger.info("Initializing UserDataController");
                     instance = new UserDataController();
                 }
             }
@@ -39,6 +42,7 @@ public class UserDataController {
      * @return a list of user objects created from the info files for each user given
      */
     public List<User> getCustomers(List<String> usernames) {
+        logger.info("Fetching customers with names: " + usernames);
         List<User> users = new ArrayList<>();
         List<String> validCustomerUsernames = getCustomerUsernames();
 
@@ -57,12 +61,14 @@ public class UserDataController {
             try {
                 nextCust = mapper.readValue(usrFile, Customer.class);
             } catch (IOException e) {
+                logger.severe("Failure to deserialize from JSON user: " + username);
                 e.printStackTrace();
             }
 
             users.add(nextCust);
         }
 
+        logger.info("Requested users successfully retrieved");
         return users;
     }
 
@@ -73,6 +79,7 @@ public class UserDataController {
      * @return A list of admin objects of the users specified
      */
     public List<User> getAdmins(List<String> usernames) {
+        logger.info("Fetching admins with names: " + usernames);
         List<User> users = new ArrayList<>();
         List<String> validAdminUsernames = getAdminUsernames();
 
@@ -91,12 +98,14 @@ public class UserDataController {
             try {
                 nextCust = mapper.readValue(usrFile, Administrator.class);
             } catch (IOException e) {
+                logger.severe("Failure to deserialize from JSON admin: " + username);
                 e.printStackTrace();
             }
 
             users.add(nextCust);
         }
 
+        logger.info("Requested admins successfully retrieved");
         return users;
     }
 
@@ -107,10 +116,12 @@ public class UserDataController {
      * @throws Exception if the user given is not found an exception is thrown
      */
     public List<Sale> getUserSales(String username) throws Exception {
+        logger.info("Getting past sales of user: " + username);
         List<String> validUsernames = getCustomerUsernames();
         List<Sale> pastSalesOfUser;
 
         if(!validUsernames.contains(username)) {
+            logger.severe("Username supplied is not a valid username and does not not exist in our records");
             throw new Exception("Username is either not a valid customer or an admin");
         }
 
@@ -120,6 +131,7 @@ public class UserDataController {
                 Customer.class);
         pastSalesOfUser = cust.getPastSales();
 
+        logger.info("User " + username + "'s past sales successfully retrieved");
         return pastSalesOfUser;
     }
 
@@ -129,6 +141,7 @@ public class UserDataController {
      * @return a list of sale objects
      */
     public List<Sale> getStoreSales() {
+        logger.info("Fetching all past sales made by the store");
         List<Sale> storeSales = new ArrayList<>();
         List<String> validAdmins = getAdminUsernames();
 
@@ -139,11 +152,13 @@ public class UserDataController {
             try {
                 nextAdmin = mapper.readValue(nxtAdminFile, Administrator.class);
             } catch (IOException ex) {
+                logger.severe("Failure to deserialize " + e + " from JSON");
                 ex.printStackTrace();
             }
             storeSales.addAll(nextAdmin.getPastSales());
         });
 
+        logger.info("All store sales successfully retrieved");
         return storeSales;
     }
 
@@ -152,6 +167,7 @@ public class UserDataController {
      * @return A list of all admins
      */
     public List<Administrator> getAllAdmins() {
+        logger.info("Getting all admins registered in our records");
         List<Administrator> admins = new ArrayList<>();
         List<String> validAdmins = getAdminUsernames();
 
@@ -162,11 +178,13 @@ public class UserDataController {
             try {
                 nextAdmin = mapper.readValue(nxtAdminFile, Administrator.class);
             } catch (IOException ex) {
+                logger.severe("Failure to deserialize admin: " + e + ", during retrieval of all admins");
                 ex.printStackTrace();
             }
             admins.add(nextAdmin);
         });
 
+        logger.info("All admins successfully retrieved");
         return admins;
     }
 
@@ -175,6 +193,7 @@ public class UserDataController {
      * @return a list of all the users registered
      */
     public List<Customer> getAllCustomers() {
+        logger.info("Fetching all customers in our records");
         List<Customer> customers = new ArrayList<>();
         List<String> validCustomers = getCustomerUsernames();
 
@@ -185,11 +204,13 @@ public class UserDataController {
             try {
                 nextCust = mapper.readValue(nxtCustFile, Customer.class);
             } catch (IOException ex) {
+                logger.severe("Failure to deserialize Customer: " + e + ", from JSON");
                 ex.printStackTrace();
             }
             customers.add(nextCust);
         });
 
+        logger.info("All customers successfully retrieved");
         return customers;
     }
 
@@ -198,6 +219,7 @@ public class UserDataController {
      * @return a list of all registered customer usernames
      */
     public List<String> getCustomerUsernames() {
+        logger.info("Fetching all customer usernames");
         List<String> usernames = new ArrayList<>();
 
         BufferedReader reader = null;
@@ -208,10 +230,12 @@ public class UserDataController {
                                     new File("./src/main/resources/UserData/customers.txt"))));
             addNamesToList(reader, usernames);
         } catch (FileNotFoundException ex) {
+            logger.severe("Failure to open reader for customers file. In Method getCustomerUsernames. Severe Failure, exiting...");
             ex.printStackTrace();
             System.exit(1);
         }
 
+        logger.info("All customer usernames successfully retrieved");
         return usernames;
     }
 
@@ -222,6 +246,7 @@ public class UserDataController {
      * @param passwords a list to store the passwords into
      */
     public void getUsernamesAndPasswords(BufferedReader reader, List<String> usernames, List<String> passwords) {
+        logger.info("Fetching all usernames and passwords from file opened in reader");
     	String line;
         try {
 //        	BufferedReader reader = new BufferedReader(new FileReader(new File("/src/main/resources/UserData/customers.txt")));
@@ -235,6 +260,7 @@ public class UserDataController {
             }
             reader.close();
         } catch (IOException e) {
+            logger.severe("IOException thrown in getUsernamesAndPasswords method in UserDataController");
             e.printStackTrace();
         }
     }
@@ -244,6 +270,7 @@ public class UserDataController {
      * @return a list of all usernames associated with admins
      */
     public List<String> getAdminUsernames() {
+        logger.info("Fetching all admin usernames");
         List<String> usernames = new ArrayList<>();
 
         BufferedReader reader = null;
@@ -253,12 +280,14 @@ public class UserDataController {
                             new FileInputStream(
                                     new File("./src/main/resources/UserData/admins.txt"))));
         } catch (FileNotFoundException ex) {
+            logger.severe("Failure to open reader for admins file in getAdminUsernames. Severe Failure, exiting...");
             ex.printStackTrace();
             System.exit(1);
         }
 
         addNamesToList(reader, usernames);
 
+        logger.info("All admin usernames successfully retrieved");
         return usernames;
     }
 
@@ -268,10 +297,12 @@ public class UserDataController {
      * @param adminToWrite the admin object to write/update
      */
     public void writeAdmin(Administrator adminToWrite) {
+        logger.info("Writing/updating admin: " + adminToWrite.getUserName());
         File adminFile = new File("./src/main/resources/UserData/" + adminToWrite.getUserName() + ".json");
         try {
             adminFile.createNewFile(); //creates  new file if it doesn't exist
         } catch (IOException e) {
+            logger.severe("Failure to create new admin File for admin: " + adminToWrite.getUserName());
             e.printStackTrace();
         }
 
@@ -279,6 +310,7 @@ public class UserDataController {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(adminFile, adminToWrite);
         } catch (IOException e) {
+            logger.severe("Failure to serialize to JSON while attempting to write admin: " + adminToWrite.getUserName());
             e.printStackTrace();
         }
     }
@@ -289,10 +321,12 @@ public class UserDataController {
      * @param custToWrite the customer object to write/update
      */
     public void writeCustomer(Customer custToWrite) {
+        logger.info("Writing/Updating Customer: " + custToWrite.getUserName());
         File custFile = new File("./src/main/resources/UserData/" + custToWrite.getUserName() + ".json");
         try {
             custFile.createNewFile(); //creates  new file if it doesn't exist
         } catch (IOException e) {
+            logger.severe("Failure to create new customer file for User: " + custToWrite.getUserName());
             e.printStackTrace();
         }
 
@@ -300,6 +334,7 @@ public class UserDataController {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(custFile, custToWrite);
         } catch (IOException e) {
+            logger.severe("Failure to serialize to JSON while attempting to write User: " + custToWrite.getUserName());
             e.printStackTrace();
         }
     }
