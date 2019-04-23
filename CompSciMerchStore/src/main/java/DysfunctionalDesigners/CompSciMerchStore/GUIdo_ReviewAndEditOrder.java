@@ -142,23 +142,15 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 				try {
 					image = ImageIO.read(new File("src/main/resources/itemimages/" + currItem.getExtendedItemID() + ".jpg"));
 					pic = new JLabel(new ImageIcon(image));
-<<<<<<< HEAD
-=======
+					
 					pic.setBounds(x, y, w, h);
 					this.add(pic);
->>>>>>> eba10e4ac09a3dfbbd0ab01c98104c144cca852b
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-<<<<<<< HEAD
-			    pic.setBounds(x, y, w, h);
-			    this.add(pic);
-=======
-			    
-			    
->>>>>>> eba10e4ac09a3dfbbd0ab01c98104c144cca852b
+
 			    y += h + 100;
 			    
 			    // price component
