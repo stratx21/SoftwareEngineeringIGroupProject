@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
 	
@@ -127,14 +129,25 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 				}
 			}
 		});
-		searchBar.setSize(width-height*5, height/2);
-		searchBar.setLocation(height, height/4);
+		searchBar.setSize(width-height*7, height/2);
+		searchBar.setLocation(height*3, height/4);
 		
 		searchBar.setBackground(new Color(255,181,9));
+		
+		List<String> options = new ArrayList<String>();
+		options.add("Other Options"); options.add("Contact Us"); options.add("FAQ"); options.add("About Us");
+		
+		JComboBox section9 = new JComboBox(options.toArray());
+		section9.setBounds(home_button.getX()+home_button.getWidth(), 0, searchBar.getX()-home_button.getX()-home_button.getWidth(), home_button.getHeight());
+		section9.setBackground(new Color(255,181,9));
+		section9.addActionListener(done);
+		section9.setActionCommand("other_opt");
+		
 		
 		//add all buttons 
 		try {
 			this.add(home_button);
+			this.add(section9);
 			this.add(searchBar);
 			this.add(wishlist);
 			this.add(logout);

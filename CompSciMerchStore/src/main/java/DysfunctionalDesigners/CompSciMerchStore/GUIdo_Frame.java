@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -114,7 +115,29 @@ public class GUIdo_Frame extends JFrame{
 			to_login();
 		} else if(e.getActionCommand().equals("cart")) {
 			to_cart(cart, (Customer) current_user);
+		} else if(e.getActionCommand().equals("other_opt")) {
+			JComboBox cb = (JComboBox)e.getSource();
+			String option = (String)cb.getSelectedItem();
+			if(option.equals("Contact Us")) {
+				to_contactus();
+			}else if(option.equals("FAQ")) {
+				to_faq();
+			}else if(option.equals("About Us")) {
+				to_aboutus();
+			}
 		}
+	}
+	
+	private void to_contactus() {
+		
+	}
+	
+	private void to_faq() {
+		
+	}
+	
+	private void to_aboutus() {
+		
 	}
 	
 	/**
@@ -475,9 +498,7 @@ public class GUIdo_Frame extends JFrame{
 				} else if(e.getActionCommand().equals("dys_des"))  {
 					title = "Dysfunctional Designers";
 					//set display_items to the items given by the professor list
-					display_items = Catalogue.getInstance().searchByProfessor(Professor.DYS_DES);
-				}else if(e.getActionCommand().equals("other_opt")) {
-					
+					display_items = Catalogue.getInstance().searchByProfessor(Professor.DYS_DES); 
 				} else {
 					System.err.println("ERROR: GUIdo_Frame.initialize() professor not found!");
 					System.err.println("name given: \"" + e.getActionCommand()+"\"");
