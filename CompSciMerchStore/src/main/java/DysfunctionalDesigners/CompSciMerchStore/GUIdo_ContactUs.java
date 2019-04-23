@@ -4,9 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -28,38 +36,53 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	private List<String> complaints = new ArrayList<String>();
 	
 	private void readJSONFile() throws Exception {
+//		File in = new File("src/main/resources/complaints.txt");
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		this.complaints = null;
+//		
+//		try {
+//			complaints = mapper.readValue(in, new TypeReference<String>(){});
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
-		File in = new File("src/main/resources/complaints.json");
-		ObjectMapper mapper = new ObjectMapper();
-		
-		this.complaints = null;
-		
-		try {
-			complaints = mapper.readValue(in, new TypeReference<String>(){});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+//		BufferedReader in = new BufferedReader(new FileReader(new File()));
+		Path path = Paths.get("src/main/resources", "complaints.txt");
+		Charset charset = Charset.forName("ISO-8859-1");
+		complaints = Files.readAllLines(path, charset);
 	}
 	
 	private void complaintsToJSON(String complaint) {
 		if(this.complaints != null) {
-			ObjectMapper mapper = new ObjectMapper();
+//			ObjectMapper mapper = new ObjectMapper();
 			
 			this.complaints.add(complaint);
 			
+//			try {
+//				mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/complaints.json"), this.complaints);
+//			} catch (JsonGenerationException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (JsonMappingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
 			try {
-				mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/complaints.json"), this.complaints);
-			} catch (JsonGenerationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
+				FileWriter writer = new FileWriter("src/main/resources/complaints.txt"); 
+				for(Iterator<String> str = this.complaints.iterator(); str.hasNext();) {
+				  writer.write(str.next());
+				}
+				writer.close();
+			} catch(IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 	}
 	
