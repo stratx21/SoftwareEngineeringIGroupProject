@@ -44,7 +44,9 @@ public class LineItem {
 	/**
 	 * required by json parser
 	 */
-	public LineItem() {}
+	public LineItem() {
+		this.promoCodes = new ArrayList<String>();
+	}
 	
 	public int getQuantity() { return quantity; }
 	public int getItemID() { return itemID; }

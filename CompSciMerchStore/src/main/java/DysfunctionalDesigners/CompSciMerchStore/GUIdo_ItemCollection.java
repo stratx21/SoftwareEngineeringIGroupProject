@@ -197,15 +197,18 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 							ex.printStackTrace();
 						}
 						
-						if(customer.getWishList().contains(item.getItemID())) {
-							//has item, so remove it 
-							customer.removeItemFromWishlist(item.getItemID());
-							thisbutton.enableIcons(offlist1,offlist2,offlist3);
-						} else {
-							//does not have the item, so add it 
-							customer.addItemToWishlist(item.getItemID());
-							thisbutton.enableIcons(onlist1,onlist2,onlist3);
+						if(customer.getWishList() != null) {
+							if(customer.getWishList().contains(item.getItemID())) {
+								//has item, so remove it 
+								customer.removeItemFromWishlist(item.getItemID());
+								thisbutton.enableIcons(offlist1,offlist2,offlist3);
+							} else {
+								//does not have the item, so add it 
+								customer.addItemToWishlist(item.getItemID());
+								thisbutton.enableIcons(onlist1,onlist2,onlist3);
+							}	
 						}
+						
 					}
 				});
 				

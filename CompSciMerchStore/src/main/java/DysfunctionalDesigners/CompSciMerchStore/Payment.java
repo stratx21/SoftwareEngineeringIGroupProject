@@ -9,8 +9,12 @@ public class Payment {
     private PaymentInfo paymentInfo;
 
     public Payment() { 	}
-    
-    
+
+    /**
+     * Constructor for Payment
+     * @param amount amount to be payed
+     * @param paymentInfo the payment info to be used for the payment
+     */
     public Payment(double amount, PaymentInfo paymentInfo) {
         this.amount = amount;
         this.paymentInfo = paymentInfo;

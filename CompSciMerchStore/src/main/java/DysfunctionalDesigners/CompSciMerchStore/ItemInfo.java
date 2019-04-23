@@ -40,7 +40,7 @@ public class ItemInfo {
 		this.extendedItemID = "ERROR: This is a temporary ItemInfo used for searching/comparing and shouldn't be used for more than that";
 		this.stock = -1;
 		this.vendorID = -1;
-		this.saleDiscount = -1;
+		this.saleDiscount = 0.0;
 		this.price = -1;
 		this.promoDiscounts = null;
 		this.reviews = null;
@@ -144,7 +144,7 @@ public class ItemInfo {
 	 */
 	@JsonIgnore
 	public double getTotalDiscount(List<String> promoKeys) {
-		if(!this.promoDiscounts.isEmpty()) {
+		if(this.promoDiscounts != null && !this.promoDiscounts.isEmpty()) {
 			double total = saleDiscount;
 			
 			for(String key : promoKeys) {
@@ -196,6 +196,9 @@ public class ItemInfo {
 	 * @param discount the amount off the discount adds
 	 */
 	public void addPromoDiscount(String keyword, double discount) {
+		if(this.promoDiscounts == null) {
+			this.promoDiscounts = new HashMap<>();
+		}
 		//key will be keyword
 		logger.info("Adding promo discount code \"" + keyword +  "\": " + discount + " to item " + this.extendedItemID);
 		this.promoDiscounts.put(keyword, (discount > 1 ? 1 : discount));
