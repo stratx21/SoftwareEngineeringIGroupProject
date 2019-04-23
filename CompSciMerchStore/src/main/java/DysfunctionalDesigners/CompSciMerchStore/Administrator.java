@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Administrator extends Vendor{
@@ -60,9 +62,58 @@ public class Administrator extends Vendor{
      * Returns all the complaints made that have been written to the file containing all complaints
      * @return A string array of the complaints
      */
-    //public String[] getAllComplaints() {
+    public String[] getAllComplaints() {
+        UserDataController dataController = UserDataController.getInstance();
+        List<String> complaints = new ArrayList<>();
+        List<Customer> customers = dataController.getAllCustomers();
 
-    //}
+        BufferedReader reader;
+        try {
+            StringBuilder fileText = new StringBuilder();
+            reader = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(
+                                    new File("./src/main/resources/complaints.txt"))));
+            String line;
+            while((line = reader.readLine()) != null) {
+                fileText.append(line);
+            }
+            reader.close();
+
+            String fullFile = fileText.toString();
+            String[] allComplaints = fullFile.split("[0-9]{5}:\\Q|\\E:(?=.*[0-9]{5}:\\Q|\\E:)");
+
+            //Gets all ids for the complaints based on regex pattern that matches the ID pattern
+            List<String> allIds = new ArrayList<>();
+            Pattern pat = Pattern.compile("[0-9]{5}:\\Q|\\E:");
+            Matcher m = pat.matcher(fullFile);
+            while(m.find()) {
+                allIds.add(m.group());
+            }
+            //Gets only the number part of the string out of a format like this -> "00000:|:"
+            allIds = allIds.stream().map(e -> e.substring(0, e.indexOf(':'))).collect(Collectors.toList());
+
+            //Get the usernames associated with the ids
+            List<String> usernames = new ArrayList<>();
+            allIds.forEach( e -> {
+                for (Customer customer : customers) {
+                    if(customer.getUserID() == Integer.valueOf(e)) {
+                        usernames.add(customer.getUserName());
+                        break; //ensures this is only run once per id in the allIds list
+                    }
+                }
+            });
+
+            //Put the id and associated complaint together and add to the final list
+            for(int i = 0; i < allComplaints.length; i++) {
+                complaints.add(usernames.get(i) + ": " + allComplaints[i]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return complaints.toArray(new String[0]);
+    }
 
     /**
      * A method that generates a report of all sales made on the store and writes it to a file

@@ -206,12 +206,11 @@ public class UserDataController {
                     new InputStreamReader(
                             new FileInputStream(
                                     new File("./src/main/resources/UserData/customers.txt"))));
+            addNamesToList(reader, usernames);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
             System.exit(1);
         }
-
-        addNamesToList(reader, usernames);
 
         return usernames;
     }
@@ -304,7 +303,7 @@ public class UserDataController {
             e.printStackTrace();
         }
     }
-    
+
     private void addNamesToList(BufferedReader reader, List<String> listToAddTo) {
         String line;
         try {
