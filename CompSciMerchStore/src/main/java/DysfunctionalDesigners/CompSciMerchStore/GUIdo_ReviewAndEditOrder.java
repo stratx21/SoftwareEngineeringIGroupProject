@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -61,8 +60,9 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("proceeding to payment for now");
-				GUIdo_Payment pay = new GUIdo_Payment(sale, customer);
-				
+				GUIdo_Payment pay = new GUIdo_Payment(sale, customer); // supposed to go to shipping
+																	// testing payment screen for now
+				//*******?????????
 			}
 			
 		});
@@ -138,14 +138,15 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 //				Catalogue.getItem(i.getKey());
 				ItemInfo currItem = Catalogue.getInstance().getItem(i.getKey());
 				BufferedImage image = null;
+				JLabel pic = null;
 				try {
 					image = ImageIO.read(new File("src/main/resources/itemimages/" + currItem.getExtendedItemID() + ".jpg"));
+					pic = new JLabel(new ImageIcon(image));
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			    JLabel pic = new JLabel(new ImageIcon(image));
 			    pic.setBounds(x, y, w, h);
 			    this.add(pic);
 			    y += h + 100;
@@ -181,7 +182,6 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 					public void actionPerformed(ActionEvent e) {
 						JComboBox comboBox = (JComboBox) e.getSource();
 						Object selected = comboBox.getSelectedItem();
-						String command = e.getActionCommand();
 						
 	                    if(sale.editQuantity(Catalogue.getInstance().getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
 	                    	drawScreen(sale, 1, customer);
@@ -261,7 +261,6 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		String action = e.getActionCommand();
 	}
 
 }
