@@ -80,8 +80,9 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 		section8.setBackground(new Color(255,181,9));
 		
 		//the button for the DropDown 
-		GUIdo_CButton section9 = new GUIdo_CButton(x+8*width/SECTIONS,y,width/SECTIONS,height,"Other Optionsx0");
-		section9.setActionCommand("dys_des");
+
+		GUIdo_CButton section9 = new GUIdo_CButton(x+8*width/SECTIONS,y,width/SECTIONS,height,"Other Options");
+		section9.setActionCommand("other_opt");
 		section9.setActionListener_clicked(done);
 //				section8.setVisible(true);
 		section9.setBackground(new Color(255,181,9));

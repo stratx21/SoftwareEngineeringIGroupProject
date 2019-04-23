@@ -9,6 +9,12 @@ public class PaymentInfo {
     private Address billingAddress;
     private int CCV;
 
+    /**
+     * Makes a PaymentInfo Object
+     * @param cardNumber the credit card number to add
+     * @param billingAddress the billing address to associate with the payment
+     * @param CCV the 3 number code on the card
+     */
     public PaymentInfo(String cardNumber, Address billingAddress, int CCV) {
         this.cardNumber = cardNumber;
         this.billingAddress = billingAddress;

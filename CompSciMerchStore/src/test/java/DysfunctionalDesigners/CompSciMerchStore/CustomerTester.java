@@ -3,8 +3,6 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +19,9 @@ public class CustomerTester {
 	
 	@Test
 	void testAddWishlist() {
-		
 		int itemID = 27;
 		c.addItemToWishlist(27);
-		List<Integer> tempWish = c.getWishList();
 		assertTrue(c.getWishList().contains(itemID));
-		
 	}
 	
 	@Test

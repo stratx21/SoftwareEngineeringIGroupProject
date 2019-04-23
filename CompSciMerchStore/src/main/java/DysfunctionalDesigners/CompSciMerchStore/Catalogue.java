@@ -35,6 +35,9 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 		return instance;
 	}
 	
+	/**
+	 * Constructor which reads in the catalogue from the file the first time the catalogue is needed.
+	 */
 	protected Catalogue() {
 		try{
 //    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
@@ -326,7 +329,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	/**
 	 * @return the catalogue (only for use in json output)
 	 */
-	public Map<Integer, ItemInfo> getCatalogue() { return catalogue; }
+//	public Map<Integer, ItemInfo> getCatalogue() { return catalogue; }
 
 	/**
 	 * @param itemID item to check
