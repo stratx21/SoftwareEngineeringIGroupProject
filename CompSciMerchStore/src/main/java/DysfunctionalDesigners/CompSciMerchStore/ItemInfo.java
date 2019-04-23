@@ -196,6 +196,9 @@ public class ItemInfo {
 	 * @param discount the amount off the discount adds
 	 */
 	public void addPromoDiscount(String keyword, double discount) {
+		if(this.promoDiscounts == null) {
+			this.promoDiscounts = new HashMap<>();
+		}
 		//key will be keyword
 		logger.info("Adding promo discount code \"" + keyword +  "\": " + discount + " to item " + this.extendedItemID);
 		this.promoDiscounts.put(keyword, (discount > 1 ? 1 : discount));
