@@ -329,15 +329,16 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			int i = 0;
 			g.setColor(Color.YELLOW);
 			for(;i < review.getRating(); i++) {
-				g.fillPolygon(STAR_X, STAR_Y, 11);
+				g.fillPolygon(starx_t, stary_t, 11);
 				for(int k = 0; k < 11; k++) {
 					starx_t [k] += STAR_WIDTH;
 				}
 			}
 			
+			
 			g.setColor(Color.GRAY);
 			for(;i < 5; i++) {
-				g.fillPolygon(STAR_X, STAR_Y, 11);
+				g.fillPolygon(starx_t, stary_t, 11);
 				for(int k = 0; k < 11; k++) {
 					starx_t [k] += STAR_WIDTH;
 				}
