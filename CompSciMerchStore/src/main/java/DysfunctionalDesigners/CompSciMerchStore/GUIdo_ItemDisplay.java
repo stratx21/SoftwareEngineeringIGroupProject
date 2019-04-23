@@ -257,6 +257,15 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		});
 		wishlist_button.repaint();
 		this.add(wishlist_button);
+		
+		GUIdo_CButton see_reviews_button = new GUIdo_CButton(wishlist_button.getX(),wishlist_button.getY()+wishlist_button.getHeight() + 7, 200,50, "Reviews");
+		see_reviews_button.setBackground(new Color(255,181,9));
+		see_reviews_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+		see_reviews_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"see_reviews"));
+			}
+		});
 	}
 	
 	/**
