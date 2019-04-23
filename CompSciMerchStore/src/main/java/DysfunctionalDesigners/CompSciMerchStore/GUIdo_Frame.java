@@ -262,6 +262,9 @@ public class GUIdo_Frame extends JFrame{
 				if(e.getActionCommand().equals("item_added")) {
 					cart = (Sale)e.getSource();
 					to_cart(cart, (Customer) user);
+				} else if(e.getActionCommand().equals("see_reviews")) {
+					/* Mackenna : TODO add review viewing here */
+					//e.getSource() is the item to find reviews for 
 				}
 			}
 		},current_user);
