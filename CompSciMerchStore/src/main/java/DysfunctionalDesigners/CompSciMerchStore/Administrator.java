@@ -76,12 +76,19 @@ public class Administrator extends Vendor{
                                     new File("./src/main/resources/complaints.txt"))));
             String line;
             while((line = reader.readLine()) != null) {
-                fileText.append(line);
+                fileText.append(line).append(" ");
             }
             reader.close();
 
             String fullFile = fileText.toString();
-            String[] allComplaints = fullFile.split("[0-9]{5}:\\Q|\\E:(?=.*[0-9]{5}:\\Q|\\E:)");
+            String[] allComplaints = fullFile.split("[0-9]{5}:\\Q|\\E:");
+            //(?=.*[0-9]{5}:\\Q|\\E:)"
+
+            //Temp list to get rid of any possible spaces left as their own elements in the array.
+            //Filters then collects back to list. Then list put back to array.
+            List<String> tempList = Arrays.asList(allComplaints);
+            tempList = tempList.stream().filter(e -> !e.equals("")).collect(Collectors.toList());
+            allComplaints = tempList.toArray(new String[0]);
 
             //Gets all ids for the complaints based on regex pattern that matches the ID pattern
             List<String> allIds = new ArrayList<>();

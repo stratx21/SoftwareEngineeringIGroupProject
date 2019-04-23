@@ -23,6 +23,14 @@ public class AdministratorTester {
 		admin.removeItemFromCatalogue(0);
 		assertFalse(c.getItem(0).isEnabled());
 	}
+
+	@Test
+	void getAllComplaintTest() {
+		String[] complaints = admin.getAllComplaints();
+		for (String complaint : complaints) {
+			System.out.println(complaint);
+		}
+	}
 	
 	@Test
 	void testReport() {
