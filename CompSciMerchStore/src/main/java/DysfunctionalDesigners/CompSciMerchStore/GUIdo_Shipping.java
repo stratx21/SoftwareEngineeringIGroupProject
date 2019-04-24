@@ -56,6 +56,9 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		JLabel shipOpt = new JLabel("Shipping Options");
 		shipOpt.setFont(new Font("Cambria", Font.BOLD, 34));
 		shipOpt.setHorizontalAlignment(JLabel.CENTER);
+		JLabel subtotal = new JLabel("Subtotal");
+		subtotal.setFont(new Font("Cambria", Font.BOLD, 34));
+		subtotal.setHorizontalAlignment(JLabel.CENTER);
 		JLabel addyLine1 = new JLabel("Address Line 1");
 		addyLine1.setHorizontalAlignment(JLabel.CENTER);
 		JLabel addyLine2 = new JLabel("Address Line 2");
@@ -66,12 +69,17 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		state.setHorizontalAlignment(JLabel.CENTER);
 		JLabel zipcode = new JLabel("Zipcode");
 		zipcode.setHorizontalAlignment(JLabel.CENTER);
-		JLabel filler = new JLabel(" ");
+		//JLabel filler = new JLabel(" ");
 		JTextField addressLine1 = new JTextField();
+		addressLine1.setHorizontalAlignment(JTextField.CENTER);
 		JTextField addressLine2 = new JTextField();
+		addressLine2.setHorizontalAlignment(JTextField.CENTER);
 		JTextField cityInput = new JTextField();
+		cityInput.setHorizontalAlignment(JTextField.CENTER);
 		JFormattedTextField stateInput = new JFormattedTextField(stateFormat);
+		stateInput.setHorizontalAlignment(JTextField.CENTER);
 		JFormattedTextField zip = new JFormattedTextField(zipFormat);
+		zip.setHorizontalAlignment(JTextField.CENTER);
 		
 		GUIdo_CButton ptp = new GUIdo_CButton(0, 0, 200, 50, "Proceed to Payment");
 		ptp.setHorizontalAlignment(JButton.CENTER);
@@ -112,15 +120,18 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
-		//c.gridwidth = 3;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.weightx = 0.5;
+		c.weighty = 0;
 		c.gridx = 0;
 		c.gridy = 0;
-		c.anchor = GridBagConstraints.CENTER;
 		this.add(shipInfo, c); // col 1
 		c.gridx = 1;
 		c.gridy = 0;
 		this.add(shipOpt, c); // col 2
+		c.gridx = 2;
+		c.gridy = 0;
+		this.add(subtotal); // col 3
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(addyLine1, c); // col 1
@@ -129,9 +140,11 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.add(shipOp1, c); // col 2
 		c.gridx = 2;
 		c.gridy = 10;
+		c.weighty = 1;
 		this.add(ptp, c);	// col 3
 		c.gridx = 0;
 		c.gridy = 2;
+		c.weighty = 0;
 		this.add(addressLine1, c); // col 1
 		c.gridx = 0;
 		c.gridy = 3;
