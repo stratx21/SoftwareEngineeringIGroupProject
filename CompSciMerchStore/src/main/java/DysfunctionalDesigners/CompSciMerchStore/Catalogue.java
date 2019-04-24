@@ -22,7 +22,11 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	private int numItems = 0;
 	private static Catalogue instance = null;
 	private static Logger logger = Logger.getLogger(Catalogue.class.getName());
-	
+
+	/**
+	 * Gets an instance of the catalogue
+	 * @return a reference to the catalogue instance
+	 */
 	public static Catalogue getInstance() {
 		if(instance == null) {
 			synchronized (Catalogue.class) {

@@ -62,8 +62,9 @@ public class Administrator extends Vendor{
     /**
      * Returns all the complaints made that have been written to the file containing all complaints
      * @return A string array of the complaints
+     * @throws Exception If the reader is unable to open or there is an input data error, an exception is thrown.
      */
-    public String[] getAllComplaints() {
+    public String[] getAllComplaints() throws Exception{
         logger.info("Getting all user complaints");
         UserDataController dataController = UserDataController.getInstance();
         List<String> complaints = new ArrayList<>();
@@ -116,13 +117,22 @@ public class Administrator extends Vendor{
                 }
             });
 
+            //If somehow there is a size discrepancy and there are more or less usernames of users than complaints retrieved
+            //throw an exception
+            if(!(usernames.size() == allComplaints.length)) {
+                throw new Exception("Possible error in input. More complaints found than users to attribute to");
+            }
             //Put the id and associated complaint together and add to the final list
             for(int i = 0; i < allComplaints.length; i++) {
                 complaints.add(usernames.get(i) + ": " + allComplaints[i]);
             }
         } catch (IOException e) {
-            logger.severe("IOException thrown while fetching all complaints. get complaints failed");
+            logger.severe("Get complaints failed: " + e.getMessage());
             e.printStackTrace();
+            throw e;
+        } catch(Exception e) {
+            logger.severe("Failure to get complaints: " + e.getMessage());
+            throw e; //Rethrow so that the function fails to complete in case of this critical error
         }
 
         logger.info("Fetching all User Complaints: Success");
