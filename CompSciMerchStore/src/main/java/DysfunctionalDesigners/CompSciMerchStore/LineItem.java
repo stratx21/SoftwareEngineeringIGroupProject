@@ -12,7 +12,12 @@ public class LineItem {
 	private int quantity;
 	private int itemID;
 	private List<String> promoCodes;
-	
+
+	/**
+	 * Constructor for LineItem
+	 * @param quantity quantity of item
+	 * @param itemID ID of item
+	 */
 	public LineItem(int quantity, int itemID) {
 		this.quantity = quantity;
 		this.itemID = itemID;
@@ -44,7 +49,9 @@ public class LineItem {
 	/**
 	 * required by json parser
 	 */
-	public LineItem() {}
+	public LineItem() {
+		this.promoCodes = new ArrayList<String>();
+	}
 	
 	public int getQuantity() { return quantity; }
 	public int getItemID() { return itemID; }
