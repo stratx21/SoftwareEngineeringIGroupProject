@@ -15,8 +15,8 @@ public class GUIdo_AboutUs extends GUIdo_CPanel{
 	JTextArea l2;
 	
 	GUIdo_AboutUs(){
-		
 		super(600);
+		logger.info("Switched to panel AboutUs");
 		
 		l1 = new JLabel("About us");
 		l1.setForeground(Color.blue);
