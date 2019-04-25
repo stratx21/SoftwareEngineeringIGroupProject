@@ -10,7 +10,7 @@ public class GUIdo_AboutUs extends GUIdo_CPanel{
 
 	JLabel l1, l2, l3;
 	
-	GUIdo_AboutUs(final ActionListener al){
+	GUIdo_AboutUs(){
 		
 		super(600);
 		

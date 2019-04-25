@@ -86,7 +86,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 		}
 	}
 	
-	GUIdo_ContactUs(final ActionListener al){
+	GUIdo_ContactUs(){
 		super(800);
 		
 		GUIdo_ContactUs temp = this;

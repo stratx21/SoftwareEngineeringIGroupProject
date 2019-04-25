@@ -11,7 +11,7 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 	//whatever, text, title
 	JLabel l1, l2, l3;
 	
-	GUIdo_FAQScreen(final ActionListener al){
+	GUIdo_FAQScreen(){
 		super(600);
 		
 		l1 = new JLabel("FAQ");

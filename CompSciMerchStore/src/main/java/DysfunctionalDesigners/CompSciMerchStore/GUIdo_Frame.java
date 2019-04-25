@@ -129,39 +129,18 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	private void to_contactus() {
-		current_panel = new GUIdo_ContactUs(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		current_panel = new GUIdo_ContactUs();
+		current_panel.repaint();
 	}
 	
 	private void to_faq() {
-		current_panel = new GUIdo_FAQScreen(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		current_panel = new GUIdo_FAQScreen();
+		current_panel.repaint();
 	}
 	
 	private void to_aboutus() {
-		current_panel = new GUIdo_AboutUs(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		current_panel = new GUIdo_AboutUs();
+		current_panel.repaint();
 	}
 	
 	/**
