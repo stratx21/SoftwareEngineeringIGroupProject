@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -16,17 +13,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.core.JsonGenerationException;
+//import com.fasterxml.jackson.core.type.TypeReference;
+//import com.fasterxml.jackson.databind.JsonMappingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GUIdo_ContactUs extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_ContactUs.class.getName());
 
 	//whatever, user, email, message, title
 	JLabel l1, l2, l3, l4, l5;
@@ -37,6 +36,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	private List<String> complaints = new ArrayList<String>();
 	
 	private void readJSONFile() throws Exception {
+		logger.info("Importing complaints.txt");
 //		File in = new File("src/main/resources/complaints.txt");
 //		ObjectMapper mapper = new ObjectMapper();
 //		
@@ -56,6 +56,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	
 	private void complaintsToJSON(String complaint) {
 		if(this.complaints != null) {
+			logger.info("Exporting complaints with new complaint.");
 //			ObjectMapper mapper = new ObjectMapper();
 			
 			this.complaints.add(complaint);
@@ -79,8 +80,10 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 				  writer.write(str.next() + "\n");
 				}
 				writer.close();
+				logger.info("Successfully exported.");
 			} catch(IOException e) {
 				// TODO Auto-generated catch block
+				logger.severe("ERROR: FAILED TO EXPORT COMPLAINTS: " + e.getMessage());
 				e.printStackTrace();
 			}
 			
@@ -89,12 +92,13 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	
 	GUIdo_ContactUs(){
 		super(800);
+		logger.info("Switched to ContactUs panel");
 		
 		GUIdo_ContactUs temp = this;
 		try {
 			this.readJSONFile();
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: FAILED TO IMPORT FILE complaints.txt: " + e1.getMessage());
 			e1.printStackTrace();
 		}
 		
@@ -128,11 +132,12 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(!tf1.getText().isEmpty()) {
 					for(int i = 0; i < control.getAllCustomers().size(); i++) {
 						if(tf1.getText().equals(control.getAllCustomers().get(i).getUserName())) {
-							temp.complaintsToJSON(control.getAllCustomers().get(i).getComplaintPrefix() + tf3.getText());
+							String complaint = control.getAllCustomers().get(i).getComplaintPrefix() + tf3.getText();
+							temp.complaintsToJSON(complaint);
+							logger.info("Found user and exporting complaint: \"" + complaint + "\"");
 						}
 					}
 				}
