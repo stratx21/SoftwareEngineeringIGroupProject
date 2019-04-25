@@ -122,26 +122,15 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		ptp.disable();
 		JCheckBox shipOp1 = new JCheckBox("Flat Rate - $68.00");
 		
-//		shipOp1.addItemListener(new ItemListener() {
-//
-//			@Override
-//			public void itemStateChanged(ItemEvent e) {
-//				// TODO Auto-generated method stub
-//				if(e.getStateChange() == ItemEvent.SELECTED) {
-//					ptp.enable();
-//				}else if(e.getStateChange() == ItemEvent.DESELECTED){
-//					ptp.disable();
-//				}
-//			}
-//			
-//		});
-		
 		ptp.setActionListener_clicked(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(isEnabled()) {
+				if(isEnabled() && !addressLine1.getText().isEmpty() && !addressLine1.getText().isBlank()
+						&& !cityInput.getText().isEmpty() && !cityInput.getText().isBlank()
+						&& !stateInput.getText().isEmpty() && !stateInput.getText().isBlank()
+						&& !zip.getText().isEmpty() && !zip.getText().isBlank()) {
 					// proceed to shipping!!!!!
 					JOptionPane.showMessageDialog(null, "suck a dick");
 				}else {
