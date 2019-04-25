@@ -1,0 +1,56 @@
+BUGS:
+
+
+Bug 1:
+In the Catalogue function getInstance(), the code:
+if(instance == null) {
+			synchronized (Catalogue.class) {
+				if(instance == null) {
+					instance = new Catalogue();
+					logger.info("Created catalogue singleton");
+				}
+            }
+		}
+
+produces a bug. Spotbugs reports that there is a "possible doublecheck". There
+is a double check in this function, however, it is necessary and intentional.
+
+Bug 2:
+In the GUIDO_Toolbar class, all JButton's were reported as possibly
+being null pointers. This issue is resolved by putting everything in a try/catch.
+
+
+Bug 3:
+In GUIDO_ItemCollection, an if statement (~line 201) used the wishlist for part
+of the parameter. The wishlist could be null, so it created a bug. The if statement
+now is enclosed in an outer check, which confirms that the wishlist is NOT null.
+
+
+Bug 4:
+The line
+this.image_ratio = (this.item_image.getWidth()*1.0/this.item_image.getHeight());
+in Guido_ItemDisplay was concerned about item_image being null. The line is
+now in a try/catch block.
+
+Bug 5:
+The line:
+if(customer.getWishList().contains(item.getItemID())) {
+Is concerned about the wishlist being null. The line is now enclosed in an
+outer check.
+
+Bug 6:
+The variable 'pic' in Guido_ReviewAndEditOrder is angry because it might be null.
+It is now fully enclosed in try/catch blocks.
+
+Bug 7:
+In user data controller:
+public static UserDataController getInstance() {
+        if(instance == null) {
+            synchronized (UserDataController.class) {
+                if(instance == null) {
+                    instance = new UserDataController();
+                }
+            }
+        }
+
+SpotBugs is complaining about the doublecheck here as well, but it is necessary.
