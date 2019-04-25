@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,12 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionListener{
+	private static Logger logger = Logger.getLogger(GUIdo_ReviewAndEditOrder.class.getName());
 	
 	/**
 	 * This sets up the GUIdo_ReviewAndEditOrder instance 
 	 */
 	public GUIdo_ReviewAndEditOrder(Sale sale, Customer customer) {
 	    super();
+	    logger.info("Switched to Review and Edit Order");
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
 	    this.drawScreen(sale, 0, customer);
   	    this.repaint();
@@ -107,6 +110,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.add(od);
 		this.add(estTax);
 		this.add(total);
+		logger.info("Order total was calculated for user " + customer.getUserName() + ": " + total);
 		this.add(shipping);
 		
 		subtotal.repaint();
