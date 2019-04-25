@@ -13,6 +13,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,12 +26,15 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
+	private static Logger logger = Logger.getLogger(Catalogue.class.getName());
+	
 	
 	GUIdo_Shipping current_panel = this;
 	GUIdo_ReviewAndEditOrder previous_panel;
 	
 	public GUIdo_Shipping(Sale sale, Customer customer) {
 		super();
+		logger.info("Switched to Shipping Information Frame");
 		this.setPreferredSize(new Dimension(this.getWidth(), 1000));
 		this.drawScreen(sale, customer);
 		this.repaint();
@@ -43,6 +47,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			stateFormat = new MaskFormatter("UU");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught ParseException in Shipping");
 			e.printStackTrace();
 		}
 		MaskFormatter zipFormat = null;
@@ -50,6 +55,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			zipFormat = new MaskFormatter("#####");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught ParseException in Shipping");
 			e.printStackTrace();
 		}
 		
@@ -158,7 +164,10 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 						|| stateInput.getText().isEmpty() || stateInput.getText().isBlank()
 						|| zip.getText().isEmpty() || zip.getText().isBlank()){
 					// dialog that says to enter missing info
+					logger.info("Not all shipping information was valid");
 					JOptionPane.showMessageDialog(null, "Please enter all necessary information and select a shipping option.");
+				}else {
+					logger.info("Shipping information was valid; proceeding to payment."); 
 				}
 			}
 			
