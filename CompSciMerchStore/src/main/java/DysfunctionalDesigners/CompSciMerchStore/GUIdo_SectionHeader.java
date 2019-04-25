@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 
 public class GUIdo_SectionHeader extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_SectionHeader.class.getName());
 
 	/**
 	 * The number of sections of professors that are shown
@@ -33,7 +35,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	 */
 	public GUIdo_SectionHeader(int x, int y, int width, int height, final ActionListener done) {
 		this.setSize(width, height);
-
+		
 		//the button for Dr. Cerny's section
 		GUIdo_CButton section1 = new GUIdo_CButton(x+0*width/SECTIONS,y,width/SECTIONS,height,"Dr. Cerny");
 		section1.setActionCommand("cerny");
@@ -112,6 +114,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	 * disable all the section buttons, and do not allow them to be clicked
 	 */
 	public void disable_all_buttons() {
+		logger.info("All Buttons Disabled: Logging Out");
 		for(GUIdo_CButton button : buttons) {
 			button.disable();
 		}
@@ -121,6 +124,7 @@ public class GUIdo_SectionHeader extends GUIdo_CPanel{
 	 * enable all the section buttons, and allow them to be clicked
 	 */
 	public void enable_all_buttons() {
+		logger.info("All Buttons Enabled: Logging In");
 		for(GUIdo_CButton button : buttons) {
 			button.enable();
 		}
