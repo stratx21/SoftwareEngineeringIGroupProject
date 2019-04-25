@@ -18,6 +18,7 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 	
 	GUIdo_FAQScreen(){
 		super(600);
+		logger.info("Switched to FAQScreen.");
 		
 		l1 = new JLabel("FAQ");
 		l1.setForeground(Color.blue);
