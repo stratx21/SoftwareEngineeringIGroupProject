@@ -41,7 +41,12 @@ public class Sale {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Sale constructor
+	 *
+	 * @param custID the ID of the customer this sale is tied to
+	 */
 	public Sale(int custID) {
 		this.customerID = custID;
 		this.saleID = nextSaleID++;

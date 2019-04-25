@@ -20,7 +20,7 @@ public class Administrator extends Vendor{
      */
     public Administrator(String[] d) {
         super(d);
-        
+        logger.info("Creating Admin Object");
     }
 
     /**
@@ -37,6 +37,7 @@ public class Administrator extends Vendor{
      */
     public Administrator(String email, String motherMaidenName, String userName, String password, String name, int userID, List<Integer> uploadedItems, List<Sale> pastSales) {
         super(email, motherMaidenName, userName, password, name, userID, uploadedItems, pastSales);
+        logger.info("Creating Admin Object");
     }
 
     /**
@@ -44,6 +45,7 @@ public class Administrator extends Vendor{
      */
     public Administrator() {
     	super();
+        logger.info("Creating Admin Object");
     }
 
     /**
@@ -51,18 +53,19 @@ public class Administrator extends Vendor{
      * @param id The item id to be removed.
      */
     public void removeItemFromCatalogue(int id) {
+        logger.info("Removing item " + id + " from catalogue. Initiated by admin: " + this.getUserName());
         Catalogue.getInstance().removeItem(id);
     }
 
     //public void disableItem(int id) {}
 
-    //TODO: When we decide how complaints are written. Write this
-
     /**
      * Returns all the complaints made that have been written to the file containing all complaints
      * @return A string array of the complaints
+     * @throws Exception If the reader is unable to open or there is an input data error, an exception is thrown.
      */
-    public String[] getAllComplaints() {
+    public String[] getAllComplaints() throws Exception{
+        logger.info("Getting all user complaints");
         UserDataController dataController = UserDataController.getInstance();
         List<String> complaints = new ArrayList<>();
         List<Customer> customers = dataController.getAllCustomers();
@@ -70,15 +73,18 @@ public class Administrator extends Vendor{
         BufferedReader reader;
         try {
             StringBuilder fileText = new StringBuilder();
+            logger.info("Attempting to open reader for complaints file");
             reader = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(
                                     new File("./src/main/resources/complaints.txt"))));
+            logger.info("Reader successfully opened");
             String line;
             while((line = reader.readLine()) != null) {
                 fileText.append(line).append(" ");
             }
             reader.close();
+            logger.info("Reader successfully closed");
 
             String fullFile = fileText.toString();
             String[] allComplaints = fullFile.split("[0-9]{5}:\\Q|\\E:");
@@ -111,14 +117,25 @@ public class Administrator extends Vendor{
                 }
             });
 
+            //If somehow there is a size discrepancy and there are more or less usernames of users than complaints retrieved
+            //throw an exception
+            if(!(usernames.size() == allComplaints.length)) {
+                throw new Exception("Possible error in input. More complaints found than users to attribute to");
+            }
             //Put the id and associated complaint together and add to the final list
             for(int i = 0; i < allComplaints.length; i++) {
                 complaints.add(usernames.get(i) + ": " + allComplaints[i]);
             }
         } catch (IOException e) {
+            logger.severe("Get complaints failed: " + e.getMessage());
             e.printStackTrace();
+            throw e;
+        } catch(Exception e) {
+            logger.severe("Failure to get complaints: " + e.getMessage());
+            throw e; //Rethrow so that the function fails to complete in case of this critical error
         }
 
+        logger.info("Fetching all User Complaints: Success");
         return complaints.toArray(new String[0]);
     }
 
@@ -127,6 +144,7 @@ public class Administrator extends Vendor{
      * @return Returns true if the report was successfully generated
      */
     public boolean generateAllSalesReport() {
+        logger.info("Generating a Report of all Sales");
         UserDataController dataController = UserDataController.getInstance();
         List<Sale> salesFromCust = new ArrayList<>();
         List<Sale> storeSales = dataController.getStoreSales();
@@ -140,6 +158,7 @@ public class Administrator extends Vendor{
             try {
                 nextSales = dataController.getUserSales(e.getUserName());
             } catch (Exception ex) {
+                logger.severe("Failure to fetch " + e.getUserName() + "'s sales");
                 ex.printStackTrace();
             }
             if(!nextSales.isEmpty()) {
@@ -155,6 +174,7 @@ public class Administrator extends Vendor{
         try {
             salesReportFile.createNewFile();
         } catch (IOException e) {
+            logger.severe("Failure to create new salesReport file");
             e.printStackTrace();
             return false;
         }
@@ -162,6 +182,7 @@ public class Administrator extends Vendor{
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(salesReportFile));
+            logger.info("Writing Customer Sales to Sales Report");
             writer.write("Customer Sales: \n");
             Catalogue catalogue = Catalogue.getInstance();
 
@@ -186,7 +207,9 @@ public class Administrator extends Vendor{
                     writer.write("Item " + nextItem.getDisplayName() + " was sold by " + theVendor.getUserName()+"\n");
                 }
             }
+            logger.info("Writing Customer Sales to Report: SUCCESS");
 
+            logger.info("Writing All Store Sales to Sales Report");
             writer.write("Store Sales:\n");
             //for each sale in the store's sales
             for (Sale storeSale : storeSales) {
@@ -203,11 +226,15 @@ public class Administrator extends Vendor{
                     writer.write("Item " + nextItem.getDisplayName() + " was sold by the store\n");
                 }
             }
+            logger.info("Writing Store Sales to Report: SUCCESS");
             writer.close();
+            logger.info("Writer Closed");
         } catch (IOException e) {
+            logger.severe("IOException thrown. Possible failure to open Writer");
             e.printStackTrace();
             return false;
         }
+        logger.info("All Sales Report Generation: SUCCESS");
         return true;
     }
 
@@ -217,21 +244,23 @@ public class Administrator extends Vendor{
      * @return Returns true if the report was generated successfully.
      */
     public boolean generateAllUsersReport() {
+        logger.info("Generating a report of all Users");
         UserDataController dataController = UserDataController.getInstance();
         BufferedWriter writer = null;
         File userReportFile = new File("./src/main/resources/reports/usersReport.txt");
         int numberOfUsers, numberOfAdmins;
 
-
         try {
             userReportFile.createNewFile();
         } catch (IOException e) {
+            logger.severe("Failure to create new usersReport file");
             e.printStackTrace();
             return false;
         }
         try {
             writer = new BufferedWriter(new FileWriter(userReportFile));
 
+            logger.info("Writing info to Report");
             Path userFile = Paths.get("./src/main/resources/UserData/customers.txt");
             Path adminPath = Paths.get("./src/main/resources/UserData/admins.txt");
             numberOfUsers = (int)Files.lines(userFile).count();
@@ -266,9 +295,11 @@ public class Administrator extends Vendor{
             writer.close();
 
         } catch (IOException e) {
+            logger.severe("IOException thrown. Possible failure to open writer");
             e.printStackTrace();
             return false;
         }
+        logger.info("All Users Report Generation: SUCCESS");
         return true;
     }
 }

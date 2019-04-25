@@ -26,9 +26,14 @@ public class AdministratorTester {
 
 	@Test
 	void getAllComplaintTest() {
-		String[] complaints = admin.getAllComplaints();
-		for (String complaint : complaints) {
-			System.out.println(complaint);
+		String[] complaints;
+		try {
+			complaints = admin.getAllComplaints();
+			for (String complaint : complaints) {
+				System.out.println(complaint);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

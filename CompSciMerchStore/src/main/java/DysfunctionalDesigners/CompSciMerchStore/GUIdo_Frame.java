@@ -129,15 +129,18 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	private void to_contactus() {
-		
+		current_panel = new GUIdo_ContactUs();
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	private void to_faq() {
-		
+		current_panel = new GUIdo_FAQScreen();
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	private void to_aboutus() {
-		
+		current_panel = new GUIdo_AboutUs();
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	/**
@@ -285,7 +288,7 @@ public class GUIdo_Frame extends JFrame{
 				if(e.getActionCommand().equals("item_added")) {
 					cart = (Sale)e.getSource();
 					to_cart(cart, (Customer) user);
-				} else if(e.getActionCommand().equals("see_reviews")) {
+				} else if(e.getActionCommand().equals("add_review")) {
 					/* Mackenna : TODO add review viewing here */
 					//e.getSource() is the item to find reviews for 
 				}

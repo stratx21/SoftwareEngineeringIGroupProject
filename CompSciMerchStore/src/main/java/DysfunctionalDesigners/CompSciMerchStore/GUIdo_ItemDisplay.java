@@ -50,6 +50,17 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	 */
 	private User current_user = null;
 	
+	private int lowestPointY = 50;
+	
+	private final int GAP_BETWEEN_REVIEWS = 75;
+	
+	private final int REVIEW_DESC_BUFFER = 45;
+	
+	private final int[] STAR_X = {42,52,72,52,60,40,15,28,9,32,42};
+	private final int[] STAR_Y = {38,62,68,80,105,85,102,75,58,60,38};
+	
+	private final int STAR_WIDTH = 70;
+	
 	/**
 	 * This sets up the item display to display the information for the ItemInfo itemToDisplay given by
 	 * 	parameter. 
@@ -258,14 +269,17 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		wishlist_button.repaint();
 		this.add(wishlist_button);
 		
-		GUIdo_CButton see_reviews_button = new GUIdo_CButton(wishlist_button.getX(),wishlist_button.getY()+wishlist_button.getHeight() + 7, 200,50, "Reviews");
-		see_reviews_button.setBackground(new Color(255,181,9));
-		see_reviews_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
-		see_reviews_button.addActionListener(new ActionListener() {
+		GUIdo_CButton add_review_button = new GUIdo_CButton(wishlist_button.getX(),wishlist_button.getY()+wishlist_button.getHeight() + 7, 200,50, "Add Reviews");
+		add_review_button.setBackground(new Color(255,181,9));
+		add_review_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+		add_review_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"see_reviews"));
+				done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"add_review"));
 			}
 		});
+		this.add(add_review_button);
+		
+		lowestPointY = add_review_button.getY()+add_review_button.getHeight();
 	}
 	
 	/**
@@ -291,6 +305,63 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		//draw the image using the scaled width and height
 		g.drawImage(this.item_image, 
 				this.getWidth()*1/10, this.getHeight()*1/10, width, height, null);
+		
+		int y = this.getHeight()*1/10 + height;
+		
+		if(this.lowestPointY > y) {
+			y = this.lowestPointY;
+		}
+		
+		y += 25;
+		
+		g.drawString("REVIEWS", this.getWidth()/2-GUIdo_OutputTools.getPixelWidth("REVIEWS", DESC_FONT)/2,y);
+		
+		int [] starx_t = STAR_X;
+		int [] stary_t = STAR_Y;
+		
+		for(int i = 0; i < 11; i++) {
+			stary_t[i] += y;
+		}
+		
+		for(Review review : item.getReviews()) {
+			int oldy = y;
+			y += GAP_BETWEEN_REVIEWS;
+			int i = 0;
+			g.setColor(Color.YELLOW);
+			for(;i < review.getRating(); i++) {
+				g.fillPolygon(starx_t, stary_t, 11);
+				for(int k = 0; k < 11; k++) {
+					starx_t [k] += STAR_WIDTH;
+				}
+			}
+			
+			
+			g.setColor(Color.GRAY);
+			for(;i < 5; i++) {
+				g.fillPolygon(starx_t, stary_t, 11);
+				for(int k = 0; k < 11; k++) {
+					starx_t [k] += STAR_WIDTH;
+				}
+			}
+			
+			y += REVIEW_DESC_BUFFER;
+			
+			String dateStr = review.getDate().toString();
+			g.drawString(dateStr, this.getWidth(), y);
+			y += REVIEW_DESC_BUFFER;
+			
+			for(String line : GUIdo_OutputTools.formatStringForPrompt(review.getDescription(), DESC_FONT, this.getWidth()*2/3)) {
+				g.drawString(line, this.getWidth()/2-GUIdo_OutputTools.getPixelWidth(line, DESC_FONT), y);
+				y += this.REVIEW_DESC_BUFFER;
+			}
+			
+			starx_t = STAR_X;
+			for(int k = 0; k < 11; k++) {
+				stary_t[k] += (y-oldy);
+			}
+		}
+		
+		
 	}
 	
 }
