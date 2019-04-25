@@ -2,6 +2,7 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,17 +13,20 @@ import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	
 	GUIdo_Shipping current_panel = this;
+	GUIdo_ReviewAndEditOrder previous_panel;
 	
 	public GUIdo_Shipping(Sale sale, Customer customer) {
 		super();
@@ -55,6 +59,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: connect to review&edit order
+				previous_panel = new GUIdo_ReviewAndEditOrder(sale, customer);
 			}
 			
 		});
@@ -131,10 +136,14 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 						&& !cityInput.getText().isEmpty() && !cityInput.getText().isBlank()
 						&& !stateInput.getText().isEmpty() && !stateInput.getText().isBlank()
 						&& !zip.getText().isEmpty() && !zip.getText().isBlank()) {
-					// proceed to shipping!!!!!
-					JOptionPane.showMessageDialog(null, "suck a dick");
-				}else {
+					// TODO: proceed to shipping!!!!!
+					JOptionPane.showMessageDialog(null, "Thank you for entering all information!");
+				}else if(!isEnabled() || addressLine1.getText().isEmpty() || addressLine1.getText().isBlank()
+						|| cityInput.getText().isEmpty() || cityInput.getText().isBlank()
+						|| stateInput.getText().isEmpty() || stateInput.getText().isBlank()
+						|| zip.getText().isEmpty() || zip.getText().isBlank()){
 					// dialog that says to enter missing info
+					JOptionPane.showMessageDialog(null, "Please enter all necessary information and select a shipping option.");
 				}
 			}
 			
@@ -230,13 +239,18 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.add(estTaxNum, c);
 		c.gridx = 2;
 		c.gridy = 5;
-		this.add(shipping, c); // add shipping cost after button is pressed
+		this.add(shipping, c);
 		c.gridx = 2;
 		c.gridy = 7;
 		this.add(total, c);
 		c.gridx = 3;
 		c.gridy = 7;
 		this.add(totalCostps, c);
+		
+//		TitledBorder order;
+//		order = BorderFactory.createTitledBorder("Order Details");
+//		orderDetails.setBorder(order);
+//		
 		
 		shipOp1.addItemListener(new ItemListener() {
 
