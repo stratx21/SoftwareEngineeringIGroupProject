@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,7 +20,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class GUIdo_LoginScreen extends GUIdo_CPanel {
-
+	private static Logger logger = Logger.getLogger(GUIdo_LoginScreen.class.getName());
 	JLabel l1, l2, l3;
 	JTextField tf1;
 	GUIdo_CButton btn1, btn2, btn3, btn4, btn5;
@@ -27,6 +28,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 	
 	public GUIdo_LoginScreen(final ActionListener al) {
 		super(400);
+		logger.info("Switched to Login Screen");
 		GUIdo_CPanel panel = this;
 		l1 = new JLabel("Username");
 		l1.setForeground(Color.blue);
@@ -91,10 +93,12 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 									users = dataControl.getAdmins(temp);
 									wrongpass = false;
 								} else {
-									//TODO:: logger event fine incorrect password admin
+									
+									logger.fine("Error: Incorrect Password for Admin");
 								}
 							} else {
-								//TODO:: logger event fine incorrect username admin
+								
+								logger.fine("Error: Incorrect Password for Customer");
 							}
 						}
 					} else if(e.getActionCommand().equals("Login as CUSTOMER")){
@@ -110,15 +114,15 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 									users = dataControl.getCustomers(temp);
 									wrongpass = false;
 								} else {
-									//TODO:: logger event fine incorrect password customer
+									logger.info("Error: Incorrect password for admin");
 								}
 							} else {
-								//TODO:: logger event fine incorrect username customer
+								logger.info("Error: Incorrect password for customer");
 							}
 						}
 					}
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
+					logger.severe("ERROR: FileNotFound Exception in Login Screen");
 					e1.printStackTrace();
 				}	
 				if(!userexists) {
@@ -129,6 +133,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 						      "Error", JOptionPane.ERROR_MESSAGE); 
 				} else {
 					//all was correct, user and password
+					logger.info("Login Successful");
 					ActionEvent forPerformed = new ActionEvent(users.get(0), ActionEvent.ACTION_PERFORMED, "Enter");
 					//forPerformed.setSource(tf1.getText());
 					
