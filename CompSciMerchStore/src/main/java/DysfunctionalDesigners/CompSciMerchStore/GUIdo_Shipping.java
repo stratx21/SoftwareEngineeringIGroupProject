@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -69,7 +70,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		state.setHorizontalAlignment(JLabel.CENTER);
 		JLabel zipcode = new JLabel("Zipcode");
 		zipcode.setHorizontalAlignment(JLabel.CENTER);
-		//JLabel filler = new JLabel(" ");
+		JLabel filler = new JLabel("dick");
 		JTextField addressLine1 = new JTextField();
 		addressLine1.setHorizontalAlignment(JTextField.CENTER);
 		JTextField addressLine2 = new JTextField();
@@ -121,7 +122,10 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
-		c.weightx = 0.5;
+		c.insets = new Insets(1, 10, 1, 10);
+		//c.gridwidth = 3;
+		//c.gridheight = GridBagConstraints.ABOVE_BASELINE_TRAILING;
+		c.weightx = 10;
 		c.weighty = 0;
 		c.gridx = 0;
 		c.gridy = 0;
@@ -137,10 +141,12 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.add(addyLine1, c); // col 1
 		c.gridx = 1;
 		c.gridy = 1;
+		//c.ipady = 40;
 		this.add(shipOp1, c); // col 2
 		c.gridx = 2;
 		c.gridy = 10;
 		c.weighty = 1;
+		c.ipady = 0;
 		this.add(ptp, c);	// col 3
 		c.gridx = 0;
 		c.gridy = 2;
@@ -157,19 +163,19 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.add(city, c); // col 1
 		c.gridx = 0;
 		c.gridy = 6;
-		this.add(cityInput); // col 1
+		this.add(cityInput, c); // col 1
 		c.gridx = 0;
 		c.gridy = 7;
-		this.add(state); // col 1
+		this.add(state, c); // col 1
 		c.gridx = 0;
 		c.gridy = 8;
-		this.add(stateInput); // col 1
+		this.add(stateInput, c); // col 1
 		c.gridx = 0;
 		c.gridy = 9;
-		this.add(zipcode); // col 1
+		this.add(zipcode, c); // col 1
 		c.gridx = 0;
 		c.gridy = 10;
-		this.add(zip); // col 1
+		this.add(zip, c); // col 1
 	}
 
 	
