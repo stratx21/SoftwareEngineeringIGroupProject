@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -75,7 +76,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 			try {
 				FileWriter writer = new FileWriter("src/main/resources/complaints.txt"); 
 				for(Iterator<String> str = this.complaints.iterator(); str.hasNext();) {
-				  writer.write(str.next());
+				  writer.write(str.next() + "\n");
 				}
 				writer.close();
 			} catch(IOException e) {
@@ -86,7 +87,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 		}
 	}
 	
-	GUIdo_ContactUs(final ActionListener al){
+	GUIdo_ContactUs(){
 		super(800);
 		
 		GUIdo_ContactUs temp = this;
@@ -135,6 +136,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 						}
 					}
 				}
+				JOptionPane.showMessageDialog(panel, "Complaint has been submitted!", "Accepted", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});

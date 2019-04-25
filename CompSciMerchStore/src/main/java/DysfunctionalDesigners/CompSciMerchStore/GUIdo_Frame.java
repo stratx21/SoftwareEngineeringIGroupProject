@@ -129,15 +129,18 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	private void to_contactus() {
-		
+		current_panel = new GUIdo_ContactUs();
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	private void to_faq() {
-		
+		current_panel = new GUIdo_FAQScreen();
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	private void to_aboutus() {
-		
+		current_panel = new GUIdo_AboutUs();
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	/**
