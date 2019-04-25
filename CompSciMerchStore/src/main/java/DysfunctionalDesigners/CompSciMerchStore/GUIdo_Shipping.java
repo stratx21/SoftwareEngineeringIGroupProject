@@ -46,7 +46,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		try {
 			stateFormat = new MaskFormatter("UU");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			logger.severe("ERROR: Caught ParseException in Shipping");
 			e.printStackTrace();
 		}
@@ -54,7 +54,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		try {
 			zipFormat = new MaskFormatter("#####");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			logger.severe("ERROR: Caught ParseException in Shipping");
 			e.printStackTrace();
 		}
