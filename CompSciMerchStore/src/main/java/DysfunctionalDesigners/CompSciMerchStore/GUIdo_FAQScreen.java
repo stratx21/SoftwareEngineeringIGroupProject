@@ -3,13 +3,15 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class GUIdo_FAQScreen extends GUIdo_CPanel{
-
+	private static Logger logger = Logger.getLogger(Catalogue.class.getName());
+	
 	//whatever, text, title
 	JLabel l1, l3;
 	JTextArea l2;
@@ -40,10 +42,11 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 				+ "Answer: \n\n");
 		l2.setBackground(this.getBackground());
 		l2.setFont(new Font("Arial", Font.BOLD, 12));
-		l3 = new JLabel("Frequently Asked Questions!");
 		
+		l3 = new JLabel("Frequently Asked Questions!");
+		l3.setFont(new Font("Arial", Font.BOLD, 30));
 		l2.setBounds(50, 100, 600, 700);
-		l3.setBounds(300, 50, 200, 30);
+		l3.setBounds(300, 50, 500, 30);
 		
 		this.add(l1);
 		this.add(l2);
