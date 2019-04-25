@@ -76,7 +76,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 			try {
 				FileWriter writer = new FileWriter("src/main/resources/complaints.txt"); 
 				for(Iterator<String> str = this.complaints.iterator(); str.hasNext();) {
-				  writer.write(str.next());
+				  writer.write(str.next() + "\n");
 				}
 				writer.close();
 			} catch(IOException e) {
