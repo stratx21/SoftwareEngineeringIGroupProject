@@ -260,12 +260,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.add(total, c);
 		c.gridx = 3;
 		c.gridy = 7;
-		this.add(totalCostps, c);
-		
-//		TitledBorder order;
-//		order = BorderFactory.createTitledBorder("Order Details");
-//		orderDetails.setBorder(order);
-//		
+		this.add(totalCostps, c);	
 		
 		shipOp1.addItemListener(new ItemListener() {
 
