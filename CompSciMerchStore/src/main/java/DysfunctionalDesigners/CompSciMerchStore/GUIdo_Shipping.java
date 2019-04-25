@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -117,10 +118,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		shippingCost.setFont(new Font("Cambria", Font.PLAIN, 14));
 		JLabel total = new JLabel("Total:");
 		total.setFont(new Font("Cambria", Font.BOLD, 14));
+		total.setForeground(Color.RED);
 		JLabel totalCostps = new JLabel("$" + df.format(sale.getTotalWithTax() - Sale.getShipping()));
-		totalCostps.setFont(new Font("Cambria", Font.PLAIN, 14));
+		totalCostps.setForeground(Color.RED);
+		totalCostps.setFont(new Font("Cambria", Font.BOLD, 14));
 		JLabel totalCostws = new JLabel("$" + df.format(sale.getTotalWithTax()));
-		totalCostws.setFont(new Font("Cambria", Font.PLAIN, 14));
+		totalCostws.setFont(new Font("Cambria", Font.BOLD, 14));
+		totalCostws.setForeground(Color.RED);
 		
 		GUIdo_CButton ptp = new GUIdo_CButton(0, 0, 200, 50, "Proceed to Payment");
 		ptp.setHorizontalAlignment(JButton.CENTER);
@@ -136,7 +140,18 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 						&& !cityInput.getText().isEmpty() && !cityInput.getText().isBlank()
 						&& !stateInput.getText().isEmpty() && !stateInput.getText().isBlank()
 						&& !zip.getText().isEmpty() && !zip.getText().isBlank()) {
-					// TODO: proceed to shipping!!!!!
+					Address shippingAddr = new Address();
+					if(!addressLine2.getText().isEmpty()) {
+						shippingAddr.setStreet(addressLine1.getText() + " " + addressLine2.getText());
+					}else {
+						shippingAddr.setStreet(addressLine1.getText());
+					}
+					shippingAddr.setCity(cityInput.getText());
+					shippingAddr.setState(stateInput.getText());
+					shippingAddr.setZipCode(Integer.parseInt(zip.getText()));
+					
+					customer.setShippingAddr(shippingAddr);
+					// TODO: proceed to payment!!!!!
 					JOptionPane.showMessageDialog(null, "Thank you for entering all information!");
 				}else if(!isEnabled() || addressLine1.getText().isEmpty() || addressLine1.getText().isBlank()
 						|| cityInput.getText().isEmpty() || cityInput.getText().isBlank()
