@@ -136,7 +136,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		this.setLayout(gbl);
 		this.add(label);
 		GridBagConstraints c = new GridBagConstraints();
-		c.insets = new Insets(5, 5, 0, 0);
+		c.insets = new Insets(1, 10, 1, 10);
 		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
