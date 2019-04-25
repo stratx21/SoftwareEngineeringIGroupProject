@@ -42,6 +42,8 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 	 */
 	private ArrayList<GUIdo_CButton> buttons = new ArrayList<>();
 	
+	private JComboBox section9;
+	
 	/**
 	 * This sets up the toolbar using an x and y position, a width and height used to restrict the 
 	 * 	toolbar to where it needs to be, and an ActionListener instance used to go to whatever page
@@ -134,10 +136,11 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		searchBar.setBackground(new Color(255,181,9));
 		
+		//Go to GUIdo_Frame in toolbar_call to add an ActionEvent
 		List<String> options = new ArrayList<String>();
 		options.add("Other Options"); options.add("Contact Us"); options.add("FAQ"); options.add("About Us");
 		
-		JComboBox section9 = new JComboBox(options.toArray());
+		section9 = new JComboBox(options.toArray());
 		section9.setBounds(home_button.getX()+home_button.getWidth(), 0, searchBar.getX()-home_button.getX()-home_button.getWidth(), home_button.getHeight());
 		section9.setBackground(new Color(255,181,9));
 		section9.addActionListener(done);
@@ -184,6 +187,8 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		for(GUIdo_CButton button : buttons) {
 			button.disable();
 		}
+		section9.setEnabled(!disabled);
+		
 	}
 	
 	/**
@@ -194,6 +199,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		for(GUIdo_CButton button : buttons) {
 			button.enable();
 		}
+		section9.setEnabled(!disabled);
 	}
 	
 }
