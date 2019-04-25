@@ -3,11 +3,13 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 public class GUIdo_AboutUs extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_AboutUs.class.getName());
 
 	JLabel l1, l3;
 	JTextArea l2;
