@@ -26,7 +26,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
-	private static Logger logger = Logger.getLogger(Catalogue.class.getName());
+	private static Logger logger = Logger.getLogger(GUIdo_CPanel.class.getName());
 	
 	
 	GUIdo_Shipping current_panel = this;
