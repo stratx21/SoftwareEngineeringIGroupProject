@@ -11,12 +11,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 public class GUIdo_ItemDisplay extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_ItemDisplay.class.getName());
 	
 	/**
 	 * The BufferedImage instance that is used as the image to represent the item
@@ -83,7 +85,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		try {
 			this.item_image = ImageIO.read(new File("src/main/resources/itemimages/"+ this.item.getExtendedItemID() + ".jpg"));
 		} catch(Exception e) {
-			System.out.println("Error getting image for item in GUIdo_ItemDisplay");
+			logger.severe("ERROR getting image from file");
 			e.printStackTrace();
 		}
 		//set the image ratio to the image's width divided by the images height 
@@ -91,6 +93,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			this.image_ratio = (this.item_image.getWidth()*1.0/this.item_image.getHeight());	
 		}
 		catch(NullPointerException e) {
+			logger.severe("ERROR: NullPointException Caught for Images in ItemDisplay");
 			e.printStackTrace();
 		}
 		
@@ -197,7 +200,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		addtocart.setActionListener_clicked(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cart.addItem(quantity_chosen, item.getItemID());
-				System.out.println("CART SADFGDNF quant : " + cart.getNumItems());
+				logger.info("Item Added to cart; quantity: " + quantity_chosen + " of " + item.getItemID());
 				done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
 			}
 		});
@@ -232,7 +235,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 				try {
 					thisbutton = (GUIdo_CButton)(e.getSource());
 				} catch(Exception ex) {
-					System.err.println("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
+					logger.severe("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
 					ex.printStackTrace();
 				}
 				
@@ -241,7 +244,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 				try {
 					item = (ItemInfo)((thisbutton).getData_from_holding());
 				} catch(Exception ex) {
-					System.err.println("ERROR casting to ItemInfo : GUIdo_ItemCollection");
+					logger.severe("ERROR casting to ItemInfo : GUIdo_ItemCollection");
 					ex.printStackTrace();
 				}
 				
@@ -249,17 +252,17 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 					if(customer.getWishList().contains(item.getItemID())) {
 //						System.out.println("Exists, removing...");
 						//has item, so remove it 
+						logger.info("Removing item from wishlist for user " + customer.getUserID());
 						customer.removeItemFromWishlist(item.getItemID());
 						thisbutton.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
 					} else {
 						//does not have item, so add it 
 //						System.out.println("Doesn't exist, adding...");
 						customer.addItemToWishlist(item.getItemID());
+						logger.info("Adding item to wishlist for user " + customer.getUserID());
 						thisbutton.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
 //						System.out.println("wishlist items: ");
-						for(Integer item_id : customer.getWishList()) {
-							System.out.println(Catalogue.getInstance().getItem(item_id).getDisplayName());
-						}
+
 					}
 					thisbutton.repaint();	
 				}
