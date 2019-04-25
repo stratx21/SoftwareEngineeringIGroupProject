@@ -60,9 +60,8 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("proceeding to payment for now");
-				GUIdo_Payment pay = new GUIdo_Payment(sale, customer); // supposed to go to shipping
-																	// testing payment screen for now
-				//*******?????????
+			
+				//TODO: link shipping frame
 			}
 			
 		});
@@ -217,48 +216,6 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		}
 	}
 	
-	//public void updateOrderDetails(Sale sale) {
-		// update JLabels for order detail components with new data
-		//this.drawScreen(sale, 1);
-		/*
-		DecimalFormat df2 = new DecimalFormat("0.00");
-		JLabel subtotal = null;
-		if(sale.getNumItems() == 1) {
-			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + 
-					" item):                        $" 
-				    + df2.format(sale.getTotalWithoutTax()));
-		}else {
-			subtotal = new JLabel("Subtotal (" + sale.getNumItems() 
-			       + " items):                       $" 
-				   + df2.format(sale.getTotalWithoutTax()));
-		}
-		JLabel estTax = new JLabel("Estimated Tax:                               $" 
-						+ df2.format(sale.getEstimatedTax()));
-		JLabel total = new JLabel
-						("Total:                                           $" 
-						+ df2.format(sale.getTotalWithTax()));
-		
-		subtotal.setFont(new Font("Cambria", Font.PLAIN, 14));
-		subtotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		subtotal.setSize(1172, 425);
-		estTax.setFont(new Font("Cambria", Font.PLAIN, 14));
-		estTax.setHorizontalAlignment(SwingConstants.RIGHT);
-		estTax.setSize(1172, 500);
-		total.setFont(new Font("Cambria", Font.BOLD, 14));
-		total.setHorizontalAlignment(SwingConstants.RIGHT);
-		total.setSize(1173, 700);
-		total.setForeground(Color.red);
-		
-		this.add(subtotal);
-		this.add(estTax);
-		this.add(total);
-		
-		
-		subtotal.repaint();
-		estTax.repaint();
-		total.repaint();
-		this.repaint();*/
-	//}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
