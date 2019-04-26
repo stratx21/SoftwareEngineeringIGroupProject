@@ -291,9 +291,30 @@ public class GUIdo_Frame extends JFrame{
 				} else if(e.getActionCommand().equals("add_review")) {
 					/* Mackenna : TODO add review viewing here */
 					//e.getSource() is the item to find reviews for 
+				} else if(e.getActionCommand().equals("edit_item")) {
+					//is confirmed that the user is the one that owns the item 
+					to_edit_item(item,user);
 				}
 			}
 		},current_user);
+		scrollpane.getViewport().add(current_panel);
+	}
+	
+	/**
+	 * 
+	 * This goes to the page to edit the item given by the User
+	 *  instance given, who is assumed that this point to be
+	 *  the Vendor who owns the item. 
+	 *  
+	 * @param item the item to edit.
+	 * @param user the user who owns the item. 
+	 */
+	public void to_edit_item(ItemInfo item, User user) {
+		current_panel = new GUIdo_EditItem(this.getWidth(),item,new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		scrollpane.getViewport().add(current_panel);
 	}
 	
