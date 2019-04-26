@@ -19,9 +19,7 @@ import javax.swing.JButton;
 public class GUIdo_CButton extends JButton implements MouseListener{
 	private static Logger logger = Logger.getLogger(GUIdo_CButton.class.getName());
 	
-	private boolean permanant_select=false;
-	
-	private int id;
+
 	
 	private boolean disabled=false;
 	
