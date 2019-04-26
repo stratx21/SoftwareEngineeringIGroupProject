@@ -3,7 +3,6 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -137,7 +136,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 		// making order detail box -- reuse code in Shipping && Review/Edit Order
 		JLabel orderDetails = new JLabel("Order Details");
-		orderDetails.setFont(new Font("Cambria", Font.BOLD, 34));
+		orderDetails.setFont(new Font("Cambria", Font.BOLD, 28));
 		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
 		JLabel subtotal = null;
 		if(sale.getNumItems() == 1) {
@@ -173,48 +172,48 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 4;
+		c.gridwidth = 5;
 		this.add(label, c);
 		c.gridwidth = 1;
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		this.add(cardName, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 1;
-		c.gridy = 1;
+		c.gridy = 2;
 		this.add(nameOnCard, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		this.add(cardNum, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 1;
-		c.gridy = 2;
+		c.gridy = 3;
 		this.add(numberOnCard, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		this.add(cvv, c);
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 1;
-		c.gridy = 3;
+		c.gridy = 4;
 		this.add(cvvNum, c);
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 2;
-		c.gridy = 4;
+		c.gridy = 5;
 		c.weighty = 1;
 		this.add(addCardButton, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.NORTH;
+		c.anchor = GridBagConstraints.EAST;
 		c.weighty = 0;
 		c.gridx = 3;
-		c.gridy = 0;
+		c.gridy = 1;
 		c.gridwidth = 2;
 		this.add(orderDetails, c);
 		c.anchor = GridBagConstraints.NORTHWEST;
@@ -237,15 +236,20 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.gridx = 4;
 		c.gridy = 4;
 		this.add(shippingCost, c);
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.weighty = 1;
 		c.gridx = 3;
 		c.gridy = 5;
 		this.add(total, c);
 		c.gridx = 4;
 		c.gridy = 5;
+		c.weighty = 0;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(totalCost, c);
 		c.gridx = 4;
 		c.gridy = 6;
-		this.add(placeOrder);
+		c.weighty = 0;
+		//this.add(placeOrder);
 		
 	}
 
