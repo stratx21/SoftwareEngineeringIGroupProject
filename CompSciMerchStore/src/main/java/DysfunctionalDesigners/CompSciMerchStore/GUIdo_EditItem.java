@@ -74,6 +74,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		GUIdo_EditItem.TEXTBOX_WIDTH = width*2/3;
 		this.item=item_to_edit;
 		
+		
+		
 		//the y to use to increase to move down the page in Components to add
 		int y = 200;
 		
@@ -119,6 +121,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		professors.setSelectedItem(item.getProf().name());
 		this.add(professors);
 		
+		//
 		JTextField discount = new JTextField(""+item.getSaleDiscount());
 		discount.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(discount);
