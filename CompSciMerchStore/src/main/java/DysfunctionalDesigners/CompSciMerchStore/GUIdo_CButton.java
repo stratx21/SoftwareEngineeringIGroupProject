@@ -10,12 +10,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class GUIdo_CButton extends JButton implements MouseListener{
+	private static Logger logger = Logger.getLogger(GUIdo_CButton.class.getName());
 	
 
 	
@@ -86,7 +88,7 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 			this.hoverIcon=new ImageIcon(getScaledImage(icons[1].getImage(),width,height));
 			this.clickedIcon=new ImageIcon(getScaledImage(icons[2].getImage(),width,height));
 		} else {
-			System.err.println("ERROR: ImageIcon[] icons size provided invalid; size is " 
+			logger.severe("ERROR: ImageIcon[] icons size provided invalid; size is " 
 					+ icons.length + ", requires 3 icons");
 		}
 		this.repaint();
@@ -196,9 +198,11 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		   &&this.clickedIcon != null
 		   &&this.hoverIcon   != null)
 			this.hasIcons=true;
-		else
-			System.err.println("ERROR: tried to enable icons in GUIdo_CButton "
+		else {
+			logger.severe("ERROR: tried to enable icons in GUIdo_CButton "
 					+ "but one or more icons does not exist");
+		}
+			
 	}
 	
 	/**

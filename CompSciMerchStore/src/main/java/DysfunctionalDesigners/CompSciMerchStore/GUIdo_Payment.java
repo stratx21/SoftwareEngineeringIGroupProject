@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.logging.Logger;
 
@@ -27,16 +29,16 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
   	    this.repaint();
 	}
 	
-	@Override
-	public void paintComponent(Graphics g) {
-		g.drawRect(950, 120, 225, 250);
-		g.drawLine(1025, 170, 1105, 170);
-		g.drawLine(1025, 325, 1105, 325);
-	}
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		g.drawRect(950, 120, 225, 250);
+//		g.drawLine(1025, 170, 1105, 170);
+//		g.drawLine(1025, 325, 1105, 325);
+//	}
 	
 
 	private void drawScreen(Sale sale, int i, Customer customer) {
-		this.setLayout(null);
+		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter card = null;
 		try {
 			card = new MaskFormatter("################");
@@ -133,53 +135,117 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			
 		});
 		
-		this.add(placeOrder);
+		// making order detail box -- reuse code in Shipping && Review/Edit Order
+		JLabel orderDetails = new JLabel("Order Details");
+		orderDetails.setFont(new Font("Cambria", Font.BOLD, 34));
+		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
+		JLabel subtotal = null;
+		if(sale.getNumItems() == 1) {
+			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + " item):");
+		}else {
+			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + " items):");
+		}
+		subtotal.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel subNum = new JLabel("$" + df.format(sale.getTotalWithoutTax()));
+		subNum.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel estTax = new JLabel("Estimated Tax: ");
+		estTax.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel estTaxNum = new JLabel("$" + df.format(sale.getEstimatedTax()));
+		estTaxNum.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel shipping = new JLabel("Shipping:");
+		shipping.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel shippingCost = new JLabel("$" + df.format(Sale.getShipping()));
+		shippingCost.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel total = new JLabel("Total:");
+		total.setFont(new Font("Cambria", Font.BOLD, 14));
+		total.setForeground(Color.RED);
+		JLabel totalCost = new JLabel("$" + df.format(sale.getTotalWithTax()));
+		totalCost.setForeground(Color.RED);
+		totalCost.setFont(new Font("Cambria", Font.BOLD, 14));
 		
 		GridBagLayout gbl = new GridBagLayout();
-		//gbl.removeLayoutComponent(label);
 		this.setLayout(gbl);
-		this.add(label);
 		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = 5;
+		c.weighty = 0;
 		c.insets = new Insets(1, 10, 1, 10);
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.anchor = GridBagConstraints.NORTH;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
-		//cardName.setHorizontalTextPosition(this.getWidth() / 20);
+		c.gridwidth = 4;
+		this.add(label, c);
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 1;
 		this.add(cardName, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 1;
-		c.gridy = 0;
+		c.gridy = 1;
 		this.add(nameOnCard, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		this.add(cardNum, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 1;
-		c.gridy = 1;
+		c.gridy = 2;
 		this.add(numberOnCard, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		this.add(cvv, c);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 1;
-		c.gridy = 2;
+		c.gridy = 3;
 		this.add(cvvNum, c);
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 2;
+		c.gridy = 4;
+		c.weighty = 1;
+		this.add(addCardButton, c);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
+		c.anchor = GridBagConstraints.NORTH;
+		c.weighty = 0;
+		c.gridx = 3;
+		c.gridy = 0;
+		c.gridwidth = 2;
+		this.add(orderDetails, c);
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridwidth = 1;
+		c.gridx = 3;
+		c.gridy = 2;
+		this.add(subtotal, c);
+		c.gridx = 4;
+		c.gridy = 2;
+		this.add(subNum, c);
 		c.gridx = 3;
 		c.gridy = 3;
-		this.add(addCardButton, c);
-		
-	
-		this.setVisible(true);
+		this.add(estTax, c);
+		c.gridx = 4;
+		c.gridy = 3;
+		this.add(estTaxNum, c);
+		c.gridx = 3;
+		c.gridy = 4;
+		this.add(shipping, c);
+		c.gridx = 4;
+		c.gridy = 4;
+		this.add(shippingCost, c);
+		c.gridx = 3;
+		c.gridy = 5;
+		this.add(total, c);
+		c.gridx = 4;
+		c.gridy = 5;
+		this.add(totalCost, c);
+		c.gridx = 4;
+		c.gridy = 6;
+		this.add(placeOrder);
 		
 	}
 
