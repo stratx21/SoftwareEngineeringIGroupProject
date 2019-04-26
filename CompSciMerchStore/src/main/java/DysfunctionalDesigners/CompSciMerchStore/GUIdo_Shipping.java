@@ -94,7 +94,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		zip.setPreferredSize(new Dimension(50, 20));
 		zip.setHorizontalAlignment(JTextField.CENTER);
 		
-		// making order detail box -- reuse code in Shipping && Review/Edit Order
+		// making order detail box -- reuse code in Payment && Review/Edit Order
 		JLabel orderDetails = new JLabel("Order Details");
 		orderDetails.setFont(new Font("Cambria", Font.BOLD, 34));
 		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
