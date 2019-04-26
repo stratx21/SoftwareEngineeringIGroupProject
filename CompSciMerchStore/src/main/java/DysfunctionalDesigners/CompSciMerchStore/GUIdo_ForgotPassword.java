@@ -4,12 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+
 public class GUIdo_ForgotPassword extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_ForgotPassword.class.getName());
 	
 	//whatever, user, mother's, new pass, confirm new pass
 	JLabel l1, l2, l3, l4, l5, l6;
@@ -20,6 +24,8 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 	
 	GUIdo_ForgotPassword(final ActionListener al){
 		super(500);
+		logger.info("Switched to ForgotPassword");
+		
 		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
 		l1 = new JLabel("Username");
@@ -54,20 +60,25 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(!tf3.getText().equals(tf4.getText())) {
 					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				if(!tf1.getText().isEmpty()) {
-					for(int i = 0; i < control.getAllCustomers().size(); i++) {
-						if(tf1.getText().equals(control.getAllCustomers().get(i).getUserName())) {
-							if(tf2.getText().equals(control.getAllCustomers().get(i).getMotherMaidenName())) {
-								control.getAllCustomers().get(i).setPassword(tf3.getText());
+					List<Customer> customers = control.getAllCustomers();
+					for(int i = 0; i < customers.size(); i++) {
+						Customer current = customers.get(i);
+						if(tf1.getText().equals(current.getUserName())) {
+							if(tf2.getText().equals(current.getMotherMaidenName())) {
+								current.setPassword(tf3.getText());
+								control.writeCustomer(current);
+								logger.info("Set new password for " + current.getUserName());
 							}else {
 								JOptionPane.showMessageDialog(panel, "Mother's maiden name doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
+								logger.info("Tried to change " + current.getUserName() + " password with incorrect maiden name");
 							}
 						}else {
 							JOptionPane.showMessageDialog(panel, "Username doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+							logger.info("Tried to change " + current.getUserName() + " password with incorrect username");
 						}
 					}
 				}

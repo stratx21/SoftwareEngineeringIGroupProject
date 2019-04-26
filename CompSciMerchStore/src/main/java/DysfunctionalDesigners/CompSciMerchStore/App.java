@@ -24,7 +24,7 @@ public class App
 		    System.out.println("WARNING: Logging not configured (console output only)");
 		}
     	logger.info("Starting main app");
-    	
+
         new GUIdo_Frame();
     }
 }

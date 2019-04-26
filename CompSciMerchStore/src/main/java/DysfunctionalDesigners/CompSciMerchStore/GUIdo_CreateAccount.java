@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 //Creates screen, doesn't have things in correct place. Adjust values to get spacing and placement right.
 
 public class GUIdo_CreateAccount extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_CreateAccount.class.getName());
 	
 	//whatever, email, confirm email, mother's name, user, pass, confirm pass, name, create account
 	JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9;
@@ -22,6 +24,8 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 	
 	GUIdo_CreateAccount(final ActionListener al){
 		super(700);
+		logger.info("Switched to panel CreateAccount");
+		
 		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
 		l1 = new JLabel("Username");
@@ -70,16 +74,20 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 				// TODO Auto-generated method stub
 				if(!tf1.getText().equals(tf2.getText())) {
 					JOptionPane.showMessageDialog(panel, "Emails are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
-				}else if(!tf5.getText().equals(tf6.getText())) {
+					logger.info("Attempted submission with non matching emails");
+				} else if(!tf5.getText().equals(tf6.getText())) {
 					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with non matching passwords");
 				} else if(control.getCustomerUsernames().contains(tf4.getText())){
 					JOptionPane.showMessageDialog(panel, "Username is taken already!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with already taken usernames");
 				}
 				
 				if(!tf1.getText().isEmpty()) {
 					for(int i = 0; i < control.getAllCustomers().size(); i++) {
 						if(tf1.getText().equals(control.getAllCustomers().get(i).getEmail())){
 							JOptionPane.showMessageDialog(panel, "Email already has an account!", "Error", JOptionPane.ERROR_MESSAGE);
+							logger.info("Attempted submission with already taken email");
 						}
 					}
 				}

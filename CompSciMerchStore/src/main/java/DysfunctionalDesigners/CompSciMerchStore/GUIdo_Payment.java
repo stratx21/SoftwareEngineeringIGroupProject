@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.logging.Logger;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -19,9 +20,10 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
-	
+	private static Logger logger = Logger.getLogger(GUIdo_Payment.class.getName());
 	public GUIdo_Payment(Sale sale, Customer customer) {
 		super();
+		logger.info("Switched to Payment Screen");
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
 		this.drawScreen(sale, 0, customer);
   	    this.repaint();
@@ -41,28 +43,28 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		try {
 			card = new MaskFormatter("################");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught ParseException for Card Number in Payment");
 			e.printStackTrace();
 		}
 		MaskFormatter cvvFormat = null;
 		try {
 			cvvFormat = new MaskFormatter("###");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught ParseException for CVC in Payment");
 			e.printStackTrace();
 		}
 		MaskFormatter stateFormat = null;
 		try {
 			stateFormat = new MaskFormatter("UU");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught ParseException for StateFormat in Payment");
 			e.printStackTrace();
 		}
 		MaskFormatter zipFormat = null;
 		try {
 			zipFormat = new MaskFormatter("#####");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught ParseException for Zip Code in Payement");
 			e.printStackTrace();
 		}
 		
@@ -121,10 +123,12 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(isEnabled()) {
-					System.out.println("button enabled");
+					
 					JOptionPane.showMessageDialog(null, (Object) "Thank you for your order!");
+					logger.info("All Payment Information collected -- Proceeding");
 				}else {
 					JOptionPane.showMessageDialog(null, (Object) "Please enter all information"); // not appearing
+					logger.info("Not all Payment Information Entered");
 				}
 				
 			}
