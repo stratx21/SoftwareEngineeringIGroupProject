@@ -7,11 +7,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class GUIdo_ItemCollection extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_ItemCollection.class.getName());
 
 	/**
 	 * the list of items to display in the collection. 
@@ -112,7 +114,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 			offlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2.png")));
 			offlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3.png")));
 		} catch(IOException ioex) {
-			System.err.println("ERROR importing images for wishlist in GUIdo_ItemCollection");
+			logger.severe("ERROR importing images for wishlist in GUIdo_ItemCollection");
 			ioex.printStackTrace();
 		}
 	}
@@ -129,6 +131,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	 */
 	public GUIdo_ItemCollection(int width, List<ItemInfo> display_items, String title, ActionListener done, User user) {
 		super(/*width,*/ITEM_DISPLAY_HEIGHT*display_items.size()/ITEMS_PER_ROW+800);//item display height * item rows + const
+		
 		this.item_count=display_items.size();
 		this.items_to_display=display_items;
 		this.title = title;
@@ -184,7 +187,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 						try {
 							thisbutton = (GUIdo_CButton)(e.getSource());
 						} catch(Exception ex) {
-							System.err.println("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
+							logger.severe("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
 							ex.printStackTrace();
 						}
 						
@@ -193,7 +196,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 						try {
 							item = (ItemInfo)((thisbutton).getData_from_holding());
 						} catch(Exception ex) {
-							System.err.println("ERROR casting to ItemInfo : GUIdo_ItemCollection");
+							logger.severe("ERROR casting to ItemInfo : GUIdo_ItemCollection");
 							ex.printStackTrace();
 						}
 						
