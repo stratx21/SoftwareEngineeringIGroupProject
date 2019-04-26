@@ -13,9 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
-	
+	private static Logger logger = Logger.getLogger(GUIdo_CToolbar.class.getName());
 	/**
 	 * This function tells if the buttons are disabled. 
 	 * @return a boolean concerning if the buttons are
@@ -42,7 +43,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 	 */
 	private ArrayList<GUIdo_CButton> buttons = new ArrayList<>();
 	
-	private JComboBox section9;
+	private JComboBox otherOptions;
 	
 	/**
 	 * This sets up the toolbar using an x and y position, a width and height used to restrict the 
@@ -66,7 +67,37 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		//home button:
 		
-		GUIdo_CButton cart = new GUIdo_CButton (width- height* 4,y , height, height, "CART" ) ;
+		
+		//set up the logout button 
+		GUIdo_CButton logout = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
+		logout.setActionCommand("login");
+		logout.setActionListener_clicked(done);
+		logout.setBackground(new Color(255,181,9));
+		logout.setHoverColor(new Color(242,170,0));
+		
+		
+		//search bar:
+		
+		searchBar = new JTextField("search");
+		
+		searchBar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logger.info("SEARCH invoked with string \"" + searchBar.getText() + "\"");
+				
+				if(!disabled) {
+					ActionEvent forPerformed = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search");
+					forPerformed.setSource(searchBar.getText());
+					
+					done.actionPerformed(forPerformed);
+				}
+			}
+		});
+		searchBar.setSize(width-height*7, height/2);
+		searchBar.setLocation(height, height/4);
+		
+		searchBar.setBackground(new Color(255,181,9));
+		
+		GUIdo_CButton cart = new GUIdo_CButton (searchBar.getWidth() + 70,y , height, height, "CART" ) ;
 		cart. setActionCommand("cart");
 		cart. setActionListener_clicked( done);
 		cart.setBackground(new Color(255,181,9));
@@ -85,7 +116,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 			home_button.setBackground(new Color(255,181,9));
 			home_button.setHoverColor(new Color(242,170,0));
 		} catch(Exception e) {
-			System.out.println("ERROR setting up home button initialization");
+			logger.severe("ERROR setting up home button initialization");
 			e.printStackTrace();
 		}
 		
@@ -93,7 +124,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		//set up the wishlist button for the toolbar to see the User's wishlist 
 		GUIdo_CButton wishlist=null;
 		try {
-			wishlist = new GUIdo_CButton(x+width-height*3,y,height,height,
+			wishlist = new GUIdo_CButton(searchBar.getWidth() + 70 + cart.getWidth(),y,height,height,
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish1.png"))),
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish2.png"))),
 					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish3.png"))));
@@ -102,58 +133,36 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 			wishlist.setBackground(new Color(255,181,9));
 			wishlist.setHoverColor(new Color(242,170,0));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: IOException caught in CToolbar");
 			e1.printStackTrace();
 		}
 		
 		
-		//set up the logout button 
-		GUIdo_CButton logout = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
-		logout.setActionCommand("login");
-		logout.setActionListener_clicked(done);
-		logout.setBackground(new Color(255,181,9));
-		logout.setHoverColor(new Color(242,170,0));
-		
-		
-		//search bar:
-		
-		searchBar = new JTextField("search");
-		
-		searchBar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				System.out.println("SEARCH invoked with string \"" + searchBar.getText() + "\"");
-				
-				if(!disabled) {
-					ActionEvent forPerformed = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,"search");
-					forPerformed.setSource(searchBar.getText());
-					
-					done.actionPerformed(forPerformed);
-				}
-			}
-		});
-		searchBar.setSize(width-height*7, height/2);
-		searchBar.setLocation(height*3, height/4);
-		
-		searchBar.setBackground(new Color(255,181,9));
 		
 		//Go to GUIdo_Frame in toolbar_call to add an ActionEvent
 		List<String> options = new ArrayList<String>();
-		options.add("Other Options"); options.add("Contact Us"); options.add("FAQ"); options.add("About Us");
+		options.add("Other Options"); 
+		options.add("Contact Us"); 
+		options.add("FAQ"); 
+		options.add("About Us");
+		options.add("Add Item");
 		
-		section9 = new JComboBox(options.toArray());
-		section9.setBounds(home_button.getX()+home_button.getWidth(), 0, searchBar.getX()-home_button.getX()-home_button.getWidth(), home_button.getHeight());
-		section9.setBackground(new Color(255,181,9));
-		section9.addActionListener(done);
-		section9.setActionCommand("other_opt");
+		otherOptions = new JComboBox(options.toArray());
+		otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
+				y, cart.getWidth()+home_button.getWidth(), height);
+		otherOptions.setBackground(new Color(255,181,9));
+		otherOptions.addActionListener(done);
+		otherOptions.setActionCommand("other_opt");
 		
 		
 		//add all buttons 
 		try {
 			this.add(home_button);
-			this.add(section9);
+			
 			this.add(searchBar);
 			this.add(wishlist);
 			this.add(logout);
+			this.add(otherOptions);
 			this.add(cart);	
 		}
 		catch(NullPointerException e) {
@@ -187,7 +196,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		for(GUIdo_CButton button : buttons) {
 			button.disable();
 		}
-		section9.setEnabled(!disabled);
+		otherOptions.setEnabled(!disabled);
 		
 	}
 	
@@ -199,7 +208,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		for(GUIdo_CButton button : buttons) {
 			button.enable();
 		}
-		section9.setEnabled(!disabled);
+		otherOptions.setEnabled(!disabled);
 	}
 	
 }

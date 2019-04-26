@@ -76,7 +76,7 @@ public class ItemInfo {
 	 * @param price
 	 * @param id
 	 */
-	public ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id, Professor p) {
+	protected ItemInfo(String description, String displayName, int stock, int vendorID, double price, int id, Professor p) {
 		super();
 		this.description = description;
 		this.displayName = displayName;

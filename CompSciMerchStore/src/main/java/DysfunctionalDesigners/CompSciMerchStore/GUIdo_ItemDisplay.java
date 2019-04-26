@@ -61,6 +61,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	private final int[] STAR_X = {42,52,72,52,60,40,15,28,9,32,42};
 	private final int[] STAR_Y = {38,62,68,80,105,85,102,75,58,60,38};
 	
+	private Customer customer = null;
+	
 	private final int STAR_WIDTH = 70;
 	
 	/**
@@ -80,6 +82,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		//set this instance's instance of user to the User given 
 		this.current_user=user;
 		this.setSize(new Dimension(width,1500));
+		
+		GUIdo_CButton add_review_button = null;
 		
 		this.item = itemToDisplay;
 		try {
@@ -193,96 +197,115 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	    });
 	    
 	    this.add(quantity);
+	    
+	  //get the Customer user to get the wishlist 
+	    lowestPointY = quantity.getY()+quantity.getHeight();
+  		
+  		if(!current_user.isAdmin()) {
+		    //the button for the option to add the quantity chosen to the cart 
+			GUIdo_CButton addtocart = new GUIdo_CButton(quantity.getX()+quantity.getWidth()+5 ,quantity.getY(), 250, 50, "add to cart");
+			addtocart.setActionCommand("add_to_cart");
+			addtocart.setActionListener_clicked(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cart.addItem(quantity_chosen, item.getItemID());
+					logger.info("Item Added to cart; quantity: " + quantity_chosen + " of " + item.getItemID());
+					done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
+				}
+			});
+			addtocart.setBackground(new Color(255,181,9));
+			addtocart.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+			this.add(addtocart);
+			
+			//add the wishlist button for the user to have the option to add or remove 
+			//this item from their wishlist: 
+			GUIdo_CButton wishlist_button = new GUIdo_CButton(quantityis.getX(),quantityis.getY()+quantityis.getHeight()+5,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
 		
-	    //the button for the option to add the quantity chosen to the cart 
-		GUIdo_CButton addtocart = new GUIdo_CButton(quantity.getX()+quantity.getWidth()+5 ,quantity.getY(), 250, 50, "add to cart");
-		addtocart.setActionCommand("add_to_cart");
-		addtocart.setActionListener_clicked(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cart.addItem(quantity_chosen, item.getItemID());
-				logger.info("Item Added to cart; quantity: " + quantity_chosen + " of " + item.getItemID());
-				done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
+		
+			customer = (Customer)current_user;
+			
+			//if it exists in the wishlist 
+			if(customer.getWishList().contains(itemToDisplay.getItemID())) {
+				//filled heart 
+				wishlist_button.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
+			} else {
+				//is not in the wishlist,
+				//then unfilled heart 
+				wishlist_button.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
 			}
-		});
-		addtocart.setBackground(new Color(255,181,9));
-		addtocart.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
-		this.add(addtocart);
-		
-		//add the wishlist button for the user to have the option to add or remove 
-		//this item from their wishlist: 
-		GUIdo_CButton wishlist_button = new GUIdo_CButton(quantityis.getX(),quantityis.getY()+quantityis.getHeight()+5,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT,GUIdo_ItemCollection.WISHLIST_BUTTON_HEIGHT);
-		
-		//get the Customer user to get the wishlist 
-		Customer customer = (Customer)current_user;
-		
-		//if it exists in the wishlist 
-		if(customer.getWishList().contains(itemToDisplay.getItemID())) {
-			//filled heart 
-			wishlist_button.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
-		} else {
-			//is not in the wishlist,
-			//then unfilled heart 
-			wishlist_button.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
+			
+			//set the item that the wishlist button affects 
+			wishlist_button.setData_from_holding(itemToDisplay);
+			
+			//toggle the wishlist option:
+			wishlist_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIdo_CButton thisbutton=null;
+					try {
+						thisbutton = (GUIdo_CButton)(e.getSource());
+					} catch(Exception ex) {
+						logger.severe("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
+						ex.printStackTrace();
+					}
+					
+					ItemInfo item=null;
+					
+					try {
+						item = (ItemInfo)((thisbutton).getData_from_holding());
+					} catch(Exception ex) {
+						logger.severe("ERROR casting to ItemInfo : GUIdo_ItemCollection");
+						ex.printStackTrace();
+					}
+					
+					if(customer.getWishList() != null) {
+						if(customer.getWishList().contains(item.getItemID())) {
+	//						System.out.println("Exists, removing...");
+							//has item, so remove it 
+							logger.info("Removing item from wishlist for user " + customer.getUserID());
+							customer.removeItemFromWishlist(item.getItemID());
+							thisbutton.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
+						} else {
+							//does not have item, so add it 
+	//						System.out.println("Doesn't exist, adding...");
+							customer.addItemToWishlist(item.getItemID());
+							logger.info("Adding item to wishlist for user " + customer.getUserID());
+							thisbutton.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
+	//						System.out.println("wishlist items: ");
+	
+						}
+						thisbutton.repaint();	
+					}
+					
+				}
+			});
+			wishlist_button.repaint();
+			this.add(wishlist_button);
+			
+			add_review_button = new GUIdo_CButton(wishlist_button.getX(),wishlist_button.getY()+wishlist_button.getHeight() + 7, 200,50, "Add Reviews");
+			add_review_button.setBackground(new Color(255,181,9));
+			add_review_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+			add_review_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"add_review"));
+				}
+			});
+			this.add(add_review_button);
+			
+			lowestPointY = add_review_button.getY()+add_review_button.getHeight();
 		}
 		
-		//set the item that the wishlist button affects 
-		wishlist_button.setData_from_holding(itemToDisplay);
-		
-		//toggle the wishlist option:
-		wishlist_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GUIdo_CButton thisbutton=null;
-				try {
-					thisbutton = (GUIdo_CButton)(e.getSource());
-				} catch(Exception ex) {
-					logger.severe("ERROR casting to GUIdo_CButton : GUIdo_ItemCollection");
-					ex.printStackTrace();
+		if(item.getVendorID() == user.getUserID()) {
+			//then the user is the vendor of this item
+			//add the button to edit the item's information 
+			GUIdo_CButton edit_item_button = new GUIdo_CButton(quantityis.getX(),lowestPointY+10,200,75,"Edit item");
+			edit_item_button.setBackground(new Color(255,181,9));
+			edit_item_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+			edit_item_button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"edit_item"));
 				}
-				
-				ItemInfo item=null;
-				
-				try {
-					item = (ItemInfo)((thisbutton).getData_from_holding());
-				} catch(Exception ex) {
-					logger.severe("ERROR casting to ItemInfo : GUIdo_ItemCollection");
-					ex.printStackTrace();
-				}
-				
-				if(customer.getWishList() != null) {
-					if(customer.getWishList().contains(item.getItemID())) {
-//						System.out.println("Exists, removing...");
-						//has item, so remove it 
-						logger.info("Removing item from wishlist for user " + customer.getUserID());
-						customer.removeItemFromWishlist(item.getItemID());
-						thisbutton.enableIcons(GUIdo_ItemCollection.offlist1,GUIdo_ItemCollection.offlist2,GUIdo_ItemCollection.offlist3);
-					} else {
-						//does not have item, so add it 
-//						System.out.println("Doesn't exist, adding...");
-						customer.addItemToWishlist(item.getItemID());
-						logger.info("Adding item to wishlist for user " + customer.getUserID());
-						thisbutton.enableIcons(GUIdo_ItemCollection.onlist1,GUIdo_ItemCollection.onlist2,GUIdo_ItemCollection.onlist3);
-//						System.out.println("wishlist items: ");
-
-					}
-					thisbutton.repaint();	
-				}
-				
-			}
-		});
-		wishlist_button.repaint();
-		this.add(wishlist_button);
-		
-		GUIdo_CButton add_review_button = new GUIdo_CButton(wishlist_button.getX(),wishlist_button.getY()+wishlist_button.getHeight() + 7, 200,50, "Add Reviews");
-		add_review_button.setBackground(new Color(255,181,9));
-		add_review_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
-		add_review_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"add_review"));
-			}
-		});
-		this.add(add_review_button);
-		
-		lowestPointY = add_review_button.getY()+add_review_button.getHeight();
+			});
+			this.add(edit_item_button);
+		}
 	}
 	
 	/**

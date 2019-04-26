@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Administrator extends Vendor{
 	private static Logger logger = Logger.getLogger(Administrator.class.getName());
 
@@ -64,6 +66,7 @@ public class Administrator extends Vendor{
      * @return A string array of the complaints
      * @throws Exception If the reader is unable to open or there is an input data error, an exception is thrown.
      */
+    @JsonIgnore
     public String[] getAllComplaints() throws Exception{
         logger.info("Getting all user complaints");
         UserDataController dataController = UserDataController.getInstance();
