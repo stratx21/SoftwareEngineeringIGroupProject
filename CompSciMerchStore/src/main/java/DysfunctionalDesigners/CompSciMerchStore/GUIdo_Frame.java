@@ -312,7 +312,9 @@ public class GUIdo_Frame extends JFrame{
 	public void to_edit_item(ItemInfo item, User user) {
 		current_panel = new GUIdo_EditItem(this.getWidth(),item,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(e.getActionCommand().equals("item_updated")) {
+					display_item(item,user);
+				}
 			}
 		});
 		scrollpane.getViewport().add(current_panel);

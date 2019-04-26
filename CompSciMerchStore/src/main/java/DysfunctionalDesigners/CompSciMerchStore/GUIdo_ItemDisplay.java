@@ -199,7 +199,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	    this.add(quantity);
 	    
 	  //get the Customer user to get the wishlist 
-	    lowestPointY = quantity.getX()+quantity.getHeight();
+	    lowestPointY = quantity.getY()+quantity.getHeight();
   		
   		if(!current_user.isAdmin()) {
 		    //the button for the option to add the quantity chosen to the cart 
@@ -291,13 +291,11 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			this.add(add_review_button);
 			
 			lowestPointY = add_review_button.getY()+add_review_button.getHeight();
-		
 		}
 		
 		if(item.getVendorID() == user.getUserID()) {
 			//then the user is the vendor of this item
 			//add the button to edit the item's information 
-			
 			GUIdo_CButton edit_item_button = new GUIdo_CButton(quantityis.getX(),lowestPointY+10,200,75,"Edit item");
 			edit_item_button.setBackground(new Color(255,181,9));
 			edit_item_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 

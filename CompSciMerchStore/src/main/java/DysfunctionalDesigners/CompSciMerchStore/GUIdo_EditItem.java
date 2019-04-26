@@ -60,6 +60,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 */
 	private String discounts_display_string = "";
 	
+	private static final int LABEL_HEIGHT = 75;
+	
 	/**
 	 * 
 	 * This sets up the edit item page so that the item information can be edited. 
@@ -68,8 +70,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 * @param done the ActionListener instance that is used to return from this page. 
 	 */
 	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done) {
-		//page length of 1000 
-		super(width,1000);
+		//page length and width 
+		super(width,1750);
 		//get the width to use for the boxes 
 		GUIdo_EditItem.TEXTBOX_WIDTH = width*2/3;
 		this.item=item_to_edit;
@@ -83,24 +85,40 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		GUIdo_CPanel panel = this;
 		
 		//the name to edit 
+		JLabel name_label = new JLabel("Name");
+		name_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(name_label);
 		JTextField name = new JTextField(item.getDisplayName());
 		name.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(name);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
 		//description text field 
+		JLabel desc_label = new JLabel("Description");
+		desc_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(desc_label);
 		JTextField desc = new JTextField(item.getDescription());
 		desc.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, GUIdo_EditItem.TEXTBOX_WIDTH, GUIdo_EditItem.TEXTBOX_HEIGHT);
 		this.add(desc); 
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.TEXTBOX_HEIGHT;
 		
 		//the price editing 
+		JLabel price_label = new JLabel("Price");
+		price_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(price_label);
 		JTextField price = new JTextField(""+item.getPrice());
 		price.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(price);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
 		//the stock editing to change the stock 
+		JLabel stock_label = new JLabel("Stock");
+		stock_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(stock_label);
 		JTextField stock = new JTextField(""+item.getStock());
 		stock.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(stock);
@@ -112,6 +130,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 //		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
 		//the professor option to change the professor 
+		JLabel professor_label = new JLabel("Professor");
+		professor_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(professor_label);
 		ArrayList<String> profnames = new ArrayList<>();
 		Arrays.asList(Professor.values()).forEach(p -> profnames.add(p.name()));
 		JComboBox professors = new JComboBox(profnames.toArray());
@@ -120,8 +142,13 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		professors.setActionCommand("professor");
 		professors.setSelectedItem(item.getProf().name());
 		this.add(professors);
+		y+=professors.getHeight()+GUIdo_EditItem.Y_GAP;
 		
 		//
+		JLabel discount_label = new JLabel("Discount");
+		discount_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(discount_label);
 		JTextField discount = new JTextField(""+item.getSaleDiscount());
 		discount.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(discount);
@@ -129,6 +156,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		
 		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue());
+		JLabel promo_label = new JLabel("Promo Codes");
+		promo_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(promo_label);
 		JTextField promocodes = new JTextField(""+discounts_display_string);
 		promocodes.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(promocodes);
@@ -154,12 +185,21 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				
 				new_name = name.getText();
 				
+				if(new_name == null) {
+					error_message += " error: new name is null \n";
+				}
+				
 				new_desc = desc.getText();
+				
+				if(new_desc == null) {
+					error_message += " error: new description is null \n";
+				}
 				
 				try {
 					new_price = Double.parseDouble(price.getText());
 				} catch(NumberFormatException err) {
-					//Ethan logger 
+					//Ethan logger TODO
+					error_message += " converting the price; use format of 0.00 \n";
 					System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
 							+ "done_button listener, parsing price");
 					validated = false;
@@ -169,7 +209,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_stock = Integer.parseInt(stock.getText());
 					} catch(NumberFormatException err) {
-						//Ethan logger 
+						//Ethan logger TODO
+						error_message += " converting the stock; use format of integer values only \n";
 						System.err.println("ERROR casting to int : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing stock");
 						validated = false;
@@ -180,7 +221,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_professor = Professor.values()[professors.getSelectedIndex()];
 					} catch(Exception err) {
-						//Ethan logger 
+						//Ethan logger TODO
+						error_message += " converting the professor; choose one option. The index chosen is: "
+								+professors.getSelectedIndex() +" \n";
 						System.err.println("ERROR getting professor from data, "
 								+ "done_button listener, parsing stock");
 						validated = false;
@@ -191,7 +234,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_discount = Double.parseDouble(discount.getText());
 					} catch(NumberFormatException err) {
-						//Ethan logger 
+						//Ethan logger TODO 
+						error_message += " converting the discount; use format of 0.00 \n";
 						System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing discount");
 						validated = false;
@@ -203,20 +247,23 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					for(String line : promolines) {
 						String [] parts = line.split(",");
 						Double amount = null;
-						if(parts.length<2) {
-							error_message += "not enough arguments on line for promo code. line: \"" + line + "\". \n";
-							validated = false;
-						}
-						if(validated) {
-							try{
-							  amount = Double.parseDouble(parts[1]);
-							  new_promos.put(parts[0], amount);
-							}catch(NumberFormatException err) {
-							  //not a double
-								//Ethan logger 
-								System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
-										+ "done_button listener, parsing promo code");
+						if(parts.length > 0 && parts [0].length()>0) {
+							if(parts.length<2) {
+								error_message += "not enough arguments on line for promo code. line: \"" + line + "\". \n";
 								validated = false;
+							}
+							if(validated) {
+								try{
+								  amount = Double.parseDouble(parts[1]);
+								  new_promos.put(parts[0], amount);
+								}catch(NumberFormatException err) {
+								  //not a double
+									//Ethan logger TODO 
+									error_message += " converting the amount for the discount; use format of 0.00 \n";
+									System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+											+ "done_button listener, parsing promo code");
+									validated = false;
+								}
 							}
 						}
 					}
@@ -256,9 +303,12 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					//unreachable point
 				}
 				// (else):
-				JOptionPane.showMessageDialog(panel, error_message, 
-					      "Error", JOptionPane.ERROR_MESSAGE); 
-				//TODO make prompt to user about what was wrong 
+				if(!validated) {
+					JOptionPane.showMessageDialog(panel, error_message, 
+						      "Error", JOptionPane.ERROR_MESSAGE); 
+					//TODO make prompt to user about what was wrong 
+					System.err.println("ERROR inputting data to edit item ");
+				}
 			}
 		});
 		this.add(done_button);
