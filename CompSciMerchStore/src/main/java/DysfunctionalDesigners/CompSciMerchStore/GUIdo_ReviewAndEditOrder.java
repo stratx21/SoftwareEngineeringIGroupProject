@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionListener{
@@ -25,11 +26,11 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	/**
 	 * This sets up the GUIdo_ReviewAndEditOrder instance 
 	 */
-	public GUIdo_ReviewAndEditOrder(Sale sale, Customer customer) {
+	public GUIdo_ReviewAndEditOrder(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 	    super();
 	    logger.info("Switched to Review and Edit Order");
 		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
-	    this.drawScreen(sale, 0, customer);
+	    this.drawScreen(sale, 0, customer, current_panel, scrollpane);
   	    this.repaint();
 	}
 
@@ -41,14 +42,14 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	}
 	
 	
-	public void drawScreen(Sale sale, int num, Customer customer) {
+	public void drawScreen(Sale sale, int num, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df2 = new DecimalFormat("0.00");
 		if(num == 1) {
 			this.removeAll(); // redraw components
 			this.setLayout(null);
 		}
 		
-		this.drawCart(sale, customer);
+		this.drawCart(sale, customer, current_panel, scrollpane);
 		// title at top of screen
 		JLabel label= new JLabel("Review and Edit Order");
 		label.setHorizontalAlignment(JLabel.CENTER);
@@ -62,9 +63,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("proceeding to payment for now");
-			
-				//TODO: link shipping frame
+				to_shipping(sale, customer, current_panel, scrollpane);
 			}
 			
 		});
@@ -119,8 +118,14 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.repaint();
 	}
 	
+	protected void to_shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);
+		scrollpane.getViewport().add(current_panel);
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void drawCart(Sale sale, Customer customer) {
+	public void drawCart(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		int x = 75;
 	    int y = 100;
 	    int w = 250;
@@ -189,7 +194,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 						Object selected = comboBox.getSelectedItem();
 						
 	                    if(sale.editQuantity(Catalogue.getInstance().getItem(i.getKey()).getItemID(), Integer.parseInt((String)selected))) {
-	                    	drawScreen(sale, 1, customer);
+	                    	drawScreen(sale, 1, customer, current_panel, scrollpane);
 	                    	quantity.updateUI();
 	                    }
 					}
