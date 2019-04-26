@@ -4,14 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +48,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	/**
 	 * The width of the done button. 
 	 */
-	private static final int DONE_WIDTH = 100;
+	private static final int DONE_WIDTH = 170;
 	
 	/**
 	 * The height of the done button. 
@@ -60,7 +66,11 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 */
 	private String discounts_display_string = "";
 	
+	private BufferedImage newimage = null;
+	
 	private static final int LABEL_HEIGHT = 75;
+	
+	private JLabel current_filename = null;
 	
 	/**
 	 * 
@@ -136,6 +146,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(professor_label);
 		ArrayList<String> profnames = new ArrayList<>();
 		Arrays.asList(Professor.values()).forEach(p -> profnames.add(p.name()));
+		
+		//remove the dysfunctional designers option to not allow any more items
+		//to be added to that seciton: 
+		profnames.remove(profnames.size()-1);
 		JComboBox professors = new JComboBox(profnames.toArray());
 		professors.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		professors.setBackground(new Color(255,181,9));
@@ -154,7 +168,43 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(discount);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
+		JLabel image_label = new JLabel("Display Image");
+		image_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
+		y+=LABEL_HEIGHT+7;
+		this.add(image_label);
+		GUIdo_CButton image_upload_button = new GUIdo_CButton(width/2-DONE_WIDTH/2,y,DONE_WIDTH,DONE_HEIGHT,"upload image");
+		image_upload_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser prompt = new JFileChooser();
+		        prompt.setFileFilter(new FileNameExtensionFilter(
+		                "JPG, JPEG, and PNG", "jpg", "jpeg", "png"));
+		        if(prompt.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		            try {
+		            	//attempt to get an image from the selected file: 
+		            	//does this to ensure it can be read and used as an
+		            	//image as it would be for displaying the item 
+		            	newimage = ImageIO.read(prompt.getSelectedFile());
+		            	//update the label for the current file chosen: 
+		            	current_filename.setText(prompt.getSelectedFile().getName());
+		            	current_filename.repaint();
+		            } catch(Exception err) {
+		            	//TODO logger 
+		            	System.out.println("ERROR getting image from the the selected image, \"" + prompt.getSelectedFile().getName() + "\"");
+		            	err.printStackTrace();
+		            }
+		        }
+			}
+		});
+		//set the original default to none for the file chosen: (updates only)
+		this.current_filename = new JLabel("no new image chosen");
+		//put to the right of the image upload button: 
+		this.current_filename.setBounds(image_upload_button.getX()+image_upload_button.getWidth()+7,y,this.getHeight()/3,70);
+		//add the label to this page 
+		this.add(this.current_filename);
+		y += GUIdo_EditItem.DONE_HEIGHT;
+		this.add(image_upload_button);
 		
+		//get the promo set and put it in a string to show to the user:
 		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue());
 		JLabel promo_label = new JLabel("Promo Codes");
 		promo_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
@@ -297,6 +347,19 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 						//TODO:: Ethan logger 
 						// error updating the item being edited, for exception thrown by Catalogue updateItem; could
 						//be a null error or something else. Doubtful that it's null though 
+					}
+					
+					
+					if(newimage != null) {
+						try {
+							
+							//TODO : test if it has two .jpg extensions on the end
+							ImageIO.write(newimage, "jpg", new File("src/main/resources/itemimages/"+ item.getExtendedItemID() + ".jpg"));
+						} catch(IOException ioex) {
+							//TODO logger 
+							System.err.println("ERROR saving the image in edit item");
+							ioex.printStackTrace();
+						}
 					}
 					
 					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"item_updated"));

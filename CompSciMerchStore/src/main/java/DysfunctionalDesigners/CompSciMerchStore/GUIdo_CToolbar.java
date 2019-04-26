@@ -141,7 +141,11 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		//Go to GUIdo_Frame in toolbar_call to add an ActionEvent
 		List<String> options = new ArrayList<String>();
-		options.add("Other Options"); options.add("Contact Us"); options.add("FAQ"); options.add("About Us");
+		options.add("Other Options"); 
+		options.add("Contact Us"); 
+		options.add("FAQ"); 
+		options.add("About Us");
+		options.add("Add Item");
 		
 		otherOptions = new JComboBox(options.toArray());
 		otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 

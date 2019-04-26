@@ -91,6 +91,7 @@ public class GUIdo_Frame extends JFrame{
 	/**
 	 * The toolbar will be called here to initialize it and to set up the listener
 	 *  for actions made through the toolbar.
+	 *  
 	 * @param e the ActionEvent used by the ActionListener to call on buttons in
 	 * 	the toolbar.
 	 */
@@ -124,7 +125,26 @@ public class GUIdo_Frame extends JFrame{
 				to_faq();
 			}else if(option.equals("About Us")) {
 				to_aboutus();
+			} else if(option.equals("Add Item")) {
+				to_add_item(current_user);
 			}
+		}
+	}
+	
+	
+	private void to_add_item(User user) {
+		try {
+			current_panel = new GUIdo_UploadItem(this.getWidth(),new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//assumed that this is the only action it takes 
+					display_item((ItemInfo)(e.getSource()), user);
+				}
+			},user);
+			scrollpane.getViewport().add(current_panel);
+		} catch(Exception err) {
+			//TODO logger 
+			System.err.println("ERROR setting up the upload item page ");
+			err.printStackTrace();
 		}
 	}
 	
