@@ -33,7 +33,7 @@ public class GUIdo_Frame extends JFrame{
 	/**
 	 * The JScrollPane instance used for the pages in the main part of the frame.
 	 */
-	private JScrollPane scrollpane;
+	JScrollPane scrollpane;
 	
 	/**
 	 * The cart used to hold the items that are being bought in the current session.
@@ -115,7 +115,7 @@ public class GUIdo_Frame extends JFrame{
 		} else if(e.getActionCommand().equals("login")) {
 			to_login();
 		} else if(e.getActionCommand().equals("cart")) {
-			to_cart(cart, (Customer) current_user);
+			to_cart(cart, (Customer) current_user, current_panel, scrollpane);
 		} else if(e.getActionCommand().equals("other_opt")) {
 			JComboBox cb = (JComboBox)e.getSource();
 			String option = (String)cb.getSelectedItem();
@@ -266,9 +266,9 @@ public class GUIdo_Frame extends JFrame{
 	 * @param sale the Sale object that is being used for the Cart to be able to display
 	 * 	the cart. 
 	 */
-	private void to_cart(Sale sale, Customer cust) {
+	private void to_cart(Sale sale, Customer cust, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		//set the current page to a review and edit order to see the cart 
-		this.current_panel = new GUIdo_ReviewAndEditOrder(sale, cust);
+		this.current_panel = new GUIdo_Shipping(sale, cust, current_panel, scrollpane);
 		scrollpane.getViewport().add(this.current_panel);
 		scrollpane.repaint();
 		this.current_panel.repaint();
@@ -307,7 +307,7 @@ public class GUIdo_Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("item_added")) {
 					cart = (Sale)e.getSource();
-					to_cart(cart, (Customer) user);
+					to_cart(cart, (Customer) user, current_panel, scrollpane);
 				} else if(e.getActionCommand().equals("add_review")) {
 					/* Mackenna : TODO add review viewing here */
 					//e.getSource() is the item to find reviews for 
