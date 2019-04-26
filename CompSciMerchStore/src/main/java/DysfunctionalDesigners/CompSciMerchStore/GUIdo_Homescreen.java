@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 public class GUIdo_Homescreen extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_Homescreen.class.getName());
 	private static final String SCHPIEL = "Our store vision is simple. "
 			+ "We strive to give our users a shopping experience filled "
 			+ "with reasonably-priced, entertaining, and relatable merchandise. "
@@ -30,6 +32,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 	 */
 	public GUIdo_Homescreen(ActionListener done, int width){
 		super(1500);
+		logger.info("Switched to Homescreen");
 		this.setSize(new Dimension(width, 1500));
 		
 		System.out.println("width = " + width);
@@ -67,7 +70,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		try {
 			cashn = (BufferedImage)ImageIO.read(new File("src/main/resources/cashn.jpg"));
 		} catch(Exception e) {
-			System.out.println("Error drawing CASHN");
+			logger.severe("Error drawing CASHN");
 			e.printStackTrace();
 		}
 	}
@@ -116,7 +119,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		try {
 			Thread.sleep(20);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			logger.severe("ERROR: Caught InterruptException in Homescreen");
 			e.printStackTrace();
 		}
 	}
