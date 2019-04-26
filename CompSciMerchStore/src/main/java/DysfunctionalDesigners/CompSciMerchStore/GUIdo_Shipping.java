@@ -3,7 +3,6 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,14 +14,13 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.logging.Logger;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
@@ -32,15 +30,15 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	GUIdo_Shipping current_panel = this;
 	GUIdo_ReviewAndEditOrder previous_panel;
 	
-	public GUIdo_Shipping(Sale sale, Customer customer) {
+	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Shipping Information Frame");
 		this.setPreferredSize(new Dimension(this.getWidth(), 1000));
-		this.drawScreen(sale, customer);
+		this.drawScreen(sale, customer, current_panel, scrollpane);
 		this.repaint();
 	}
 	
-	public void drawScreen(Sale sale, Customer customer) {
+	public void drawScreen(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter stateFormat = null;
 		try {
@@ -66,7 +64,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: connect to review&edit order
-				previous_panel = new GUIdo_ReviewAndEditOrder(sale, customer);
+				// previous_panel = new GUIdo_ReviewAndEditOrder(sale, customer);
 			}
 			
 		});
@@ -158,7 +156,8 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 					
 					customer.setShippingAddr(shippingAddr);
 					// TODO: proceed to payment!!!!!
-					JOptionPane.showMessageDialog(null, "Thank you for entering all information!");
+					//JOptionPane.showMessageDialog(null, "Thank you for entering all information!");
+					to_Payment(sale, customer, current_panel, scrollpane);
 				}else if(!isEnabled() || addressLine1.getText().isEmpty() || addressLine1.getText().isBlank()
 						|| cityInput.getText().isEmpty() || cityInput.getText().isBlank()
 						|| stateInput.getText().isEmpty() || stateInput.getText().isBlank()
@@ -297,6 +296,12 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 
 	
 	
+	protected void to_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_Payment(sale, customer, current_panel, scrollpane);
+		scrollpane.getViewport().add(current_panel);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
