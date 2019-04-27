@@ -83,6 +83,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		JLabel cvv = new JLabel("CVV");
 		cvv.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField cvvNum = new JFormattedTextField(cvvFormat);
+		cvvNum.setPreferredSize(new Dimension(40, 20));
 		
 		JLabel billingaddy = new JLabel("Billing Address:");
 		billingaddy.setFont(new Font("Cambria", Font.PLAIN, 16));
