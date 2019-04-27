@@ -27,8 +27,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	private static Logger logger = Logger.getLogger(GUIdo_Shipping.class.getName());
 	
 	
-	GUIdo_Shipping current_panel = this;
-	GUIdo_ReviewAndEditOrder previous_panel;
+	GUIdo_Shipping current_pan = this;
 	
 	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
@@ -101,7 +100,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		
 		// making order detail box -- reuse code in Payment && Review/Edit Order
 		JLabel orderDetails = new JLabel("Order Details");
-		orderDetails.setFont(new Font("Cambria", Font.BOLD, 34));
+		orderDetails.setFont(new Font("Cambria", Font.PLAIN, 26));
 		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
 		JLabel subtotal = null;
 		if(sale.getNumItems() == 1) {
@@ -156,8 +155,6 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 					shippingAddr.setZipCode(Integer.parseInt(zip.getText()));
 					
 					customer.setShippingAddr(shippingAddr);
-					// TODO: proceed to payment!!!!!
-					//JOptionPane.showMessageDialog(null, "Thank you for entering all information!");
 					to_Payment(sale, customer, current_panel, scrollpane);
 				}else if(!isEnabled() || addressLine1.getText().isEmpty() || addressLine1.getText().isBlank()
 						|| cityInput.getText().isEmpty() || cityInput.getText().isBlank()
@@ -183,28 +180,28 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		c.weightx = 5;
 		c.weighty = 0;
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = 1;
 		this.add(shipInfo, c); // col 1
 		c.gridx = 1;
-		c.gridy = 0;
+		c.gridy = 1;
 		this.add(shipOpt, c); // col 2
 		c.gridx = 2;
-		c.gridy = 0;
+		c.gridy = 2;
 		c.gridwidth = 2;
-		c.fill = GridBagConstraints.NONE;
-		c.anchor = GridBagConstraints.NORTH;
-		this.add(orderDetails); // col 3
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHEAST;
+		this.add(orderDetails, c); // col 3
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.gridwidth = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(addyLine1, c); // col 1
 		c.gridx = 1;
-		c.gridy = 1;
+		c.gridy = 2;
 		this.add(shipOp1, c); // col 2
 		c.gridx = 2;
-		c.gridy = 10;
+		c.gridy = 20;
 		c.weighty = 1;
 		c.ipady = 0;
 		c.gridwidth = 2;
@@ -213,68 +210,71 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.add(ptp, c);	// col 3
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.weighty = 0;
 		c.gridwidth = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		this.add(addressLine1, c); // col 1
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		this.add(addyLine2, c); // col 1
 		c.gridx = 0;
-		c.gridy = 4;
+		c.gridy = 5;
 		this.add(addressLine2, c); // col 1
 		c.gridx = 0;
-		c.gridy = 5;
+		c.gridy = 6;
 		this.add(city, c); // col 1
 		c.gridx = 0;
-		c.gridy = 6;
+		c.gridy = 7;
 		this.add(cityInput, c); // col 1
 		c.gridx = 0;
-		c.gridy = 7;
+		c.gridy = 8;
 		this.add(state, c); // col 1
 		c.gridx = 0;
-		c.gridy = 8;
+		c.gridy = 9;
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.CENTER;
 		this.add(stateInput, c); // col 1
 		//c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
-		c.gridy = 9;
+		c.gridy = 10;
 		this.add(zipcode, c); // col 1
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.NORTH;
 		c.gridx = 0;
-		c.gridy = 10;
+		c.gridy = 11;
 		this.add(zip, c); // col 1
 		
+		// back button
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridx = 0;
-		c.gridy = 13;
+		c.gridy = 0;
 		this.add(back, c);
 		
+		// order details section
 		c.gridx = 2;
-		c.gridy = 1;
+		c.gridy = 3;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(subtotal, c);
 		c.gridx = 3;
-		c.gridy = 1;
+		c.gridy = 3;
 		this.add(subNum, c);
 		c.gridx = 2;
-		c.gridy = 3;
+		c.gridy = 4;
 		this.add(estTax, c);
 		c.gridx = 3;
-		c.gridy = 3;
+		c.gridy = 4;
 		this.add(estTaxNum, c);
 		c.gridx = 2;
 		c.gridy = 5;
 		this.add(shipping, c);
 		c.gridx = 2;
-		c.gridy = 7;
+		c.gridy = 6;
 		this.add(total, c);
 		c.gridx = 3;
-		c.gridy = 7;
+		c.gridy = 6;
 		this.add(totalCostps, c);	
 		
 		shipOp1.addItemListener(new ItemListener() {
@@ -283,16 +283,17 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println("button clicked");
 					ptp.enable();
 					c.gridx = 3;
 					c.gridy = 5;
-					current_panel.add(shippingCost, c);
+					current_pan.add(shippingCost, c);
 					c.gridx = 3;
-					c.gridy = 7;
-					current_panel.remove(totalCostps);
-					current_panel.add(totalCostws, c);
-					current_panel.repaint();
-					current_panel.revalidate();
+					c.gridy = 6;
+					current_pan.remove(totalCostps);
+					current_pan.add(totalCostws, c);
+					current_pan.repaint();
+					current_pan.revalidate();
 				}else if(e.getStateChange() == ItemEvent.DESELECTED){
 					ptp.disable();
 				}
