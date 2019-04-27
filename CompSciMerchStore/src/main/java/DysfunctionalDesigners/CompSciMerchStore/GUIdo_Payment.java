@@ -15,28 +15,21 @@ import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	private static Logger logger = Logger.getLogger(GUIdo_Payment.class.getName());
-	public GUIdo_Payment(Sale sale, Customer customer) {
+	public GUIdo_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Payment Screen");
-		this.setPreferredSize(new Dimension(this.getWidth(), 1500));
-		this.drawScreen(sale, 0, customer);
+		this.setPreferredSize(new Dimension(this.getWidth(), 500 * (customer.getPaymentInfo().size() + 1)));
+		this.drawScreen(sale, 0, customer, current_panel, scrollpane);
   	    this.repaint();
 	}
 	
-//	@Override
-//	public void paintComponent(Graphics g) {
-//		g.drawRect(950, 120, 225, 250);
-//		g.drawLine(1025, 170, 1105, 170);
-//		g.drawLine(1025, 325, 1105, 325);
-//	}
-	
-
-	private void drawScreen(Sale sale, int i, Customer customer) {
+	private void drawScreen(Sale sale, int i, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter card = null;
 		try {
@@ -74,45 +67,82 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		label.setBounds(100, 0, 100, 100);
 		label.setFont(new Font("Cambria", Font.BOLD, 34));
 		
-		
 		JLabel addCard = new JLabel("Add a Card");
 		addCard.setHorizontalAlignment(JLabel.LEFT);
 		addCard.setSize(new Dimension(25, 10));
 		addCard.setFont(new Font("Cambria", Font.BOLD, 50));
 		
 		JLabel cardName = new JLabel("Name on Card");
+		cardName.setFont(new Font("Cambria", Font.BOLD, 12));
 		JTextField nameOnCard = new JTextField();
 		
 		JLabel cardNum = new JLabel("Card Number");
+		cardNum.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField numberOnCard = new JFormattedTextField(card);
 		
 		JLabel cvv = new JLabel("CVV");
+		cvv.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField cvvNum = new JFormattedTextField(cvvFormat);
 		
+		JLabel billingaddy = new JLabel("Billing Address:");
+		billingaddy.setFont(new Font("Cambria", Font.PLAIN, 16));
 		JLabel bAddress1 = new JLabel("Address Line 1");
+		bAddress1.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField addressLine1 = new JFormattedTextField();
+		JLabel bAddress2 = new JLabel("Address Line 2");
+		bAddress2.setFont(new Font("Cambria", Font.BOLD, 12));
+		JFormattedTextField addressLine2 = new JFormattedTextField();
 		JLabel bCity = new JLabel("City");
+		bCity.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField city = new JFormattedTextField();
 		JLabel bState = new JLabel("State");
+		bState.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField state = new JFormattedTextField(stateFormat);
+		state.setPreferredSize(new Dimension(30, 20));
 		JLabel bZip = new JLabel("Zipcode");
+		bZip.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField zip = new JFormattedTextField(zipFormat);
+		zip.setPreferredSize(new Dimension(50, 20));
 		
 		GUIdo_CButton placeOrder = new GUIdo_CButton(this.getWidth() / 4, this.getHeight() / 5, 150, 50, "Place Order");
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
+		GUIdo_CButton back = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Back");
 		
 		addCardButton.setActionListener_clicked(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// save payment data
-				Address ba = new Address();
-				ba.setStreet(addressLine1.getText());
-				ba.setCity(city.getText());
-				ba.setState(state.getText());
-				ba.setZipCode(Integer.valueOf(zip.getText()));
-				PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
-				customer.getPaymentInfo().add(card);
+				if(!nameOnCard.getText().isEmpty() && !nameOnCard.getText().isBlank()
+						&& !numberOnCard.getText().isEmpty() && !numberOnCard.getText().isBlank()
+						&& !cvvNum.getText().isEmpty() && !cvvNum.getText().isBlank()
+						&& !addressLine1.getText().isEmpty() && !addressLine1.getText().isBlank()
+						&& !city.getText().isEmpty() && !city.getText().isEmpty()
+						&& !state.getText().isEmpty() && !state.getText().isBlank()
+						&& !zip.getText().isEmpty() && !zip.getText().isBlank()) {
+					Address ba = new Address();
+					if(!addressLine2.getText().isEmpty()) {
+						ba.setStreet(addressLine1.getText() + " " + addressLine2.getText());
+					}else {
+						ba.setStreet(addressLine1.getText());
+					}
+					ba.setCity(city.getText());
+					ba.setState(state.getText());
+					ba.setZipCode(Integer.valueOf(zip.getText()));
+					PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
+					customer.getPaymentInfo().add(card);
+					System.out.println("added crd successfully");
+					JOptionPane.showMessageDialog(null, (Object) "Card added successfully!");
+				}else if(nameOnCard.getText().isEmpty() || nameOnCard.getText().isBlank()
+						|| numberOnCard.getText().isEmpty() || numberOnCard.getText().isBlank()
+						|| cvvNum.getText().isEmpty() || cvvNum.getText().isBlank()
+						|| addressLine1.getText().isEmpty() || addressLine1.getText().isBlank()
+						|| city.getText().isEmpty() || city.getText().isEmpty()
+						|| state.getText().isEmpty() || state.getText().isBlank()
+						|| zip.getText().isEmpty() || zip.getText().isBlank()){
+					JOptionPane.showMessageDialog(null, (Object) "Please enter valid card and billing address information");
+				}
+				
 			}
 		
 		});
@@ -134,9 +164,19 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			
 		});
 		
+		back.setActionListener_clicked(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				to_previous(sale, customer, current_panel, scrollpane);
+			}
+			
+		});
+		
 		// making order detail box -- reuse code in Shipping && Review/Edit Order
 		JLabel orderDetails = new JLabel("Order Details");
-		orderDetails.setFont(new Font("Cambria", Font.BOLD, 28));
+		orderDetails.setFont(new Font("Cambria", Font.PLAIN, 28));
 		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
 		JLabel subtotal = null;
 		if(sale.getNumItems() == 1) {
@@ -168,11 +208,16 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.weightx = 5;
 		c.weighty = 0;
 		c.insets = new Insets(1, 10, 1, 10);
-		c.anchor = GridBagConstraints.NORTH;
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.fill = GridBagConstraints.NONE;
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 5;
+		this.add(back, c);
+		c.anchor = GridBagConstraints.NORTH;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridwidth = 3;
 		this.add(label, c);
 		c.gridwidth = 1;
 		c.gridx = 0;
@@ -203,18 +248,80 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.gridx = 1;
 		c.gridy = 4;
 		this.add(cvvNum, c);
+		
+		// add card button
 		c.fill = GridBagConstraints.NONE;
-		c.anchor = GridBagConstraints.NORTHWEST;
+		c.anchor = GridBagConstraints.NORTH;
 		c.gridx = 2;
-		c.gridy = 5;
+		c.gridy = 15;
 		c.weighty = 1;
 		this.add(addCardButton, c);
+		
+		// billing address section
+		c.weighty = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.EAST;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 6;
+		this.add(billingaddy, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 7;
+		this.add(bAddress1, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 1;
+		c.gridy = 7;
+		this.add(addressLine1, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 8;
+		this.add(bAddress2, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 1;
+		c.gridy = 8;
+		this.add(addressLine2, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 9;
+		this.add(bCity, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 1;
+		c.gridy = 9;
+		this.add(city, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 10;
+		this.add(bState, c);
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 1;
+		c.gridy = 10;
+		this.add(state, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 11;
+		this.add(bZip, c);
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 1;
+		c.gridy = 11;
+		this.add(zip, c);
+		
+		// order details box
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHEAST;
 		c.weighty = 0;
 		c.gridx = 3;
 		c.gridy = 1;
-		c.gridwidth = 2;
+		//c.gridwidth = 2;
 		this.add(orderDetails, c);
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.gridwidth = 1;
@@ -249,8 +356,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.gridx = 4;
 		c.gridy = 6;
 		c.weighty = 0;
-		//this.add(placeOrder);
+		this.add(placeOrder, c);
 		
+	}
+	
+	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);
+		scrollpane.getViewport().add(current_panel);
 	}
 
 	@Override
