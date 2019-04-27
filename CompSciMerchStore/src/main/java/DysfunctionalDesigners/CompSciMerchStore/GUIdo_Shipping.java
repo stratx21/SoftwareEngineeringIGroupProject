@@ -33,7 +33,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Shipping Information Frame");
-		this.setPreferredSize(new Dimension(this.getWidth(), 1000));
+		this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		this.drawScreen(sale, customer, current_panel, scrollpane);
 		this.repaint();
 	}
@@ -65,6 +65,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				// TODO: connect to review&edit order
 				// previous_panel = new GUIdo_ReviewAndEditOrder(sale, customer);
+				to_previous(sale, customer, current_panel, scrollpane);
 			}
 			
 		});
@@ -247,6 +248,12 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		c.gridy = 10;
 		this.add(zip, c); // col 1
 		
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.gridx = 0;
+		c.gridy = 13;
+		this.add(back, c);
+		
 		c.gridx = 2;
 		c.gridy = 1;
 		c.anchor = GridBagConstraints.NORTHWEST;
@@ -296,6 +303,12 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 
 	
 	
+	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_ReviewAndEditOrder(sale, customer, current_panel, scrollpane);
+		scrollpane.getViewport().add(current_panel);
+	}
+
 	protected void to_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Payment(sale, customer, current_panel, scrollpane);

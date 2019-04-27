@@ -268,7 +268,7 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	private void to_cart(Sale sale, Customer cust, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		//set the current page to a review and edit order to see the cart 
-		this.current_panel = new GUIdo_Shipping(sale, cust, current_panel, scrollpane);
+		this.current_panel = new GUIdo_ReviewAndEditOrder(sale, cust, current_panel, scrollpane);
 		scrollpane.getViewport().add(this.current_panel);
 		scrollpane.repaint();
 		this.current_panel.repaint();
