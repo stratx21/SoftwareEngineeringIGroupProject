@@ -132,7 +132,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					ba.setZipCode(Integer.valueOf(zip.getText()));
 					PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
 					customer.getPaymentInfo().add(card);
-					System.out.println("added crd successfully");
+					logger.info("Card Added Successfully to user " + customer.getUserName());
 					JOptionPane.showMessageDialog(null, (Object) "Card added successfully!");
 				}else if(nameOnCard.getText().isEmpty() || nameOnCard.getText().isBlank()
 						|| numberOnCard.getText().isEmpty() || numberOnCard.getText().isBlank()
@@ -141,6 +141,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 						|| city.getText().isEmpty() || city.getText().isEmpty()
 						|| state.getText().isEmpty() || state.getText().isBlank()
 						|| zip.getText().isEmpty() || zip.getText().isBlank()){
+					logger.info("Credit Card Information Incomplete for user " + customer.getUserName());
 					JOptionPane.showMessageDialog(null, (Object) "Please enter valid card and billing address information");
 				}
 				
@@ -169,7 +170,6 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				to_previous(sale, customer, current_panel, scrollpane);
 			}
 			
