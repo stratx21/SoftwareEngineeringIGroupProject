@@ -123,9 +123,9 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		GUIdo_CButton home_button= null;
 		try  {
 			home_button  =  new GUIdo_CButton(x,y,height,height,
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (1).png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (2).png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (3).png"))));
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/home (1).png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/home (2).png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/home (3).png"))));
 			home_button.setActionCommand("home");
 			home_button.setActionListener_clicked(done);
 			home_button.setBackground(new Color(255,181,9));
@@ -140,9 +140,9 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		GUIdo_CButton wishlist=null;
 		try {
 			wishlist = new GUIdo_CButton(searchBar.getWidth() + 70 + cart.getWidth(),y,height,height,
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish1.png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish2.png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish3.png"))));
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/wish1.png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/wish2.png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/wish3.png"))));
 			wishlist.setActionCommand("wishlist");//command to check by to ensure the wishlist action choice 
 			wishlist.setActionListener_clicked(done);
 			wishlist.setBackground(new Color(255,181,9));
