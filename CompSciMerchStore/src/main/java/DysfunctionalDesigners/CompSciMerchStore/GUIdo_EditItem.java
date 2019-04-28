@@ -417,7 +417,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					
 					if(newimage != null) {
 						try {
-							ImageIO.write(newimage, "jpg", new File("src/main/resources/itemimages/"+ item.getExtendedItemID() + ".jpg"));
+							ImageIO.write(newimage, "jpg", new File(App.resourceTarget + "itemimages/"+ item.getExtendedItemID() + ".jpg"));
 						} catch(IOException ioex) {
 							logger.severe("ERROR saving the image in edit item");
 							ioex.printStackTrace();
