@@ -355,7 +355,8 @@ public class GUIdo_Frame extends JFrame{
 					cart = (Sale)e.getSource();
 					to_cart(cart, (Customer) user, current_panel, scrollpane);
 				} else if(e.getActionCommand().equals("add_review")) {
-					/* Mackenna : TODO add review viewing here */
+					current_panel = new GUIdo_AddReview(item, (Customer)user);
+					scrollpane.getViewport().add(current_panel);
 					//e.getSource() is the item to find reviews for 
 				} else if(e.getActionCommand().equals("edit_item")) {
 					//is confirmed that the user is the one that owns the item 
