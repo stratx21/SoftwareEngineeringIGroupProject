@@ -144,10 +144,11 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				List<Customer> allCust = control.getAllCustomers();
 				if(!username.getText().isEmpty()) {
-					for(int i = 0; i < control.getAllCustomers().size(); i++) {
-						if(username.getText().equals(control.getAllCustomers().get(i).getUserName())) {
-							String complaint = control.getAllCustomers().get(i).getComplaintPrefix() + messageBody.getText();
+					for(int i = 0; i < allCust.size(); i++) {
+						if(username.getText().equals(allCust.get(i).getUserName())) {
+							String complaint = allCust.get(i).getComplaintPrefix() + messageBody.getText();
 							temp.complaintsToJSON(complaint);
 							logger.info("Found user and exporting complaint: \"" + complaint + "\"");
 						}
