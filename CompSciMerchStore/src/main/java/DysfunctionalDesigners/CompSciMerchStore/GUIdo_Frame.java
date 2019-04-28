@@ -100,11 +100,11 @@ public class GUIdo_Frame extends JFrame{
 	public void to_all_uploaded_items(User user) {
 		List<ItemInfo> items = new ArrayList<>();
 		for(Integer id : ((Vendor)user).getUploadedItems()) {
-			items.add(new ItemInfo(id));
+			items.add(Catalogue.getInstance().getItem(id));
 		}
 		current_panel = new GUIdo_ItemCollection(this.getWidth(),items, "Uploaded Items", new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				display_item((ItemInfo)(e.getSource()), user);
 			}
 		}, user);
 		scrollpane.getViewport().add(current_panel);
@@ -127,7 +127,8 @@ public class GUIdo_Frame extends JFrame{
 					}
 				};
 				String searched = (String)e.getSource();
-				current_panel = new GUIdo_ItemCollection(getWidth(),Catalogue.getInstance().search(searched),"Search: \""+searched+"\"",toItemDisplay,current_user);
+				current_panel = new GUIdo_ItemCollection(getWidth(),Catalogue.getInstance().search(searched),
+						"Search: \""+searched+"\"",toItemDisplay,current_user);
 				scrollpane.getViewport().add(current_panel);
 			}
 		} else if(e.getActionCommand().equals("home")) {
@@ -137,7 +138,8 @@ public class GUIdo_Frame extends JFrame{
 		} else if(e.getActionCommand().equals("login")) {
 			to_login();
 		} else if(e.getActionCommand().equals("cart")) {
-			to_cart(cart, (Customer) current_user, current_panel, scrollpane);
+			if(!current_user.isAdmin())
+				to_cart(cart, (Customer) current_user, current_panel, scrollpane);
 		} else if(e.getActionCommand().equals("other_opt")) {
 			JComboBox cb = (JComboBox)e.getSource();
 			String option = (String)cb.getSelectedItem();
@@ -167,6 +169,7 @@ public class GUIdo_Frame extends JFrame{
 			current_panel = new GUIdo_UploadItem(this.getWidth(),new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//assumed that this is the only action it takes 
+					((Vendor)user).addItemToCatalogue((ItemInfo)(e.getSource()));
 					display_item((ItemInfo)(e.getSource()), user);
 				}
 			},user);
@@ -379,6 +382,7 @@ public class GUIdo_Frame extends JFrame{
 		current_panel = new GUIdo_EditItem(this.getWidth(),item,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("item_updated")) {
+//					((Vendor)user).updateUploadedItems(item.getItemID(), item);
 					display_item(item,user);
 				}
 			}
