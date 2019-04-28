@@ -106,7 +106,7 @@ public class ItemInfo {
 		
 		if(this.image==null) {
 			try {
-				this.image=ImageIO.read(new File("src/main/resources/itemimages/"
+				this.image=ImageIO.read(new File(App.resourceTarget + "itemimages/"
 						+this.extendedItemID+".jpg"));
 			} catch(IOException ioex) {
 				ioex.printStackTrace();
