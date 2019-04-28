@@ -39,12 +39,12 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
   	    this.repaint();
 	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		g.drawRect(950, 120, 225, 250);
-		g.drawLine(1025, 170, 1105, 170);
-		g.drawLine(1025, 325, 1105, 325);
-	}
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		g.drawRect(950, 120, 225, 250);
+//		g.drawLine(1025, 170, 1105, 170);
+//		g.drawLine(1025, 325, 1105, 325);
+//	}
 	
 	
 	public void drawScreen(Sale sale, int num, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
