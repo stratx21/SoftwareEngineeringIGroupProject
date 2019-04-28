@@ -89,7 +89,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 				
 				try {
 					if(e.getActionCommand().equals("Login as ADMIN")) {
-						reader = new BufferedReader(new FileReader(new File("src/main/resources/UserData/admins.txt")));
+						reader = new BufferedReader(new FileReader(new File(App.resourceTarget + "UserData/admins.txt")));
 						dataControl.getUsernamesAndPasswords(reader, usernames, passwords);
 						
 						for(int i=0;i<usernames.size();i++) {
@@ -110,7 +110,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 							}
 						}
 					} else if(e.getActionCommand().equals("Login as CUSTOMER")){
-						reader = new BufferedReader(new FileReader(new File("src/main/resources/UserData/customers.txt")));
+						reader = new BufferedReader(new FileReader(new File(App.resourceTarget + "UserData/customers.txt")));
 						dataControl.getUsernamesAndPasswords(reader, usernames, passwords);
 
 						for(int i=0;i<usernames.size();i++) {

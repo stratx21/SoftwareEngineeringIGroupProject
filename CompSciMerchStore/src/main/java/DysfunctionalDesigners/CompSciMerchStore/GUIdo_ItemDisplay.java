@@ -87,7 +87,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		this.item = itemToDisplay;
 		try {
-			this.item_image = ImageIO.read(new File("src/main/resources/itemimages/"+ this.item.getExtendedItemID() + ".jpg"));
+			this.item_image = ImageIO.read(new File(App.resourceTarget + "itemimages/"+ this.item.getExtendedItemID() + ".jpg"));
 		} catch(Exception e) {
 			logger.severe("ERROR getting image from file");
 			e.printStackTrace();
