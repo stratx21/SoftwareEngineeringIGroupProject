@@ -80,7 +80,7 @@ public class Administrator extends Vendor{
             reader = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(
-                                    new File("./src/main/resources/complaints.txt"))));
+                                    new File(App.resourceTarget + "resources/complaints.txt"))));
             logger.info("Reader successfully opened");
             String line;
             while((line = reader.readLine()) != null) {

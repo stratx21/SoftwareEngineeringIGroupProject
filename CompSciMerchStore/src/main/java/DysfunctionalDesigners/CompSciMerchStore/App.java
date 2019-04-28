@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 public class App 
 {
 	private static Logger logger = Logger.getLogger(App.class.getName());
+	static String resourceTarget = "./src/main/";//testing
+//	static String resourceTarget = "./";//jar running
+	
     public static void main( String[] args )
     {
     	try {//ask how to disable all java.awt logging
