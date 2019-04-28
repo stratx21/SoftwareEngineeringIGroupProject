@@ -17,7 +17,7 @@ public class GUIdo_UploadItem extends GUIdo_EditItem{
 	 * @throws Exception the Exception thrown from the ItemInfo construction.
 	 */
 	public GUIdo_UploadItem(int width, ActionListener done,User user) throws Exception{
-		super(width,new ItemInfo("","",0,((Vendor)(user)).getUserID(),0.00,Professor.AARSBALD),done);
+		super(width,new ItemInfo("","",0,((Vendor)(user)).getUserID(),0.00,Professor.AARSBALD),done,user);
 	}
 	
 }

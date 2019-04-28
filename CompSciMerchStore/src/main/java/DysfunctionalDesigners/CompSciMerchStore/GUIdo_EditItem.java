@@ -74,6 +74,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	
 	private JLabel current_filename = null;
 	
+	private static final int IS_VISIBLE_WIDTH = 230;
+	
 	/**
 	 * 
 	 * This sets up the edit item page so that the item information can be edited. 
@@ -81,7 +83,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 * @param item_to_edit the item to edit in this page. 
 	 * @param done the ActionListener instance that is used to return from this page. 
 	 */
-	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done) {
+	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done, User user) {
 		//page length and width 
 		super(width,1750);
 		logger.info("Switched to EditItem frame");
@@ -89,13 +91,15 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		GUIdo_EditItem.TEXTBOX_WIDTH = width*2/3;
 		this.item=item_to_edit;
 		
-		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the y to use to increase to move down the page in Components to add
 		int y = 200;
 		
 		//
 		GUIdo_CPanel panel = this;
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the name to edit 
 		JLabel name_label = new JLabel("Name");
@@ -107,6 +111,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(name);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//description text field 
 		JLabel desc_label = new JLabel("Description");
 		desc_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
@@ -117,6 +123,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(desc); 
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.TEXTBOX_HEIGHT;
 		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//the price editing 
 		JLabel price_label = new JLabel("Price");
 		price_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
@@ -126,6 +135,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		price.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(price);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the stock editing to change the stock 
 		JLabel stock_label = new JLabel("Stock");
@@ -150,9 +161,12 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		ArrayList<String> profnames = new ArrayList<>();
 		Arrays.asList(Professor.values()).forEach(p -> profnames.add(p.name()));
 		
+		///////////////////////////////////////////////////////////////////////////////////////
+		
 		//remove the dysfunctional designers option to not allow any more items
 		//to be added to that seciton: 
-		profnames.remove(profnames.size()-1);
+		if(!user.isAdmin())
+			profnames.remove(profnames.size()-1);
 		JComboBox professors = new JComboBox(profnames.toArray());
 		professors.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		professors.setBackground(new Color(255,181,9));
@@ -161,7 +175,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(professors);
 		y+=professors.getHeight()+GUIdo_EditItem.Y_GAP;
 		
-		//
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//the label for seeing the discount: 
 		JLabel discount_label = new JLabel("Discount");
 		discount_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -171,6 +188,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(discount);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//changing the display image:: 
 		JLabel image_label = new JLabel("Display Image");
 		image_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -206,6 +227,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		y += GUIdo_EditItem.DONE_HEIGHT;
 		this.add(image_upload_button);
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//get the promo set and put it in a string to show to the user:
 		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue());
 		JLabel promo_label = new JLabel("Promo Codes");
@@ -216,6 +239,51 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		promocodes.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(promocodes);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		//the viewable stuff for enabling and disabling the item on the store: 
+		
+		JLabel isViewable = new JLabel("Item is visible on the store: ");
+		isViewable.setBounds(width/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2-GUIdo_EditItem.DONE_WIDTH/2,y,
+				GUIdo_EditItem.IS_VISIBLE_WIDTH,GUIdo_EditItem.DONE_HEIGHT);
+		
+		this.add(isViewable);
+		
+		GUIdo_CButton viewable 
+			= new GUIdo_CButton(width/2+GUIdo_EditItem.DONE_WIDTH/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2,
+					y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT,"YES");
+		viewable.setBackground(Color.GREEN);
+		if(!item.isEnabled()) {
+			viewable.setText("NO");
+			viewable.setBackground(Color.RED);
+//			viewable.repaint();
+		}
+		
+		viewable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(item.isEnabled()) {
+					item.disable();
+					viewable.setText("NO");
+					viewable.setBackground(Color.RED);
+					viewable.repaint();
+				} else {
+					item.enable();
+					viewable.setText("YES");
+					viewable.setBackground(Color.GREEN);
+					viewable.repaint();
+				}
+			}
+		});
+		
+		y+=GUIdo_EditItem.DONE_HEIGHT+GUIdo_EditItem.Y_GAP;
+		this.add(viewable);
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		
 		GUIdo_CButton done_button 
 		    = new GUIdo_CButton(width/2-GUIdo_EditItem.DONE_WIDTH/2,y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT, 
