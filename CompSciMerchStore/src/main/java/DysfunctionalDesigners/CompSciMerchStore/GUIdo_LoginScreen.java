@@ -26,6 +26,14 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 	GUIdo_CButton btn1, btn2, btn3, btn4, btn5;
 	JPasswordField p1;
 	
+	/**
+	 * This sets up the login screen using an ActionListener to go to wherever
+	 *  it may need to go after, depending on the decision that is made by
+	 *  the user. 
+	 * 
+	 * @param al the ActionListener used to control the flow of
+	 *  the program. 
+	 */
 	public GUIdo_LoginScreen(final ActionListener al) {
 		super(400);
 		logger.info("Switched to Login Screen");

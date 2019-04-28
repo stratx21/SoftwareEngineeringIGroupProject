@@ -382,7 +382,7 @@ public class GUIdo_Frame extends JFrame{
 					display_item(item,user);
 				}
 			}
-		});
+		},user);
 		scrollpane.getViewport().add(current_panel);
 	}
 	
