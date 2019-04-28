@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GUIdo_EditItem extends GUIdo_CPanel{
-
+	private static Logger logger = Logger.getLogger(GUIdo_EditItem.class.getName());
+	
 	/**
 	 * The ItemInfo instance that is being edited. 
 	 */
@@ -82,6 +84,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done) {
 		//page length and width 
 		super(width,1750);
+		logger.info("Switched to EditItem frame");
 		//get the width to use for the boxes 
 		GUIdo_EditItem.TEXTBOX_WIDTH = width*2/3;
 		this.item=item_to_edit;
@@ -188,8 +191,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		            	current_filename.setText(prompt.getSelectedFile().getName());
 		            	current_filename.repaint();
 		            } catch(Exception err) {
-		            	//TODO logger 
-		            	System.out.println("ERROR getting image from the the selected image, \"" + prompt.getSelectedFile().getName() + "\"");
+		            	logger.severe("ERROR getting image from the the selected image, \"" + prompt.getSelectedFile().getName() + "\"");
 		            	err.printStackTrace();
 		            }
 		        }
@@ -248,9 +250,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				try {
 					new_price = Double.parseDouble(price.getText());
 				} catch(NumberFormatException err) {
-					//Ethan logger TODO
 					error_message += " converting the price; use format of 0.00 \n";
-					System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+					logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 							+ "done_button listener, parsing price");
 					validated = false;
 				}
@@ -259,9 +260,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_stock = Integer.parseInt(stock.getText());
 					} catch(NumberFormatException err) {
-						//Ethan logger TODO
 						error_message += " converting the stock; use format of integer values only \n";
-						System.err.println("ERROR casting to int : GUIdo_EditItem constructor, "
+						logger.severe("ERROR casting to int : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing stock");
 						validated = false;
 					}
@@ -271,10 +271,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_professor = Professor.values()[professors.getSelectedIndex()];
 					} catch(Exception err) {
-						//Ethan logger TODO
 						error_message += " converting the professor; choose one option. The index chosen is: "
 								+professors.getSelectedIndex() +" \n";
-						System.err.println("ERROR getting professor from data, "
+						logger.severe("ERROR getting professor from data, "
 								+ "done_button listener, parsing stock");
 						validated = false;
 					}
@@ -284,9 +283,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_discount = Double.parseDouble(discount.getText());
 					} catch(NumberFormatException err) {
-						//Ethan logger TODO 
 						error_message += " converting the discount; use format of 0.00 \n";
-						System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+						logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing discount");
 						validated = false;
 					}
@@ -308,9 +306,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 								  new_promos.put(parts[0], amount);
 								}catch(NumberFormatException err) {
 								  //not a double
-									//Ethan logger TODO 
 									error_message += " converting the amount for the discount; use format of 0.00 \n";
-									System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+									logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 											+ "done_button listener, parsing promo code");
 									validated = false;
 								}
@@ -329,8 +326,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 						item.setSaleDiscount(new_discount);
 						item.setPromoDiscounts(new_promos);
 					} catch(Exception err) {
-						//Ethan logger 
-						System.err.println("ERROR putting information into the item instance : "
+						logger.severe("ERROR putting information into the item instance : "
 								+ "GUIdo_EditItem constructor, done_button listenner, parsing promo code");
 					}
 				}
@@ -342,9 +338,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						Catalogue.getInstance().updateItem(item.getItemID(), item);
 					} catch(Exception err) {
-						System.err.println("ERROR updating item in GUIdo_EditItem ");
+//						System.err.println("ERROR updating item in GUIdo_EditItem ");
 						err.printStackTrace();
-						//TODO:: Ethan logger 
+						logger.severe("ERROR: updating the item being edited, for exception thrown by Catalogue updateItem; could " + 
+								"be a null error or something else. Doubtful that it's null though.");
 						// error updating the item being edited, for exception thrown by Catalogue updateItem; could
 						//be a null error or something else. Doubtful that it's null though 
 					}
@@ -352,12 +349,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					
 					if(newimage != null) {
 						try {
-							
-							//TODO : test if it has two .jpg extensions on the end
 							ImageIO.write(newimage, "jpg", new File("src/main/resources/itemimages/"+ item.getExtendedItemID() + ".jpg"));
 						} catch(IOException ioex) {
-							//TODO logger 
-							System.err.println("ERROR saving the image in edit item");
+							logger.severe("ERROR saving the image in edit item");
 							ioex.printStackTrace();
 						}
 					}
