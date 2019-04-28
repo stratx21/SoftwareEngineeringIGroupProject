@@ -44,7 +44,7 @@ public class Catalogue {//singleton
 	 */
 	protected Catalogue() {
 		try{
-//    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
+//    		instance.readFile(new BufferedReader(new FileReader(new File(App.resourceTarget + "catalogue.txt"))));
 			this.readJSONFile();
 			logger.info("Successfully imported the JSON catalogue file");
     	} catch(Exception e) {
@@ -85,7 +85,7 @@ public class Catalogue {//singleton
 	 */
 	private void readJSONFile() throws Exception {
 		//get the next number
-		Scanner scan = new Scanner(new File("src/main/resources/NEXT_ID.txt"));
+		Scanner scan = new Scanner(new File(App.resourceTarget + "NEXT_ID.txt"));
 		int nextNum = scan.nextInt();
 		ItemInfo.setNextID(nextNum);
 		scan.close();
@@ -95,7 +95,7 @@ public class Catalogue {//singleton
 
 		this.catalogue = null;
         //User readAdmin2 = null;
-        File in = new File("src/main/resources/catalogue.json");
+        File in = new File(App.resourceTarget + "catalogue.json");
         try {
         	catalogue = mapper.readValue(in, new TypeReference<HashMap<Integer, ItemInfo>>(){});
         	logger.info("Successfully parsed the catalogue from the file.");
@@ -121,15 +121,15 @@ public class Catalogue {//singleton
 			ObjectMapper mapper = new ObjectMapper();
 	
 	        try {
-	            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/catalogue.json"), this.catalogue);
+	            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(App.resourceTarget + "catalogue.json"), this.catalogue);
 	            logger.info("Successfully printed catalogue to catalogue.json");
 	        } catch (IOException e) {
-	            logger.severe("ERROR: COULD NOT WRITE CATALOGUE TO SRC/MAIN/RESOURCES/CATALOGUE.JSON! " + e.getMessage());
+	            logger.severe("ERROR: COULD NOT WRITE CATALOGUE TO " + App.resourceTarget + "CATALOGUE.JSON! " + e.getMessage());
 	            e.printStackTrace();
 	        }
 	        
 	        try {
-				BufferedWriter bf = new BufferedWriter(new FileWriter(new File("src/main/resources/NEXT_ID.txt")));
+				BufferedWriter bf = new BufferedWriter(new FileWriter(new File(App.resourceTarget + "NEXT_ID.txt")));
 				bf.write(ItemInfo.getNEXTID() + "");
 				bf.close();
 				logger.info("Successfully wrote next id to file: " + ItemInfo.getNEXTID());
