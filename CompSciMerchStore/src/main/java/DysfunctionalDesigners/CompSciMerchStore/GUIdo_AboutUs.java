@@ -36,7 +36,7 @@ public class GUIdo_AboutUs extends GUIdo_CPanel{
 //				+ "You can find us in the second row on the left side during class and\n\n"
 //				+ "our favorite theme when presenting is imitating the great and powerful Dr. Booth.\n\n");
 //		
-		
+		//1 per line
 		String about = "Welcome to our store, we hope you are enjoying your shopping experience! \n"
 				     + "Our store was founded with the intent of creating a warm and welcoming atmosphere for our shoppers who are interested in Computer Science at Baylor. \n"
 				     + "Whether or not you are looking to buy something for yourself or others, we hope we can be here for you!\n"
@@ -44,22 +44,31 @@ public class GUIdo_AboutUs extends GUIdo_CPanel{
 				     + "Our merch is dedicated to the amazing professors we have had throughout the first two years of our degree. \n"
 				     + "We hope you can support us! Have a wonderful day!";
 		
-		description = new JTextArea(about);
+		String about2 = "Welcome to our store, we hope you are enjoying your shopping experience! Our store was \n"
+				+ "founded with the intent of creating a warm and welcoming atmosphere for our shoppers \n"
+				+ "who are interested in Computer Science at Baylor. Whether or not you are looking to \n"
+				+ "buy something for yourself or others, we hope we can be here for you! Our merchandise \n"
+				+ "is targeted at a select market: those who understand and/or support the daily life of \n"
+				+ "a Baylor Computer Science Major. Our merch is dedicated to the amazing professors we \n"
+				+ "have had throughout the first two years of our degree. We hope you can support us! \n"
+				+ "Have a wonderful day!";
+		
+		description = new JTextArea(about2);
 				
 		
-		JLabel who = new JLabel("This store was created by: Ethan Dickey, Josh Holland, Em Lakin, \n"
+		JLabel who = new JLabel("Brought to you by: Ethan Dickey, Josh Holland, Em Lakin, \n"
 				+ "Mackenna Semeyn, Harrison Rogers, and Josh Hanscheck");
 		
 		aboutUs.setHorizontalAlignment(JLabel.CENTER);
 		aboutUs.setVerticalAlignment(JLabel.CENTER);
-		aboutUs.setBounds(100, 0, 100, 100);
+		//aboutUs.setBounds(100, 0, 100, 100);
 		aboutUs.setFont(new Font("Cambria", Font.BOLD, 34));
 		
 		description.setBackground(this.getBackground());
 		description.setFont(new Font("Cambria", Font.BOLD, 22));
-		description.setBounds(50, 100, 600, 700);
+		//description.setBounds(50, 100, 600, 700);
 		
-		who.setFont(new Font("Cambria",Font.ITALIC, 20));
+		who.setFont(new Font("Cambria",Font.ITALIC, 18));
 		GridBagLayout gbl = new GridBagLayout();
 		this.setLayout(gbl);
 		GridBagConstraints c = new GridBagConstraints();
