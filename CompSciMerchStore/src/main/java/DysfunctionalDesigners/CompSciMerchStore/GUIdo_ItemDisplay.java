@@ -293,7 +293,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			lowestPointY = add_review_button.getY()+add_review_button.getHeight();
 		}
 		
-		if(item.getVendorID() == user.getUserID()) {
+		if(item.getVendorID() == user.getUserID() || user.isAdmin()) {
 			//then the user is the vendor of this item
 			//add the button to edit the item's information 
 			GUIdo_CButton edit_item_button = new GUIdo_CButton(quantityis.getX(),lowestPointY+10,200,75,"Edit item");
