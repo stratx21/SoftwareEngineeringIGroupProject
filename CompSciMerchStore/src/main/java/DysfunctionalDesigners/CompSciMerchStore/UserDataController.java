@@ -56,7 +56,7 @@ public class UserDataController {
         for (String username : usernames) {
             ObjectMapper mapper = new ObjectMapper();
             Customer nextCust = null;
-            File usrFile = new File("./src/main/resources/UserData/" + username + ".json");
+            File usrFile = new File(App.resourceTarget + "resources/UserData/" + username + ".json");
 
             try {
                 nextCust = mapper.readValue(usrFile, Customer.class);
@@ -93,7 +93,7 @@ public class UserDataController {
         for (String username : usernames) {
             ObjectMapper mapper = new ObjectMapper();
             Administrator nextCust = null;
-            File usrFile = new File("./src/main/resources/UserData/" + username + ".json");
+            File usrFile = new File(App.resourceTarget + "resources/UserData/" + username + ".json");
 
             try {
                 nextCust = mapper.readValue(usrFile, Administrator.class);
@@ -127,7 +127,7 @@ public class UserDataController {
 
         ObjectMapper mapper = new ObjectMapper();
         Customer cust = null;
-        cust = mapper.readValue(new File("./src/main/resources/UserData/" + username + ".json"),
+        cust = mapper.readValue(new File(App.resourceTarget + "resources/UserData/" + username + ".json"),
                 Customer.class);
         pastSalesOfUser = cust.getPastSales();
 
@@ -146,7 +146,7 @@ public class UserDataController {
         List<String> validAdmins = getAdminUsernames();
 
         validAdmins.forEach(e -> {
-            File nxtAdminFile = new File("./src/main/resources/UserData/" + e + ".json");
+            File nxtAdminFile = new File(App.resourceTarget + "resources/UserData/" + e + ".json");
             ObjectMapper mapper = new ObjectMapper();
             Administrator nextAdmin = null;
             try {
@@ -172,7 +172,7 @@ public class UserDataController {
         List<String> validAdmins = getAdminUsernames();
 
         validAdmins.forEach(e -> {
-            File nxtAdminFile = new File("./src/main/resources/UserData/" + e + ".json");
+            File nxtAdminFile = new File(App.resourceTarget + "resources/UserData/" + e + ".json");
             ObjectMapper mapper = new ObjectMapper();
             Administrator nextAdmin = null;
             try {
@@ -198,7 +198,7 @@ public class UserDataController {
         List<String> validCustomers = getCustomerUsernames();
 
         validCustomers.forEach(e -> {
-            File nxtCustFile = new File("./src/main/resources/UserData/" + e + ".json");
+            File nxtCustFile = new File(App.resourceTarget + "resources/UserData/" + e + ".json");
             ObjectMapper mapper = new ObjectMapper();
             Customer nextCust = null;
             try {
@@ -227,7 +227,7 @@ public class UserDataController {
             reader = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(
-                                    new File("./src/main/resources/UserData/customers.txt"))));
+                                    new File(App.resourceTarget + "resources/UserData/customers.txt"))));
             addNamesToList(reader, usernames);
         } catch (FileNotFoundException ex) {
             logger.severe("Failure to open reader for customers file. In Method getCustomerUsernames. Severe Failure, exiting...");
@@ -278,7 +278,7 @@ public class UserDataController {
             reader = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(
-                                    new File("./src/main/resources/UserData/admins.txt"))));
+                                    new File(App.resourceTarget + "resources/UserData/admins.txt"))));
         } catch (FileNotFoundException ex) {
             logger.severe("Failure to open reader for admins file in getAdminUsernames. Severe Failure, exiting...");
             ex.printStackTrace();
@@ -298,7 +298,7 @@ public class UserDataController {
      */
     public void writeAdmin(Administrator adminToWrite) {
         logger.info("Writing/updating admin: " + adminToWrite.getUserName());
-        File adminFile = new File("./src/main/resources/UserData/" + adminToWrite.getUserName() + ".json");
+        File adminFile = new File(App.resourceTarget + "resources/UserData/" + adminToWrite.getUserName() + ".json");
         try {
             adminFile.createNewFile(); //creates  new file if it doesn't exist
         } catch (IOException e) {
@@ -322,7 +322,7 @@ public class UserDataController {
      */
     public void writeCustomer(Customer custToWrite) {
         logger.info("Writing/Updating Customer: " + custToWrite.getUserName());
-        File custFile = new File("./src/main/resources/UserData/" + custToWrite.getUserName() + ".json");
+        File custFile = new File(App.resourceTarget + "resources/UserData/" + custToWrite.getUserName() + ".json");
         try {
             custFile.createNewFile(); //creates  new file if it doesn't exist
         } catch (IOException e) {
