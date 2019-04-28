@@ -286,6 +286,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			add_review_button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"add_review"));
+					// TODO: link panel to add review
+					// verify that customer has purchased item before
 				}
 			});
 			this.add(add_review_button);
