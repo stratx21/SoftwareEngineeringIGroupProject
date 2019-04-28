@@ -146,6 +146,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		options.add("FAQ"); 
 		options.add("About Us");
 		options.add("Add Item");
+		options.add("All Uploaded Items");
 		
 		otherOptions = new JComboBox(options.toArray());
 		otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
