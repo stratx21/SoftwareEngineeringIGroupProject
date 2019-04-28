@@ -295,6 +295,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			lowestPointY = add_review_button.getY()+add_review_button.getHeight();
 		}
 		
+  		//if the user is a vendor or an admin: 
 		if(item.getVendorID() == user.getUserID() || user.isAdmin()) {
 			//then the user is the vendor of this item
 			//add the button to edit the item's information 

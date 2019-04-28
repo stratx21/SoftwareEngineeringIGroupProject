@@ -16,11 +16,18 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
+	
+	/**
+	 * The logger instance that is used to log for the program. 
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_CToolbar.class.getName());
+	
 	/**
 	 * This function tells if the buttons are disabled. 
+	 * 
 	 * @return a boolean concerning if the buttons are
 	 * 	disabled. 
+	 * 
 	 */
 	public boolean getButtons_disabled() {
 		return disabled;
@@ -28,21 +35,29 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 
 	/**
 	 * The text field that is used for the search bar to search the store. 
+	 * 
 	 */
 	private JTextField searchBar;
 	
 	/**
 	 * The boolean to tell if the buttons and search bar are disabled; This is 
 	 *  used to disable the search bar. 
+	 *  
 	 */
 	private boolean disabled;
 	
 	/**
 	 * The list of buttons in the toolbar to be used so that they can be disabled
 	 *  and enabled. 
+	 *  
 	 */
 	private ArrayList<GUIdo_CButton> buttons = new ArrayList<>();
 	
+	/**
+	 * 
+	 * The other options given in the dropdown menu. 
+	 * 
+	 */
 	private JComboBox otherOptions;
 	
 	/**
@@ -139,7 +154,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		
 		
-		//Go to GUIdo_Frame in toolbar_call to add an ActionEvent
+		//the options used for the combo box: 
 		List<String> options = new ArrayList<String>();
 		options.add("Other Options"); 
 		options.add("Contact Us"); 
@@ -148,6 +163,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		options.add("Add Item");
 		options.add("All Uploaded Items");
 		
+		//set up the dropdown menu with a JComboBox for the other options: 
 		otherOptions = new JComboBox(options.toArray());
 		otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
 				y, cart.getWidth()+home_button.getWidth(), height);
