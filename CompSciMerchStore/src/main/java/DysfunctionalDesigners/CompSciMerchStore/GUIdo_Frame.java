@@ -75,6 +75,7 @@ public class GUIdo_Frame extends JFrame{
 	 * list of items for middle member deals
 	 */
 	private List<Integer> middleMemberDeals = Arrays.asList(10,16,22,17,35);
+	
 	/**
 	 * list of items for elite member deals
 	 */
@@ -83,9 +84,30 @@ public class GUIdo_Frame extends JFrame{
 	/**
 	 * This initializes the GUIdo_Frame instance; it calls initialize to
 	 * 	organize the setup and have the ability to call it again. 
+	 * 
 	 */
 	public GUIdo_Frame() {
 		this.initialize();
+	}
+	
+	/**
+	 * This shows the list of all the items that the given user has uploaded,
+	 *  by showing the item collection of all the items. 
+	 *  
+	 * @param user The User instance that has uploaded the items. 
+	 * 
+	 */
+	public void to_all_uploaded_items(User user) {
+		List<ItemInfo> items = new ArrayList<>();
+		for(Integer id : ((Vendor)user).getUploadedItems()) {
+			items.add(new ItemInfo(id));
+		}
+		current_panel = new GUIdo_ItemCollection(this.getWidth(),items, "Uploaded Items", new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		}, user);
+		scrollpane.getViewport().add(current_panel);
 	}
 	
 	/**
@@ -127,11 +149,19 @@ public class GUIdo_Frame extends JFrame{
 				to_aboutus();
 			} else if(option.equals("Add Item")) {
 				to_add_item(current_user);
+			} else if(option.contentEquals("All Uploaded Items")){
+				to_all_uploaded_items(current_user);
 			}
-		}
+				
+		} 
 	}
 	
-	
+	/**
+	 * Go to the page to add an item and insert the information to be
+	 *  able to do so. 
+	 *  
+	 * @param user the User instance that is logged in adding the item. 
+	 */
 	private void to_add_item(User user) {
 		try {
 			current_panel = new GUIdo_UploadItem(this.getWidth(),new ActionListener() {
@@ -148,16 +178,29 @@ public class GUIdo_Frame extends JFrame{
 		}
 	}
 	
+	/**
+	 * This goes to the contact us page for the program. 
+	 * 
+	 */
 	private void to_contactus() {
 		current_panel = new GUIdo_ContactUs();
 		scrollpane.getViewport().add(current_panel);
 	}
 	
+	/**
+	 * This goes to the FAQ Frequently Asked Questions page
+	 *  for the site. 
+	 *  
+	 */
 	private void to_faq() {
 		current_panel = new GUIdo_FAQScreen();
 		scrollpane.getViewport().add(current_panel);
 	}
 	
+	/**
+	 * This goes to the About Us page for the program. 
+	 * 
+	 */
 	private void to_aboutus() {
 		current_panel = new GUIdo_AboutUs();
 		scrollpane.getViewport().add(current_panel);
@@ -276,6 +319,7 @@ public class GUIdo_Frame extends JFrame{
 	
 	/**
 	 * This function goes to and sets up the homescreen. 
+	 * 
 	 */
 	private void to_homescreen() {
 		//set up the homescreen using an ActionListener for the 2 featured items and the width
@@ -295,8 +339,10 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	/**
+	 * 
 	 * This function displays the item specified by the parameter with all the 
 	 * 	details for the user to see.
+	 * 
 	 * @param item the item to display information for. 
 	 */
 	private void display_item(ItemInfo item, User user) {
@@ -341,7 +387,8 @@ public class GUIdo_Frame extends JFrame{
 	}
 	
 	/**
-	 * Function loads the member deals page
+	 * Function loads the member deals page.
+	 * 
 	 */
 	private void to_MemberDeals(boolean popup) {
 		Boolean ready = false;
@@ -449,6 +496,7 @@ public class GUIdo_Frame extends JFrame{
 	 * This initializes this instance of GUIdo_Frame by setting up the frame,
 	 * 	setting up the toolbar and the scrolling pane with the current panel
 	 *  within a panel to add to the frame. 
+	 *  
 	 */
 	public void initialize() {
 		
