@@ -106,7 +106,14 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 //		
 //		ans6.setHorizontalAlignment(JLabel.CENTER);
 //	//	ans6.setVerticalAlignment(JLabel.CENTER);
-		JLabel spacer = new JLabel ("\n");
+		JLabel spacer1 = new JLabel ("\n");
+		JLabel spacer2 = new JLabel ("\n");
+		JLabel spacer3 = new JLabel ("\n");
+		JLabel spacer4 = new JLabel ("\n");
+		JLabel spacer5 = new JLabel ("\n");
+		JLabel bigspace = new JLabel ("\n\n");
+		
+		
 		
 		faq1.setFont(new Font("Cambria", Font.BOLD, 22));
 		faq2.setFont(new Font("Cambria", Font.BOLD, 22));
@@ -133,6 +140,9 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 		
 		this.add(title,c);
 		
+		c.gridy = 1;
+		this.add(bigspace,c);
+		
 		c.gridy = 3;
 		
 		this.add(faq1,c);
@@ -141,7 +151,7 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 		this.add(ans1,c);
 		
 		c.gridy = 5;
-		this.add(spacer,c);
+		this.add(spacer1,c);
 		
 		c.gridy = 6;
 		this.add(faq2,c);
@@ -150,7 +160,7 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 		this.add(ans2,c);
 		
 		c.gridy = 8;
-		this.add(spacer,c);
+		this.add(spacer2,c);
 		
 		c.gridy = 9;
 		this.add(faq3,c);
@@ -159,21 +169,33 @@ public class GUIdo_FAQScreen extends GUIdo_CPanel{
 		this.add(ans3,c);
 		
 		c.gridy = 11;
-		this.add(spacer,c);
+		this.add(spacer3,c);
 		
 		c.gridy = 12;
 		this.add(faq4,c);
+		
 		c.gridy = 13;
 		this.add(ans4,c);
+		
+		c.gridy = 14;
+		this.add(spacer4,c);
+		
 		c.gridy = 15;
 		this.add(faq5,c);
+		
 		c.gridy = 16;
 		this.add(ans5,c);
+		
+		c.gridy = 17;
+		this.add(spacer5,c);
+		
 		c.gridy = 18;
 		this.add(faq6,c);
-		c.gridy = 20;
+		
+		
+		c.gridy = 19;
 		this.add(ans6,c);
-		c.gridy = 21;
+		c.gridy = 20;
 		
 		JLabel fake = new JLabel ("");
 		c.weighty = 1;
