@@ -1,0 +1,16 @@
+{
+  "email" : "bob@cs.baylor.edu",
+  "motherMaidenName" : "smith",
+  "userName" : "bob",
+  "password" : "takingtheREINs",
+  "name" : "Bob Rein",
+  "userID" : 10000,
+  "uploadedItems" : [ ],
+  "pastSales" : [ ],
+  "status" : "GENERAL",
+  "shippingAddr" : null,
+  "wishList" : [ ],
+  "paymentInfo": [ ],
+  "previousPurchases": [ ],
+  "cart": null
+}

@@ -26,7 +26,6 @@ import javax.swing.text.MaskFormatter;
 public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	private static Logger logger = Logger.getLogger(GUIdo_Shipping.class.getName());
 	
-	
 	GUIdo_Shipping current_pan = this;
 	
 	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
@@ -283,7 +282,6 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getStateChange() == ItemEvent.SELECTED) {
-					System.out.println("button clicked");
 					ptp.enable();
 					c.gridx = 3;
 					c.gridy = 5;

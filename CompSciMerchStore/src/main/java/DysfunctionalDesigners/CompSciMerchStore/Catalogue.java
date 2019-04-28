@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Catalogue {//all should be static as the top-level class unfortunately cannot be
+public class Catalogue {//singleton
 	private Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private int numItems = 0;
 	private static Catalogue instance = null;
