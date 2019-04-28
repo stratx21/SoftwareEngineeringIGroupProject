@@ -1,7 +1,10 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -17,6 +20,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 //import com.fasterxml.jackson.core.JsonGenerationException;
@@ -28,9 +32,10 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	private static Logger logger = Logger.getLogger(GUIdo_ContactUs.class.getName());
 
 	//whatever, user, email, message, title
-	JLabel l1, l2, l3, l4, l5;
+	JLabel title, getUN, getEmail, message, l5;
 	//user, email, message
-	JTextField tf1, tf2, tf3;
+	JTextField username, email;
+	JTextArea messageBody;
 	GUIdo_CButton btn1;
 	
 	private List<String> complaints = new ArrayList<String>();
@@ -82,7 +87,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 				writer.close();
 				logger.info("Successfully exported.");
 			} catch(IOException e) {
-				// TODO Auto-generated catch block
+				
 				logger.severe("ERROR: FAILED TO EXPORT COMPLAINTS: " + e.getMessage());
 				e.printStackTrace();
 			}
@@ -104,58 +109,88 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 		
 		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
-		l1 = new JLabel("Contact Us");
-		l1.setForeground(Color.blue);
-		l1.setFont(new Font("Arial", Font.BOLD, 20));
+		title = new JLabel("Contact Us");
 		
-		l2 = new JLabel("Enter username:");
-		l3 = new JLabel("Enter email:");
-		l4 = new JLabel("Enter message/complaint:");
-		l5 = new JLabel("Contact Us!");
+		title.setFont(new Font("Cambria", Font.BOLD, 34));
+		title.setHorizontalAlignment(JLabel.CENTER);
+		title.setVerticalAlignment(JLabel.CENTER);
+		//title.setBounds(100, 0, 100, 100);
+		getUN = new JLabel("Enter username:");
+		getUN.setFont(new Font("Cambria",Font.PLAIN,20));
+		getEmail = new JLabel("Enter email:");
+		getEmail.setFont(new Font("Cambria",Font.PLAIN, 20));
+		message = new JLabel("Enter message/complaint:");
+		message.setFont(new Font("Cambria", Font.PLAIN, 20));
+		//l5 = new JLabel("Contact Us!");
 		
-		tf1 = new JTextField();
-		tf2 = new JTextField();
-		tf3 = new JTextField();
+		username = new JTextField();
+		email = new JTextField();
+		messageBody = new JTextArea();
 		
 		btn1 = new GUIdo_CButton(750, 750, 170, 30, "Submit");
+//		
+//		getUN.setBounds(100, 100, 200, 30);
+//		getEmail.setBounds(300, 100, 200, 30);
+//		message.setBounds(100, 200, 200, 30);
 		
-		l2.setBounds(100, 100, 200, 30);
-		l3.setBounds(300, 100, 200, 30);
-		l4.setBounds(100, 200, 200, 30);
-		l5.setBounds(400, 30, 200, 30);
 		
-		tf1.setBounds(100, 140, 200, 30);
-		tf2.setBounds(300, 140, 200, 30);
-		tf3.setBounds(100, 240, 400, 100);
+		
+		username.setPreferredSize(new Dimension(10,50));
+		email.setPreferredSize(new Dimension(10,70));
+		messageBody.setPreferredSize(new Dimension(500,500));
+		
 		
 		btn1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!tf1.getText().isEmpty()) {
-					for(int i = 0; i < control.getAllCustomers().size(); i++) {
-						if(tf1.getText().equals(control.getAllCustomers().get(i).getUserName())) {
-							String complaint = control.getAllCustomers().get(i).getComplaintPrefix() + tf3.getText();
+				List<Customer> allCust = control.getAllCustomers();
+				if(!username.getText().isEmpty()) {
+					for(int i = 0; i < allCust.size(); i++) {
+						if(username.getText().equals(allCust.get(i).getUserName())) {
+							String complaint = allCust.get(i).getComplaintPrefix() + messageBody.getText();
 							temp.complaintsToJSON(complaint);
 							logger.info("Found user and exporting complaint: \"" + complaint + "\"");
 						}
 					}
 				}
+				
 				JOptionPane.showMessageDialog(panel, "Complaint has been submitted!", "Accepted", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});
 		
-		this.add(l1);
-		this.add(l2);
-		this.add(l3);
-		this.add(l4);
-		this.add(l5);
+		messageBody.setEditable(true);
+		messageBody.setLineWrap(true);
 		
-		this.add(tf1);
-		this.add(tf2);
-		this.add(tf3);
+		GridBagLayout gbl = new GridBagLayout();
+		this.setLayout(gbl);
+		GridBagConstraints c = new GridBagConstraints();
 		
-		this.add(btn1);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTH;
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(title,c);
+		c.gridy = 1;
+		this.add(getUN,c);
+		c.gridy = 3;
+		this.add(getEmail,c);
+		c.gridy = 5;
+		this.add(message,c);
+		
+		c.gridy = 2;
+		c.gridx = 0;
+		this.add(username,c);
+		c.gridy = 4;
+		this.add(email,c);
+		c.gridy = 6;
+		this.add(messageBody,c);
+		c.gridx = 0;
+		c.gridy = 7;
+		this.add(btn1,c);
+		JLabel fake = new JLabel ("");
+		c.weighty = 1;
+		this.add(fake,c);
 	}
 }
