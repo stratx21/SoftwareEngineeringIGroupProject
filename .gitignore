@@ -137,3 +137,4 @@ local.properties
 
 CompSciMerchStore/src/main/resources/NEXT_SALE_ID\.txt
 CompSciMerchStore/logger.*
+CompSciMerchStore/reports.*

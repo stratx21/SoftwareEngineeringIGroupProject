@@ -22,7 +22,7 @@ public class GUIdo_AboutUs extends GUIdo_CPanel{
 	 */
 	GUIdo_AboutUs(){
 		super(600);	
-		
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to panel AboutUs");
 		
 		aboutUs = new JLabel("About us\n");

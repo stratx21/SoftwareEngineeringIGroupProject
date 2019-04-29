@@ -24,6 +24,7 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 	GUIdo_ForgotPassword(final ActionListener al){
 		super(500);
 		logger.info("Switched to ForgotPassword");
+		this.setBackground(Color.WHITE);
 		
 		JLabel l1, enterUN, l3, l4, l5, title;
 		

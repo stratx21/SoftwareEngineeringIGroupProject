@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -17,6 +18,7 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 	
 	public GUIdo_PreviousOrders(Customer customer) {
 		super();
+		this.setBackground(Color.WHITE);
 		if(customer.getPreviousPurchases().size() < 2) {
 			this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		}else {

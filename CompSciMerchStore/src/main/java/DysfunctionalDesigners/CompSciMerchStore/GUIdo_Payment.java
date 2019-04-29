@@ -24,6 +24,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	public GUIdo_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Payment Screen");
+		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		this.drawScreen(sale, 0, customer, current_panel, scrollpane);
   	    this.repaint();
@@ -32,6 +33,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	private void drawScreen(Sale sale, int i, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter card = null;
+		
 		try {
 			card = new MaskFormatter("################");
 		} catch (ParseException e) {

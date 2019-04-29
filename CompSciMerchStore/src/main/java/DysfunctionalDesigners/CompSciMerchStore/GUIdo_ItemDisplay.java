@@ -79,6 +79,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	public GUIdo_ItemDisplay(ItemInfo itemToDisplay,int width, Sale cart,ActionListener done, User user) {
 		//set up the page with a page length/height of 1500 pixels 
 		super(1500);
+		this.setBackground(Color.WHITE);
 		//set this instance's instance of user to the User given 
 		this.current_user=user;
 		this.setSize(new Dimension(width,1500));
@@ -320,7 +321,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
-		
+		this.setBackground(Color.WHITE);
 		//get the width and height in terms of the scale : 
 		int width = (int)(this.getWidth()/2*this.image_ratio);
 		int height = (int)(this.getWidth()/2/this.image_ratio);
