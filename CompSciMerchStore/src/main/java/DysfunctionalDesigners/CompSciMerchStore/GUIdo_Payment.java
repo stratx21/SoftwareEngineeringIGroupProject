@@ -156,10 +156,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(isEnabled()) {
-					JOptionPane.showMessageDialog(null, (Object) "Thank you for your order!");
-					logger.info("All Payment Information collected -- Proceeding");
-					customer.addNewSale(sale);
-					to_previousOrders(customer, current_panel, scrollpane);
+					if(sale.finalizePayment()) {
+						JOptionPane.showMessageDialog(null, (Object) "Thank you for your order!");
+						logger.info("All Payment Information collected -- Proceeding");
+						to_previousOrders(customer, current_panel, scrollpane);
+					}else {
+						//TODO: logger
+					}
+					
 				}else {
 					JOptionPane.showMessageDialog(null, (Object) "Please enter all information"); // not appearing
 					logger.info("Not all Payment Information Entered");
