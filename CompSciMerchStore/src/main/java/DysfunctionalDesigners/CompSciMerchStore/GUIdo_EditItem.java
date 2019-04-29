@@ -317,8 +317,11 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				
 				try {
 					new_price = Double.parseDouble(price.getText());
-				} catch(NumberFormatException err) {
-					error_message += " converting the price; use format of 0.00 \n";
+					if(new_price < 0.00)
+						throw new Exception();
+				} catch(Exception err) {
+					error_message += " converting the price; use format of 0.00. Price must be "
+							+ "greater than or equal to zero. \n";
 					logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 							+ "done_button listener, parsing price");
 					validated = false;
@@ -327,7 +330,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				if(validated) {
 					try {
 						new_stock = Integer.parseInt(stock.getText());
-					} catch(NumberFormatException err) {
+						if(new_stock < 0)
+							throw new Exception();
+					} catch(Exception err) {
 						error_message += " converting the stock; use format of integer values only \n";
 						logger.severe("ERROR casting to int : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing stock");
