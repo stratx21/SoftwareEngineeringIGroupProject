@@ -36,11 +36,12 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 	 */
 	public GUIdo_LoginScreen(final ActionListener al) {
 		super(400);
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to Login Screen");
 		GUIdo_CPanel panel = this;
 		l1 = new JLabel("Username");
-		l1.setForeground(Color.blue);
-		l1.setFont(new Font("Arial", Font.BOLD, 20));
+		//l1.setForeground(Color.blue);
+		l1.setFont(new Font("Cambria", Font.BOLD, 20));
 		
 		l2 = new JLabel("Username");
 		l3 = new JLabel("Password");
@@ -53,22 +54,31 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		btn4 = new GUIdo_CButton(330, 260, 170, 30, "Forgot Password");
 		
 		btn1.setActionCommand("Enter Admin");
-		btn1.setBackground(new Color(255,181,9));
+		btn1.setBackground(new Color(255,228,225));
+		btn1.setHoverColor(new Color(255,192,203));
 		
 		btn5.setActionCommand("Enter Customer");
-		btn5.setBackground(new Color(255,181,9));
+		btn5.setBackground(new Color(255,228,225));
+		btn5.setHoverColor(new Color(255,192,203));
+
 		
 		btn2.setActionCommand("Continue as a guest!");
 		btn2.setActionListener_clicked(al);
-		btn2.setBackground(new Color(255,181,9));
+		btn2.setBackground(new Color(255,228,225));
+		btn2.setHoverColor(new Color(255,192,203));
+
 		
 		btn3.setActionCommand("Create Account");
 		btn3.setActionListener_clicked(al);
-		btn3.setBackground(new Color(255,181,9));
+		btn3.setBackground(new Color(255,228,225));
+		btn3.setHoverColor(new Color(255,192,203));
+
 		
 		btn4.setActionCommand("Forgot Password?");
 		btn4.setActionListener_clicked(al);
-		btn4.setBackground(new Color(255,181,9));		
+		btn4.setBackground(new Color(255,228,225));	
+		btn4.setHoverColor(new Color(255,192,203));
+
 		
 		l2.setBounds(  80,  70, 200, 30);
 		l3.setBounds(  80, 110, 200, 30);

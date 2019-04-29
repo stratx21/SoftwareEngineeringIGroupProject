@@ -30,6 +30,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	
 	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to Shipping Information Frame");
 		this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		this.drawScreen(sale, customer, current_panel, scrollpane);

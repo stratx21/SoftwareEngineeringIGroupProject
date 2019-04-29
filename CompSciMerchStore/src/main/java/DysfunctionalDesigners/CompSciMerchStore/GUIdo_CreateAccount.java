@@ -1,7 +1,10 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
@@ -16,111 +19,161 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 	private static Logger logger = Logger.getLogger(GUIdo_CreateAccount.class.getName());
 	
 	//whatever, email, confirm email, mother's name, user, pass, confirm pass, name, create account
-	JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9;
+	JLabel l1, email, confirmEmail, momName, enterUN, enterPass, confirmPass, enterName, title;
 	//email, confirm email, mother's name, user, pass, confirm pass, name
-	JTextField tf1, tf2, tf3, tf4, tf5, tf6, tf7;
+	JTextField getEmail, getEmailCon, getMom, getUN, getPass, getconfirmPass, getName;
 	//sign up
 	GUIdo_CButton btn1;
 	
 	GUIdo_CreateAccount(final ActionListener al){
 		super(700);
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to panel CreateAccount");
 		
 		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
-		l1 = new JLabel("Username");
-		l1.setForeground(Color.blue);
-		l1.setFont(new Font("Arial", Font.BOLD, 20));
+
 		
-		l2 = new JLabel("Enter email:");
-		l3 = new JLabel("Confirm email:");
-		l4 = new JLabel("Enter mother's maiden name:");
-		l5 = new JLabel("Enter username:");
-		l6 = new JLabel("Enter password:");
-		l7 = new JLabel("Confirm password:");
-		l8 = new JLabel("Enter name:");
-		l9 = new JLabel("Create an Account");
-		tf1 = new JTextField();
-		tf2 = new JTextField();
-		tf3 = new JTextField();
-		tf4 = new JTextField();
-		tf5 = new JTextField();
-		tf6 = new JTextField();
-		tf7 = new JTextField();
-		btn1 = new GUIdo_CButton(650, 650, 170, 30, "Sign Up!");
+		email = new JLabel("Enter email:");
+		confirmEmail = new JLabel("Confirm email:");
+		momName = new JLabel("Enter mother's maiden name:");
+		enterUN = new JLabel("Enter username:");
+		enterPass = new JLabel("Enter password:");
+		confirmPass = new JLabel("Confirm password:");
+		enterName = new JLabel("Enter name:");
+		title = new JLabel("Create an Account");
+		title.setFont(new Font("Cambria", Font.BOLD, 34));
 		
-		l2.setBounds(50, 50, 200, 30);
-		l3.setBounds(50, 120, 200, 30);
-		l4.setBounds(50, 190, 200, 30);
-		l5.setBounds(50, 260, 200, 30);
-		l6.setBounds(50, 330, 200, 30);
-		l7.setBounds(50, 400, 200, 30);
-		l8.setBounds(50, 470, 200, 30);
-		l9.setBounds(200, 30, 200, 30);
 		
-		tf1.setBounds(50, 90, 200, 30);
-		tf2.setBounds(50, 160, 200, 30);
-		tf3.setBounds(50, 230, 200, 30);
-		tf4.setBounds(50, 300, 200, 30);
-		tf5.setBounds(50, 370, 200, 30);
-		tf6.setBounds(50, 440, 200, 30);
-		tf7.setBounds(50, 510, 200, 30);
+		email.setFont(new Font("Cambria",Font.PLAIN,20));
+		confirmEmail.setFont(new Font("Cambria",Font.PLAIN,20));
+		momName.setFont(new Font("Cambria",Font.PLAIN,20));
+		enterUN.setFont(new Font("Cambria",Font.PLAIN,20));
+		enterPass.setFont(new Font("Cambria",Font.PLAIN,20));
+		confirmPass.setFont(new Font("Cambria",Font.PLAIN,20));
+		enterName.setFont(new Font("Cambria",Font.PLAIN,20));
 		
+		
+		
+		getEmail = new JTextField();
+		getEmailCon = new JTextField();
+		getMom = new JTextField();
+		getUN = new JTextField();
+		getPass = new JTextField();
+		getconfirmPass = new JTextField();
+		getName = new JTextField();
+		btn1 = new GUIdo_CButton(650, 650, 170, 30, "Create!");
+		
+		getEmail.setPreferredSize(new Dimension(10,50));
+		getEmailCon.setPreferredSize(new Dimension(10,50));
+		getMom.setPreferredSize(new Dimension(10,50));
+		getUN.setPreferredSize(new Dimension(10,50));
+		getPass.setPreferredSize(new Dimension(10,50));
+		getconfirmPass.setPreferredSize(new Dimension(10,50));
+		getName.setPreferredSize(new Dimension(10,50));
+		getName.setPreferredSize(new Dimension(10,50));
+		btn1.setPreferredSize(new Dimension(10,50));
+		
+
 		String[] toInput = new String[6];
 		btn1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(!tf1.getText().equals(tf2.getText())) {
+				if(!getEmail.getText().equals(getEmailCon.getText())) {
 					JOptionPane.showMessageDialog(panel, "Emails are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
 					logger.info("Attempted submission with non matching emails");
-				} else if(!tf5.getText().equals(tf6.getText())) {
+				} else if(!getPass.getText().equals(getconfirmPass.getText())) {
 					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
 					logger.info("Attempted submission with non matching passwords");
-				} else if(control.getCustomerUsernames().contains(tf4.getText())){
+				} else if(control.getCustomerUsernames().contains(getUN.getText())){
 					JOptionPane.showMessageDialog(panel, "Username is taken already!", "Error", JOptionPane.ERROR_MESSAGE);
 					logger.info("Attempted submission with already taken usernames");
 				}
 				
-				if(!tf1.getText().isEmpty()) {
+				if(!getEmail.getText().isEmpty()) {
 					for(int i = 0; i < control.getAllCustomers().size(); i++) {
-						if(tf1.getText().equals(control.getAllCustomers().get(i).getEmail())){
+						if(getEmail.getText().equals(control.getAllCustomers().get(i).getEmail())){
 							JOptionPane.showMessageDialog(panel, "Email already has an account!", "Error", JOptionPane.ERROR_MESSAGE);
 							logger.info("Attempted submission with already taken email");
 						}
 					}
 				}
 				
-				toInput[0] = tf1.getText(); 
-				toInput[1] = tf3.getText();
-				toInput[2] = tf4.getText();
-				toInput[3] = tf5.getText();
-				toInput[4] = tf7.getText();
-				toInput[5] = User.hashUserNameToCustomerID(tf4.getText());
+				toInput[0] = getEmail.getText(); 
+				toInput[1] = getMom.getText();
+				toInput[2] = getUN.getText();
+				toInput[3] = getPass.getText();
+				toInput[4] = getName.getText();
+				toInput[5] = User.hashUserNameToCustomerID(getUN.getText());
 				
 				control.writeCustomer(new Customer(toInput));
 			}
 			
 		});
 		
-		this.add(l1);
-		this.add(l2);
-		this.add(l3);
-		this.add(l4);
-		this.add(l5);
-		this.add(l6);
-		this.add(l7);
-		this.add(l8);
-		this.add(l9);
-		this.add(tf1);
-		this.add(tf2);
-		this.add(tf3);
-		this.add(tf4);
-		this.add(tf5);
-		this.add(tf6);
-		this.add(tf7);
-		this.add(btn1);
+		GridBagLayout gbl = new GridBagLayout();
+		this.setLayout(gbl);
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTH;
+		c.gridx = 0;
+		c.gridy = 0;
+		
+		this.add(title,c);
+		
+		c.gridy = 2;
+		this.add(enterUN,c);
+		
+		c.gridy = 4;
+		this.add(getUN,c);
+		
+		c.gridy = 6;
+		this.add(email,c);
+		
+		c.gridy = 8;
+		this.add(getEmail,c);
+		
+		c.gridy = 10;
+		this.add(confirmEmail,c);
+		
+		c.gridy = 12;
+		this.add(getEmailCon,c);
+		
+		c.gridy = 14;
+		this.add(enterPass,c);
+		
+		c.gridy = 16;
+		this.add(getPass,c);
+		
+		c.gridy = 18;
+		this.add(confirmPass,c);
+		
+		c.gridy = 20;
+		this.add(getconfirmPass,c);
+		
+		
+		c.gridy = 22;
+		this.add(momName,c);
+		
+		c.gridy = 24;
+		this.add(getMom,c);
+		
+		c.gridy = 26;
+		this.add(btn1,c);
+		
+		c.gridy = 28;
+		
+		c.gridy = 30;
+		
+		JLabel fake = new JLabel ("");
+		c.weighty = 1;
+		this.add(fake,c);
+		
+		
+	
 		
 	}
 
