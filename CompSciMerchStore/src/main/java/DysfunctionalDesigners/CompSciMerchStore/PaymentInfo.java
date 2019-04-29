@@ -21,7 +21,12 @@ public class PaymentInfo {
         this.CCV = CCV;
         logger.info("Initialized payment info with card number " + cardNumber);
     }
-
+    
+    /**
+     * For the JSON parser
+     */
+    public PaymentInfo() {} 
+    
     public String getCardNumber() {
         return cardNumber;
     }

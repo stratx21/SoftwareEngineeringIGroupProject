@@ -278,6 +278,17 @@ public class Sale {
 			custChanged.stream().forEach(e -> data.writeCustomer(e));
 			/////////here is where we would add some of the database and remote
 			/////////stuff if this was a real online store
+		} else {
+			if(!this.checkPaymentAmount()) {
+				logger.severe("ERROR: TRYING TO FINALIZE SALE BUT PAYMENT AMOUNT ISN'T ENOUGH");
+			} else if(this.finalized) {
+				logger.severe("ERROR: TRYING TO FINALIZE SALE BUT SALE ALREADY FINALIZED");
+			} else if(this.shippingAddr == null) {
+				logger.severe("ERROR: TRYING TO FINALIZE SALE BUT SHIPPING ADDRESS NULL");
+			} else if(this.customerID == -1) {
+				logger.severe("ERROR: TRYING TO FINALIZE SALE BUT INVALID CUSTOMER ID");
+			}
+			
 		}
 		return this.finalized;
 	}

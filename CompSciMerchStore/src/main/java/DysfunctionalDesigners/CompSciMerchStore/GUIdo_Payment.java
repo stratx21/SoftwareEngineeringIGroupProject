@@ -104,7 +104,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		bZip.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField zip = new JFormattedTextField(zipFormat);
 		zip.setPreferredSize(new Dimension(50, 20));
-		
+
 		GUIdo_CButton placeOrder = new GUIdo_CButton(this.getWidth() / 4, this.getHeight() / 5, 150, 50, "Place Order");
 		placeOrder.disable();
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
@@ -134,8 +134,10 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
 					customer.getPaymentInfo().add(card);
 					placeOrder.enable();
+					
 					logger.info("Card Added Successfully to user " + customer.getUserName());
-					JOptionPane.showMessageDialog(null, (Object) "Card added successfully!");
+					sale.setPayment(new Payment(sale.getTotalWithTax(), card));
+					JOptionPane.showMessageDialog(null, (Object) ("Card added successfully with amount " + sale.getTotalWithTax() + "!"));
 				}else if(nameOnCard.getText().isEmpty() || nameOnCard.getText().isBlank()
 						|| numberOnCard.getText().isEmpty() || numberOnCard.getText().isBlank()
 						|| cvvNum.getText().isEmpty() || cvvNum.getText().isBlank()
@@ -158,10 +160,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 				if(isEnabled()) {
 					if(sale.finalizePayment()) {
 						JOptionPane.showMessageDialog(null, (Object) "Thank you for your order!");
+						customer.updatePreviousPurchases(customer.getCart());
+						customer.setCart(null);
 						logger.info("All Payment Information collected -- Proceeding");
 						to_previousOrders(customer, current_panel, scrollpane);
 					}else {
 						logger.severe("ERROR: SALE NOT FINALIZED");
+						JOptionPane.showMessageDialog(null, (Object) "Please enter all information"); // not appearing
+						logger.info("Not all Payment Information Entered");
 					}
 					
 				}else {
