@@ -157,6 +157,8 @@ public class GUIdo_Frame extends JFrame{
 				if(current_user.isAdmin()) {
 					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user);
 					scrollpane.getViewport().add(current_panel);
+				} else {
+					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
 				}
 			}
 				
