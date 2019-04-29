@@ -80,7 +80,7 @@ public class GUIdo_OutputTools {
     
     /**
      * This function will return an integer value of how many pixels long a 
-     *  String text will be by using Font font
+     *  String text will be by using Font font.
      * 
      * @param text the line of text that is being used with the given Font
      *      font to find the width of
@@ -91,5 +91,20 @@ public class GUIdo_OutputTools {
         AffineTransform affinetransform = new AffineTransform();     
         FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
         return (int)(font.getStringBounds(text,frc).getWidth());
+    }
+    
+    /**
+     * This function will return an integer value of how many pixels high a 
+     *  String text will be by using Font font.
+     * 
+     * @param text the line of text that is being used with the given Font
+     *      font to find the height of
+     * @param font the font that is being used to draw the String text
+     * @return the integer value of how high in pixels the String will be
+     */
+    public static int getPixelHeight(String text, Font font) {
+    	AffineTransform affinetransform = new AffineTransform();     
+        FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+        return (int)(font.getStringBounds(text,frc).getHeight());
     }
 }
