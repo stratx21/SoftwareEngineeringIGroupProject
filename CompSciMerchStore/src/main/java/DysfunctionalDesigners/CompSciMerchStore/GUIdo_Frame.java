@@ -151,8 +151,13 @@ public class GUIdo_Frame extends JFrame{
 				to_aboutus();
 			} else if(option.equals("Add Item")) {
 				to_add_item(current_user);
-			} else if(option.contentEquals("All Uploaded Items")){
+			} else if(option.equals("All Uploaded Items")){
 				to_all_uploaded_items(current_user);
+			} else if(option.equals("Admin Page")) {
+				if(current_user.isAdmin()) {
+					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user);
+					scrollpane.getViewport().add(current_panel);
+				}
 			}
 				
 		} 
