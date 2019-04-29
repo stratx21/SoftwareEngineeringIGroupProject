@@ -153,7 +153,12 @@ public class GUIdo_Frame extends JFrame{
 				to_add_item(current_user);
 			} else if(option.equals("All Uploaded Items")){
 				to_all_uploaded_items(current_user);
-			} else if(option.equals("Admin Page")) {
+			} else if(option.equals("Member Deals")) {
+				if(!((Customer)current_user).getUserName().equals("guest")) {
+					to_MemberDeals(true);
+				}
+			}
+			else if(option.equals("Admin Page")) {
 				if(current_user.isAdmin()) {
 					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user);
 					scrollpane.getViewport().add(current_panel);
@@ -337,11 +342,6 @@ public class GUIdo_Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("display1") || e.getActionCommand().equals("display2")) {
 					display_item((ItemInfo)e.getSource(), current_user);
-				} else if(e.getActionCommand().equals("memberdeals")) {
-					if(!((Customer)current_user).getUserName().equals("guest")) {
-						to_MemberDeals(true);
-					}
-					
 				}
 			}
 		}, scrollpane.getWidth());

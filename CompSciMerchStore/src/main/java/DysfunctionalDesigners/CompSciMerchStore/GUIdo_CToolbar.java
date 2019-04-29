@@ -157,6 +157,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		//the options used for the combo box: 
 		List<String> options = new ArrayList<String>();
 		options.add("Other Options"); 
+		options.add("Member Deals");
 		options.add("Contact Us"); 
 		options.add("FAQ"); 
 		options.add("About Us");
