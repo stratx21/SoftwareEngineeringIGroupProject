@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class GUIdo_AdminPage extends GUIdo_CPanel {
+	private static Logger logger = Logger.getLogger(GUIdo_AdminPage.class.getName());
 	
 	
 	/**
@@ -98,7 +100,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		//set up the page using the width given of the frame and a default 
 		//page length. 
 		super(width, 1200);
-		
+		logger.info("Switched to AdminPage");
 		//the title for the page 
 		
 		JLabel title = new JLabel(GUIdo_AdminPage.TITLE); 
@@ -116,11 +118,16 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 				"generate all sales report");
 		generateAllSalesReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(admin.generateAllSalesReport())
+				if(admin.generateAllSalesReport()) {
 					JOptionPane.showMessageDialog(new JFrame(), "All Sales Report generated successfully!");
-				else
+					logger.info("All Sales Report generated successfully");
+				}
+				else {
 					JOptionPane.showMessageDialog(new JFrame(), "Sales Report failed to generate");
+					logger.info("Unable to generate all sales report");
 
+				}
+					
 			}
 		});
 		this.add(generateAllSalesReports); 
@@ -135,11 +142,16 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 				"generate all users report");
 		generateAllUsersReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(admin.generateAllUsersReport())
-					JOptionPane.showMessageDialog(new JFrame(), "All Sales Report generated successfully!");
-				else
-					JOptionPane.showMessageDialog(new JFrame(), "Sales Report failed to generate");
-				
+				if(admin.generateAllUsersReport()) {
+					JOptionPane.showMessageDialog(new JFrame(), "All Users Report generated successfully!");
+					logger.fine("All Users report generated successfully");
+				}
+					
+				else {
+					JOptionPane.showMessageDialog(new JFrame(), "All Users Report failed to generate");
+					logger.fine("All Users report failed to generate");
+				}
+					
 			}
 		});
 		
@@ -164,7 +176,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 					try {
 						complaints = Arrays.asList(admin.getAllComplaints());
 					} catch (Exception e1) {
-						// TODO logger 
+						logger.severe("ERROR: CAUGHT EXCEPTION IN ADMIN PAGE COMPLAINTS"); 
 						e1.printStackTrace();
 					}
 					
