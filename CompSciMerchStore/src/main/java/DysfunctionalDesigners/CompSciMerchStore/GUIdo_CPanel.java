@@ -7,10 +7,10 @@ import javax.swing.JPanel;
 
 public class GUIdo_CPanel extends JPanel{
 	
-	/*
+	/**
 	 * The length of the page in pixels. 
 	 */
-	private int page_length = 400;
+	protected int page_length = 400;
 	
 	/**
 	 * Set up the panel with the default setup. 
