@@ -23,46 +23,87 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	/**
 	 * The BufferedImage instance that is used as the image to represent the item
 	 * 	graphically. 
+	 * 
 	 */
 	private BufferedImage item_image = null;
 	
 	/**
 	 * The item instance that is being displayed. 
+	 * 
 	 */
 	private ItemInfo item = null;
 	
 	/**
 	 * The Font instance that is used for the description for the item. 
+	 * 
 	 */
-	private static final Font DESC_FONT = new Font("Calibri",Font.PLAIN,35);
+	private static final Font DESC_FONT = new Font("Calibri",Font.PLAIN,30);
+	
+	/**
+	 * The Font instance that is used for the title of the reviews. 
+	 * 
+	 */
+	private static final Font TITLE_FONT = new Font("Calibri", Font.PLAIN, 50);
 	
 	/**
 	 * The quantity chosen of the item that is being displayed. 
+	 * 
 	 */
 	private int quantity_chosen = 1;
 	
 	/**
 	 * The image ratio to use to scale the image; it is the width of the image divided by
 	 * 	the height of the image. 
+	 * 
 	 */
 	private double image_ratio = 0;
 	
 	/**
 	 * the current user instance that is logged in. 
+	 * 
 	 */
 	private User current_user = null;
 	
+	/**
+	 * The lowest point in the y coordinates that was reached, for reference
+	 *  for other graphics. 
+	 */
 	private int lowestPointY = 50;
 	
+	/**
+	 * The gap between reviews on the y axis in pixels.
+	 * 
+	 */
 	private final int GAP_BETWEEN_REVIEWS = 75;
 	
+	/**
+	 * The buffer on the description for the reviews. 
+	 * 
+	 */
 	private final int REVIEW_DESC_BUFFER = 45;
 	
+	/**
+	 * The original x values for drawing the star to transpose from. 
+	 * 
+	 */
 	private final int[] STAR_X = {42,52,72,52,60,40,15,28,9,32,42};
+	
+	/**
+	 * The original y values for drawing the star to transpose from. 
+	 * 
+	 */
 	private final int[] STAR_Y = {38,62,68,80,105,85,102,75,58,60,38};
 	
+	/**
+	 * The Cusomter instance that is used for the login and review information. 
+	 * 
+	 */
 	private Customer customer = null;
 	
+	/**
+	 * The width of the star for the reviews. 
+	 * 
+	 */
 	private final int STAR_WIDTH = 70;
 	
 	/**
@@ -342,12 +383,21 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			y = this.lowestPointY;
 		}
 		
-		y += 25;
+		y += 50;
 		
-		g.drawString("REVIEWS", this.getWidth()/2-GUIdo_OutputTools.getPixelWidth("REVIEWS", DESC_FONT)/2,y);
+		//the title:
+		g.setFont(TITLE_FONT);
+		g.drawString("REVIEWS", this.getWidth()/2-GUIdo_OutputTools.getPixelWidth("REVIEWS", TITLE_FONT)/2,y);
 		
-		int [] starx_t = STAR_X;
-		int [] stary_t = STAR_Y;
+		//get the x values for the stars:
+		int []starx_t = new int[11];
+		for(int pl = 0; pl < 11; pl++)
+			starx_t[pl] = STAR_X[pl] + this.getWidth()/6;
+		
+		//get the y values for the stars: 
+		int []stary_t = new int[11];
+		for(int pl = 0; pl < 11; pl++)
+			stary_t[pl] = STAR_Y[pl];
 		
 		for(int i = 0; i < 11; i++) {
 			stary_t[i] += y;
@@ -365,14 +415,23 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 				}
 			}
 			
+			//draw any filled yellow stars:
+			g.setColor(Color.YELLOW); 
+			for(;i < review.getRating(); i++) { 
+				g.fillPolygon(starx_t, stary_t, 11); 
+				for(int k = 0; k < 11; k++) { 
+					starx_t [k] += STAR_WIDTH; 
+				} 
+			} 
 			
-			g.setColor(Color.WHITE);
-			for(;i < 5; i++) {
-				g.fillPolygon(starx_t, stary_t, 11);
-				for(int k = 0; k < 11; k++) {
-					starx_t [k] += STAR_WIDTH;
-				}
-			}
+			//draw any gray stars
+			g.setColor(Color.GRAY); 
+			for(;i < 5; i++) { 
+				g.fillPolygon(starx_t, stary_t, 11); 
+				for(int k = 0; k < 11; k++) { 
+					starx_t [k] += STAR_WIDTH; 
+				} 
+			} 
 			
 			y += REVIEW_DESC_BUFFER;
 			
@@ -380,18 +439,24 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			g.drawString(dateStr, this.getWidth(), y);
 			y += REVIEW_DESC_BUFFER;
 			
+			g.setFont(DESC_FONT);
+			
 			for(String line : GUIdo_OutputTools.formatStringForPrompt(review.getDescription(), DESC_FONT, this.getWidth()*2/3)) {
-				g.drawString(line, this.getWidth()/2-GUIdo_OutputTools.getPixelWidth(line, DESC_FONT), y);
+				g.drawString(line, this.getWidth()/6/*-GUIdo_OutputTools.getPixelWidth(line, DESC_FONT)*/, y);
 				y += this.REVIEW_DESC_BUFFER;
 			}
 			
-			starx_t = STAR_X;
+			for(int pl = 0; pl < 11; pl++)
+				starx_t[pl] = STAR_X[pl] + this.getWidth()/6;
+			
 			for(int k = 0; k < 11; k++) {
 				stary_t[k] += (y-oldy);
 			}
 		}
 		
-		
+		if(y > this.getHeight()) {
+			this.setPreferredSize(new Dimension(this.getWidth(),y + 200));
+		}
 	}
 	
 }
