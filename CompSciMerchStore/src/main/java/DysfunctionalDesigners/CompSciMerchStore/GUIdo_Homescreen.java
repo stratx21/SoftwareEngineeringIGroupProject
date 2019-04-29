@@ -33,6 +33,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 	public GUIdo_Homescreen(ActionListener done, int width){
 		super(1500);
 		logger.info("Switched to Homescreen");
+		this.setBackground(Color.WHITE);
 		this.setSize(new Dimension(width, 1500));
 		
 		System.out.println("width = " + width);
@@ -77,6 +78,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 	public void paintComponent(Graphics g) {
 		
 		g.setColor(new Color(255,255,225));
+		this.setBackground(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		int currenty = this.getHeight()*2/10+15;
 		int welcome_width = this.getWidth()*3/10;

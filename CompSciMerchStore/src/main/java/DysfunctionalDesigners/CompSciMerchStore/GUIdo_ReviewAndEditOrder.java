@@ -28,6 +28,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	 */
 	public GUIdo_ReviewAndEditOrder(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 	    super();
+	    this.setBackground(Color.WHITE);
 	    logger.info("Switched to Review and Edit Order");
 	    if(sale.getNumUniqueItems() > 0) {
 	    	this.setPreferredSize(new Dimension(this.getWidth(), 1000 * (sale.getNumUniqueItems())));

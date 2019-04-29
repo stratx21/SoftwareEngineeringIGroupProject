@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 public class GUIdo_UploadItem extends GUIdo_EditItem{
@@ -18,6 +19,7 @@ public class GUIdo_UploadItem extends GUIdo_EditItem{
 	 */
 	public GUIdo_UploadItem(int width, ActionListener done,User user) throws Exception{
 		super(width,new ItemInfo("","",0,((Vendor)(user)).getUserID(),0.00,Professor.AARSBALD),done,user);
+		this.setBackground(Color.WHITE);
 	}
 	
 }

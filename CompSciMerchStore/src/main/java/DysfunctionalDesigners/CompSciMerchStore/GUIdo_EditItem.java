@@ -86,6 +86,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done, User user) {
 		//page length and width 
 		super(width,1750);
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to EditItem frame");
 		//get the width to use for the boxes 
 		GUIdo_EditItem.TEXTBOX_WIDTH = width*2/3;

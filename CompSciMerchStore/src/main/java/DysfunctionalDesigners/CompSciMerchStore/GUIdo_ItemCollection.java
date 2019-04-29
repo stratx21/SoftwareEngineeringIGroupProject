@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -131,7 +132,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	 */
 	public GUIdo_ItemCollection(int width, List<ItemInfo> display_items, String title, ActionListener done, User user) {
 		super(/*width,*/ITEM_DISPLAY_HEIGHT*display_items.size()/ITEMS_PER_ROW+800);//item display height * item rows + const
-		
+		this.setBackground(Color.WHITE);
 		this.item_count=display_items.size();
 		this.items_to_display=display_items;
 		this.title = title;
@@ -244,7 +245,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
-		
+		this.setBackground(Color.WHITE);
 		int x=ORIGINAL_X,
 		    y=ORIGINAL_X+GUIdo_ItemCollection.HEIGHT_ADJUSTER;
 		

@@ -27,6 +27,7 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 	
 	GUIdo_CreateAccount(final ActionListener al){
 		super(700);
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to panel CreateAccount");
 		
 		GUIdo_CPanel panel = this;

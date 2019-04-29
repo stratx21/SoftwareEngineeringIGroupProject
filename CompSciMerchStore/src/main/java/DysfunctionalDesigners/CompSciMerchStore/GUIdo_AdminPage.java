@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -100,6 +101,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		//set up the page using the width given of the frame and a default 
 		//page length. 
 		super(width, 1200);
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to AdminPage");
 		//the title for the page 
 		

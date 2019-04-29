@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -30,6 +31,7 @@ public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
 	
 	public void drawScreen(ItemInfo item, Customer customer) {
 		logger.info("Switched to Add Review screen");
+		this.setBackground(Color.WHITE);
 		MaskFormatter reviewFormat = null;
 		try {
 			reviewFormat = new MaskFormatter("#");

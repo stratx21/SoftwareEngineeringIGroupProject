@@ -75,6 +75,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		disabled = false;
 //		super();
 		//general setup:
+		this.setBackground(Color.WHITE);
 		this.setSize(width, height);
 //		this.width=width;
 //		this.height=height;

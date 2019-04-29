@@ -86,7 +86,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	GUIdo_ContactUs(){
 		super(800);
 		logger.info("Switched to ContactUs panel");
-		
+		this.setBackground(Color.WHITE);
 		GUIdo_ContactUs temp = this;
 		try {
 			this.readJSONFile();

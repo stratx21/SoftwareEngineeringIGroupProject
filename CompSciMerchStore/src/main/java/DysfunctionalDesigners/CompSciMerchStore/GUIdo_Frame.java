@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -88,6 +89,7 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	public GUIdo_Frame() {
 		this.initialize();
+		this.setBackground(Color.WHITE);
 	}
 	
 	/**

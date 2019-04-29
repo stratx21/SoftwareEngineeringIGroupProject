@@ -36,6 +36,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 	 */
 	public GUIdo_LoginScreen(final ActionListener al) {
 		super(400);
+		this.setBackground(Color.WHITE);
 		logger.info("Switched to Login Screen");
 		GUIdo_CPanel panel = this;
 		l1 = new JLabel("Username");
