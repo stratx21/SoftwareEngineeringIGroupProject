@@ -168,11 +168,18 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		//set up the dropdown menu with a JComboBox for the other options: 
 		otherOptions = new JComboBox(options.toArray());
-		otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
-				y, cart.getWidth()+home_button.getWidth(), height);
-		otherOptions.setBackground(new Color(255,181,9));
-		otherOptions.addActionListener(done);
-		otherOptions.setActionCommand("other_opt");
+		try {
+			otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
+					y, cart.getWidth()+home_button.getWidth(), height);
+			otherOptions.setBackground(new Color(255,181,9));
+			otherOptions.addActionListener(done);
+			otherOptions.setActionCommand("other_opt");	
+		}
+		
+		catch(NullPointerException e) {
+			logger.severe("ERROR: NULLPOINTER ON HOME/WISHLIST BUTTON -- EXCEPTION CAUGHT");
+		}
+		
 		
 		
 		//add all buttons 
