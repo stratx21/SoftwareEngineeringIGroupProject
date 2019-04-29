@@ -19,6 +19,7 @@ public class GUIdo_CPanel extends JPanel{
 	public GUIdo_CPanel() {
 		//allow freedom by setting the layout to null
 		this.setLayout(null);
+		this.setBackground(Color.WHITE);
 		this.setAutoscrolls(true);
 	}
 	
