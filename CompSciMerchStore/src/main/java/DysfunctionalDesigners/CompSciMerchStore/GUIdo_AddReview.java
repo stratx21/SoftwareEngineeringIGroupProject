@@ -29,6 +29,7 @@ public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
 	}
 	
 	public void drawScreen(ItemInfo item, Customer customer) {
+		logger.info("Switched to Add Review screen");
 		MaskFormatter reviewFormat = null;
 		try {
 			reviewFormat = new MaskFormatter("#");
@@ -76,7 +77,7 @@ public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
 					}
 				}catch(NumberFormatException n) {
 					n.printStackTrace();
-					// TODO: logger
+					logger.severe("ERROR: CAUGHT NumberFormatException in AddReview");
 				}
 				
 			}
