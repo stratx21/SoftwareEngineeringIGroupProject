@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Catalogue {//all should be static as the top-level class unfortunately cannot be
+public class Catalogue {//singleton
 	private Map<Integer, ItemInfo> catalogue = new HashMap<Integer, ItemInfo>();
 	private int numItems = 0;
 	private static Catalogue instance = null;
@@ -44,7 +44,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	protected Catalogue() {
 		try{
-//    		instance.readFile(new BufferedReader(new FileReader(new File("src/main/resources/catalogue.txt"))));
+//    		instance.readFile(new BufferedReader(new FileReader(new File(App.resourceTarget + "catalogue.txt"))));
 			this.readJSONFile();
 			logger.info("Successfully imported the JSON catalogue file");
     	} catch(Exception e) {
@@ -85,7 +85,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 	 */
 	private void readJSONFile() throws Exception {
 		//get the next number
-		Scanner scan = new Scanner(new File("src/main/resources/NEXT_ID.txt"));
+		Scanner scan = new Scanner(new File(App.resourceTarget + "NEXT_ID.txt"));
 		int nextNum = scan.nextInt();
 		ItemInfo.setNextID(nextNum);
 		scan.close();
@@ -95,7 +95,7 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 
 		this.catalogue = null;
         //User readAdmin2 = null;
-        File in = new File("src/main/resources/catalogue.json");
+        File in = new File(App.resourceTarget + "catalogue.json");
         try {
         	catalogue = mapper.readValue(in, new TypeReference<HashMap<Integer, ItemInfo>>(){});
         	logger.info("Successfully parsed the catalogue from the file.");
@@ -121,15 +121,15 @@ public class Catalogue {//all should be static as the top-level class unfortunat
 			ObjectMapper mapper = new ObjectMapper();
 	
 	        try {
-	            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/catalogue.json"), this.catalogue);
+	            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(App.resourceTarget + "catalogue.json"), this.catalogue);
 	            logger.info("Successfully printed catalogue to catalogue.json");
 	        } catch (IOException e) {
-	            logger.severe("ERROR: COULD NOT WRITE CATALOGUE TO SRC/MAIN/RESOURCES/CATALOGUE.JSON! " + e.getMessage());
+	            logger.severe("ERROR: COULD NOT WRITE CATALOGUE TO " + App.resourceTarget + "CATALOGUE.JSON! " + e.getMessage());
 	            e.printStackTrace();
 	        }
 	        
 	        try {
-				BufferedWriter bf = new BufferedWriter(new FileWriter(new File("src/main/resources/NEXT_ID.txt")));
+				BufferedWriter bf = new BufferedWriter(new FileWriter(new File(App.resourceTarget + "NEXT_ID.txt")));
 				bf.write(ItemInfo.getNEXTID() + "");
 				bf.close();
 				logger.info("Successfully wrote next id to file: " + ItemInfo.getNEXTID());

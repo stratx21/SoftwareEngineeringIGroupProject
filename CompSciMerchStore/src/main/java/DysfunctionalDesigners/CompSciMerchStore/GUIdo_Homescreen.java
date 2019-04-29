@@ -68,7 +68,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		this.setOpaque(false);
 		
 		try {
-			cashn = (BufferedImage)ImageIO.read(new File("src/main/resources/cashn.jpg"));
+			cashn = (BufferedImage)ImageIO.read(new File(App.resourceTarget + "cashn.jpg"));
 		} catch(Exception e) {
 			logger.severe("Error drawing CASHN");
 			e.printStackTrace();

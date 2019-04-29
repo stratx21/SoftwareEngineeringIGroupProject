@@ -33,7 +33,7 @@ public class Sale {
 	
 	static {
 		try {
-			Scanner scan = new Scanner(new File("src/main/resources/NEXT_SALE_ID.txt"));
+			Scanner scan = new Scanner(new File(App.resourceTarget + "NEXT_SALE_ID.txt"));
 			nextSaleID = scan.nextInt();
 			scan.close();
 		} catch (FileNotFoundException e) {
@@ -52,7 +52,7 @@ public class Sale {
 		this.saleID = nextSaleID++;
 		
 		try {
-			BufferedWriter bf = new BufferedWriter(new FileWriter(new File("src/main/resources/NEXT_SALE_ID.txt")));
+			BufferedWriter bf = new BufferedWriter(new FileWriter(new File(App.resourceTarget + "NEXT_SALE_ID.txt")));
 			bf.write(nextSaleID + "");
 			bf.close();
 		} catch (IOException e) {

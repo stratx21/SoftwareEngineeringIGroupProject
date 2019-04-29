@@ -80,7 +80,7 @@ public class Administrator extends Vendor{
             reader = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(
-                                    new File("./src/main/resources/complaints.txt"))));
+                                    new File(App.resourceTarget + "complaints.txt"))));
             logger.info("Reader successfully opened");
             String line;
             while((line = reader.readLine()) != null) {
@@ -173,7 +173,7 @@ public class Administrator extends Vendor{
         List<Sale> uniqueCustSales = salesFromCust.stream().distinct().collect(Collectors.toList());
         storeSales = storeSales.stream().distinct().collect(Collectors.toList());
 
-        File salesReportFile = new File("./src/main/resources/reports/salesReport.txt");
+        File salesReportFile = new File(App.resourceTarget + "reports/salesReport.txt");
         try {
             salesReportFile.createNewFile();
         } catch (IOException e) {
@@ -250,7 +250,7 @@ public class Administrator extends Vendor{
         logger.info("Generating a report of all Users");
         UserDataController dataController = UserDataController.getInstance();
         BufferedWriter writer = null;
-        File userReportFile = new File("./src/main/resources/reports/usersReport.txt");
+        File userReportFile = new File(App.resourceTarget + "reports/usersReport.txt");
         int numberOfUsers, numberOfAdmins;
 
         try {
@@ -264,8 +264,8 @@ public class Administrator extends Vendor{
             writer = new BufferedWriter(new FileWriter(userReportFile));
 
             logger.info("Writing info to Report");
-            Path userFile = Paths.get("./src/main/resources/UserData/customers.txt");
-            Path adminPath = Paths.get("./src/main/resources/UserData/admins.txt");
+            Path userFile = Paths.get(App.resourceTarget + "UserData/customers.txt");
+            Path adminPath = Paths.get(App.resourceTarget + "UserData/admins.txt");
             numberOfUsers = (int)Files.lines(userFile).count();
             numberOfAdmins = (int)Files.lines(adminPath).count();
 

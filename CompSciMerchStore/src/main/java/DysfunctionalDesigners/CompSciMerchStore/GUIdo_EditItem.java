@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GUIdo_EditItem extends GUIdo_CPanel{
-
+	private static Logger logger = Logger.getLogger(GUIdo_EditItem.class.getName());
+	
 	/**
 	 * The ItemInfo instance that is being edited. 
 	 */
@@ -72,6 +74,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	
 	private JLabel current_filename = null;
 	
+	private static final int IS_VISIBLE_WIDTH = 230;
+	
 	/**
 	 * 
 	 * This sets up the edit item page so that the item information can be edited. 
@@ -79,20 +83,23 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 * @param item_to_edit the item to edit in this page. 
 	 * @param done the ActionListener instance that is used to return from this page. 
 	 */
-	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done) {
+	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done, User user) {
 		//page length and width 
 		super(width,1750);
+		logger.info("Switched to EditItem frame");
 		//get the width to use for the boxes 
 		GUIdo_EditItem.TEXTBOX_WIDTH = width*2/3;
 		this.item=item_to_edit;
 		
-		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the y to use to increase to move down the page in Components to add
 		int y = 200;
 		
 		//
 		GUIdo_CPanel panel = this;
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the name to edit 
 		JLabel name_label = new JLabel("Name");
@@ -104,6 +111,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(name);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//description text field 
 		JLabel desc_label = new JLabel("Description");
 		desc_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
@@ -114,6 +123,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(desc); 
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.TEXTBOX_HEIGHT;
 		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//the price editing 
 		JLabel price_label = new JLabel("Price");
 		price_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
@@ -123,6 +135,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		price.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(price);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the stock editing to change the stock 
 		JLabel stock_label = new JLabel("Stock");
@@ -147,9 +161,12 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		ArrayList<String> profnames = new ArrayList<>();
 		Arrays.asList(Professor.values()).forEach(p -> profnames.add(p.name()));
 		
+		///////////////////////////////////////////////////////////////////////////////////////
+		
 		//remove the dysfunctional designers option to not allow any more items
 		//to be added to that seciton: 
-		profnames.remove(profnames.size()-1);
+		if(!user.isAdmin())
+			profnames.remove(profnames.size()-1);
 		JComboBox professors = new JComboBox(profnames.toArray());
 		professors.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		professors.setBackground(new Color(255,181,9));
@@ -158,7 +175,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(professors);
 		y+=professors.getHeight()+GUIdo_EditItem.Y_GAP;
 		
-		//
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//the label for seeing the discount: 
 		JLabel discount_label = new JLabel("Discount");
 		discount_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -168,6 +188,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(discount);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//changing the display image:: 
 		JLabel image_label = new JLabel("Display Image");
 		image_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -188,8 +212,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		            	current_filename.setText(prompt.getSelectedFile().getName());
 		            	current_filename.repaint();
 		            } catch(Exception err) {
-		            	//TODO logger 
-		            	System.out.println("ERROR getting image from the the selected image, \"" + prompt.getSelectedFile().getName() + "\"");
+		            	logger.severe("ERROR getting image from the the selected image, \"" + prompt.getSelectedFile().getName() + "\"");
 		            	err.printStackTrace();
 		            }
 		        }
@@ -204,6 +227,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		y += GUIdo_EditItem.DONE_HEIGHT;
 		this.add(image_upload_button);
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		//get the promo set and put it in a string to show to the user:
 		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue());
 		JLabel promo_label = new JLabel("Promo Codes");
@@ -214,6 +239,51 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		promocodes.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(promocodes);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		//the viewable stuff for enabling and disabling the item on the store: 
+		
+		JLabel isViewable = new JLabel("Item is visible on the store: ");
+		isViewable.setBounds(width/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2-GUIdo_EditItem.DONE_WIDTH/2,y,
+				GUIdo_EditItem.IS_VISIBLE_WIDTH,GUIdo_EditItem.DONE_HEIGHT);
+		
+		this.add(isViewable);
+		
+		GUIdo_CButton viewable 
+			= new GUIdo_CButton(width/2+GUIdo_EditItem.DONE_WIDTH/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2,
+					y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT,"YES");
+		viewable.setBackground(Color.GREEN);
+		if(!item.isEnabled()) {
+			viewable.setText("NO");
+			viewable.setBackground(Color.RED);
+//			viewable.repaint();
+		}
+		
+		viewable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(item.isEnabled()) {
+					item.disable();
+					viewable.setText("NO");
+					viewable.setBackground(Color.RED);
+					viewable.repaint();
+				} else {
+					item.enable();
+					viewable.setText("YES");
+					viewable.setBackground(Color.GREEN);
+					viewable.repaint();
+				}
+			}
+		});
+		
+		y+=GUIdo_EditItem.DONE_HEIGHT+GUIdo_EditItem.Y_GAP;
+		this.add(viewable);
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		
 		GUIdo_CButton done_button 
 		    = new GUIdo_CButton(width/2-GUIdo_EditItem.DONE_WIDTH/2,y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT, 
@@ -247,10 +317,12 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				
 				try {
 					new_price = Double.parseDouble(price.getText());
-				} catch(NumberFormatException err) {
-					//Ethan logger TODO
-					error_message += " converting the price; use format of 0.00 \n";
-					System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+					if(new_price < 0.00)
+						throw new Exception();
+				} catch(Exception err) {
+					error_message += " converting the price; use format of 0.00. Price must be "
+							+ "greater than or equal to zero. \n";
+					logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 							+ "done_button listener, parsing price");
 					validated = false;
 				}
@@ -258,10 +330,11 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				if(validated) {
 					try {
 						new_stock = Integer.parseInt(stock.getText());
-					} catch(NumberFormatException err) {
-						//Ethan logger TODO
+						if(new_stock < 0)
+							throw new Exception();
+					} catch(Exception err) {
 						error_message += " converting the stock; use format of integer values only \n";
-						System.err.println("ERROR casting to int : GUIdo_EditItem constructor, "
+						logger.severe("ERROR casting to int : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing stock");
 						validated = false;
 					}
@@ -271,10 +344,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_professor = Professor.values()[professors.getSelectedIndex()];
 					} catch(Exception err) {
-						//Ethan logger TODO
 						error_message += " converting the professor; choose one option. The index chosen is: "
 								+professors.getSelectedIndex() +" \n";
-						System.err.println("ERROR getting professor from data, "
+						logger.severe("ERROR getting professor from data, "
 								+ "done_button listener, parsing stock");
 						validated = false;
 					}
@@ -284,9 +356,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						new_discount = Double.parseDouble(discount.getText());
 					} catch(NumberFormatException err) {
-						//Ethan logger TODO 
 						error_message += " converting the discount; use format of 0.00 \n";
-						System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+						logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 								+ "done_button listener, parsing discount");
 						validated = false;
 					}
@@ -308,9 +379,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 								  new_promos.put(parts[0], amount);
 								}catch(NumberFormatException err) {
 								  //not a double
-									//Ethan logger TODO 
 									error_message += " converting the amount for the discount; use format of 0.00 \n";
-									System.err.println("ERROR casting to double : GUIdo_EditItem constructor, "
+									logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
 											+ "done_button listener, parsing promo code");
 									validated = false;
 								}
@@ -329,8 +399,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 						item.setSaleDiscount(new_discount);
 						item.setPromoDiscounts(new_promos);
 					} catch(Exception err) {
-						//Ethan logger 
-						System.err.println("ERROR putting information into the item instance : "
+						logger.severe("ERROR putting information into the item instance : "
 								+ "GUIdo_EditItem constructor, done_button listenner, parsing promo code");
 					}
 				}
@@ -342,9 +411,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					try {
 						Catalogue.getInstance().updateItem(item.getItemID(), item);
 					} catch(Exception err) {
-						System.err.println("ERROR updating item in GUIdo_EditItem ");
+//						System.err.println("ERROR updating item in GUIdo_EditItem ");
 						err.printStackTrace();
-						//TODO:: Ethan logger 
+						logger.severe("ERROR: updating the item being edited, for exception thrown by Catalogue updateItem; could " + 
+								"be a null error or something else. Doubtful that it's null though.");
 						// error updating the item being edited, for exception thrown by Catalogue updateItem; could
 						//be a null error or something else. Doubtful that it's null though 
 					}
@@ -352,12 +422,9 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					
 					if(newimage != null) {
 						try {
-							
-							//TODO : test if it has two .jpg extensions on the end
-							ImageIO.write(newimage, "jpg", new File("src/main/resources/itemimages/"+ item.getExtendedItemID() + ".jpg"));
+							ImageIO.write(newimage, "jpg", new File(App.resourceTarget + "itemimages/"+ item.getExtendedItemID() + ".jpg"));
 						} catch(IOException ioex) {
-							//TODO logger 
-							System.err.println("ERROR saving the image in edit item");
+							logger.severe("ERROR saving the image in edit item");
 							ioex.printStackTrace();
 						}
 					}

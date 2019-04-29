@@ -153,7 +153,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 				BufferedImage image = null;
 				JLabel pic = null;
 				try {
-					image = ImageIO.read(new File("src/main/resources/itemimages/" + currItem.getExtendedItemID() + ".jpg"));
+					image = ImageIO.read(new File(App.resourceTarget + "itemimages/" + currItem.getExtendedItemID() + ".jpg"));
 					pic = new JLabel(new ImageIcon(image));
 					
 					pic.setBounds(x, y, w, h);

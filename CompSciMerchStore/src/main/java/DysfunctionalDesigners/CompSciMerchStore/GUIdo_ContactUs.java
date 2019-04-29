@@ -42,7 +42,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 	
 	private void readJSONFile() throws Exception {
 		logger.info("Importing complaints.txt");
-//		File in = new File("src/main/resources/complaints.txt");
+//		File in = new File(App.resourceTarget + "complaints.txt");
 //		ObjectMapper mapper = new ObjectMapper();
 //		
 //		this.complaints = null;
@@ -54,7 +54,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 //		}
 		
 //		BufferedReader in = new BufferedReader(new FileReader(new File()));
-		Path path = Paths.get("src/main/resources", "complaints.txt");
+		Path path = Paths.get(App.resourceTarget, "complaints.txt");
 		Charset charset = Charset.forName("ISO-8859-1");
 		complaints = Files.readAllLines(path, charset);
 	}
@@ -80,7 +80,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 //			}
 			
 			try {
-				FileWriter writer = new FileWriter("src/main/resources/complaints.txt"); 
+				FileWriter writer = new FileWriter(App.resourceTarget + "complaints.txt"); 
 				for(Iterator<String> str = this.complaints.iterator(); str.hasNext();) {
 				  writer.write(str.next() + "\n");
 				}
@@ -103,7 +103,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 		try {
 			this.readJSONFile();
 		} catch (Exception e1) {
-			logger.severe("ERROR: FAILED TO IMPORT FILE complaints.txt: " + e1.getMessage());
+			logger.severe("ERROR: FAILED TO IMPORT FILE " + App.resourceTarget + "complaints.txt: " + e1.getMessage());
 			e1.printStackTrace();
 		}
 		

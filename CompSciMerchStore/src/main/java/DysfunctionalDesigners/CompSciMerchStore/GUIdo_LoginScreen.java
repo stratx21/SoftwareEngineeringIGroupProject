@@ -26,6 +26,14 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 	GUIdo_CButton btn1, btn2, btn3, btn4, btn5;
 	JPasswordField p1;
 	
+	/**
+	 * This sets up the login screen using an ActionListener to go to wherever
+	 *  it may need to go after, depending on the decision that is made by
+	 *  the user. 
+	 * 
+	 * @param al the ActionListener used to control the flow of
+	 *  the program. 
+	 */
 	public GUIdo_LoginScreen(final ActionListener al) {
 		super(400);
 		logger.info("Switched to Login Screen");
@@ -81,7 +89,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 				
 				try {
 					if(e.getActionCommand().equals("Login as ADMIN")) {
-						reader = new BufferedReader(new FileReader(new File("src/main/resources/UserData/admins.txt")));
+						reader = new BufferedReader(new FileReader(new File(App.resourceTarget + "UserData/admins.txt")));
 						dataControl.getUsernamesAndPasswords(reader, usernames, passwords);
 						
 						for(int i=0;i<usernames.size();i++) {
@@ -102,7 +110,7 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 							}
 						}
 					} else if(e.getActionCommand().equals("Login as CUSTOMER")){
-						reader = new BufferedReader(new FileReader(new File("src/main/resources/UserData/customers.txt")));
+						reader = new BufferedReader(new FileReader(new File(App.resourceTarget + "UserData/customers.txt")));
 						dataControl.getUsernamesAndPasswords(reader, usernames, passwords);
 
 						for(int i=0;i<usernames.size();i++) {

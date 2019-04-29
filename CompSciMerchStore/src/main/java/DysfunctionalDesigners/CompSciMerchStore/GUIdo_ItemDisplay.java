@@ -87,7 +87,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		this.item = itemToDisplay;
 		try {
-			this.item_image = ImageIO.read(new File("src/main/resources/itemimages/"+ this.item.getExtendedItemID() + ".jpg"));
+			this.item_image = ImageIO.read(new File(App.resourceTarget + "itemimages/"+ this.item.getExtendedItemID() + ".jpg"));
 		} catch(Exception e) {
 			logger.severe("ERROR getting image from file");
 			e.printStackTrace();
@@ -295,7 +295,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			lowestPointY = add_review_button.getY()+add_review_button.getHeight();
 		}
 		
-		if(item.getVendorID() == user.getUserID()) {
+  		//if the user is a vendor or an admin: 
+		if(item.getVendorID() == user.getUserID() || user.isAdmin()) {
 			//then the user is the vendor of this item
 			//add the button to edit the item's information 
 			GUIdo_CButton edit_item_button = new GUIdo_CButton(quantityis.getX(),lowestPointY+10,200,75,"Edit item");

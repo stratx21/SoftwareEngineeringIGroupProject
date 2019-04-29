@@ -105,14 +105,14 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	 */
 	static {
 		try {
-			onlist1 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/1_onlist.png")));
-		    onlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2_onlist.png")));
-		    onlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3_onlist.png")));
+			onlist1 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/1_onlist.png")));
+		    onlist2 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/2_onlist.png")));
+		    onlist3 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/3_onlist.png")));
 		
 		
-			offlist1 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/1.png")));
-			offlist2 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/2.png")));
-			offlist3 = new ImageIcon(ImageIO.read(new File("src/main/resources/wishlist/3.png")));
+			offlist1 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/1.png")));
+			offlist2 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/2.png")));
+			offlist3 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/3.png")));
 		} catch(IOException ioex) {
 			logger.severe("ERROR importing images for wishlist in GUIdo_ItemCollection");
 			ioex.printStackTrace();

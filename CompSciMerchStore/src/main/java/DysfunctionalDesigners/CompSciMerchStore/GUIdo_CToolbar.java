@@ -16,11 +16,18 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class GUIdo_CToolbar extends GUIdo_CPanel{
+	
+	/**
+	 * The logger instance that is used to log for the program. 
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_CToolbar.class.getName());
+	
 	/**
 	 * This function tells if the buttons are disabled. 
+	 * 
 	 * @return a boolean concerning if the buttons are
 	 * 	disabled. 
+	 * 
 	 */
 	public boolean getButtons_disabled() {
 		return disabled;
@@ -28,21 +35,29 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 
 	/**
 	 * The text field that is used for the search bar to search the store. 
+	 * 
 	 */
 	private JTextField searchBar;
 	
 	/**
 	 * The boolean to tell if the buttons and search bar are disabled; This is 
 	 *  used to disable the search bar. 
+	 *  
 	 */
 	private boolean disabled;
 	
 	/**
 	 * The list of buttons in the toolbar to be used so that they can be disabled
 	 *  and enabled. 
+	 *  
 	 */
 	private ArrayList<GUIdo_CButton> buttons = new ArrayList<>();
 	
+	/**
+	 * 
+	 * The other options given in the dropdown menu. 
+	 * 
+	 */
 	private JComboBox otherOptions;
 	
 	/**
@@ -108,9 +123,9 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		GUIdo_CButton home_button= null;
 		try  {
 			home_button  =  new GUIdo_CButton(x,y,height,height,
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (1).png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (2).png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/home (3).png"))));
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/home (1).png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/home (2).png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/home (3).png"))));
 			home_button.setActionCommand("home");
 			home_button.setActionListener_clicked(done);
 			home_button.setBackground(new Color(255,181,9));
@@ -125,9 +140,9 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		GUIdo_CButton wishlist=null;
 		try {
 			wishlist = new GUIdo_CButton(searchBar.getWidth() + 70 + cart.getWidth(),y,height,height,
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish1.png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish2.png"))),
-					new ImageIcon(ImageIO.read(new File("src/main/resources/Toolbar/wish3.png"))));
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/wish1.png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/wish2.png"))),
+					new ImageIcon(ImageIO.read(new File(App.resourceTarget + "Toolbar/wish3.png"))));
 			wishlist.setActionCommand("wishlist");//command to check by to ensure the wishlist action choice 
 			wishlist.setActionListener_clicked(done);
 			wishlist.setBackground(new Color(255,181,9));
@@ -139,7 +154,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		
 		
-		//Go to GUIdo_Frame in toolbar_call to add an ActionEvent
+		//the options used for the combo box: 
 		List<String> options = new ArrayList<String>();
 		options.add("Other Options"); 
 		options.add("Contact Us"); 
@@ -147,7 +162,10 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		options.add("About Us");
 		options.add("Add Item");
 		options.add("All Uploaded Items");
+		options.add("Admin Page");
 		
+		
+		//set up the dropdown menu with a JComboBox for the other options: 
 		otherOptions = new JComboBox(options.toArray());
 		otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
 				y, cart.getWidth()+home_button.getWidth(), height);
