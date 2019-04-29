@@ -169,7 +169,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 			profnames.remove(profnames.size()-1);
 		JComboBox professors = new JComboBox(profnames.toArray());
 		professors.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
-		professors.setBackground(new Color(255,181,9));
+		professors.setBackground(new Color(255,228,225));
 		professors.setActionCommand("professor");
 		professors.setSelectedItem(item.getProf().name());
 		this.add(professors);

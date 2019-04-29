@@ -66,19 +66,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 			
 			this.complaints.add(complaint);
 			
-//			try {
-//				mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/complaints.json"), this.complaints);
-//			} catch (JsonGenerationException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (JsonMappingException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			
+
 			try {
 				FileWriter writer = new FileWriter(App.resourceTarget + "complaints.txt"); 
 				for(Iterator<String> str = this.complaints.iterator(); str.hasNext();) {
