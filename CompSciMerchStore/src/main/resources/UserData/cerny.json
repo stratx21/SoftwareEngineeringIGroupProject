@@ -6,5 +6,251 @@
   "name" : "Professor Cerny",
   "userID" : 40000,
   "uploadedItems" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 ],
-  "pastSales" : [ ]
+  "pastSales" : [ {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdc",
+        "billingAddress" : {
+          "street" : "asdfsafa asdf",
+          "zipCode" : 64123,
+          "city" : "asdf",
+          "state" : "ZA"
+        },
+        "ccv" : 854
+      }
+    },
+    "dateTime" : 1556511824719,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "lkj",
+      "zipCode" : 74751,
+      "city" : ";lkj",
+      "state" : "LK"
+    },
+    "finalized" : true
+  }, {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdc",
+        "billingAddress" : {
+          "street" : "asdfsafa asdf",
+          "zipCode" : 64123,
+          "city" : "asdf",
+          "state" : "ZA"
+        },
+        "ccv" : 854
+      }
+    },
+    "dateTime" : 1556511824719,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "lkj",
+      "zipCode" : 74751,
+      "city" : ";lkj",
+      "state" : "LK"
+    },
+    "finalized" : true
+  }, {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdc",
+        "billingAddress" : {
+          "street" : "asdfsafa asdf",
+          "zipCode" : 64123,
+          "city" : "asdf",
+          "state" : "ZA"
+        },
+        "ccv" : 854
+      }
+    },
+    "dateTime" : 1556511824719,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "lkj",
+      "zipCode" : 74751,
+      "city" : ";lkj",
+      "state" : "LK"
+    },
+    "finalized" : true
+  }, {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdfcv",
+        "billingAddress" : {
+          "street" : "sfdghhgfdasfg",
+          "zipCode" : 23452,
+          "city" : "dfsg",
+          "state" : "FD"
+        },
+        "ccv" : 234
+      }
+    },
+    "dateTime" : 1556512033347,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "ewargncb",
+      "zipCode" : 12345,
+      "city" : "asdfb",
+      "state" : "SD"
+    },
+    "finalized" : true
+  }, {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdfcv",
+        "billingAddress" : {
+          "street" : "sfdghhgfdasfg",
+          "zipCode" : 23452,
+          "city" : "dfsg",
+          "state" : "FD"
+        },
+        "ccv" : 234
+      }
+    },
+    "dateTime" : 1556512033347,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "ewargncb",
+      "zipCode" : 12345,
+      "city" : "asdfb",
+      "state" : "SD"
+    },
+    "finalized" : true
+  }, {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdfcv",
+        "billingAddress" : {
+          "street" : "sfdghhgfdasfg",
+          "zipCode" : 23452,
+          "city" : "dfsg",
+          "state" : "FD"
+        },
+        "ccv" : 234
+      }
+    },
+    "dateTime" : 1556512033347,
+    "customerID" : 10001,
+    "saleID" : 84,
+    "itemList" : {
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "ewargncb",
+      "zipCode" : 12345,
+      "city" : "asdfb",
+      "state" : "SD"
+    },
+    "finalized" : true
+  } ]
 }

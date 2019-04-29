@@ -8,12 +8,84 @@
   "uploadedItems" : [ ],
   "pastSales" : [ ],
   "status" : "GENERAL",
-  "paymentInfo" : [ ],
-  "shippingAddr" : null,
+  "paymentInfo" : [ {
+    "cardNumber" : "Andrew Case",
+    "billingAddress" : {
+      "street" : "One Bear Place",
+      "zipCode" : 76798,
+      "city" : "Waco",
+      "state" : "TX"
+    },
+    "ccv" : 666
+  }, {
+    "cardNumber" : "Andrew Case",
+    "billingAddress" : {
+      "street" : "One Bear Place",
+      "zipCode" : 76798,
+      "city" : "Waco",
+      "state" : "TX"
+    },
+    "ccv" : 666
+  }, {
+    "cardNumber" : "dsd",
+    "billingAddress" : {
+      "street" : "53467",
+      "zipCode" : 34567,
+      "city" : "waco",
+      "state" : "TX"
+    },
+    "ccv" : 435
+  }, {
+    "cardNumber" : "Andrew Case",
+    "billingAddress" : {
+      "street" : "One Bear Place",
+      "zipCode" : 76798,
+      "city" : "Waco",
+      "state" : "TX"
+    },
+    "ccv" : 666
+  }, {
+    "cardNumber" : "asdc",
+    "billingAddress" : {
+      "street" : "asdfsafa asdf",
+      "zipCode" : 64123,
+      "city" : "asdf",
+      "state" : "ZA"
+    },
+    "ccv" : 854
+  }, {
+    "cardNumber" : "asdfcv",
+    "billingAddress" : {
+      "street" : "sfdghhgfdasfg",
+      "zipCode" : 23452,
+      "city" : "dfsg",
+      "state" : "FD"
+    },
+    "ccv" : 234
+  } ],
+  "shippingAddr" : {
+    "street" : "ewargncb",
+    "zipCode" : 12345,
+    "city" : "asdfb",
+    "state" : "SD"
+  },
   "wishList" : [ 1 ],
-  "cart" : {
-    "payment" : null,
-    "dateTime" : null,
+  "cart" : null,
+  "previousPurchases" : [ {
+    "payment" : {
+      "amount" : 1105.4588,
+      "paymentInfo" : {
+        "cardNumber" : "asdfcv",
+        "billingAddress" : {
+          "street" : "sfdghhgfdasfg",
+          "zipCode" : 23452,
+          "city" : "dfsg",
+          "state" : "FD"
+        },
+        "ccv" : 234
+      }
+    },
+    "dateTime" : 1556512033347,
     "customerID" : 10001,
     "saleID" : 84,
     "itemList" : {
@@ -26,10 +98,19 @@
         "quantity" : 1,
         "itemID" : 43,
         "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 9,
+        "itemID" : 44,
+        "promoCodes" : [ ]
       }
     },
-    "shippingAddr" : null,
-    "finalized" : false
-  },
-  "previousPurchases" : [ ]
+    "shippingAddr" : {
+      "street" : "ewargncb",
+      "zipCode" : 12345,
+      "city" : "asdfb",
+      "state" : "SD"
+    },
+    "finalized" : true
+  } ]
 }

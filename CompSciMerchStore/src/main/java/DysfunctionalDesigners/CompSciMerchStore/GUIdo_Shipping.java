@@ -155,6 +155,7 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 					shippingAddr.setZipCode(Integer.parseInt(zip.getText()));
 					
 					customer.setShippingAddr(shippingAddr);
+					sale.setShippingAddr(shippingAddr);
 					to_Payment(sale, customer, current_panel, scrollpane);
 				}else if(!isEnabled() || addressLine1.getText().isEmpty() || addressLine1.getText().isBlank()
 						|| cityInput.getText().isEmpty() || cityInput.getText().isBlank()
