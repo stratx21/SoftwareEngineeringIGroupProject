@@ -55,15 +55,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		});
 		this.add(display_item_2);
 		
-		GUIdo_CButton memberButton = new GUIdo_CButton(this.getWidth()*1/10, 50, 200, 50, "VIEW MEMBER DEALS");
-		memberButton.setActionListener_clicked(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				done.actionPerformed(new ActionEvent(display_item2, ActionEvent.ACTION_PERFORMED, "memberdeals"));
-				//to_MemberDeals();
-			}
-		});
-		this.add(memberButton);
-		
+
 		
 		this.setOpaque(false);
 		
