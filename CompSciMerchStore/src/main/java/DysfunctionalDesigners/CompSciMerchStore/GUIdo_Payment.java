@@ -24,7 +24,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	public GUIdo_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Payment Screen");
-		this.setPreferredSize(new Dimension(this.getWidth(), 500 * (customer.getPaymentInfo().size() + 1)));
+		this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		this.drawScreen(sale, 0, customer, current_panel, scrollpane);
   	    this.repaint();
 	}
@@ -106,6 +106,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		zip.setPreferredSize(new Dimension(50, 20));
 		
 		GUIdo_CButton placeOrder = new GUIdo_CButton(this.getWidth() / 4, this.getHeight() / 5, 150, 50, "Place Order");
+		placeOrder.disable();
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
 		GUIdo_CButton back = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Back");
 		
@@ -132,6 +133,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					ba.setZipCode(Integer.valueOf(zip.getText()));
 					PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
 					customer.getPaymentInfo().add(card);
+					placeOrder.enable();
 					logger.info("Card Added Successfully to user " + customer.getUserName());
 					JOptionPane.showMessageDialog(null, (Object) "Card added successfully!");
 				}else if(nameOnCard.getText().isEmpty() || nameOnCard.getText().isBlank()
@@ -150,13 +152,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		});
 		
 		placeOrder.setActionListener_clicked(new ActionListener() {
-
+			// TODO: link to previous orders page and save to customer
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(isEnabled()) {
-					
 					JOptionPane.showMessageDialog(null, (Object) "Thank you for your order!");
 					logger.info("All Payment Information collected -- Proceeding");
+					customer.addNewSale(sale);
+					to_previousOrders(customer, current_panel, scrollpane);
 				}else {
 					JOptionPane.showMessageDialog(null, (Object) "Please enter all information"); // not appearing
 					logger.info("Not all Payment Information Entered");
@@ -361,6 +364,12 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 	}
 	
+	protected void to_previousOrders(Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_PreviousOrders(customer);
+		scrollpane.getViewport().add(current_panel);
+	}
+
 	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);
