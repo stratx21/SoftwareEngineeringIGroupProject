@@ -123,9 +123,9 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 
 			}
 		});
-		this.add(generateAllSalesReports);
+		this.add(generateAllSalesReports); 
 		
-		y+=BUTTON_HEIGHT+this.Y_GAP;
+		y+=BUTTON_HEIGHT+this.Y_GAP; 
 		
 		
 		//////////////////////////////////////////////////////
@@ -156,7 +156,10 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 				"Get All Complaints");
 		get_all_complaints.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//only if the complaints have not already been added: 
 				if(!complaints_shown) {
+					
+					//get the complaints list from the admin priviledges: 
 					List<String> complaints = null;
 					try {
 						complaints = Arrays.asList(admin.getAllComplaints());
@@ -164,31 +167,35 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 						// TODO logger 
 						e1.printStackTrace();
 					}
+					
+					//make JLabel objects for the complaints: 
 					JLabel toadd = new JLabel("Complaint: ");
 					for(String complaint : complaints) {
 						toadd = new JLabel("Complaint: ");
-						toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT);
+						toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT); 
 						toadd.setBounds(getWidth()/6, 
 											y, 
 											250, 
-											GUIdo_AdminPage.COMPLAINT_HEIGHT);
-						add(toadd);
-						y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP;
+											GUIdo_AdminPage.COMPLAINT_HEIGHT); 
+						add(toadd); 
+						y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP; 
 						
+						//for each line in the complaint, print the lines so that they are
+						//not word wrapped: 
 						for(String line : 
-							GUIdo_OutputTools.formatStringForPrompt(complaint, 
-									GUIdo_AdminPage.COMPLAINTS_FONT, getWidth()*2/3)) {
+							GUIdo_OutputTools.formatStringForPrompt(complaint,  
+									GUIdo_AdminPage.COMPLAINTS_FONT, getWidth()*2/3)) { 
 							
 							toadd = new JLabel(line);
 							toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT);
 							toadd.setBounds(getWidth()/6, 
-											y,
-											getWidth()*2/3,
-											GUIdo_AdminPage.COMPLAINT_HEIGHT);
-							add(toadd);
-							y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP;
-						}
-						y+= GUIdo_AdminPage.COMPLAINT_GAP*2;
+											y, 
+											getWidth()*2/3, 
+											GUIdo_AdminPage.COMPLAINT_HEIGHT); 
+							add(toadd); 
+							y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP; 
+						} 
+						y+= GUIdo_AdminPage.COMPLAINT_GAP*2;  
 					}
 				}
 				
