@@ -172,23 +172,7 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 		this.add(fake,c);
 		
 		
-		//this.add(l1);
-//		this.add(email);
-//		this.add(confirmEmail);
-//		this.add(momName);
-//		this.add(enterUN);
-//		this.add(enterPass);
-//		this.add(confirmPass);
-//		this.add(enterName);
-//		this.add(title);
-//		this.add(getEmail);
-//		this.add(getEmailCon);
-//		this.add(getMom);
-//		this.add(getUN);
-//		this.add(getPass);
-//		this.add(getconfirmPass);
-//		this.add(getName);
-//		this.add(btn1);
+	
 		
 	}
 
