@@ -11,7 +11,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Yum!!!!",
+      "userID" : 19999,
+      "date" : 1556516442159,
+      "rating" : 5
+    } ]
   },
   "1" : {
     "description" : "A nice soft, squishy eraser to take care of any of your dry-erase mistakes!",
@@ -27,7 +32,12 @@
     },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I love this eraser! It's soft and squishy like my brain!",
+      "userID" : 19999,
+      "date" : 1556514160547,
+      "rating" : 5
+    } ]
   },
   "2" : {
     "description" : "Perfectly pressed, white button down shirt. Sporting this beauty, you'll never have to worry about being unprofessional!",
@@ -44,7 +54,12 @@
     },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I wore this to formal and it was quite the craze ",
+      "userID" : 19999,
+      "date" : 1556516336274,
+      "rating" : 5
+    } ]
   },
   "3" : {
     "description" : "Clean, well-fitting, black slacks to be the perfect yin to your white-button-down yang.",
@@ -121,7 +136,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Maybe he'll have mercy on me if I wear this to the first day of class...",
+      "userID" : 19999,
+      "date" : 1556516105518,
+      "rating" : 4
+    } ]
   },
   "8" : {
     "description" : "Do you like to work-out? Do you just not have time because you're a CS major? Yeah, us either. Showcase how you really feel with this t-shirt!",
@@ -135,7 +155,17 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Cardio makes me sad, even when it's coding...",
+      "userID" : 19999,
+      "date" : 1556516049249,
+      "rating" : 2
+    }, {
+      "description" : "5 Stars!! Coding is the best cardio!!",
+      "userID" : 19999,
+      "date" : 1556516070948,
+      "rating" : 5
+    } ]
   },
   "9" : {
     "description" : "Do you wish you could dress as cool as Cerny? Do YOU want to look as comfy as he does when you code? Start wearing this Cerny-inspired jacket today!",
@@ -256,7 +286,17 @@
     },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Goes well with the chalkboard!!!! I can tell when they're about to run out!",
+      "userID" : 19999,
+      "date" : 1556516473655,
+      "rating" : 4
+    }, {
+      "description" : "Not as yummy as Dr. Booth's EXPO Markers...",
+      "userID" : 19999,
+      "date" : 1556516488438,
+      "rating" : 1
+    } ]
   },
   "17" : {
     "description" : "Once you buy our chalk, you obviously need a way to use it! *Items sold seperately*",
@@ -273,7 +313,12 @@
     },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "This goes perfectly with the No-Secrets Chalk!! Could be a little bigger though. My graphs don't fit!",
+      "userID" : 19999,
+      "date" : 1556516176147,
+      "rating" : 4
+    } ]
   },
   "18" : {
     "description" : "So about Dr. Hamerly's typing... We know none of us will ever be as good, but we can still try. Invest in a Typing-Like-Hamerly Crashcourse today.",
@@ -332,7 +377,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "FRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "These helped me so much for my Computer Systems quiz!!!! Thanks!!",
+      "userID" : 19999,
+      "date" : 1556516133957,
+      "rating" : 5
+    } ]
   },
   "22" : {
     "description" : "Did you get a bad grade? Can you not remember the order that registers pop off the stack? Well that's a... bummer.",
@@ -394,7 +444,12 @@
     },
     "enabled" : true,
     "prof" : "AARSBALD",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Gig 'em Bears",
+      "userID" : 19999,
+      "date" : 1556516427735,
+      "rating" : 4
+    } ]
   },
   "26" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -619,7 +674,27 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "DYS_DES",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "This is a little overpriced for not having a 4th floor",
+      "userID" : 19999,
+      "date" : 1556516194655,
+      "rating" : 1
+    }, {
+      "description" : "It has some great views from the 5th floor!! I'm a bit concerned about the lack of a 4th floor, however. I want the good but mediocre views, but not as sad as the 3rd floor. ",
+      "userID" : 19999,
+      "date" : 1556516257354,
+      "rating" : 3
+    }, {
+      "description" : "I love staying here until 4 AM in the lab!!!!",
+      "userID" : 19999,
+      "date" : 1556516294405,
+      "rating" : 5
+    }, {
+      "description" : "Fast and Free shipping!! It came faster than I expected! It wasn't long before I was exploring the sunroofed lobby while watching non-CS majors take naps on the couches while the CS majors scurried to and fro from the lab. The basement was sketchy but had some cool stuff. ",
+      "userID" : 19999,
+      "date" : 1556516608283,
+      "rating" : 4
+    } ]
   },
   "41" : {
     "description" : "Wish you could've been there yourself? At least you can buy it on a t-shirt!",
