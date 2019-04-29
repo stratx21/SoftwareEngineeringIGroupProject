@@ -10,6 +10,11 @@ public class PaymentInfo {
     private int CCV;
 
     /**
+     * For the JSON parser
+     */
+    public PaymentInfo() {} 
+    
+    /**
      * Makes a PaymentInfo Object
      * @param cardNumber the credit card number to add
      * @param billingAddress the billing address to associate with the payment
@@ -22,10 +27,7 @@ public class PaymentInfo {
         logger.info("Initialized payment info with card number " + cardNumber);
     }
     
-    /**
-     * For the JSON parser
-     */
-    public PaymentInfo() {} 
+    
     
     public String getCardNumber() {
         return cardNumber;
