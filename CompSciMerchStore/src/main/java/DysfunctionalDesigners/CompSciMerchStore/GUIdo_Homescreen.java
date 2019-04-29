@@ -76,15 +76,15 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		
-		g.setColor(new Color(20,66,30));
+		g.setColor(new Color(255,255,225));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		int currenty = this.getHeight()*2/10+15;
 		int welcome_width = this.getWidth()*3/10;
 		int welcome_x_start = this.getWidth()*6/10+15;
-		Font desc_font = new Font("Ariel",Font.PLAIN, this.getWidth()/60);
+		Font desc_font = new Font("Cambria",Font.PLAIN, this.getWidth()/60);
 		
-		g.setColor(new Color(255,181,9));
-		g.setFont(new Font("Ariel",Font.PLAIN,this.getWidth()/16));
+		g.setColor(new Color(176,48,96));
+		g.setFont(new Font("Cambria",Font.PLAIN,this.getWidth()/17));
 		
 		
 		g.drawImage(this.cashn, 
@@ -93,7 +93,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		
 		g.drawRect(this.getWidth()*6/10, this.getHeight()*1/10, welcome_width, this.getHeight()*7/10);
 		g.drawString("Welcome!", welcome_x_start, currenty);
-		currenty+=this.getFontMetrics((new Font("Ariel",Font.PLAIN,this.getWidth()/16))).getHeight()/2;
+		currenty+=this.getFontMetrics((new Font("Cambria",Font.BOLD,this.getWidth()/16))).getHeight()/2;
 		
 		ArrayList<String> schpiel_lines = GUIdo_OutputTools.formatStringForPrompt(SCHPIEL, desc_font, welcome_width);
 		g.setFont(desc_font);
