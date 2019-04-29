@@ -182,34 +182,40 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 					
 					//make JLabel objects for the complaints: 
 					JLabel toadd = new JLabel("Complaint: ");
-					for(String complaint : complaints) {
-						toadd = new JLabel("Complaint: ");
-						toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT); 
-						toadd.setBounds(getWidth()/6, 
-											y, 
-											250, 
-											GUIdo_AdminPage.COMPLAINT_HEIGHT); 
-						add(toadd); 
-						y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP; 
-						
-						//for each line in the complaint, print the lines so that they are
-						//not word wrapped: 
-						for(String line : 
-							GUIdo_OutputTools.formatStringForPrompt(complaint,  
-									GUIdo_AdminPage.COMPLAINTS_FONT, getWidth()*2/3)) { 
-							
-							toadd = new JLabel(line);
-							toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT);
+					try {
+						for(String complaint : complaints) {
+							toadd = new JLabel("Complaint: ");
+							toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT); 
 							toadd.setBounds(getWidth()/6, 
-											y, 
-											getWidth()*2/3, 
-											GUIdo_AdminPage.COMPLAINT_HEIGHT); 
+												y, 
+												250, 
+												GUIdo_AdminPage.COMPLAINT_HEIGHT); 
 							add(toadd); 
 							y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP; 
-						} 
-						y+= GUIdo_AdminPage.COMPLAINT_GAP*2;  
-					}
+							
+							//for each line in the complaint, print the lines so that they are
+							//not word wrapped: 
+							for(String line : 
+								GUIdo_OutputTools.formatStringForPrompt(complaint,  
+										GUIdo_AdminPage.COMPLAINTS_FONT, getWidth()*2/3)) { 
+								
+								toadd = new JLabel(line);
+								toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT);
+								toadd.setBounds(getWidth()/6, 
+												y, 
+												getWidth()*2/3, 
+												GUIdo_AdminPage.COMPLAINT_HEIGHT); 
+								add(toadd); 
+								y += GUIdo_AdminPage.COMPLAINT_HEIGHT+GUIdo_AdminPage.COMPLAINT_GAP; 
+							} 
+							y+= GUIdo_AdminPage.COMPLAINT_GAP*2;  
+						}
+						
+				}catch(NullPointerException e1) {
+					logger.severe("ERROR: NULLPOINTER CAUGHT IN ADMINPAGE");
+					e1.printStackTrace();
 				}
+		}
 				
 				page_length= y+200;
 				setPreferredSize(new Dimension(getWidth(),page_length));
