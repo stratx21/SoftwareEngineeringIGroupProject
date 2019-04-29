@@ -205,7 +205,14 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 					}
 			    });
 			    
-			    pic.repaint();
+			    try {
+			    	 pic.repaint();
+			    }
+			    catch(NullPointerException e) {
+			    	logger.severe("ERROR: NULLPOINTEREXCEPTION CAUGHT IN REVIEW/EDIT ORDER");
+			    	e.printStackTrace();
+			    }
+			   
 			    price.repaint();
 			    q.repaint();
 			    //quantity.revalidate();
