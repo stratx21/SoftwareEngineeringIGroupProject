@@ -161,7 +161,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 						logger.info("All Payment Information collected -- Proceeding");
 						to_previousOrders(customer, current_panel, scrollpane);
 					}else {
-						//TODO: logger
+						logger.severe("ERROR: SALE NOT FINALIZED");
 					}
 					
 				}else {
