@@ -195,7 +195,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 						
 						try {
 							item = (ItemInfo)((thisbutton).getData_from_holding());
-						} catch(Exception ex) {
+						} catch(NullPointerException ex) {
 							logger.severe("ERROR casting to ItemInfo : GUIdo_ItemCollection");
 							ex.printStackTrace();
 						}
