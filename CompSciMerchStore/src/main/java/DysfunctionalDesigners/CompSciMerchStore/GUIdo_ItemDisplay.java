@@ -212,8 +212,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 					done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
 				}
 			});
-			addtocart.setBackground(new Color(255,181,9));
-			addtocart.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+			addtocart.setBackground(new Color(255,228,225));
+			addtocart.setHoverColor(new Color(255,192,203));//the color for when the mouse hovers over the button 
 			this.add(addtocart);
 			
 			//add the wishlist button for the user to have the option to add or remove 
@@ -281,8 +281,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			this.add(wishlist_button);
 			
 			add_review_button = new GUIdo_CButton(wishlist_button.getX(),wishlist_button.getY()+wishlist_button.getHeight() + 7, 200,50, "Add Reviews");
-			add_review_button.setBackground(new Color(255,181,9));
-			add_review_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+			add_review_button.setBackground(new Color(255,228,225));
+			add_review_button.setHoverColor(new Color(255,192,203));//the color for when the mouse hovers over the button 
 			add_review_button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"add_review"));
@@ -300,8 +300,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			//then the user is the vendor of this item
 			//add the button to edit the item's information 
 			GUIdo_CButton edit_item_button = new GUIdo_CButton(quantityis.getX(),lowestPointY+10,200,75,"Edit item");
-			edit_item_button.setBackground(new Color(255,181,9));
-			edit_item_button.setHoverColor(new Color(242,170,0));//the color for when the mouse hovers over the button 
+			edit_item_button.setBackground(new Color(255,228,225));
+			edit_item_button.setHoverColor(new Color(255,192,203));//the color for when the mouse hovers over the button 
 			edit_item_button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"edit_item"));
@@ -356,7 +356,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			int oldy = y;
 			y += GAP_BETWEEN_REVIEWS;
 			int i = 0;
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.GRAY);
 			for(;i < review.getRating(); i++) {
 				g.fillPolygon(starx_t, stary_t, 11);
 				for(int k = 0; k < 11; k++) {
@@ -365,7 +365,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			}
 			
 			
-			g.setColor(Color.GRAY);
+			g.setColor(Color.WHITE);
 			for(;i < 5; i++) {
 				g.fillPolygon(starx_t, stary_t, 11);
 				for(int k = 0; k < 11; k++) {
