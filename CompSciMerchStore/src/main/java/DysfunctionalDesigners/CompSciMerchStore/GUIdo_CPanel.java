@@ -1,5 +1,6 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 
@@ -28,6 +29,7 @@ public class GUIdo_CPanel extends JPanel{
 	 */
 	public GUIdo_CPanel(int page_length_pixels) {
 		this();
+		this.setBackground(Color.WHITE);
 		this.page_length=page_length_pixels;
 		this.setPreferredSize(new Dimension(this.getWidth(), page_length_pixels));
 		this.setSize(new Dimension(this.getWidth(), page_length_pixels));
@@ -42,6 +44,7 @@ public class GUIdo_CPanel extends JPanel{
 	 */
 	public GUIdo_CPanel(int width,int page_length_pixels) {
 		this();
+		this.setBackground(Color.WHITE);
 		this.page_length=page_length_pixels;
 		this.setPreferredSize(new Dimension(width, page_length_pixels));
 		this.setSize(new Dimension(width, page_length_pixels));
