@@ -2,7 +2,6 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
