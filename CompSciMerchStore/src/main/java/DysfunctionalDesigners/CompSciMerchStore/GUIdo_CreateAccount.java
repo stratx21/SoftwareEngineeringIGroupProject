@@ -25,6 +25,11 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 	//sign up
 	GUIdo_CButton btn1;
 	
+	/**
+	 * This creates the Create Account page. It updates the frame to show the page.
+	 * @param al is the action listener needed for the button
+	 * 
+	 */
 	GUIdo_CreateAccount(final ActionListener al){
 		super(700);
 		this.setBackground(Color.WHITE);
