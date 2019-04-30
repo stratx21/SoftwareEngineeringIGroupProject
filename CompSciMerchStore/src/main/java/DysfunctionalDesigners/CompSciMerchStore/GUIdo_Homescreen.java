@@ -58,7 +58,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		
 
 		
-		this.setOpaque(false);
+	//	this.setOpaque(false);
 		
 		try {
 			cashn = (BufferedImage)ImageIO.read(new File(App.resourceTarget + "cashn.jpg"));

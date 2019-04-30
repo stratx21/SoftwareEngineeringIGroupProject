@@ -225,6 +225,7 @@ public class GUIdo_Frame extends JFrame{
 	 * @param user_to_see the user to see the wishlist page for.
 	 */
 	public void to_wishlist(User user_to_see) {
+		this.setBackground(Color.WHITE);
 		//get the items in the user's wishlist: 
 		List<ItemInfo> items_for_wishlist = Catalogue.getInstance().getItems(((Customer)user_to_see).getWishList());
 		//this page is a new ItemCollection that is for the wishlist, having the items in the user's wishlist, a title of Wishlist,
@@ -336,6 +337,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	private void to_homescreen() {
+		this.setBackground(Color.WHITE);
 		//set up the homescreen using an ActionListener for the 2 featured items and the width
 		current_panel = new GUIdo_Homescreen(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -358,8 +360,10 @@ public class GUIdo_Frame extends JFrame{
 		//display a singular item's information and allow the user to add it to the cart and choose a quantity
 		//uses the item to display, given by display_item function (this function) parameter, the width of the
 		//page, and an ActionListener instance for when an item is added to the cart.
+		this.setBackground(Color.WHITE);
 		current_panel = new GUIdo_ItemDisplay(item,scrollpane.getWidth(),cart,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if(e.getActionCommand().equals("item_added")) {
 					cart = (Sale)e.getSource();
 					to_cart(cart, (Customer) user, current_panel, scrollpane);
@@ -514,6 +518,7 @@ public class GUIdo_Frame extends JFrame{
 		//frame setup:
 		//dispose of the frame on close, but do not exit the program
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setBackground(Color.WHITE);
 		
 		//add a window listener in order to have actions when the frame is closed 
 		this.addWindowListener(new WindowAdapter() {

@@ -89,7 +89,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		logout.setActionCommand("login");
 		logout.setActionListener_clicked(done);
 		logout.setBackground(new Color(255,228,225));
-		logout.setHoverColor(new Color(242,170,0));
+		logout.setHoverColor(new Color(255,192,203));
 		
 		
 		//search bar:
@@ -117,8 +117,8 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		cart. setActionCommand("cart");
 		cart. setActionListener_clicked( done);
 		cart.setBackground(new Color(255,228,225));
-		cart.setHoverColor(new Color(255,228,225));
-//		cart.setPressedColor(new Color(230,160,0));
+		cart.setHoverColor(new Color(255,192,203));
+
 		
 		//add the home button in the top left 
 		GUIdo_CButton home_button= null;
@@ -147,7 +147,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 			wishlist.setActionCommand("wishlist");//command to check by to ensure the wishlist action choice 
 			wishlist.setActionListener_clicked(done);
 			wishlist.setBackground(new Color(255,228,225));
-			wishlist.setHoverColor(new Color(255,228,225));
+			wishlist.setHoverColor(new Color(255,192,203));
 		} catch (IOException e1) {
 			logger.severe("ERROR: IOException caught in CToolbar");
 			e1.printStackTrace();
@@ -173,6 +173,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 			otherOptions.setBounds(searchBar.getWidth() + home_button.getWidth() + cart.getWidth() + wishlist.getWidth(), 
 					y, cart.getWidth()+home_button.getWidth(), height);
 			otherOptions.setBackground(new Color(255,228,225));
+			//otherOptions.setHoverColor(new Color(255,192,203));
 			otherOptions.addActionListener(done);
 			otherOptions.setActionCommand("other_opt");	
 		}
