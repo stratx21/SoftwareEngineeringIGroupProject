@@ -1,23 +1,17 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.util.ArrayList;
@@ -38,7 +32,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	private static int TEXTBOX_WIDTH;
 	
 	/**
-	 * The height of the textboxes to edit the larger data. 
+	 * The height of the textboxes to edit the larger data.
 	 */
 	private static final int TEXTBOX_HEIGHT = 125;
 	
@@ -231,12 +225,13 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//get the promo set and put it in a string to show to the user:
-		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue());
+		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue() + "\n");
 		JLabel promo_label = new JLabel("Promo Codes");
 		promo_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(promo_label);
-		JTextField promocodes = new JTextField(""+discounts_display_string);
+		JTextArea promocodes = new JTextArea(""+discounts_display_string);
+		promocodes.setBackground(Color.WHITE);
 		promocodes.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2,y,GUIdo_EditItem.TEXTBOX_WIDTH,GUIdo_EditItem.SMALLER_TEXT_HEIGHT);
 		this.add(promocodes);
 		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
@@ -359,7 +354,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					} catch(NumberFormatException err) {
 						error_message += " converting the discount; use format of 0.00 \n";
 						logger.severe("ERROR casting to double : GUIdo_EditItem constructor, "
-								+ "done_button listener, parsing discount");
+								+ "done_button listener, parsing discount " + "\""+ discount.getText() +"\"");
 						validated = false;
 					}
 				}
