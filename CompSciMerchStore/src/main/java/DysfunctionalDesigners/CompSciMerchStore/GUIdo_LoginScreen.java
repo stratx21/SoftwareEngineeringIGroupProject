@@ -43,15 +43,19 @@ public class GUIdo_LoginScreen extends GUIdo_CPanel {
 		//l1.setForeground(Color.blue);
 		l1.setFont(new Font("Cambria", Font.BOLD, 20));
 		
-		l2 = new JLabel("Username");
-		l3 = new JLabel("Password");
+		l2 = new JLabel("Username:");
+		l2.setFont(new Font("Cambria", Font.BOLD, 30));
+		l3 = new JLabel("Password:");
+		l3.setFont(new Font("Cambria", Font.BOLD, 30));
 		tf1 = new JTextField();
 		p1 = new JPasswordField();
+		
+		tf1.setPreferredSize(new Dimension(10,50));
 		btn1 = new GUIdo_CButton(150, 210, 170, 30, "Login as ADMIN");
 		btn5 = new GUIdo_CButton(150, 160, 170, 30, "Login as CUSTOMER");
 		btn2 = new GUIdo_CButton(330, 160, 170, 30, "Be our guest");
 		btn3 = new GUIdo_CButton(150, 260, 170, 30, "Create Account");
-		btn4 = new GUIdo_CButton(330, 260, 170, 30, "Forgot Password");
+		btn4 = new GUIdo_CButton(330, 260, 170, 30, "Forgot Password?");
 		
 		btn1.setActionCommand("Enter Admin");
 		btn1.setBackground(new Color(255,228,225));
