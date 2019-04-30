@@ -362,7 +362,9 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		this.setBackground(Color.WHITE);
+		this.setOpaque(true);
 		//get the width and height in terms of the scale : 
 		int width = (int)(this.getWidth()/2*this.image_ratio);
 		int height = (int)(this.getWidth()/2/this.image_ratio);

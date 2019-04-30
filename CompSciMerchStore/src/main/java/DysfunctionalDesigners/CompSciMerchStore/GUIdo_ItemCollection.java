@@ -246,7 +246,9 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		this.setBackground(Color.WHITE);
+		
 		int x=ORIGINAL_X,
 		    y=ORIGINAL_X+GUIdo_ItemCollection.HEIGHT_ADJUSTER;
 		
