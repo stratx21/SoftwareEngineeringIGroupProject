@@ -141,7 +141,7 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	    int yq = 450;
 	    int x3 = 450;
 	    int y3 = 200;
-	    String[] numItems = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+	    //String[] numItems = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 	    DecimalFormat df2 = new DecimalFormat("0.00");
 	    
 		if(sale.getNumUniqueItems() > 0) { // CHANGE TO > 0
@@ -184,6 +184,11 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    q.setFont(new Font("Cambria", Font.PLAIN, 18));
 			    this.add(q);
 			    
+			    //int amount = sale.getItemList().get(currItem.getItemID()).getQuantity();
+			    String[] numItems = new String[10];
+			    for(int j = 1; j <= currItem.getStock() && j < 10; j++) {
+					numItems[j] = String.valueOf(j);
+				}
 			    JComboBox quantity;
 			    quantity = new JComboBox(numItems);
 			    //quantity.setLayout(new GridLayout(0, 1));
