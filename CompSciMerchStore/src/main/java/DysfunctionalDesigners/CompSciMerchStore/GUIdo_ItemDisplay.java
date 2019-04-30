@@ -37,13 +37,13 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	 * The Font instance that is used for the description for the item. 
 	 * 
 	 */
-	private static final Font DESC_FONT = new Font("Calibri",Font.PLAIN,30);
+	private static final Font DESC_FONT = new Font("Cambria",Font.PLAIN,30);
 	
 	/**
 	 * The Font instance that is used for the title of the reviews. 
 	 * 
 	 */
-	private static final Font TITLE_FONT = new Font("Calibri", Font.PLAIN, 50);
+	private static final Font TITLE_FONT = new Font("Cambria", Font.BOLD, 50);
 	
 	/**
 	 * The quantity chosen of the item that is being displayed. 
@@ -147,13 +147,13 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		//add the name of the item 
 		JLabel name =  new JLabel(this.item.getDisplayName());
 		//make the Font for the name decently big: 
-		name.setFont(new Font("Calibri",Font.PLAIN,55));
+		name.setFont(new Font("Cambria",Font.PLAIN,55));
 		name.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*1/10, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(name);
 		
 		//show the price formatting the item, always showing at least one dollar place and always showing two decimal places: 
 		JLabel price =  new JLabel("$"+new DecimalFormat("0.00").format(this.item.getPrice()));
-		price.setFont(new Font("Calibri",Font.PLAIN,35));
+		price.setFont(new Font("Cambria",Font.PLAIN,35));
 		price.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*5/35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(price);
 		
@@ -207,7 +207,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		//The label for the quantity to indicate what the dropdown menu for the quantity is 
 		JLabel quantityis = new JLabel("Quantity: ");
-		quantityis.setFont(new Font("Calibri",Font.PLAIN,20));
+		quantityis.setFont(new Font("Cambria",Font.PLAIN,20));
 		quantityis.setBounds(desc.getX(), currenty+DESC_LINE_HEIGHT+5, 88, 25);
 		this.add(quantityis);
 		
@@ -406,7 +406,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		for(Review review : item.getReviews()) {			int oldy = y;
 			y += GAP_BETWEEN_REVIEWS;
 			int i = 0;
-			g.setColor(Color.GRAY);
+			g.setColor(Color.WHITE);
 			for(;i < review.getRating(); i++) {
 				g.fillPolygon(starx_t, stary_t, 11);
 				for(int k = 0; k < 11; k++) {

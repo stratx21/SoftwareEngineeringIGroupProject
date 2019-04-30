@@ -84,7 +84,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	/**
 	 * The Font object used for the title at the top of the collection. 
 	 */
-	private static final Font TITLE_FONT = new Font("Ariel",Font.BOLD,50);
+	private static final Font TITLE_FONT = new Font("Cambria",Font.BOLD,50);
 	
 	/**
 	 * The title used at the top of the page. 
@@ -106,6 +106,7 @@ public class GUIdo_ItemCollection extends GUIdo_CPanel{
 	 */
 	static {
 		try {
+			
 			onlist1 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/1_onlist.png")));
 		    onlist2 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/2_onlist.png")));
 		    onlist3 = new ImageIcon(ImageIO.read(new File(App.resourceTarget + "wishlist/3_onlist.png")));

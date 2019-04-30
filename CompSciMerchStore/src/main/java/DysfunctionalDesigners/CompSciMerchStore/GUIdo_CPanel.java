@@ -20,6 +20,8 @@ public class GUIdo_CPanel extends JPanel{
 		//allow freedom by setting the layout to null
 		this.setLayout(null);
 		this.setBackground(Color.WHITE);
+		this.setOpaque(true);
+		
 		this.setAutoscrolls(true);
 	}
 	
@@ -30,6 +32,7 @@ public class GUIdo_CPanel extends JPanel{
 	 */
 	public GUIdo_CPanel(int page_length_pixels) {
 		this();
+		this.setOpaque(true);
 		this.setBackground(Color.WHITE);
 		this.page_length=page_length_pixels;
 		this.setPreferredSize(new Dimension(this.getWidth(), page_length_pixels));
@@ -45,6 +48,7 @@ public class GUIdo_CPanel extends JPanel{
 	 */
 	public GUIdo_CPanel(int width,int page_length_pixels) {
 		this();
+		this.setOpaque(true);
 		this.setBackground(Color.WHITE);
 		this.page_length=page_length_pixels;
 		this.setPreferredSize(new Dimension(width, page_length_pixels));
