@@ -403,8 +403,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			stary_t[i] += y;
 		}
 		
-		for(Review review : item.getReviews()) {
-			int oldy = y;
+		for(Review review : item.getReviews()) {			int oldy = y;
 			y += GAP_BETWEEN_REVIEWS;
 			int i = 0;
 			g.setColor(Color.GRAY);
