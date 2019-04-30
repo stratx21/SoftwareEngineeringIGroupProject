@@ -309,13 +309,25 @@ public class GUIdo_Frame extends JFrame{
 			to_homescreen();
 			
 		} else if(e.getActionCommand().equals("Create Account")) {
-			ActionListener l = null;
-			current_panel = new GUIdo_CreateAccount(l);
+			
+			current_panel = new GUIdo_CreateAccount(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					to_login();
+				}
+			});
 			scrollpane.getViewport().add(current_panel);
 			
 		} else if(e.getActionCommand().equals("Forgot Password?")) {
-			ActionListener l = null;
-			current_panel = new GUIdo_ForgotPassword(l);
+			
+			current_panel = new GUIdo_ForgotPassword(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					to_login();
+				}
+				
+			});
 			scrollpane.getViewport().add(current_panel);
 		}
 	}
