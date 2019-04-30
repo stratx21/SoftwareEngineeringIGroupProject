@@ -176,6 +176,8 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		});
 		this.add(make_promo);
 		
+		y+=BUTTON_HEIGHT+GUIdo_AdminPage.Y_GAP;
+		
 		//////////////////////////////////////////////////////
 		
 		//the button to get the complaints and show it: 
