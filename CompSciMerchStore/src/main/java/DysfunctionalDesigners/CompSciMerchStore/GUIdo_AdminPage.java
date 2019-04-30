@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -77,7 +78,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 	 * The Font instance that is used for the title of the admin page. 
 	 * 
 	 */
-	private static final Font TITLE_FONT = new Font("Calibri", Font.PLAIN,50);
+	private static final Font TITLE_FONT = new Font("Cambria", Font.PLAIN,50);
 	
 	/**
 	 * The gap in pixels between each line of the complaints.
@@ -94,9 +95,10 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 	 * @param width the width in pixels of the page. 
 	 * @param admin the Administrator instance that is used for the login
 	 *  to see the admin page. 
-	 *  
+	 *  @param done the ActionListener instance that is used to go to the 
+	 *   promo code adding. 
 	 */
-	public GUIdo_AdminPage(int width, Administrator admin) {
+	public GUIdo_AdminPage(int width, Administrator admin, ActionListener done) {
 		//set up the page using the width given of the frame and a default 
 		//page length. 
 		super(width, 1200);
@@ -158,8 +160,21 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		
 		this.add(generateAllUsersReports);
 		
-		y+=BUTTON_HEIGHT+this.Y_GAP;
+		y+=BUTTON_HEIGHT+GUIdo_AdminPage.Y_GAP;
 		
+		//////////////////////////////////////////////////////
+		
+		GUIdo_CButton make_promo = new GUIdo_CButton(width/2-BUTTON_WIDTH/2,
+													  y,
+													  BUTTON_WIDTH,
+													  BUTTON_HEIGHT,
+													  "Generate Promo Code");
+		make_promo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				done.actionPerformed(new ActionEvent(null, ActionEvent.ACTION_PERFORMED, "make_promo"));
+			}
+		});
+		this.add(make_promo);
 		
 		//////////////////////////////////////////////////////
 		
@@ -216,7 +231,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 					logger.severe("ERROR: NULLPOINTER CAUGHT IN ADMINPAGE");
 					e1.printStackTrace();
 				}
-		}
+				}
 				
 				page_length= y+200;
 				setPreferredSize(new Dimension(getWidth(),page_length));
