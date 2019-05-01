@@ -87,9 +87,20 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		c.gridy = 14;
 		this.add(yourUN,c);
 		
+		c.gridy = 16;
+		this.add(showUN,c);
+		
+		c.gridy = 18;
+		this.add(yourPass, c);
+		
+		c.gridy = 20;
+		this.add(showPass, c);
+		
 		c.gridy = 2;
-		c.gridx = 2;
+		c.gridx = 4;
 		this.add(editProfile,c);
+		
+		c.gridy = 4;
 		this.add(viewPreviousOrders, c);
 		
 		c.gridy = 28;
