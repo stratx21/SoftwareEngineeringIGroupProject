@@ -648,6 +648,7 @@ public class GUIdo_Frame extends JFrame{
 						}
 					}
 				}
+		    	System.exit(0);
 		    }
 		});
 		
