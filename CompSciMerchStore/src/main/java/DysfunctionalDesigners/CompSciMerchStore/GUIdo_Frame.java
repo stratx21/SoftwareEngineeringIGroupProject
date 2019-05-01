@@ -265,7 +265,7 @@ public class GUIdo_Frame extends JFrame{
 					//switch to edit profile page
 					to_EditProfile(u);
 				} else if(e.getActionCommand().equals("View previous orders")) {
-					to_PreviousSales((Vendor) u);
+					to_PreviousSales((Customer) u);
 				}
 				
 			}
@@ -292,8 +292,8 @@ public class GUIdo_Frame extends JFrame{
 		
 	}
 	
-	private void to_PreviousSales(Vendor v) {
-		current_panel = new GUIdo_PastSales(v);
+	private void to_PreviousSales(Customer c) {
+		current_panel = new GUIdo_PreviousOrders(c);
 		scrollpane.getViewport().add(current_panel);
 	}
 	/**
