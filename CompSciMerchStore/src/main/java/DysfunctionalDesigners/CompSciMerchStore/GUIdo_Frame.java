@@ -178,13 +178,17 @@ public class GUIdo_Frame extends JFrame{
 		} 
 	}
 	
+	/**
+	 * Set up the promo code making page. 
+	 * 
+	 */
 	public void to_make_promo() {
 		this.current_panel = new GUIdo_MakePromo(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				to_homescreen();
 			}
 		}, this.getWidth());
-		
+		//add to scrolling pane and repaint: 
 		scrollpane.getViewport().add(this.current_panel);
 		scrollpane.repaint();
 	}
