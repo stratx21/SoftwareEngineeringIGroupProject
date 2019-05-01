@@ -144,7 +144,8 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 		GUIdo_CButton placeOrder = new GUIdo_CButton(0, 0, 150, 75, "Place Order");
 		placeOrder.disable();
-		placeOrder.setBackground(Color.pink);
+		placeOrder.setBackground(new Color(255,228,225));
+		placeOrder.setHoverColor(new Color(255,192,203));
 		//placeOrder.setForeground(Color.PINK);
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
 		GUIdo_CButton back = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Back");
