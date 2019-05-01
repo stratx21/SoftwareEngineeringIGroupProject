@@ -80,7 +80,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		g.setColor(new Color(255,255,225));
 		this.setBackground(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		int currenty = this.getHeight()*2/30;
+		int currenty = this.getHeight()*2/28;
 		int welcome_width = this.getWidth()*3/10;
 		int welcome_x_start = this.getWidth()*6/10+15;
 		Font desc_font = new Font("Cambria",Font.PLAIN, this.getWidth()/60);
