@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
@@ -35,7 +36,25 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		title = new JLabel("View Profile");
 		title.setFont(new Font("Cambria", Font.BOLD, 34));
 		editProfile = new GUIdo_CButton(650, 650, 170, 30, "Edit Profile");
+		editProfile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		viewPreviousOrders = new GUIdo_CButton(650, 650, 170, 30, "View Previous Orders");
+		viewPreviousOrders.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		email.setFont(new Font("Cambria",Font.BOLD,24));
 		momName.setFont(new Font("Cambria",Font.BOLD,24));
