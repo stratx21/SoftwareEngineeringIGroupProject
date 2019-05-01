@@ -181,7 +181,7 @@ public class GUIdo_Frame extends JFrame{
 	public void to_make_promo() {
 		this.current_panel = new GUIdo_MakePromo(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				to_homescreen();
 			}
 		}, this.getWidth());
 		
