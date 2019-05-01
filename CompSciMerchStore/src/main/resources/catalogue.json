@@ -337,8 +337,8 @@
     } ]
   },
   "15" : {
-    "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself an 'Hours of planning will save you weeks of debugging' shirt today!",
-    "displayName" : "Hours of Planning Will Save you Weeks of Debugging T-Shirt",
+    "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself a 'Weeks of Debugging Will Save You Hours of Planning' shirt today!",
+    "displayName" : "Weeks of Debugging Will Save You Hours of Planning T-Shirt",
     "extendedItemID" : "00015",
     "itemID" : 15,
     "stock" : 99,
