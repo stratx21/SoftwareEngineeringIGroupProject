@@ -28,6 +28,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	
 	GUIdo_Shipping current_pan = this;
 	
+	/**
+	 * Go to the shipping panel
+	 * @param sale			the sale to display for
+	 * @param customer		the customer that's checking out
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scollpane to add to
+	 */
 	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		this.setBackground(Color.WHITE);
