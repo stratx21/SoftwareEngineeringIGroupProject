@@ -34,7 +34,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		super(1500);
 		logger.info("Switched to Homescreen");
 		this.setBackground(Color.WHITE);
-		this.setSize(new Dimension(width, 1500));
+		this.setSize(new Dimension(width, 800));
 		
 		System.out.println("width = " + width);
 		
@@ -80,7 +80,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		g.setColor(new Color(255,255,225));
 		this.setBackground(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		int currenty = this.getHeight()*2/10+15;
+		int currenty = this.getHeight()*2/30;
 		int welcome_width = this.getWidth()*3/10;
 		int welcome_x_start = this.getWidth()*6/10+15;
 		Font desc_font = new Font("Cambria",Font.PLAIN, this.getWidth()/60);
@@ -90,10 +90,10 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		
 		
 		g.drawImage(this.cashn, 
-				this.getWidth()*1/10, this.getHeight()*1/10, this.getWidth()*2/5,this.getWidth()*3/14, null);
+				this.getWidth()*1/10, this.getHeight()*1/28, this.getWidth()*2/5,this.getWidth()*3/14, null);
 		
 		
-		g.drawRect(this.getWidth()*6/10, this.getHeight()*1/10, welcome_width, this.getHeight()*7/10);
+		//g.drawRect(this.getWidth()*6/10, this.getHeight()*1/10, welcome_width, this.getHeight()*7/10);
 		g.drawString("Welcome!", welcome_x_start, currenty);
 		currenty+=this.getFontMetrics((new Font("Cambria",Font.BOLD,this.getWidth()/16))).getHeight()/2;
 		
@@ -106,9 +106,9 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		}
 		
 		
-		display_item1.drawDisplay(g, this.getWidth()*1/10, this.getHeight()*1/10+this.getWidth()*3/14+30, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
+		display_item1.drawDisplay(g, this.getWidth()*1/10, this.getHeight()*1/18+this.getWidth()*3/14+30, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
 	
-		display_item2.drawDisplay(g, this.getWidth()*3/10, this.getHeight()*1/10+this.getWidth()*3/14+30, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
+		display_item2.drawDisplay(g, this.getWidth()*3/10, this.getHeight()*1/18+this.getWidth()*3/14+30, (int)(this.getWidth()*1.5/10), welcome_width*3/4);
 		
 		try {
 			Thread.sleep(20);
