@@ -42,6 +42,16 @@
       "userID" : 19999,
       "date" : 1556514160547,
       "rating" : 5
+    }, {
+      "description" : "so plush!!!!",
+      "userID" : 19999,
+      "date" : 1556690677594,
+      "rating" : 5
+    }, {
+      "description" : "its a chocking hazard...",
+      "userID" : 19999,
+      "date" : 1556691312339,
+      "rating" : 1
     } ]
   },
   "2" : {
@@ -80,7 +90,17 @@
     },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"worst material to swim in\" - scuba diver",
+      "userID" : 19999,
+      "date" : 1556691350961,
+      "rating" : 2
+    }, {
+      "description" : "\"Wore this during my basketball game... got a girl's number because I was the only stylish person on the court :D\" - happy boy",
+      "userID" : 19999,
+      "date" : 1556691423083,
+      "rating" : 5
+    } ]
   },
   "4" : {
     "description" : "A day-of-the-week calendar! This way, you'll never have to wonder what day it is, or whether or not you have class!",
@@ -96,7 +116,12 @@
     },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "this wasn't edible....",
+      "userID" : 19999,
+      "date" : 1556691455974,
+      "rating" : 1
+    } ]
   },
   "5" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -113,7 +138,12 @@
     },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"went to my brother's mud wrestling tournament... it was never white again\" -  brother",
+      "userID" : 19999,
+      "date" : 1556691517831,
+      "rating" : 2
+    } ]
   },
   "6" : {
     "description" : "Do you miss Dr. Booth when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Dr. Booth Bobble Head today!",
@@ -127,7 +157,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I lost my Cerny bobble head... but now I have the Booth bobble head to take care of me as I sleep",
+      "userID" : 19999,
+      "date" : 1556691568005,
+      "rating" : 4
+    } ]
   },
   "7" : {
     "description" : "Support Cerny's life goals with this 'Somehow Harder Than Donahoo' T-Shirt!",
@@ -145,6 +180,11 @@
       "description" : "Maybe he'll have mercy on me if I wear this to the first day of class...",
       "userID" : 19999,
       "date" : 1556516105518,
+      "rating" : 4
+    }, {
+      "description" : "\"My love for Jesus is harder than Donahoo\" - Anonynomous \n",
+      "userID" : 19999,
+      "date" : 1556690821877,
       "rating" : 4
     } ]
   },
@@ -186,7 +226,12 @@
     },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"It looks great on me when i lean forward on my computer and code at night in bed\" - hacker",
+      "userID" : 19999,
+      "date" : 1556690891894,
+      "rating" : 4
+    } ]
   },
   "10" : {
     "description" : "Do you need encouragement? This button is here for you! It's here to remind you that... 'If you don't know collections, you don't know Java!'",
@@ -203,7 +248,12 @@
     },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "its a great button to push when im bored - liberal arts student",
+      "userID" : 19999,
+      "date" : 1556690932560,
+      "rating" : 4
+    } ]
   },
   "11" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -217,7 +267,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"my knowledge that i have gained from Cerny made my head too big to fit the cap...\" -big head larry",
+      "userID" : 19999,
+      "date" : 1556690989614,
+      "rating" : 1
+    } ]
   },
   "12" : {
     "description" : "Do you miss Dr. Cerny when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Dr. Cerny Bobble Head today!",
@@ -231,7 +286,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"I have this over my bed to watch over me as i dream about kittens\"  - sleepy boy",
+      "userID" : 19999,
+      "date" : 1556691047051,
+      "rating" : 5
+    } ]
   },
   "13" : {
     "description" : "Are you jealous of how cool Hamerly is when he rocks his Chacos? Feed your jealousy! Get a pair today! *May or may not have been worn by Hamerly himself*",
@@ -288,7 +348,22 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "it's the other way around...",
+      "userID" : 19999,
+      "date" : 1556691108915,
+      "rating" : 1
+    }, {
+      "description" : "Dr. Hamerly's shirt said it the opposite way",
+      "userID" : 19999,
+      "date" : 1556691132980,
+      "rating" : 1
+    }, {
+      "description" : "bad the wrong way ",
+      "userID" : 19999,
+      "date" : 1556691139412,
+      "rating" : 1
+    } ]
   },
   "16" : {
     "description" : "If you're like Dr. Hamerly, and you like to know how much of your writing utensil is left, invest in some chalk. Our pack includes every color of the rainbow.",
@@ -352,7 +427,22 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I faihled thfis ccrashscourse ",
+      "userID" : 19999,
+      "date" : 1556691938461,
+      "rating" : 1
+    }, {
+      "description" : "Wow, this was such a great course to take in Booth's class!!",
+      "userID" : 19999,
+      "date" : 1556691977174,
+      "rating" : 5
+    }, {
+      "description" : "dgsv fhetrhtjn ryjjr tyhrjthgnjthgjn thjrgf tmjumrtygnh t!!! 34rg hhgmgfn  trhfdhgmj ethytrhefgtyhgnfbngn gr !!!",
+      "userID" : 19999,
+      "date" : 1556691997355,
+      "rating" : 5
+    } ]
   },
   "19" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -369,7 +459,12 @@
     },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I never wore hats before until I wore this hat...",
+      "userID" : 19999,
+      "date" : 1556692022370,
+      "rating" : 5
+    } ]
   },
   "20" : {
     "description" : "Do you miss Dr. Hamerly when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Dr. Hamerly Bobble Head today!",
@@ -383,7 +478,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Ok... I lost my Fry bobble head and now I think my house is haunted... I got this Hamerly bobble head to replace the previous bobble head and I have surrounded it with holy water... I think I need to call a priest to exorcize my house soon....",
+      "userID" : 19999,
+      "date" : 1556692093351,
+      "rating" : 2
+    } ]
   },
   "21" : {
     "description" : "If you've taken Intro to Computer Systems, you know how important it is to know your multiples of 16. To make sure you never forget, invest in some flashcards now!",
@@ -420,7 +520,17 @@
     },
     "enabled" : true,
     "prof" : "FRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Threw this at the wall when I failed an exam... It was truly a bummer...",
+      "userID" : 19999,
+      "date" : 1556691655076,
+      "rating" : 3
+    }, {
+      "description" : "friend got dumped today, I just pressed the button to help him out.... it didnt help at all whoops",
+      "userID" : 19999,
+      "date" : 1556691705832,
+      "rating" : 1
+    } ]
   },
   "23" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -434,7 +544,22 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "FRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Was actually a quality product",
+      "userID" : 19999,
+      "date" : 1556691739659,
+      "rating" : 4
+    }, {
+      "description" : "my mom was so proud of me to be able to wear this hat with style.",
+      "userID" : 19999,
+      "date" : 1556691778354,
+      "rating" : 4
+    }, {
+      "description" : "LEEDLE LEEDLE LEEDLE",
+      "userID" : 19999,
+      "date" : 1556691788027,
+      "rating" : 5
+    } ]
   },
   "24" : {
     "description" : "Do you miss Professor Fry when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Professor Fry Bobble Head today!",
@@ -448,7 +573,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "FRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Lost my Booth bobble head... I think someone is stealing them from me... Bought this bobble head to replace the booth bobble head and I'm gonna have cameras all around the house to make sure I'm not crazy",
+      "userID" : 19999,
+      "date" : 1556691874263,
+      "rating" : 3
+    } ]
   },
   "25" : {
     "description" : "If you also like A&M like Professor Bald Aars, you can support it with him.. If you really want.",
@@ -517,6 +647,11 @@
       "userID" : 19999,
       "date" : 1556689732164,
       "rating" : 4
+    }, {
+      "description" : "OMGGGGGG!!! I lost the Hamerly bobble head!! I think my mom i sjust throwing them away thinking they are dolls!! they are not dolls!!! gosh!!! anyway I got this bobble head hoping it will actually stick around... pray for me",
+      "userID" : 19999,
+      "date" : 1556692159088,
+      "rating" : 4
     } ]
   },
   "28" : {
@@ -531,7 +666,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "AARSHAIRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Do not put this poster over the fire place!! ",
+      "userID" : 19999,
+      "date" : 1556692781449,
+      "rating" : 1
+    } ]
   },
   "29" : {
     "description" : "Professor Hairy Aars is all about his students finding what they love in life. He'll even sit on the floor with them and talk about it. If you need a little help, this book might be for you!",
@@ -545,7 +685,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "AARSHAIRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Who needs a job to love when you have one of the amazing bobble heads that are offered on this website!! I love my bobble heads!! I have been finding new ones in the neighbor's yard everytime I look over!! It's like he is giving away free bobble heads!! I am going to start a bobble head collection with the new additions I have gotten from the past weeks!",
+      "userID" : 19999,
+      "date" : 1556692746231,
+      "rating" : 1
+    } ]
   },
   "30" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -561,7 +706,12 @@
     },
     "enabled" : true,
     "prof" : "AARSHAIRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "After wearing this hat... my head grew alot of hair... I was so shocked.. doctors were amazed at the growth rate of my hair... Doctors hate this hat. Get a full head of hair now if you call in the next hour!",
+      "userID" : 19999,
+      "date" : 1556692597953,
+      "rating" : 4
+    } ]
   },
   "31" : {
     "description" : "Do you miss Professor Hairy Aars when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Professor Hairy Aars Bobble Head today!",
@@ -575,7 +725,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "AARSHAIRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "So I just lost my previous bobble heads... I thought it was my mom but she was in germany for the passt 2 weeks... I think its a ghost but the priest exorcised my house... Idk anymore... I hope this hairy Aars bobble head will protect me from the evil spirits thats tormenting my bobble head collection.",
+      "userID" : 19999,
+      "date" : 1556692353942,
+      "rating" : 3
+    } ]
   },
   "32" : {
     "description" : "You can't lie, Dr. Maurer is one of the biggest fashion icon's of CS. If you want to be cool too, you can get a fedora.",
@@ -591,7 +746,12 @@
     },
     "enabled" : true,
     "prof" : "MAURER",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I really hoped the maniquen's head was part of the hat... was disapointed ",
+      "userID" : 19999,
+      "date" : 1556692808068,
+      "rating" : 1
+    } ]
   },
   "33" : {
     "description" : "They sparkle, they shine, they dazzle your audience! What more could you want! Get yourself some Dr. Maurer inspired earrings today. Only legends recognize legends.",
@@ -605,7 +765,22 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "MAURER",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Wish these were in different colors!! So amazing! So wow!",
+      "userID" : 19999,
+      "date" : 1556692836360,
+      "rating" : 4
+    }, {
+      "description" : "Incredible!",
+      "userID" : 19999,
+      "date" : 1556692844397,
+      "rating" : 5
+    }, {
+      "description" : "Bought these the other day.. forgot I dont have holes to put them in :/",
+      "userID" : 19999,
+      "date" : 1556692865321,
+      "rating" : 1
+    } ]
   },
   "34" : {
     "description" : "Do you like a little BOUNCE in your probability calculations? Do you like a LOT of bounce? We've got you covered. Get this set of 100 bouncy balls now.",
@@ -619,7 +794,17 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "MAURER",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I was really excited for this product until I slipped on a hill and dropeed the box with the balls in it... the box broke... just like my hopes and dreams",
+      "userID" : 19999,
+      "date" : 1556692935009,
+      "rating" : 1
+    }, {
+      "description" : "You wouldn't beleive what happened the other day. I was walking down a hill and I saw 100 balls go down a hill! This made me want to buy 100 bouncy balls and thats what I did! Such a great purchase!!",
+      "userID" : 19999,
+      "date" : 1556692987433,
+      "rating" : 5
+    } ]
   },
   "35" : {
     "description" : "Do you like a little BOUNCE in your probability calculations? Wouldn't it be CRAZY to not CONTAIN that BOUNCE? Get yourself this set: 100 bouncy balls, PLUS AN URN!! What more could you want?",
@@ -637,7 +822,12 @@
     },
     "enabled" : true,
     "prof" : "MAURER",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Bought this as a last second resort to put Grandma's ashes in... hope grandma has alot of space in it.",
+      "userID" : 19999,
+      "date" : 1556693056163,
+      "rating" : 5
+    } ]
   },
   "36" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -651,7 +841,22 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "MAURER",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "was such a great investment to put on my dog. My dog's confidence has improved alot because of it!! Thank you!!",
+      "userID" : 19999,
+      "date" : 1556693104137,
+      "rating" : 5
+    }, {
+      "description" : "Perfect way to impress my date for tonight :D",
+      "userID" : 19999,
+      "date" : 1556693137320,
+      "rating" : 5
+    }, {
+      "description" : "nevermind... she laughed at me",
+      "userID" : 19999,
+      "date" : 1556693151973,
+      "rating" : 1
+    } ]
   },
   "37" : {
     "description" : "Do you miss Dr. Maurer when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Dr. Maurer Bobble Head today!",
@@ -665,7 +870,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "MAURER",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "So excited to restart my bobble head collection with the Maurer bobblehead. My hairy Aars bobble head went missing.... I have started seeing a psychiatrist to help me with my issues that may not be my fault... everyone is calling me crazy... i swear that aliens exist!!!",
+      "userID" : 19999,
+      "date" : 1556692504342,
+      "rating" : 5
+    } ]
   },
   "38" : {
     "description" : "A fashion-forward hat to support your favorite professor!",
@@ -679,7 +889,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"To big for my head\" - liberal arts student",
+      "userID" : 19999,
+      "date" : 1556691075033,
+      "rating" : 2
+    } ]
   },
   "39" : {
     "description" : "An amazingly relatable shirt to feature what it really takes to get through this major.",
@@ -768,6 +983,11 @@
       "userID" : 19999,
       "date" : 1556690032371,
       "rating" : 1
+    }, {
+      "description" : "\"I wish I looked as good as him\" -runway model\n",
+      "userID" : 19999,
+      "date" : 1556691195106,
+      "rating" : 5
     } ]
   },
   "42" : {
@@ -782,7 +1002,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "BOOTH",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I love this joke!!! -Dad",
+      "userID" : 19999,
+      "date" : 1556691154970,
+      "rating" : 5
+    } ]
   },
   "43" : {
     "description" : "Support your favorite Designers!",
@@ -796,7 +1021,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "DYS_DES",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"I should have been on this picture\" - Brian Thayil",
+      "userID" : 19999,
+      "date" : 1556693239017,
+      "rating" : 1
+    } ]
   },
   "44" : {
     "description" : "Posters are now available! You won't want to miss it!",
@@ -810,7 +1040,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "DYS_DES",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Better than the new episodes of Star Wars... especially episode 7 and 8... and most likely 9",
+      "userID" : 19999,
+      "date" : 1556693365788,
+      "rating" : 4
+    } ]
   },
   "45" : {
     "description" : "If you need to say thanks, this shirt will be perfect!",
@@ -868,6 +1103,21 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "\"worst gift to give to my wife on our 30th annivesary\" - newly divorced single man ",
+      "userID" : 19999,
+      "date" : 1556691250025,
+      "rating" : 1
+    }, {
+      "description" : "what i look like in the morning",
+      "userID" : 19999,
+      "date" : 1556691271630,
+      "rating" : 3
+    }, {
+      "description" : "I wish I could find a man who looks like this in the mornings...",
+      "userID" : 19999,
+      "date" : 1556691287169,
+      "rating" : 4
+    } ]
   }
 }
