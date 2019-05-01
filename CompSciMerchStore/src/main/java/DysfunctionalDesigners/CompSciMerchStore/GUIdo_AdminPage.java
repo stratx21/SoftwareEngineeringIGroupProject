@@ -238,8 +238,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 				}
 				}
 				
-				page_length= y+200;
-				setPreferredSize(new Dimension(getWidth(),page_length));
+				set_new_length(y+200);
 				repaint();
 			}
 		});
