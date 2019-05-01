@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 	}
 	
 	public void drawScreen(Customer customer) {
+		DecimalFormat df = new DecimalFormat("0.00");
 		GridBagLayout layout = new GridBagLayout();
 		this.setLayout(layout);
 		GridBagConstraints c = new GridBagConstraints();
@@ -68,7 +70,7 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 				this.add(name, c);
 			}
 			
-			JLabel total = new JLabel("Total: $" + s.getTotalWithTax());
+			JLabel total = new JLabel("Total: $" + df.format(s.getTotalWithTax()));
 			total.setFont(new Font("Cambria", Font.BOLD, 16));
 			total.setForeground(Color.RED);
 			y++;
