@@ -11,10 +11,12 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
 public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
@@ -86,6 +88,10 @@ public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
 		GridBagLayout layout = new GridBagLayout();
 		this.setLayout(layout);
 		
+		
+		Border b = BorderFactory.createLineBorder(Color.BLACK);
+		reviewField.setBorder(BorderFactory.createCompoundBorder(b,
+	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(5, 10, 5, 10);
 		c.gridx = 0;
