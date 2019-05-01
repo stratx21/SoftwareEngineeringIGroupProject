@@ -954,6 +954,11 @@
       "userID" : 19999,
       "date" : 1556689843138,
       "rating" : 4
+    }, {
+      "description" : "'Why is it not brick?' -everyone on campus ",
+      "userID" : 13419,
+      "date" : 1556689843148,
+      "rating" : 1
     } ]
   },
   "41" : {
@@ -1119,5 +1124,19 @@
       "date" : 1556691287169,
       "rating" : 4
     } ]
+  },
+  "50" : {
+    "description" : "This hunk of junk can run Big Int in less than 12 parsecs",
+    "displayName" : "Computer Fossil",
+    "extendedItemID" : "00050",
+    "itemID" : 50,
+    "stock" : 200,
+    "vendorID" : 13419,
+    "saleDiscount" : 0.0,
+    "price" : 20.0,
+    "promoDiscounts" : { },
+    "enabled" : true,
+    "prof" : "FRY",
+    "reviews" : [ ]
   }
 }
