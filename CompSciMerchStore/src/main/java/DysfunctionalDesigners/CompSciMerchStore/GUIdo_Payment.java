@@ -461,6 +461,13 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		scrollpane.getViewport().add(current_panel);
 	}
 
+	/**
+	 * Go to the shipping page
+	 * @param sale				sale to go for
+	 * @param customer			customer this applies to
+	 * @param current_panel		The current panel to change
+	 * @param scrollpane		the scrollpane to add to
+	 */
 	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);
