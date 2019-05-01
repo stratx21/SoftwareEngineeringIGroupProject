@@ -21,6 +21,9 @@ import javax.swing.text.MaskFormatter;
 
 public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	private static Logger logger = Logger.getLogger(GUIdo_Payment.class.getName());
+	
+	GUIdo_Payment this_panel = this;
+	
 	public GUIdo_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Payment Screen");
@@ -111,8 +114,38 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		promoLabel.setFont(new Font("Cambria", Font.PLAIN, 16));
 		JTextField promoCode = new JTextField();
 		
-		GUIdo_CButton placeOrder = new GUIdo_CButton(this.getWidth() / 4, this.getHeight() / 5, 200, 100, "Place Order");
+		// making order detail box -- reuse code in Shipping && Review/Edit Order
+		JLabel orderDetails = new JLabel("Order Details");
+		orderDetails.setFont(new Font("Cambria", Font.PLAIN, 28));
+		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
+		JLabel subtotal = null;
+		if(sale.getNumItems() == 1) {
+			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + " item):");
+		}else {
+			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + " items):");
+		}
+		subtotal.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel subNum = new JLabel("$" + df.format(sale.getTotalWithoutTax()));
+		subNum.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel estTax = new JLabel("Estimated Tax: ");
+		estTax.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel estTaxNum = new JLabel("$" + df.format(sale.getEstimatedTax()));
+		estTaxNum.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel shipping = new JLabel("Shipping:");
+		shipping.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel shippingCost = new JLabel("$" + df.format(Sale.getShipping()));
+		shippingCost.setFont(new Font("Cambria", Font.PLAIN, 14));
+		JLabel total = new JLabel("Total:");
+		total.setFont(new Font("Cambria", Font.BOLD, 14));
+		total.setForeground(Color.RED);
+		JLabel totalCost = new JLabel("$" + df.format(sale.getTotalWithTax()));
+		totalCost.setForeground(Color.RED);
+		totalCost.setFont(new Font("Cambria", Font.BOLD, 14));
+		
+		GUIdo_CButton placeOrder = new GUIdo_CButton(0, 0, 150, 75, "Place Order");
 		placeOrder.disable();
+		placeOrder.setBackground(Color.pink);
+		//placeOrder.setForeground(Color.PINK);
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
 		GUIdo_CButton back = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Back");
 		GUIdo_CButton enterPromoCode = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Enter Code");
@@ -194,44 +227,6 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			}
 			
 		});
-		
-		enterPromoCode.setActionListener_clicked(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// verify promo code and update total
-			}
-			
-		});
-		
-		// making order detail box -- reuse code in Shipping && Review/Edit Order
-		JLabel orderDetails = new JLabel("Order Details");
-		orderDetails.setFont(new Font("Cambria", Font.PLAIN, 28));
-		//orderDetails.setHorizontalAlignment(JLabel.CENTER);
-		JLabel subtotal = null;
-		if(sale.getNumItems() == 1) {
-			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + " item):");
-		}else {
-			subtotal = new JLabel("Subtotal (" + sale.getNumItems() + " items):");
-		}
-		subtotal.setFont(new Font("Cambria", Font.PLAIN, 14));
-		JLabel subNum = new JLabel("$" + df.format(sale.getTotalWithoutTax()));
-		subNum.setFont(new Font("Cambria", Font.PLAIN, 14));
-		JLabel estTax = new JLabel("Estimated Tax: ");
-		estTax.setFont(new Font("Cambria", Font.PLAIN, 14));
-		JLabel estTaxNum = new JLabel("$" + df.format(sale.getEstimatedTax()));
-		estTaxNum.setFont(new Font("Cambria", Font.PLAIN, 14));
-		JLabel shipping = new JLabel("Shipping:");
-		shipping.setFont(new Font("Cambria", Font.PLAIN, 14));
-		JLabel shippingCost = new JLabel("$" + df.format(Sale.getShipping()));
-		shippingCost.setFont(new Font("Cambria", Font.PLAIN, 14));
-		JLabel total = new JLabel("Total:");
-		total.setFont(new Font("Cambria", Font.BOLD, 14));
-		total.setForeground(Color.RED);
-		JLabel totalCost = new JLabel("$" + df.format(sale.getTotalWithTax()));
-		totalCost.setForeground(Color.RED);
-		totalCost.setFont(new Font("Cambria", Font.BOLD, 14));
 		
 		GridBagLayout gbl = new GridBagLayout();
 		this.setLayout(gbl);
@@ -385,6 +380,33 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(totalCost, c);
 		
+		boolean promo = false;
+		enterPromoCode.setActionListener_clicked(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(sale.checkPromoCode(promoCode.getText())) {
+					sale.applyPromoCode(promoCode.getText());
+					JLabel newTotalCost = new JLabel("$" + df.format(sale.getTotalWithTax()));
+					totalCost.setForeground(Color.RED);
+					totalCost.setFont(new Font("Cambria", Font.BOLD, 14));
+					this_panel.remove(totalCost);
+					c.gridx = 4;
+					c.gridy = 5;
+					c.weighty = 0;
+					c.anchor = GridBagConstraints.NORTHWEST;
+					this_panel.add(newTotalCost, c);
+					this_panel.repaint();
+					this_panel.revalidate();
+				}else if(!sale.checkPromoCode(promoCode.getText())){
+					JOptionPane.showMessageDialog(null, "Not a valid promo code!");
+				}
+				
+			}
+			
+		});
+		
 		c.gridx = 3;
 		c.gridy = 6;
 		c.weighty = 0;
@@ -398,6 +420,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.gridx = 4;
 		c.gridy = 7;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(enterPromoCode, c);
 		c.gridx = 3;
