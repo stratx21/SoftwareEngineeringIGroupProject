@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -22,6 +23,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class GUIdo_Frame extends JFrame{
+	
+	/**
+	 * Instance of the Logger
+	 */
+	private static Logger logger = Logger.getLogger(GUIdo_Frame.class.getName());
 	
 	/**
 	 * the height in pixels of the toolbar.
@@ -85,6 +91,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	public GUIdo_Frame() {
+		logger.info("Initialized guido_frame");
 		this.initialize();
 		this.setBackground(Color.WHITE);
 	}
@@ -97,6 +104,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	public void to_all_uploaded_items(User user) {
+		logger.info("Going to all uploaded items and passing it user" + user.getUserID());
 		List<ItemInfo> items = new ArrayList<>();
 		for(Integer id : ((Vendor)user).getUploadedItems()) {
 			items.add(Catalogue.getInstance().getItem(id));
@@ -170,12 +178,13 @@ public class GUIdo_Frame extends JFrame{
 								}, getWidth());
 								scrollpane.getViewport().add(current_panel);
 							} else {
-								//no other - error 
+								logger.severe("INVALID ADMIN ACTION PERFORMED: " + e.getActionCommand());
 							}
 						}
 					});
 					scrollpane.getViewport().add(current_panel);
 				} else {
+					logger.fine("Non admins trying to access admin page: \"" + current_user.getUserID());
 					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
 				}
 			} else if(option.equals("View Profile")) {

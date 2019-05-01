@@ -18,11 +18,13 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 	private static Logger logger = Logger.getLogger(GUIdo_CreateAccount.class.getName());
 	
 	//whatever, email, confirm email, mother's name, user, pass, confirm pass, name, create account
-	JLabel l1, email, confirmEmail, momName, enterPass, confirmPass, enterName, title;
+	JLabel l1, email, confirmEmail, momName, enterPass, confirmPass, enterName, title, memberLevel;
 	//email, confirm email, mother's name, user, pass, confirm pass, name
-	JTextField getEmail, getEmailCon, getMom, getPass, getconfirmPass, getName;
+	JTextField getEmail, getEmailCon, getMom, getPass, getconfirmPass, getName, getMemberLevel;
 	//sign up
 	GUIdo_CButton btn1;
+	
+	Customer current = null;
 
 	/**
 	 * The edit profile frame
@@ -30,8 +32,10 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 	 * @param u		The user to edit
 	 */
 	GUIdo_EditProfile(final ActionListener al, User u){
-		super(800);
-		
+		super(1200);
+		if(!u.isAdmin()) {
+			current = (Customer)u;
+		}
 		this.setBackground(Color.WHITE);
 		logger.info("Switched to panel CreateAccount");
 		
@@ -45,6 +49,7 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		enterPass = new JLabel("Edit password:");
 		confirmPass = new JLabel("Confirm password:");
 		enterName = new JLabel("Edit name:");
+		memberLevel = new JLabel("Edit member level (General, Middle, Elite)");
 		title = new JLabel("Edit Profile");
 		title.setFont(new Font("Cambria", Font.BOLD, 34));
 		
@@ -55,6 +60,7 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		enterPass.setFont(new Font("Cambria",Font.PLAIN,20));
 		confirmPass.setFont(new Font("Cambria",Font.PLAIN,20));
 		enterName.setFont(new Font("Cambria",Font.PLAIN,20));
+		memberLevel.setFont(new Font("Cambria", Font.PLAIN, 20));
 		
 		
 		
@@ -64,7 +70,8 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		getPass = new JTextField(u.getPassword());
 		getconfirmPass = new JTextField();
 		getName = new JTextField(u.getName());
-		btn1 = new GUIdo_CButton(650, 650, 170, 30, "Submit Changes");
+		getMemberLevel = new JTextField();
+		btn1 = new GUIdo_CButton(900, 900, 170, 30, "Submit Changes");
 		
 		getEmail.setPreferredSize(new Dimension(10,50));
 		getEmailCon.setPreferredSize(new Dimension(10,50));
@@ -72,7 +79,7 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		getPass.setPreferredSize(new Dimension(10,50));
 		getconfirmPass.setPreferredSize(new Dimension(10,50));
 		getName.setPreferredSize(new Dimension(10,50));
-		getName.setPreferredSize(new Dimension(10,50));
+		getMemberLevel.setPreferredSize(new Dimension(10,50));
 		btn1.setPreferredSize(new Dimension(10,50));
 		btn1.setActionCommand("submit_changes");	
 		
@@ -124,11 +131,20 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 					u.setMotherMaidenName(getMom.getText());
 					u.setPassword(getPass.getText());
 					u.setName(getName.getText());
+					if(!u.isAdmin()) {
+						if(getMemberLevel.getText().equals("General")) {
+							current.setStatus(MemberLevel.GENERAL);
+						}else if(getMemberLevel.getText().equals("Middle")) {
+							current.setStatus(MemberLevel.MIDDLE);
+						}else if(getMemberLevel.getText().equals("Elite")) {
+							current.setStatus(MemberLevel.ELITE);
+						}
+					}
 					
 					if(u.isAdmin()) {
 						control.writeAdmin((Administrator)u);
 					}else {
-						control.writeCustomer((Customer)u);
+						control.writeCustomer(current);
 					}
 					control.updateUserPassword(u);
 					
@@ -187,13 +203,16 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		c.gridy = 24;
 		this.add(getMom,c);
 		
-		c.gridy = 26;
+		if(!u.isAdmin()) {
+			c.gridy = 26;
+			this.add(memberLevel,c);
+		
+			c.gridy = 28;
+			this.add(getMemberLevel,c);
+		}
+		
+		c.gridy = 34;
 		this.add(btn1,c);
-		
-		c.gridy = 28;
-		
-		
-		c.gridy = 30;
 		
 		JLabel fake = new JLabel ("");
 		c.weighty = 1;
