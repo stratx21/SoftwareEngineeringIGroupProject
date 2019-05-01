@@ -2,8 +2,10 @@ package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class GUIdo_UploadItem extends GUIdo_EditItem{
+	private static Logger logger = Logger.getLogger(GUIdo_UploadItem.class.getName());
 	
 	/**
 	 * This sets up the UploadItem page using the width of the page, the ActionListener
@@ -19,6 +21,7 @@ public class GUIdo_UploadItem extends GUIdo_EditItem{
 	 */
 	public GUIdo_UploadItem(int width, ActionListener done,User user) throws Exception{
 		super(width,new ItemInfo("","",0,((Vendor)(user)).getUserID(),0.00,Professor.AARSBALD),done,user);
+		logger.info("Switched to Upload Item Frame");
 		this.setBackground(Color.WHITE);
 	}
 	
