@@ -24,6 +24,11 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 	//sign up
 	GUIdo_CButton btn1;
 
+	/**
+	 * The edit profile frame
+	 * @param al	the action listener to go to other frames
+	 * @param u		The user to edit
+	 */
 	GUIdo_EditProfile(final ActionListener al, User u){
 		super(800);
 		

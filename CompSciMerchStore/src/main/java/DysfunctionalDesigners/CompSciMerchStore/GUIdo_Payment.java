@@ -24,6 +24,13 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	
 	GUIdo_Payment this_panel = this;
 	
+	/**
+	 * Go to payment screen
+	 * @param sale			the sale to register
+	 * @param customer		the customer to check out
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	public GUIdo_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Payment Screen");
