@@ -235,12 +235,16 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		image_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(image_label);
-		GUIdo_CButton image_upload_button = new GUIdo_CButton(width/2-DONE_WIDTH/2,y,DONE_WIDTH,DONE_HEIGHT,"upload image");
-		image_upload_button.addActionListener(new ActionListener() {
+		
+		GUIdo_CButton image_upload_button = new GUIdo_CButton(width/2-DONE_WIDTH/2,y,DONE_WIDTH,DONE_HEIGHT,
+				"upload image");
+		image_upload_button.addActionListener(new ActionListener() {//the process to upload an image: 
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser prompt = new JFileChooser();
-		        prompt.setFileFilter(new FileNameExtensionFilter(
+				JFileChooser prompt = new JFileChooser();//let the user choose the file 
+		        prompt.setFileFilter(new FileNameExtensionFilter(//should only be jpg,jpeg, or png. 
 		                "JPG, JPEG, and PNG", "jpg", "jpeg", "png"));
+		        //^ must be translated to a bufferedimage 
+		        
 		        if(prompt.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 		            try {
 		            	//attempt to get an image from the selected file: 
@@ -287,6 +291,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		//the viewable stuff for enabling and disabling the item on the store: 
 		
+		//put label to the left of the yes/no button 
 		JLabel isViewable = new JLabel("Item is visible on the store? "); 
 		isViewable.setFont(LABEL_FONT); 
 		isViewable.setBounds(width/2-GUIdo_EditItem.IS_VISIBLE_WIDTH-Y_GAP,y, 
@@ -304,6 +309,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 //			viewable.repaint();
 		}
 		
+		//the toggle for on the store or not: 
 		viewable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(item.isEnabled()) {
@@ -328,7 +334,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		
 		GUIdo_CButton done_button 
-		    = new GUIdo_CButton(width/2-GUIdo_EditItem.DONE_WIDTH/2,y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT, 
+		    = new GUIdo_CButton(
+		    		width/2-GUIdo_EditItem.DONE_WIDTH/2,y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT, 
 		    		"done");
 		done_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -337,26 +344,28 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				//validate data 
 				String[] promolines = promocodes.getText().split("\n");
 				
+				//data to get: 
 				String new_name = null;
 				String new_desc = null;
 				Double new_price = null;
 				Integer new_stock = null;
 				Professor new_professor = null;
 				Double new_discount = null;
-				Map<String,Double> new_promos = new HashMap<String,Double>();
+				Map<String,Double> new_promos = new HashMap<String,Double>(); // promo codes
 				
 				new_name = name.getText();
 				
-				if(new_name == null) {
+				if(new_name == null) {//ensure that the new name is valid: 
 					error_message += " error: new name is null \n";
 				}
 				
 				new_desc = desc.getText();
 				
-				if(new_desc == null) {
+				if(new_desc == null) {//ensure that the new description is valid 
 					error_message += " error: new description is null \n";
 				}
 				
+				//get the price data: 
 				try {
 					new_price = Double.parseDouble(price.getText());
 					if(new_price < 0.00)
@@ -369,6 +378,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					validated = false;
 				}
 				
+				//get the stock - not less than zero 
 				if(validated) {
 					try {
 						new_stock = Integer.parseInt(stock.getText());
@@ -382,10 +392,12 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					}
 				}
 				
+				//professor data: 
 				if(validated) {
 					try {
 						new_professor = Professor.values()[professors.getSelectedIndex()];
 					} catch(Exception err) {
+						//low chance of exception - most likely a programmer error. 
 						error_message += " converting the professor; choose one option. The index chosen is: "
 								+professors.getSelectedIndex() +" \n";
 						logger.severe("ERROR getting professor from data, "
@@ -394,6 +406,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					}
 				}
 				
+				
+				//get discount data: 
 				if(validated) {
 					try {
 						new_discount = Double.parseDouble(discount.getText());
@@ -433,6 +447,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				
 				if(validated) {
 					try {
+						//update the item information:
 						item.setDisplayName(new_name);
 						item.setDescription(new_desc);
 						item.setPrice(new_price);
@@ -447,16 +462,16 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				}
 				
 				
-				//TODO if ( validated) : 
+				//if validated, then update the item's info. 
 				if(validated) {
 					
 					try {
 						Catalogue.getInstance().updateItem(item.getItemID(), item);
 					} catch(Exception err) {
-//						System.err.println("ERROR updating item in GUIdo_EditItem ");
 						err.printStackTrace();
-						logger.severe("ERROR: updating the item being edited, for exception thrown by Catalogue updateItem; could " + 
-								"be a null error or something else. Doubtful that it's null though.");
+						//something related to what is going on in the update item function in the Catalogue
+						logger.severe("ERROR: updating the item being edited, for exception thrown by Catalogue updateItem; could "
+								+ "be a null error or something else. Doubtful that it's null though.");
 						// error updating the item being edited, for exception thrown by Catalogue updateItem; could
 						//be a null error or something else. Doubtful that it's null though 
 					}
@@ -464,17 +479,23 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 					
 					if(newimage != null) {
 						try {
-							ImageIO.write(newimage, "jpg", new File(App.resourceTarget + "itemimages/"+ item.getExtendedItemID() + ".jpg"));
+							//write the image to the proper spot with
+							//the proper id: 
+							ImageIO.write(newimage, "jpg", new File(App.resourceTarget + "itemimages/"
+									+ item.getExtendedItemID() + ".jpg"));
 						} catch(IOException ioex) {
 							logger.severe("ERROR saving the image in edit item");
 							ioex.printStackTrace();
 						}
 					}
 					
-					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,"item_updated"));
+					done.actionPerformed(new ActionEvent(item,ActionEvent.ACTION_PERFORMED,
+								"item_updated"));
 					//unreachable point
 				}
-				// (else):
+				// (else): not validated confirmed in theory - action listener 
+				//done call should make this not validated only from the
+				//unreachable point
 				if(!validated) {
 					JOptionPane.showMessageDialog(panel, error_message, 
 						      "Error", JOptionPane.ERROR_MESSAGE); 
@@ -483,7 +504,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 				}
 			}
 		});
-		this.add(done_button);
+		this.add(done_button); //add done button from above 
+		//add the height
 		y += GUIdo_EditItem.DONE_HEIGHT;
 		
 		
