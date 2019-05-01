@@ -16,7 +16,9 @@ import javax.swing.JLabel;
 
 public class GUIdo_PastSales extends GUIdo_CPanel implements ActionListener{
 	private static Logger logger = Logger.getLogger(GUIdo_PastSales.class.getName());
+	
 	private static Catalogue catalogue = new Catalogue();
+	
 	public GUIdo_PastSales(Vendor vendor) {
 		super();
 		this.setBackground(Color.WHITE);
@@ -64,6 +66,15 @@ public class GUIdo_PastSales extends GUIdo_CPanel implements ActionListener{
 				c.fill = GridBagConstraints.NONE;
 				this.add(name, c);
 			}
+			
+			JLabel total = new JLabel("Total: $" + s.getTotalWithTax());
+			total.setFont(new Font("Cambria", Font.PLAIN, 16));
+			y++;
+			c.gridy = y;
+			c.anchor = GridBagConstraints.LINE_START;
+			c.fill = GridBagConstraints.NONE;
+			this.add(total, c);
+			y++; // increment twice to have extra space in between orders
 		}
 	}
 
