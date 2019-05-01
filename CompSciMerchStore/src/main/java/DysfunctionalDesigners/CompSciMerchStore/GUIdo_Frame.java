@@ -87,6 +87,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	public GUIdo_Frame() {
+		logger.info("Initialized guido_frame");
 		this.initialize();
 		this.setBackground(Color.WHITE);
 	}
@@ -99,6 +100,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	public void to_all_uploaded_items(User user) {
+		logger.info("Going to all uploaded items and passing it user" + user.getUserID());
 		List<ItemInfo> items = new ArrayList<>();
 		for(Integer id : ((Vendor)user).getUploadedItems()) {
 			items.add(Catalogue.getInstance().getItem(id));
