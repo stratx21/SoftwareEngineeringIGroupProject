@@ -182,7 +182,6 @@ public class GUIdo_Frame extends JFrame{
 		this.current_panel = new GUIdo_MakePromo(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//TODO add the promo stored in e.getSource() to the list 
 			}
 		}, this.getWidth());
 		
