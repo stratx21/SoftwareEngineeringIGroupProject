@@ -12,7 +12,7 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 
-public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener{
+public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 	
 	public Catalogue catalogue = new Catalogue(); // instance to use to search for item names by id
 	
@@ -35,7 +35,7 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 		int x = 0;
 		int y = 0;
 		
-		JLabel previousPurchases = new JLabel("Previous Purchases");
+		JLabel previousPurchases = new JLabel("Previous Orders");
 		previousPurchases.setFont(new Font("Cambria", Font.BOLD, 34));
 		c.gridx = x;
 		c.gridy = y;
@@ -85,13 +85,8 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 		JLabel spacey = new JLabel("                  ");
 		y++;
 		c.gridy = y;
-		c.weighty = 1;
-		this.add(spacey);
+		c.weighty = 6;
+		this.add(spacey, c);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }
