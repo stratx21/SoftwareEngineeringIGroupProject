@@ -180,11 +180,20 @@ public class GUIdo_Frame extends JFrame{
 				}
 			} else if(option.equals("View Profile")) {
 				to_ViewProfile(current_user);
+			} else if(option.equals("View Past Sales")) {
+				to_PastSales(current_user);
 			}
 				
 		} 
 	}
 	
+	private void to_PastSales(User current_user) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_PastSales((Vendor) current_user);
+		scrollpane.getViewport().add(this.current_panel);
+		scrollpane.repaint();
+	}
+
 	/**
 	 * Set up the promo code making page. 
 	 * 
