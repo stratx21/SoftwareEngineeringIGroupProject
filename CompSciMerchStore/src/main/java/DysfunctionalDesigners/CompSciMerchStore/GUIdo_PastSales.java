@@ -35,6 +35,10 @@ public class GUIdo_PastSales extends GUIdo_CPanel{
 		this.repaint();
 	}
 	
+	/**
+	 * Draw the screen
+	 * @param vendor	the vender to draw
+	 */
 	public void drawScreen(Vendor vendor) {
 		GridBagLayout layout = new GridBagLayout();
 		this.setLayout(layout);
