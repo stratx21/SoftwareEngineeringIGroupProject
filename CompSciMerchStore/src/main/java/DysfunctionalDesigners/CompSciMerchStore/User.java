@@ -44,6 +44,9 @@ public abstract class User {
 		final int prime = 31;
 		String result = (prime + ((userName == null) ? 0 : userName.hashCode())) + "";
 		result = (Integer.parseInt(result) % 10000) + "";
+		if(result.length() > 4) {
+			result = result.substring(1);
+		}
 		result = "1" + result;
 		logger.info("Hashed username \"" + userName + "\" to " + result);
 		return result;

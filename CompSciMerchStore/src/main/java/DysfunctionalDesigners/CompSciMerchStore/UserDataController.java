@@ -374,6 +374,34 @@ public class UserDataController {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Adds a user to the appropriate usernames and password file
+     * @param userToUpdate the user to update, the object contains the new password
+     */
+    public void addUsernameAndPasswordToLists(User userToUpdate) {
+        logger.info("Updating the password of user " + userToUpdate.getUserName());
+        Path fileToUpdate;
+        if(userToUpdate.isAdmin()) {
+            fileToUpdate = Paths.get(App.resourceTarget + "UserData/admins.txt");
+        } else {
+            fileToUpdate = Paths.get(App.resourceTarget + "UserData/customers.txt");
+        }
+
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(fileToUpdate);
+            String toAdd = userToUpdate.getUserName() + " " + userToUpdate.getPassword();
+            if(!lines.contains(toAdd)) {
+            	lines.add(toAdd);
+            }
+            Files.write(fileToUpdate,  lines);
+            logger.info("USER ADDITION COMPLETE");
+        } catch (IOException e) {
+            logger.severe("IOException IN updateUserPassword, UPDATE FAILED");
+            e.printStackTrace();
+        }
+    }
 
     private void addNamesToList(BufferedReader reader, List<String> listToAddTo) {
         String line;

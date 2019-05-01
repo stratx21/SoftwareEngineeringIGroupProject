@@ -1,0 +1,24 @@
+{
+  "email" : "whos@that.com",
+  "motherMaidenName" : "Who?",
+  "userName" : "whosthat",
+  "password" : "whosthat",
+  "name" : "Who's That",
+  "userID" : 15797,
+  "uploadedItems" : [ ],
+  "pastSales" : [ ],
+  "status" : "GENERAL",
+  "paymentInfo" : [ ],
+  "shippingAddr" : null,
+  "wishList" : [ ],
+  "cart" : {
+    "payment" : null,
+    "dateTime" : null,
+    "customerID" : 15797,
+    "saleID" : 290,
+    "itemList" : { },
+    "shippingAddr" : null,
+    "finalized" : false
+  },
+  "previousPurchases" : [ ]
+}

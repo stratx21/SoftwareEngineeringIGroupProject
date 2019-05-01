@@ -144,8 +144,9 @@ public class GUIdo_CreateAccount extends GUIdo_CPanel{
 					toInput[4] = getName.getText();
 					toInput[5] = User.hashUserNameToCustomerID(getUN.getText());
 					
-					control.writeCustomer(new Customer(toInput));
-					
+					Customer temp = new Customer(toInput);
+					control.writeCustomer(temp);
+					control.addUsernameAndPasswordToLists(temp);
 					btn1.setActionListener_clicked(al);
 				}
 				
