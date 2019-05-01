@@ -22,7 +22,10 @@ import javax.swing.text.MaskFormatter;
 public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
 	private static Logger logger = Logger.getLogger(GUIdo_AddReview.class.getName());
 	
-	public GUIdo_AddReview(ItemInfo item, Customer customer) {
+	private ActionListener done = null;
+	
+	public GUIdo_AddReview(ItemInfo item, Customer customer, ActionListener done) {
+		this.done=done;
 		this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		this.drawScreen(item, customer);
 		this.repaint();
@@ -73,6 +76,7 @@ public class GUIdo_AddReview extends GUIdo_CPanel implements ActionListener{
 						Review review = new Review(description, customer.getUserID(), rating);
 						item.addReview(review);
 						JOptionPane.showMessageDialog(null, "Thank you for submitting your review!");
+						done.actionPerformed(new ActionEvent(this,ActionEvent.ACTION_PERFORMED,"added_review"));
 					}else if(rating > 5 || description.isEmpty() || description.isBlank()) {
 						JOptionPane.showMessageDialog(null, "Please enter a valid review.");
 					}
