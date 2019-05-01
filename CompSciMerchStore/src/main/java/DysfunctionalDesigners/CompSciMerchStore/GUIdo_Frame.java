@@ -161,7 +161,7 @@ public class GUIdo_Frame extends JFrame{
 					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user, new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if(e.getActionCommand().equals("make_promo")) {
-								
+								to_make_promo();
 							} else {
 								//no other - error 
 							}
@@ -186,6 +186,7 @@ public class GUIdo_Frame extends JFrame{
 		}, this.getWidth());
 		
 		scrollpane.getViewport().add(this.current_panel);
+		scrollpane.repaint();
 	}
 	
 	/**

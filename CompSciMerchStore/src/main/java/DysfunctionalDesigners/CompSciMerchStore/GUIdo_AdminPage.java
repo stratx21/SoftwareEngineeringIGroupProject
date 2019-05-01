@@ -164,6 +164,9 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		
 		//////////////////////////////////////////////////////
 		
+		
+		
+		
 		GUIdo_CButton make_promo = new GUIdo_CButton(width/2-BUTTON_WIDTH/2,
 													  y,
 													  BUTTON_WIDTH,
@@ -171,7 +174,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 													  "Generate Promo Code");
 		make_promo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				done.actionPerformed(new ActionEvent(null, ActionEvent.ACTION_PERFORMED, "make_promo"));
+				done.actionPerformed(new ActionEvent(make_promo, ActionEvent.ACTION_PERFORMED, "make_promo"));
 			}
 		});
 		this.add(make_promo);
