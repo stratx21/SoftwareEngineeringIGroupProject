@@ -85,7 +85,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		
 		
 		//set up the logout button 
-		GUIdo_CButton logout = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGOUT");
+		GUIdo_CButton logout = new GUIdo_CButton(x+width-height*2,y,height*2,height,"LOGIN/OUT");
 		logout.setActionCommand("login");
 		logout.setActionListener_clicked(done);
 		logout.setBackground(new Color(255,228,225));
@@ -159,6 +159,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		List<String> options = new ArrayList<String>();
 		options.add("Other Options"); 
 		options.add("Member Deals");
+		options.add("View Profile");
 		options.add("Contact Us"); 
 		options.add("FAQ"); 
 		options.add("About Us");

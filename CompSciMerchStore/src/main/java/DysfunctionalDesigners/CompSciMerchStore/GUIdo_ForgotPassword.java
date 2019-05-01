@@ -26,9 +26,9 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		logger.info("Switched to ForgotPassword");
 		this.setBackground(Color.WHITE);
 		
-		JLabel l1, enterUN, l3, l4, l5, title;
+		JLabel  enterUN, enterMom, enterPass, confirmPass, title;
 		
-		JTextField tf1, tf2, tf3, tf4;
+		JTextField tf1, getUN, getMomName, getPass1;
 		
 		GUIdo_CButton btn1;
 		
@@ -40,67 +40,79 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		
 		enterUN = new JLabel("Enter username:");
 		enterUN.setFont(new Font("Cambria",Font.PLAIN,20));
-		l3 = new JLabel("Enter mother's maiden name:");
-		l3.setFont(new Font("Cambria",Font.PLAIN,20));
-		l4 = new JLabel("Enter new password:");
-		l4.setFont(new Font("Cambria",Font.PLAIN,20));
-		l5 = new JLabel("Confirm new password:");
-		l5.setFont(new Font("Cambria",Font.PLAIN,20));
+		enterMom = new JLabel("Enter mother's maiden name:");
+		enterMom.setFont(new Font("Cambria",Font.PLAIN,20));
+		enterPass = new JLabel("Enter new password:");
+		enterPass.setFont(new Font("Cambria",Font.PLAIN,20));
+		confirmPass = new JLabel("Confirm new password:");
+		confirmPass.setFont(new Font("Cambria",Font.PLAIN,20));
 		title = new JLabel("Reset Password");
-		title.setFont(new Font("Camrbia", Font.BOLD, 34));
+		title.setFont(new Font("Cambria", Font.BOLD, 34));
 		
-		tf1 = new JTextField();
-		tf2 = new JTextField();
-		tf3 = new JTextField();
-		tf4 = new JTextField();
+	
+		getUN = new JTextField();
+		getMomName = new JTextField();
+		getPass1 = new JTextField();
 		
 		btn1 = new GUIdo_CButton(450, 450, 170, 30, "Reset Password");
 		btn1.setPreferredSize(new Dimension(10,50));
+
+		btn1.setActionCommand("login");
 		
-//		enterUN.setBounds(50, 50, 200, 30);
-//		l3.setBounds(50, 120, 200, 30);
-//		l4.setBounds(50, 190, 200, 30);
-//		l5.setBounds(50, 260, 200, 30);
-//		title.setBounds(250, 30, 200, 30);
-//		
-//		tf1.setBounds(50, 90, 200, 30);
-//		tf2.setBounds(50, 160, 200, 30);
-//		tf3.setBounds(50, 230, 200, 30);
-//		tf4.setBounds(50, 300, 200, 30);
-//		
 		
-		tf1.setPreferredSize(new Dimension(new Dimension(10,50)));
-		tf2.setPreferredSize(new Dimension(10,50));
-		tf3.setPreferredSize(new Dimension(10,50));
-		tf4.setPreferredSize(new Dimension(10,50));
+		JTextField getConfirmPass = new JTextField();
+		getUN.setPreferredSize(new Dimension(10,50));
+		getMomName.setPreferredSize(new Dimension(10,50));
+		getPass1.setPreferredSize(new Dimension(10,50));
+		getConfirmPass.setPreferredSize(new Dimension(10,50));
 		
-		JTextField tf5 = new JTextField();
-		tf5.setPreferredSize(new Dimension(10,50));
+		
+		
 		btn1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!tf3.getText().equals(tf4.getText())) {
+				boolean userFound = false, deservesPage = false;
+				if(!getPass1.getText().equals(getConfirmPass.getText())) {
 					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				if(!tf1.getText().isEmpty()) {
+				if(!getUN.getText().isEmpty()) {
+					
 					List<Customer> customers = control.getAllCustomers();
 					for(int i = 0; i < customers.size(); i++) {
+						
 						Customer current = customers.get(i);
-						if(tf1.getText().equals(current.getUserName())) {
-							if(tf2.getText().equals(current.getMotherMaidenName())) {
-								current.setPassword(tf3.getText());
+						if(getUN.getText().equals(current.getUserName())) {
+							userFound = true;
+							if(getMomName.getText().equals(current.getMotherMaidenName())) {
+								current.setPassword(getConfirmPass.getText());
 								control.writeCustomer(current);
 								logger.info("Set new password for " + current.getUserName());
+								deservesPage = true;
+								
+								break;
 							}else {
 								JOptionPane.showMessageDialog(panel, "Mother's maiden name doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
 								logger.info("Tried to change " + current.getUserName() + " password with incorrect maiden name");
 							}
-						}else {
-							JOptionPane.showMessageDialog(panel, "Username doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
-							logger.info("Tried to change " + current.getUserName() + " password with incorrect username");
 						}
+						//else {
+//							JOptionPane.showMessageDialog(panel, "Username doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+////							logger.info("Tried to change " + current.getUserName() + " password with incorrect username");
+//						}
 					}
+					if(!userFound) {
+						JOptionPane.showMessageDialog(panel, "Username doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+						logger.fine("Tried to change password of non-existent account: \"" + getUN.getText() + "\"");
+					}
+					else {
+						if(deservesPage) {
+							btn1.setActionListener_clicked(al);		
+							//btn1.doClick();	
+						}
+						
+					}
+					
 				}
 			}
 			
@@ -129,37 +141,37 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		this.add(enterUN,c);
 		
 		c.gridy = 5;
-		this.add(tf2,c);
+		this.add(getUN,c);
 		
 		c.gridy = 6;
-		this.add(l3,c);
+		this.add(enterMom,c);
 		
 		c.gridy = 7;
-		this.add(tf3,c);
+		this.add(getMomName,c);
 		
 		c.gridy = 8;
-		this.add(l4,c);
+		this.add(enterPass,c);
 		
 		c.gridy = 9;
-		this.add(tf4,c);
+		this.add(getPass1,c);
 		
 		c.gridy = 10;
-		this.add(l5,c);
+		this.add(confirmPass,c);
 		
 		c.gridy = 11;
-		this.add(tf5,c);
+		this.add(getConfirmPass,c);
 //		
 //		this.add(l1);
 //		this.add(enterUN);
-//		this.add(l3);
-//		this.add(l4);
-//		this.add(l5);
+//		this.add(enterMom);
+//		this.add(enterPass);
+//		this.add(confirmPass);
 //		this.add(title);
 //		
 //		this.add(tf1);
-//		this.add(tf2);
-//		this.add(tf3);
-//		this.add(tf4);
+//		this.add(getUN);
+//		this.add(getMomName);
+//		this.add(getPass1);
 		
 		
 		c.gridy = 12;

@@ -1,0 +1,16 @@
+{
+  "email" : "user@mail.com",
+  "motherMaidenName" : "hi",
+  "userName" : "user1",
+  "password" : "",
+  "name" : "",
+  "userID" : 18597,
+  "uploadedItems" : [ ],
+  "pastSales" : [ ],
+  "status" : "GENERAL",
+  "paymentInfo" : [ ],
+  "shippingAddr" : null,
+  "wishList" : [ ],
+  "cart" : null,
+  "previousPurchases" : [ ]
+}
