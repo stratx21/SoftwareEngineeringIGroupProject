@@ -14,7 +14,14 @@ public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
 	 */
 	private static Logger logger = Logger.getLogger(GUIdo_ViewAllUsers.class.getName());
 	
+	/**
+	 * Font for all JLabels
+	 */
 	private static final Font COMPLAINTS_FONT = new Font("Cambria", Font.PLAIN, 20);
+	
+	/**
+	 * Constant button height for buttons
+	 */
 	private static final int BUTTON_WIDTH = 250;
 	private static final int BUTTON_HEIGHT = 80;
 	private static final int Y_GAP = 15;
