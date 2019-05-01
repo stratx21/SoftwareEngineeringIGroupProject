@@ -30,7 +30,7 @@ public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
 	private static final int BUTTON_HEIGHT = 80;
 	
 	/**
-	 * Constant gap between things
+	 * Constant gap between buttons
 	 */
 	private static final int Y_GAP = 15;
 	
@@ -39,10 +39,20 @@ public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
 	 */
 	private static final int COMPLAINT_HEIGHT
 			= GUIdo_OutputTools.getPixelHeight("User:", GUIdo_ViewAllUsers.COMPLAINTS_FONT) + 40;
+	
+	/**
+	 * Gap between complaints
+	 */
 	private static final int COMPLAINT_GAP = 7;
 	private int y = 75;
 	private boolean users_shown = false;
 	
+	
+	/**
+	 * Function to create the frame to view all users
+	 * @param done actionListener to move to a new frame
+	 * @param width size of frame
+	 */
 	public GUIdo_ViewAllUsers(ActionListener done, int width) {
 		//set 1200 to something greater later if needed: 
 		super(width,1200);//width, length of page in pixels.
