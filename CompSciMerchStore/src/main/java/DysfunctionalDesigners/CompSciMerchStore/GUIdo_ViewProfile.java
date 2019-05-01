@@ -1,6 +1,9 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
@@ -11,16 +14,91 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 	JLabel l1, email, momName, yourUN, yourPass, yourName, title;
 	JLabel showEmail, showMomName, showUN, showPass, showName;
 	
-	GUIdo_CButton editprofile;
+	GUIdo_CButton editProfile, viewPreviousOrders;
 	
-	GUIdo_ViewProfile(final ActionListener al){
+	GUIdo_ViewProfile(final ActionListener al, User u){
 		super(800);
+		//cast u to vendor
+		Vendor v = (Vendor)u;
+		//display info for vendor
 		this.setBackground(Color.white);
 		logger.info("Switched to panel ViewProfile");
 		
 		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
 		
+		email = new JLabel("Your email:");
+		momName = new JLabel("Your mother's maiden name:");
+		yourUN = new JLabel("Your username:");
+		yourPass = new JLabel("Your password:");
+		yourName = new JLabel("Your name:");
+		title = new JLabel("View Profile");
+		title.setFont(new Font("Cambria", Font.BOLD, 34));
+		editProfile = new GUIdo_CButton(650, 650, 170, 30, "Edit Profile");
+		viewPreviousOrders = new GUIdo_CButton(650, 650, 170, 30, "View Previous Orders");
+		
+		email.setFont(new Font("Cambria",Font.PLAIN,20));
+		momName.setFont(new Font("Cambria",Font.PLAIN,20));
+		yourUN.setFont(new Font("Cambria",Font.PLAIN,20));
+		yourPass.setFont(new Font("Cambria",Font.PLAIN,20));
+		yourName.setFont(new Font("Cambria",Font.PLAIN,20));
+		
+		showEmail = new JLabel(v.getEmail());
+		showMomName = new JLabel(v.getMotherMaidenName());
+		showUN = new JLabel(v.getUserName());
+		showPass = new JLabel(v.getPassword());
+		showName = new JLabel(v.getName());
+		
+		email.setFont(new Font("Cambria",Font.PLAIN,20));
+		showMomName.setFont(new Font("Cambria",Font.PLAIN,20));
+		showUN.setFont(new Font("Cambria",Font.PLAIN,20));
+		showPass.setFont(new Font("Cambria",Font.PLAIN,20));
+		showName.setFont(new Font("Cambria",Font.PLAIN,20));
+		
+		GridBagLayout gbl = new GridBagLayout();
+		this.setLayout(gbl);
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTH;
+		c.gridx = 0;
+		c.gridy = 0;
+		
+		this.add(title,c);
+		
+		c.gridy = 2;
+		this.add(yourName,c);
+		
+		c.gridy = 4;
+		this.add(showName,c);
+		
+		c.gridy = 6;
+		this.add(email,c);
+		
+		c.gridy = 8;
+		this.add(showEmail,c);
+		
+		c.gridy = 10;
+		this.add(momName,c);
+		
+		c.gridy = 12;
+		this.add(showMomName,c);
+		
+		c.gridy = 14;
+		this.add(yourUN,c);
+		
+		c.gridy = 2;
+		c.gridx = 2;
+		this.add(editProfile,c);
+		this.add(viewPreviousOrders, c);
+		
+		c.gridy = 28;
+		
+		c.gridy = 30;
+		
+		JLabel fake = new JLabel ("");
+		c.weighty = 1;
+		this.add(fake,c);
 		
 	}
 
