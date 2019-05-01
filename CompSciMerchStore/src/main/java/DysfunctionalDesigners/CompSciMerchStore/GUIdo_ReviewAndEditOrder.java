@@ -38,14 +38,15 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 	    this.drawScreen(sale, 0, customer, current_panel, scrollpane);
   	    this.repaint();
 	}
-
-//	@Override
-//	public void paintComponent(Graphics g) {
-//		g.drawRect(950, 120, 225, 250);
-//		g.drawLine(1025, 170, 1105, 170);
-//		g.drawLine(1025, 325, 1105, 325);
-//	}
 	
+	/**
+	 * this function draws the frame for the review and edit order screen. 
+	 * @param sale the sale to be displayed
+	 * @param num num
+	 * @param customer the customer the sale belongs to
+	 * @param current_panel to set it
+	 * @param scrollpane to add it
+	 */
 	
 	public void drawScreen(Sale sale, int num, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df2 = new DecimalFormat("0.00");
