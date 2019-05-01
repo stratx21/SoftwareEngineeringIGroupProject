@@ -647,6 +647,7 @@ public class GUIdo_Frame extends JFrame{
 						}
 					}
 				}
+		    	System.exit(0);
 		    }
 		});
 		
@@ -745,7 +746,7 @@ public class GUIdo_Frame extends JFrame{
 		//set the size based on the size of this frame, compensating for the toolbars 
 		scrollpane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()-4*TOOLBAR_HEIGHT));
 		//scroll faster: 
-		scrollpane.getVerticalScrollBar().setUnitIncrement(5);
+		scrollpane.getVerticalScrollBar().setUnitIncrement(10);
 		
 		//add an action listener to repaint when the scrollpane is scrolled in
 		scrollpane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
