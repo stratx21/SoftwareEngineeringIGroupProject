@@ -16,24 +16,72 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class GUIdo_CButton extends JButton implements MouseListener{
+	
+	//NOTE:: addActionListener(ActionListener) inherited will only add an additional
+	//ActionListener instance and will not flow with the ActionCommand for the clicks
+	//managed by the child CButton. 
+	
+	/**
+	 * The Logger instance used to log events. 
+	 * 
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_CButton.class.getName());
 	
 
-	
+	/**
+	 * The boolean value telling if this instance of CButton is disabled. 
+	 * 
+	 */
 	private boolean disabled=false;
 	
+	/**
+	 * The ActionListener instance that is used when this CButton is clicked. 
+	 */
 	ActionListener onClicked=null;
 	
+	/**
+	 * The color used for when this button is pressed/clicked with the mouse. 
+	 */
 	private Color pressedColor = null;
+	
+	/**
+	 * The color that is used for when the cursor hovers over this instance of CButton. 
+	 */
 	private Color hoverColor = null;
+	
+	/**
+	 * The default color that is used as a singular color for this instance of CButton: 
+	 */
 	private Color defaultColor = null;
 	
+	/**
+	 * The custom action command that is used for when the ActionListener is invoked by 
+	 *  this instance of CButton being clicked; it will be passed with the ActionEvent
+	 *  that is created and passed up through the ActionListener call. 
+	 */
 	private String custom_action_command="CLICKED";
 	
-	//stale image, hover image, clicked image
+	/**
+	 * This boolean tells if this instance of CButton is using icons instead of plain
+	 *  text and/or colors. 
+	 */
 	private boolean hasIcons=false;
 	
-	private ImageIcon staleIcon,hoverIcon,clickedIcon;
+	/**
+	 * This is the icon that is used when no actions are happening with the mouse. 
+	 */
+	private ImageIcon staleIcon;
+	
+	/**
+	 * The icon that is used when the cursor hovers over this instance of Cbutton. 
+	 */
+	private ImageIcon hoverIcon;
+	
+	/**
+	 * The icon that is used when this instance of CButton is clicked, to signal
+	 *  to the user that the button is active and is being clicked. 
+	 */
+	private ImageIcon clickedIcon;
 	
 	/**
 	 * The item that can be used to represent the data that this
@@ -271,19 +319,35 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 //		super.paintComponent(g);
 //	}
 	
+	/**
+	 * This overrides the function used for setting the background
+	 *  so that the color can be managed manually by the CButton to
+	 *  store the default color for the stale state as well. 
+	 *  
+	 *  @param newcolor the new Color instance that will be used to 
+	 *   set the background of this isntance of CButton. 
+	 */
 	@Override
 	public void setBackground(Color newcolor) {
 		this.defaultColor=newcolor;
 		super.setBackground(newcolor);
 	}
 	
-	
+	/**
+	 * The overrriden function from the MouseListener that 
+	 *  is invoked when the mouse clicks on the CButton. 
+	 */
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 		//none?
 	}
 
+	/**
+	 * This is the overrriden function from the MouseListener that is invoked
+	 *  when the cursor enters the span of the CButton. 
+	 *  
+	 */
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(!this.disabled) {
@@ -295,6 +359,11 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		}
 	}
 
+	/**
+	 * This is the overriden function from the MouseListener that is invoked 
+	 *  when the cursor exits the span of the CButton. 
+	 *  
+	 */
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(!this.disabled) {
@@ -306,6 +375,12 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		}
 	}
 
+	/**
+	 * This is the overriden function from the MouseListener that is invoked
+	 *  when the cursor begins a clicking action on the CButton, but before
+	 *  the mouse is released. 
+	 *  
+	 */
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(!this.disabled) {
@@ -317,6 +392,12 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		}
 	}
 
+	/**
+	 * This is the overriden function from the MouseListener that is invoked
+	 *  when the cursor ends the clicking action on the CButton, so then
+	 *  the click is completed and the actions of the buttons will be invoked. 
+	 *  
+	 */
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(!this.disabled) {
@@ -332,10 +413,24 @@ public class GUIdo_CButton extends JButton implements MouseListener{
 		}
 	}
 
+	/**
+	 * This will return the data that the CButton is holding for any 
+	 *  purposes that the user may have. 
+	 * 
+	 * @return the object that the programmer gave to the CButton for
+	 *  it to hold. 
+	 */
 	public Object getData_from_holding() {
 		return data_from_holding;
 	}
 
+	/**
+	 * This sets the data for the CButton to hold for the programmer
+	 *  to be able to identify the CButton or use the data later. 
+	 * 
+	 * @param data_from_holding the data that the programmer wants
+	 *  the CButton instance to hold. 
+	 */
 	public void setData_from_holding(Object data_from_holding) {
 		this.data_from_holding = data_from_holding;
 	}

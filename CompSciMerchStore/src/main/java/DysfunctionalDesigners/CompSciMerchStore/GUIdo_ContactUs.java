@@ -18,10 +18,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 //import com.fasterxml.jackson.core.JsonGenerationException;
 //import com.fasterxml.jackson.core.type.TypeReference;
@@ -111,9 +113,14 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 		message.setFont(new Font("Cambria", Font.PLAIN, 20));
 		//l5 = new JLabel("Contact Us!");
 		
+		
+		
 		username = new JTextField();
 		email = new JTextField();
 		messageBody = new JTextArea();
+		Border b = BorderFactory.createLineBorder(Color.BLACK);
+		messageBody.setBorder(BorderFactory.createCompoundBorder(b,
+	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		
 		btn1 = new GUIdo_CButton(750, 750, 170, 30, "Submit");
 //		
