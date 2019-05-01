@@ -380,7 +380,6 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(totalCost, c);
 		
-		boolean promo = false;
 		enterPromoCode.setActionListener_clicked(new ActionListener() {
 
 			@Override
@@ -389,8 +388,8 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 				if(sale.checkPromoCode(promoCode.getText())) {
 					sale.applyPromoCode(promoCode.getText());
 					JLabel newTotalCost = new JLabel("$" + df.format(sale.getTotalWithTax()));
-					totalCost.setForeground(Color.RED);
-					totalCost.setFont(new Font("Cambria", Font.BOLD, 14));
+					newTotalCost.setForeground(Color.RED);
+					newTotalCost.setFont(new Font("Cambria", Font.BOLD, 14));
 					this_panel.remove(totalCost);
 					c.gridx = 4;
 					c.gridy = 5;
@@ -399,6 +398,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					this_panel.add(newTotalCost, c);
 					this_panel.repaint();
 					this_panel.revalidate();
+					JOptionPane.showMessageDialog(null, "Promo code added!");
 				}else if(!sale.checkPromoCode(promoCode.getText())){
 					JOptionPane.showMessageDialog(null, "Not a valid promo code!");
 				}
