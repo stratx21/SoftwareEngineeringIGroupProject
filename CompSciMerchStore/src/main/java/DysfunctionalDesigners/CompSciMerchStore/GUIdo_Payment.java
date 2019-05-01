@@ -40,6 +40,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
   	    this.repaint();
 	}
 	
+	/**
+	 * Draw the payment screen
+	 * @param sale			the sale to draw
+	 * @param i				i
+	 * @param customer		the customer to draw for
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	private void drawScreen(Sale sale, int i, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter card = null;
