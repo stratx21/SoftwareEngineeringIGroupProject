@@ -124,6 +124,13 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 		this.repaint();
 	}
 	
+	/**
+	 * function goes from the order page to the shipping page
+	 * @param sale sale to be displayed
+	 * @param customer customer used
+	 * @param current_panel frame to be set
+	 * @param scrollpane scrollpane to add the frame to
+	 */
 	protected void to_shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);
