@@ -16,10 +16,14 @@ import javax.swing.JLabel;
 
 public class GUIdo_PastSales extends GUIdo_CPanel{
 	/**
-	 * instance of the logger
+	 * Instance of the logger
 	 */
 	private static Logger logger = Logger.getLogger(GUIdo_PastSales.class.getName());
 	
+	
+	/**
+	 * Instance of the catalogue
+	 */
 	private static Catalogue catalogue = new Catalogue();
 	
 	/**
@@ -28,6 +32,7 @@ public class GUIdo_PastSales extends GUIdo_CPanel{
 	 */
 	public GUIdo_PastSales(Vendor vendor) {
 		super();
+		logger.info("Switched to Past Sales");
 		this.setBackground(Color.WHITE);
 		if(vendor.getPastSales().size() < 2) {
 			this.setPreferredSize(new Dimension(this.getWidth(), 500));
