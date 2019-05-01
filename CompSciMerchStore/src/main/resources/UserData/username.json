@@ -1,0 +1,100 @@
+{
+  "email" : "notmyemail@email.com",
+  "motherMaidenName" : "mother's maiden name",
+  "userName" : "username",
+  "password" : "password",
+  "name" : "Trevor Van Hoozier",
+  "userID" : 13419,
+  "uploadedItems" : [ 50 ],
+  "pastSales" : [ ],
+  "status" : "ELITE",
+  "paymentInfo" : [ ],
+  "shippingAddr" : null,
+  "wishList" : [ 44, 42 ],
+  "cart" : {
+    "payment" : null,
+    "dateTime" : null,
+    "customerID" : 13419,
+    "saleID" : 176,
+    "itemList" : {
+      "32" : {
+        "quantity" : 2,
+        "itemID" : 32,
+        "promoCodes" : [ ]
+      },
+      "2" : {
+        "quantity" : 3,
+        "itemID" : 2,
+        "promoCodes" : [ ]
+      },
+      "3" : {
+        "quantity" : 1,
+        "itemID" : 3,
+        "promoCodes" : [ ]
+      },
+      "40" : {
+        "quantity" : 1,
+        "itemID" : 40,
+        "promoCodes" : [ ]
+      },
+      "44" : {
+        "quantity" : 1,
+        "itemID" : 44,
+        "promoCodes" : [ ]
+      },
+      "28" : {
+        "quantity" : 1,
+        "itemID" : 28,
+        "promoCodes" : [ ]
+      },
+      "7" : {
+        "quantity" : 1,
+        "itemID" : 7,
+        "promoCodes" : [ ]
+      },
+      "45" : {
+        "quantity" : 1,
+        "itemID" : 45,
+        "promoCodes" : [ ]
+      },
+      "43" : {
+        "quantity" : 1,
+        "itemID" : 43,
+        "promoCodes" : [ ]
+      },
+      "35" : {
+        "quantity" : 1,
+        "itemID" : 35,
+        "promoCodes" : [ ]
+      },
+      "22" : {
+        "quantity" : 1,
+        "itemID" : 22,
+        "promoCodes" : [ ]
+      },
+      "42" : {
+        "quantity" : 1,
+        "itemID" : 42,
+        "promoCodes" : [ ]
+      },
+      "6" : {
+        "quantity" : 1,
+        "itemID" : 6,
+        "promoCodes" : [ ]
+      },
+      "8" : {
+        "quantity" : 1,
+        "itemID" : 8,
+        "promoCodes" : [ ]
+      },
+      "1" : {
+        "quantity" : 1,
+        "itemID" : 1,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : null,
+    "finalized" : false
+  },
+  "previousPurchases" : [ ]
+}
