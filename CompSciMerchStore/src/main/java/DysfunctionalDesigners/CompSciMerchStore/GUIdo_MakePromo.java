@@ -21,7 +21,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 	 * The Font instance that is used for the title of the admin page. 
 	 * 
 	 */
-	private static final Font TITLE_FONT = new Font("Cambria", Font.PLAIN,50);
+	private static final Font TITLE_FONT = new Font("Cambria", Font.BOLD,50);
 	 
 	/** 
 	 * The height of the parts for the input for the promo.  
@@ -71,26 +71,30 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 		this.add(sale_info);
 		
 		//telling what the box is: 
-		JLabel promo_text_label = new JLabel("code:"); 
+		JLabel promo_text_label = new JLabel("Enter New Promo Code:"); 
+		promo_text_label.setFont(new Font("Cambria", Font.BOLD, 24));
 		promo_text_label.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.LABEL_HEIGHT);
 		y+=GUIdo_MakePromo.LABEL_HEIGHT+7;
 		this.add(promo_text_label);
 		
 		//the box used for the promo code text itself: 
 		JTextField promo_text = new JTextField("CODE"); 
+		promo_text.setFont(new Font("Cambria", Font.PLAIN, 14));
 		promo_text.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.PART_HEIGHT);
 		this.add(promo_text); 
 		y+=GUIdo_MakePromo.PART_HEIGHT + GUIdo_MakePromo.PART_Y_GAP;
 		
 		////////////////////////////////////////////////////////////////////
 		//PROMO percent off:
-		JLabel percent_off_label = new JLabel("Percent off");
+		JLabel percent_off_label = new JLabel("Discount Amount:");
+		percent_off_label.setFont(new Font("Cambria", Font.BOLD, 24));
 		percent_off_label.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.LABEL_HEIGHT);
 		y+=GUIdo_MakePromo.LABEL_HEIGHT+7;
 		this.add(percent_off_label);
 		
 		//the percent off that should be changed to numbers: 
 		JTextField percent_off = new JTextField("% off");
+		percent_off.setFont(new Font("Cambria", Font.PLAIN, 14));
 		percent_off.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.PART_HEIGHT);
 		this.add(percent_off);
 		y+=GUIdo_MakePromo.PART_HEIGHT + GUIdo_MakePromo.PART_Y_GAP; 
