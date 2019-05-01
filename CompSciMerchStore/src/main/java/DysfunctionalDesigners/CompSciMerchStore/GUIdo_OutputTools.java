@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class GUIdo_OutputTools {
 	/**
