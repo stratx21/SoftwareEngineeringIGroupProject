@@ -7,7 +7,7 @@
   "userID" : 10001,
   "uploadedItems" : [ ],
   "pastSales" : [ ],
-  "status" : "ELITE",
+  "status" : "GENERAL",
   "paymentInfo" : [ {
     "cardNumber" : "Andrew Case",
     "billingAddress" : {
