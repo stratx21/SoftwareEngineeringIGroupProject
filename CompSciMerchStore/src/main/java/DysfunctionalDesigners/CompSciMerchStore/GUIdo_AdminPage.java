@@ -21,6 +21,11 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 	 * The Font instance used for the complaints to display them. 
 	 * 
 	 */
+	private static final Font COMPLAINTS_LABEL_FONT = new Font("Cambria", Font.BOLD, 22);
+	
+	/**
+	 * The Font instance used for the body of complaints
+	 */
 	private static final Font COMPLAINTS_FONT = new Font("Cambria", Font.PLAIN, 20);
 	
 	/**
@@ -116,7 +121,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		
 		GUIdo_CButton generateAllSalesReports = new GUIdo_CButton(
 				width/2-BUTTON_WIDTH/2,y,BUTTON_WIDTH,BUTTON_HEIGHT,
-				"generate all sales report");
+				"Generate All Sales Report");
 		generateAllSalesReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(admin.generateAllSalesReport()) {
@@ -140,7 +145,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		
 		GUIdo_CButton generateAllUsersReports = new GUIdo_CButton(
 				width/2-BUTTON_WIDTH/2,y,BUTTON_WIDTH,BUTTON_HEIGHT,
-				"generate all users report");
+				"Generate All Users Report");
 		generateAllUsersReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(admin.generateAllUsersReport()) {
@@ -194,7 +199,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		//the button to get the complaints and show it: 
 		GUIdo_CButton get_all_complaints = new GUIdo_CButton(
 				width/2-BUTTON_WIDTH/2,y,BUTTON_WIDTH,BUTTON_HEIGHT,
-				"Get All Complaints");
+				"Get All Contact Us Submissions");
 		get_all_complaints.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//only if the complaints have not already been added: 
@@ -210,11 +215,11 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 					}
 					
 					//make JLabel objects for the complaints: 
-					JLabel toadd = new JLabel("Complaint: ");
+					JLabel toadd = new JLabel("Contact Us Submission: ");
 					try {
 						for(String complaint : complaints) {
-							toadd = new JLabel("Complaint: ");
-							toadd.setFont(GUIdo_AdminPage.COMPLAINTS_FONT); 
+							toadd = new JLabel("Contact Us Submission: ");
+							toadd.setFont(GUIdo_AdminPage.COMPLAINTS_LABEL_FONT); 
 							toadd.setBounds(getWidth()/6, 
 												y, 
 												250, 
