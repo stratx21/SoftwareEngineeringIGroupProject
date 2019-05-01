@@ -2,12 +2,12 @@
   "email" : "andrew@cs.baylor.edu",
   "motherMaidenName" : "johnson",
   "userName" : "AndrewCase",
-  "password" : "ilovemacss",
+  "password" : "ilovemacs",
   "name" : "Andrew Case",
   "userID" : 10001,
   "uploadedItems" : [ ],
   "pastSales" : [ ],
-  "status" : "GENERAL",
+  "status" : "ELITE",
   "paymentInfo" : [ {
     "cardNumber" : "Andrew Case",
     "billingAddress" : {
@@ -62,23 +62,24 @@
       "state" : "FD"
     },
     "ccv" : 234
+  }, {
+    "cardNumber" : "3q4w25safzdxgdcfhvsdgdcvf",
+    "billingAddress" : {
+      "street" : "dfghjhgfddsfghj",
+      "zipCode" : 32456,
+      "city" : "asdgfhjfk",
+      "state" : "DS"
+    },
+    "ccv" : 666
   } ],
   "shippingAddr" : {
-    "street" : "ewargncb",
-    "zipCode" : 12345,
-    "city" : "asdfb",
-    "state" : "SD"
+    "street" : "aSdf",
+    "zipCode" : 21324,
+    "city" : "dwsf ",
+    "state" : "WQ"
   },
   "wishList" : [ 1, 15 ],
-  "cart" : {
-    "payment" : null,
-    "dateTime" : null,
-    "customerID" : 10001,
-    "saleID" : 147,
-    "itemList" : { },
-    "shippingAddr" : null,
-    "finalized" : false
-  },
+  "cart" : null,
   "previousPurchases" : [ {
     "payment" : {
       "amount" : 1105.4588,
@@ -118,6 +119,62 @@
       "zipCode" : 74751,
       "city" : ";lkj",
       "state" : "LK"
+    },
+    "finalized" : true
+  }, {
+    "payment" : {
+      "amount" : 1173.9443,
+      "paymentInfo" : {
+        "cardNumber" : "3q4w25safzdxgdcfhvsdgdcvf",
+        "billingAddress" : {
+          "street" : "dfghjhgfddsfghj",
+          "zipCode" : 32456,
+          "city" : "asdgfhjfk",
+          "state" : "DS"
+        },
+        "ccv" : 666
+      }
+    },
+    "dateTime" : 1556681176165,
+    "customerID" : 10001,
+    "saleID" : 147,
+    "itemList" : {
+      "9" : {
+        "quantity" : 9,
+        "itemID" : 9,
+        "promoCodes" : [ "CERNYISTHEBEST" ]
+      },
+      "46" : {
+        "quantity" : 9,
+        "itemID" : 46,
+        "promoCodes" : [ ]
+      },
+      "29" : {
+        "quantity" : 1,
+        "itemID" : 29,
+        "promoCodes" : [ ]
+      },
+      "35" : {
+        "quantity" : 9,
+        "itemID" : 35,
+        "promoCodes" : [ "CERNYISTHEBEST" ]
+      },
+      "22" : {
+        "quantity" : 3,
+        "itemID" : 22,
+        "promoCodes" : [ "CERNYISTHEBEST" ]
+      },
+      "21" : {
+        "quantity" : 1,
+        "itemID" : 21,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "aSdf",
+      "zipCode" : 21324,
+      "city" : "dwsf ",
+      "state" : "WQ"
     },
     "finalized" : true
   } ]

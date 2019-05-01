@@ -53,4 +53,10 @@ public class GUIdo_CPanel extends JPanel{
 		this.setPreferredSize(new Dimension(width, page_length_pixels));
 		this.setSize(new Dimension(width, page_length_pixels));
 	}
+	
+	protected void set_new_length(int new_length) {
+		this.page_length = new_length;
+		this.setPreferredSize(new Dimension(this.getWidth(),new_length));
+		this.setSize(new Dimension(this.getWidth(),new_length));
+	}
 }
