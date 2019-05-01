@@ -23,8 +23,20 @@ public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
 	 * Constant button height for buttons
 	 */
 	private static final int BUTTON_WIDTH = 250;
+	
+	/**
+	 * Constant button width
+	 */
 	private static final int BUTTON_HEIGHT = 80;
+	
+	/**
+	 * Constant gap between things
+	 */
 	private static final int Y_GAP = 15;
+	
+	/**
+	 * Constant height for text
+	 */
 	private static final int COMPLAINT_HEIGHT
 			= GUIdo_OutputTools.getPixelHeight("User:", GUIdo_ViewAllUsers.COMPLAINTS_FONT) + 40;
 	private static final int COMPLAINT_GAP = 7;
