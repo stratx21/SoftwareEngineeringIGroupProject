@@ -349,20 +349,10 @@
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ {
-      "description" : "it's the other way around...",
+      "description" : "Who knew??",
       "userID" : 19999,
       "date" : 1556691108915,
-      "rating" : 1
-    }, {
-      "description" : "Dr. Hamerly's shirt said it the opposite way",
-      "userID" : 19999,
-      "date" : 1556691132980,
-      "rating" : 1
-    }, {
-      "description" : "bad the wrong way ",
-      "userID" : 19999,
-      "date" : 1556691139412,
-      "rating" : 1
+      "rating" : 5
     } ]
   },
   "16" : {
