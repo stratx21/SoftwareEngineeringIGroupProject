@@ -188,9 +188,17 @@ public class GUIdo_Frame extends JFrame{
 					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
 				}
 			} else if(option.equals("View Profile")) {
-				to_ViewProfile(current_user);
+				if(current_user.getUserName().equals("guest")) {
+					JOptionPane.showMessageDialog(null, "Sorry, only logged in users can view profile!");
+				}else {
+					to_ViewProfile(current_user);
+				}
 			} else if(option.equals("View Past Sales")) {
-				to_PastSales(current_user);
+				if(current_user.getUserName().equals("guest")) {
+					JOptionPane.showMessageDialog(null, "Sorry, only logged in users can view past sales!");
+				}else {
+					to_PastSales(current_user);
+				}
 			}
 				
 		} 
