@@ -98,6 +98,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		zip.setPreferredSize(new Dimension(50, 20));
 		zip.setHorizontalAlignment(JTextField.CENTER);
 		
+		if(customer.getShippingAddr() != null) {
+			addressLine1.setText(customer.getShippingAddr().getStreet());
+			cityInput.setText(customer.getShippingAddr().getCity());
+			stateInput.setText(customer.getShippingAddr().getState());
+			zip.setText(String.valueOf(customer.getShippingAddr().getZipCode()));
+		}
+		
 		// making order detail box -- reuse code in Payment && Review/Edit Order
 		JLabel orderDetails = new JLabel("Order Details");
 		orderDetails.setFont(new Font("Cambria", Font.PLAIN, 26));
