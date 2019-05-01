@@ -200,7 +200,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 				if(isEnabled()) {
 					if(sale.finalizePayment()) {
 						JOptionPane.showMessageDialog(null, (Object) "Thank you for your order!");
-						customer.updatePreviousPurchases(customer.getCart());
+						customer.updatePreviousPurchases(sale);
 						customer.setCart(null);
 						logger.info("All Payment Information collected -- Proceeding");
 						to_previousOrders(customer, current_panel, scrollpane);
