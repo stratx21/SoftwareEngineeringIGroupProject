@@ -64,7 +64,10 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		c.gridx = 0;
 		c.gridy = 0;
 		
+		JLabel blah = new JLabel(" ");
 		this.add(title,c);
+		c.gridy = 1;
+		this.add(blah, c);
 		
 		c.gridy = 2;
 		this.add(yourName,c);
