@@ -159,6 +159,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		List<String> options = new ArrayList<String>();
 		options.add("Other Options"); 
 		options.add("Member Deals");
+		options.add("View Profile");
 		options.add("Contact Us"); 
 		options.add("FAQ"); 
 		options.add("About Us");
