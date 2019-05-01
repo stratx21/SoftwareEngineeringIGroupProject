@@ -199,7 +199,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 			public void actionPerformed(ActionEvent e) {
 				//only if the complaints have not already been added: 
 				if(!complaints_shown) {
-					
+					complaints_shown = true;
 					//get the complaints list from the admin priviledges: 
 					List<String> complaints = null;
 					try {
