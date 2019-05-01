@@ -19,6 +19,10 @@ public class GUIdo_PastSales extends GUIdo_CPanel{
 	
 	private static Catalogue catalogue = new Catalogue();
 	
+	/**
+	 * Go to past sales frame
+	 * @param vendor 	the vender to see past sales for
+	 */
 	public GUIdo_PastSales(Vendor vendor) {
 		super();
 		this.setBackground(Color.WHITE);
