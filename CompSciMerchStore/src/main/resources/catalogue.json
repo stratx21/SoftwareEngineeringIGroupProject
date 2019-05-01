@@ -1137,6 +1137,16 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "FRY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "It can't run GTA V very well...",
+      "userID" : 10001,
+      "date" : 1556742447093,
+      "rating" : 1
+    }, {
+      "description" : "What a great artifact to hang on the wall! ",
+      "userID" : 10001,
+      "date" : 1556742457215,
+      "rating" : 5
+    } ]
   }
 }

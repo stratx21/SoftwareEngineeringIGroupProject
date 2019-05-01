@@ -94,6 +94,11 @@
         "quantity" : 2,
         "itemID" : 33,
         "promoCodes" : [ ]
+      },
+      "22" : {
+        "quantity" : 1,
+        "itemID" : 22,
+        "promoCodes" : [ ]
       }
     },
     "shippingAddr" : {
