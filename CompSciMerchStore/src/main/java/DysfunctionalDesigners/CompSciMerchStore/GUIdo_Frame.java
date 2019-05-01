@@ -23,6 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class GUIdo_Frame extends JFrame{
+	
+	/**
+	 * Instance of the Logger
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_Frame.class.getName());
 	
 	/**
