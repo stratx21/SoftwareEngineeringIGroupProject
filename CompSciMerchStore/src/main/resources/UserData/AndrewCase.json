@@ -78,14 +78,30 @@
     "city" : "dwsf ",
     "state" : "WQ"
   },
-  "wishList" : [ 15 ],
+  "wishList" : [ 15, 1, 33, 35 ],
   "cart" : {
     "payment" : null,
     "dateTime" : null,
     "customerID" : 10001,
     "saleID" : 25,
-    "itemList" : { },
-    "shippingAddr" : null,
+    "itemList" : {
+      "13" : {
+        "quantity" : 1,
+        "itemID" : 13,
+        "promoCodes" : [ ]
+      },
+      "33" : {
+        "quantity" : 2,
+        "itemID" : 33,
+        "promoCodes" : [ ]
+      }
+    },
+    "shippingAddr" : {
+      "street" : "aSdf",
+      "zipCode" : 21324,
+      "city" : "dwsf ",
+      "state" : "WQ"
+    },
     "finalized" : false
   },
   "previousPurchases" : [ {
