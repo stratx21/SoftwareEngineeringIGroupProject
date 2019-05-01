@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -22,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class GUIdo_Frame extends JFrame{
+	private static Logger logger = Logger.getLogger(GUIdo_Frame.class.getName());
 	
 	/**
 	 * the height in pixels of the toolbar.
