@@ -107,10 +107,15 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		JFormattedTextField zip = new JFormattedTextField(zipFormat);
 		zip.setPreferredSize(new Dimension(50, 20));
 
-		GUIdo_CButton placeOrder = new GUIdo_CButton(this.getWidth() / 4, this.getHeight() / 5, 150, 50, "Place Order");
+		JLabel promoLabel = new JLabel("Promo Code:");
+		promoLabel.setFont(new Font("Cambria", Font.PLAIN, 16));
+		JTextField promoCode = new JTextField();
+		
+		GUIdo_CButton placeOrder = new GUIdo_CButton(this.getWidth() / 4, this.getHeight() / 5, 200, 100, "Place Order");
 		placeOrder.disable();
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
 		GUIdo_CButton back = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Back");
+		GUIdo_CButton enterPromoCode = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Enter Code");
 		
 		addCardButton.setActionListener_clicked(new ActionListener() {
 
@@ -186,6 +191,16 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				to_previous(sale, customer, current_panel, scrollpane);
+			}
+			
+		});
+		
+		enterPromoCode.setActionListener_clicked(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				// verify promo code and update total
 			}
 			
 		});
@@ -369,9 +384,28 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		c.weighty = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		this.add(totalCost, c);
+		
+		c.gridx = 3;
+		c.gridy = 6;
+		c.weighty = 0;
+		c.anchor = GridBagConstraints.EAST;
+		this.add(promoLabel, c);
 		c.gridx = 4;
 		c.gridy = 6;
 		c.weighty = 0;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		this.add(promoCode, c);
+		c.gridx = 4;
+		c.gridy = 7;
+		c.weighty = 0;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		this.add(enterPromoCode, c);
+		c.gridx = 3;
+		c.gridy = 10;
+		c.weighty = 0;
+		c.gridwidth = 2;
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.CENTER;
 		this.add(placeOrder, c);
 		
 	}
