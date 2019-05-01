@@ -184,8 +184,8 @@ public class GUIdo_ReviewAndEditOrder extends GUIdo_CPanel implements ActionList
 			    this.add(q);
 			    
 			    //int amount = sale.getItemList().get(currItem.getItemID()).getQuantity();
-			    String[] numItems = new String[10];
-			    for(int j = 1; j <= currItem.getStock() && j < 10; j++) {
+			    String[] numItems = new String[11];
+			    for(int j = 0; j <= currItem.getStock() && j <= 10; j++) {
 					numItems[j] = String.valueOf(j);
 				}
 			    JComboBox quantity;

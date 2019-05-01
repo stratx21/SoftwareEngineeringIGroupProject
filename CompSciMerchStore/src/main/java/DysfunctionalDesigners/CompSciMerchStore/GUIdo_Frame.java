@@ -251,12 +251,22 @@ public class GUIdo_Frame extends JFrame{
 		scrollpane.getViewport().add(current_panel);
 	}
 	
+	/**
+	 * This function goes to the ViewProfile page for the specified User.
+	 * @param u the user to see profile info of.
+	 */
 	private void to_ViewProfile(User u) {
 		current_panel = new GUIdo_ViewProfile(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				if(e.getActionCommand().equals("edit_profile")) {
+					//switch to edit profile page
+					to_EditProfile(u);
+				} else if(e.getActionCommand().equals("View previous orders")) {
+					to_PreviousSales((Vendor) u);
+				}
 				
 			}
 			
@@ -264,6 +274,28 @@ public class GUIdo_Frame extends JFrame{
 		scrollpane.getViewport().add(current_panel);
 	}
 	
+	private void to_EditProfile(User u) {
+		current_panel = new GUIdo_EditProfile(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 if(e.getActionCommand().equals("submit_changes")) {
+						to_ViewProfile(u);
+				}else {
+					
+				}
+			}
+			
+		}, u);
+		scrollpane.getViewport().add(current_panel);
+		
+	}
+	
+	private void to_PreviousSales(Vendor v) {
+		current_panel = new GUIdo_PastSales(v);
+		scrollpane.getViewport().add(current_panel);
+	}
 	/**
 	 * This function goes to the wishlist page for the specified User. 
 	 * @param user_to_see the user to see the wishlist page for.

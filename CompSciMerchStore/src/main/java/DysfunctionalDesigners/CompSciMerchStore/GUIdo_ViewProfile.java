@@ -16,6 +16,7 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 	JLabel showEmail, showMomName, showUN, showPass, showName;
 	
 	GUIdo_CButton editProfile, viewPreviousOrders;
+	GUIdo_CPanel panel = this;
 	
 	GUIdo_ViewProfile(final ActionListener al, User u){
 		super(800);
@@ -25,7 +26,6 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		this.setBackground(Color.white);
 		logger.info("Switched to panel ViewProfile");
 		
-		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
 		
 		email = new JLabel("Your email:");
@@ -35,26 +35,16 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		yourName = new JLabel("Your name:");
 		title = new JLabel("View Profile");
 		title.setFont(new Font("Cambria", Font.BOLD, 34));
+		
 		editProfile = new GUIdo_CButton(650, 650, 170, 30, "Edit Profile");
-		editProfile.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		editProfile.addActionListener(al);
+		editProfile.setActionCommand("edit_profile");
+		editProfile.setActionListener_clicked(al);
+		
 		viewPreviousOrders = new GUIdo_CButton(650, 650, 170, 30, "View Previous Orders");
-		viewPreviousOrders.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		viewPreviousOrders.addActionListener(al);
+		viewPreviousOrders.setActionCommand("View previous orders");
+		viewPreviousOrders.setActionListener_clicked(al);
 		
 		email.setFont(new Font("Cambria",Font.BOLD,24));
 		momName.setFont(new Font("Cambria",Font.BOLD,24));

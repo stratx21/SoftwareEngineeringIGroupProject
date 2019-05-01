@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 	private static Logger logger = Logger.getLogger(GUIdo_ItemDisplay.class.getName());
@@ -215,7 +216,8 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		
 		//add the possible options, with a max of 10 or the stock remaining,
 		//whichever is smaller. 
-		for(int i = 1; i <= item.getStock() - amount && i < 10; i++) {
+		int max_allowed = 10;
+		for(int i = 1; i <= item.getStock() - amount && i < max_allowed; i++) {
 			options.add(i+"");
 		}
 		
@@ -248,9 +250,19 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			addtocart.setActionCommand("add_to_cart");
 			addtocart.setActionListener_clicked(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart.addItem(quantity_chosen, item.getItemID());
-					logger.info("Item Added to cart; quantity: " + quantity_chosen + " of " + item.getItemID());
-					done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
+					boolean proceed = true;
+					if(cart.getItemList().containsKey(item.getItemID())) {
+						//check for how many are there
+						if(cart.getItemList().get(item.getItemID()).getQuantity() + quantity_chosen >= max_allowed) {
+							JOptionPane.showMessageDialog(null, "Max quantity of " + max_allowed + " allowed in the cart!");
+							proceed = false;
+						}
+					}
+					if(proceed){
+						cart.addItem(quantity_chosen, item.getItemID());
+						logger.info("Item Added to cart; quantity: " + quantity_chosen + " of " + item.getItemID());
+						done.actionPerformed(new ActionEvent(cart,ActionEvent.ACTION_PERFORMED,"item_added"));
+					}
 				}
 			});
 			addtocart.setBackground(new Color(255,228,225));
