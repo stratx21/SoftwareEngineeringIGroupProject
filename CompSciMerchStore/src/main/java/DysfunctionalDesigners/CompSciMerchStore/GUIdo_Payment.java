@@ -171,6 +171,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// save payment data
+				DecimalFormat df = new DecimalFormat("0.00");
 				if(!nameOnCard.getText().isEmpty() && !nameOnCard.getText().isBlank()
 						&& !numberOnCard.getText().isEmpty() && !numberOnCard.getText().isBlank()
 						&& !cvvNum.getText().isEmpty() && !cvvNum.getText().isBlank()
@@ -193,7 +194,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					
 					logger.info("Card Added Successfully to user " + customer.getUserName());
 					sale.setPayment(new Payment(sale.getTotalWithTax(), card));
-					JOptionPane.showMessageDialog(null, (Object) ("Card added successfully with amount " + sale.getTotalWithTax() + "!"));
+					JOptionPane.showMessageDialog(null, (Object) ("Card added successfully with amount $" + df.format(sale.getTotalWithTax()) + "!"));
 				}else if(nameOnCard.getText().isEmpty() || nameOnCard.getText().isBlank()
 						|| numberOnCard.getText().isEmpty() || numberOnCard.getText().isBlank()
 						|| cvvNum.getText().isEmpty() || cvvNum.getText().isBlank()
