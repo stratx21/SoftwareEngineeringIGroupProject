@@ -37,11 +37,11 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		editProfile = new GUIdo_CButton(650, 650, 170, 30, "Edit Profile");
 		viewPreviousOrders = new GUIdo_CButton(650, 650, 170, 30, "View Previous Orders");
 		
-		email.setFont(new Font("Cambria",Font.PLAIN,20));
-		momName.setFont(new Font("Cambria",Font.PLAIN,20));
-		yourUN.setFont(new Font("Cambria",Font.PLAIN,20));
-		yourPass.setFont(new Font("Cambria",Font.PLAIN,20));
-		yourName.setFont(new Font("Cambria",Font.PLAIN,20));
+		email.setFont(new Font("Cambria",Font.BOLD,24));
+		momName.setFont(new Font("Cambria",Font.BOLD,24));
+		yourUN.setFont(new Font("Cambria",Font.BOLD,24));
+		yourPass.setFont(new Font("Cambria",Font.BOLD,24));
+		yourName.setFont(new Font("Cambria",Font.BOLD,24));
 		
 		showEmail = new JLabel(v.getEmail());
 		showMomName = new JLabel(v.getMotherMaidenName());
@@ -49,11 +49,11 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		showPass = new JLabel(v.getPassword());
 		showName = new JLabel(v.getName());
 		
-		email.setFont(new Font("Cambria",Font.PLAIN,20));
-		showMomName.setFont(new Font("Cambria",Font.PLAIN,20));
-		showUN.setFont(new Font("Cambria",Font.PLAIN,20));
-		showPass.setFont(new Font("Cambria",Font.PLAIN,20));
-		showName.setFont(new Font("Cambria",Font.PLAIN,20));
+		showEmail.setFont(new Font("Cambria",Font.PLAIN,24));
+		showMomName.setFont(new Font("Cambria",Font.PLAIN,24));
+		showUN.setFont(new Font("Cambria",Font.PLAIN,24));
+		showPass.setFont(new Font("Cambria",Font.PLAIN,24));
+		showName.setFont(new Font("Cambria",Font.PLAIN,24));
 		
 		GridBagLayout gbl = new GridBagLayout();
 		this.setLayout(gbl);
@@ -64,7 +64,10 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		c.gridx = 0;
 		c.gridy = 0;
 		
+		JLabel blah = new JLabel(" ");
 		this.add(title,c);
+		c.gridy = 1;
+		this.add(blah, c);
 		
 		c.gridy = 2;
 		this.add(yourName,c);

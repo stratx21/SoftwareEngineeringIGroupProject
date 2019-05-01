@@ -266,9 +266,9 @@ public class Catalogue {//singleton
 	public void addDiscountToAll(Double discount){//will be a sale discount
 		logger.info("Adding a discount to all items: " + discount);
 		for(Entry<Integer, ItemInfo> item : catalogue.entrySet()) {
-			if(discount > item.getValue().getSaleDiscount()) {
+//			if(discount > item.getValue().getSaleDiscount()) {
 				item.getValue().setSaleDiscount(discount);
-			}
+//			}
 		}
 	}
 	
@@ -290,9 +290,9 @@ public class Catalogue {//singleton
 	public void addDiscountToAll(Double discount, Professor prof){
 		logger.info("Adding a discount to all items: " + discount + " (prof: " + prof.name() + ").");
 		searchByProfessor(prof).stream().forEach(e -> {
-			if(discount > e.getSaleDiscount()) {
+//			if(discount > e.getSaleDiscount()) {
 				e.setSaleDiscount(discount);
-			}
+//			}
 		});
 	}
 	
