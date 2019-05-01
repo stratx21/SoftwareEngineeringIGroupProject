@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 public class GUIdo_PastSales extends GUIdo_CPanel{
+	/**
+	 * instance of the logger
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_PastSales.class.getName());
 	
 	private static Catalogue catalogue = new Catalogue();
