@@ -174,12 +174,13 @@ public class GUIdo_Frame extends JFrame{
 								}, getWidth());
 								scrollpane.getViewport().add(current_panel);
 							} else {
-								//no other - error 
+								logger.severe("INVALID ADMIN ACTION PERFORMED: " + e.getActionCommand());
 							}
 						}
 					});
 					scrollpane.getViewport().add(current_panel);
 				} else {
+					logger.fine("Non admins trying to access admin page: \"" + current_user.getUserID());
 					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
 				}
 			} else if(option.equals("View Profile")) {
