@@ -12,8 +12,8 @@ import javax.swing.JLabel;
 
 public class GUIdo_ViewProfile extends GUIdo_CPanel{
 	private static Logger logger = Logger.getLogger(GUIdo_ViewProfile.class.getName());
-	JLabel l1, email, momName, yourUN, yourPass, yourName, title;
-	JLabel showEmail, showMomName, showUN, showPass, showName;
+	JLabel l1, email, momName, yourUN, yourPass, yourName, title, memberStatus, address;
+	JLabel showEmail, showMomName, showUN, showPass, showName, showMemberStatus, showAddress;
 	
 	GUIdo_CButton editProfile, viewPreviousOrders;
 	GUIdo_CPanel panel = this;
@@ -22,17 +22,29 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		super(800);
 		//cast u to vendor
 		Vendor v = (Vendor)u;
+		Customer current = (Customer)u;
+		String memberS = "General";
 		//display info for vendor
 		this.setBackground(Color.white);
 		logger.info("Switched to panel ViewProfile");
 		
 		UserDataController control = UserDataController.getInstance();
 		
+		if(current.getStatus().equals(MemberLevel.GENERAL)) {
+			memberS = "General";
+		}else if(current.getStatus().equals(MemberLevel.MIDDLE)) {
+			memberS = "Middle";
+		}else if(current.getStatus().equals(MemberLevel.ELITE)) {
+			memberS = "Elite";
+		}
+		
 		email = new JLabel("Your email:");
 		momName = new JLabel("Your mother's maiden name:");
 		yourUN = new JLabel("Your username:");
 		yourPass = new JLabel("Your password:");
 		yourName = new JLabel("Your name:");
+		memberStatus = new JLabel("Your Member Status:");
+		address = new JLabel("Your address is:");
 		title = new JLabel("View Profile");
 		title.setFont(new Font("Cambria", Font.BOLD, 34));
 		
@@ -51,18 +63,29 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		yourUN.setFont(new Font("Cambria",Font.BOLD,24));
 		yourPass.setFont(new Font("Cambria",Font.BOLD,24));
 		yourName.setFont(new Font("Cambria",Font.BOLD,24));
+		memberStatus.setFont(new Font("Cambria",Font.BOLD,24));
+		address.setFont(new Font("Cambria",Font.BOLD,24));
 		
 		showEmail = new JLabel(v.getEmail());
 		showMomName = new JLabel(v.getMotherMaidenName());
 		showUN = new JLabel(v.getUserName());
 		showPass = new JLabel(v.getPassword());
 		showName = new JLabel(v.getName());
+		showMemberStatus = new JLabel(memberS);
+		showAddress = new JLabel(current.getShippingAddr().getStreet() + "," + current.getShippingAddr().getCity() + ","
+				+ current.getShippingAddr().getState() + " " + current.getShippingAddr().getZipCode());
 		
 		showEmail.setFont(new Font("Cambria",Font.PLAIN,24));
 		showMomName.setFont(new Font("Cambria",Font.PLAIN,24));
 		showUN.setFont(new Font("Cambria",Font.PLAIN,24));
 		showPass.setFont(new Font("Cambria",Font.PLAIN,24));
 		showName.setFont(new Font("Cambria",Font.PLAIN,24));
+		showMemberStatus.setFont(new Font("Cambria",Font.PLAIN,24));
+		showAddress.setFont(new Font("Cambria",Font.PLAIN,24));
+		
+		if(u.isAdmin()) {
+			editProfile.disable();
+		}
 		
 		GridBagLayout gbl = new GridBagLayout();
 		this.setLayout(gbl);
@@ -107,6 +130,18 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		
 		c.gridy = 20;
 		this.add(showPass, c);
+		
+		c.gridy = 22;
+		this.add(memberStatus, c);
+		
+		c.gridy = 24;
+		this.add(showMemberStatus, c);
+		
+		c.gridy = 26;
+		this.add(address, c);
+		
+		c.gridy = 28;
+		this.add(showAddress, c);
 		
 		c.gridy = 2;
 		c.gridx = 4;
