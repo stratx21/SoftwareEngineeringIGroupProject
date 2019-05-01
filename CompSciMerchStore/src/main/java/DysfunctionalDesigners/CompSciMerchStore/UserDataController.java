@@ -3,6 +3,9 @@ package DysfunctionalDesigners.CompSciMerchStore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -335,6 +338,39 @@ public class UserDataController {
             mapper.writerWithDefaultPrettyPrinter().writeValue(custFile, custToWrite);
         } catch (IOException e) {
             logger.severe("Failure to serialize to JSON while attempting to write User: " + custToWrite.getUserName());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Updates the password of the user passed
+     * @param userToUpdate the user to update, the object contains the new password
+     */
+    public void updateUserPassword(User userToUpdate) {
+        logger.info("Updating the password of user " + userToUpdate.getUserName());
+        Path fileToUpdate;
+        if(userToUpdate.isAdmin()) {
+            fileToUpdate = Paths.get(App.resourceTarget + "UserData/admins.txt");
+        } else {
+            fileToUpdate = Paths.get(App.resourceTarget + "UserData/customers.txt");
+        }
+
+        List<String> lines;
+        try {
+            int ndx = 0;
+            lines = Files.readAllLines(fileToUpdate);
+            for(int i = 0; i < lines.size(); i++) {
+                String[] nextLine = lines.get(i).split(" ");
+                if(nextLine[0].equals(userToUpdate.getUserName())) {
+                    ndx = i;
+                }
+            }
+
+            lines.set(ndx, userToUpdate.getUserName() + " " + userToUpdate.getPassword());
+            Files.write(fileToUpdate,  lines);
+            logger.info("PASSWORD UPDATE COMPLETE");
+        } catch (IOException e) {
+            logger.severe("IOException IN updateUserPassword, UPDATE FAILED");
             e.printStackTrace();
         }
     }
