@@ -44,6 +44,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.repaint();
 	}
 	
+	/**
+	 * Draw the shipping screen
+	 * @param sale			the sale to display for
+	 * @param customer		the customer that's checking out
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scollpane to add to
+	 */
 	public void drawScreen(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter stateFormat = null;
