@@ -23,6 +23,8 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 	JTextField getEmail, getEmailCon, getMom, getPass, getconfirmPass, getName, getMemberLevel;
 	//sign up
 	GUIdo_CButton btn1;
+	
+	Customer current = null;
 
 	/**
 	 * The edit profile frame
@@ -31,8 +33,9 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 	 */
 	GUIdo_EditProfile(final ActionListener al, User u){
 		super(1200);
-		Customer current = (Customer)u;
-		
+		if(!u.isAdmin()) {
+			current = (Customer)u;
+		}
 		this.setBackground(Color.WHITE);
 		logger.info("Switched to panel CreateAccount");
 		
@@ -61,12 +64,12 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		
 		
 		
-		getEmail = new JTextField(current.getEmail());
+		getEmail = new JTextField(u.getEmail());
 		getEmailCon = new JTextField();
-		getMom = new JTextField(current.getMotherMaidenName());
-		getPass = new JTextField(current.getPassword());
+		getMom = new JTextField(u.getMotherMaidenName());
+		getPass = new JTextField(u.getPassword());
 		getconfirmPass = new JTextField();
-		getName = new JTextField(current.getName());
+		getName = new JTextField(u.getName());
 		getMemberLevel = new JTextField();
 		btn1 = new GUIdo_CButton(900, 900, 170, 30, "Submit Changes");
 		
@@ -124,16 +127,18 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 //				}
 				
 				if(valid) {
-					current.setEmail(getEmail.getText()); 
-					current.setMotherMaidenName(getMom.getText());
-					current.setPassword(getPass.getText());
-					current.setName(getName.getText());
-					if(getMemberLevel.getText().equals("General")) {
-						current.setStatus(MemberLevel.GENERAL);
-					}else if(getMemberLevel.getText().equals("Middle")) {
-						current.setStatus(MemberLevel.MIDDLE);
-					}else if(getMemberLevel.getText().equals("Elite")) {
-						current.setStatus(MemberLevel.ELITE);
+					u.setEmail(getEmail.getText()); 
+					u.setMotherMaidenName(getMom.getText());
+					u.setPassword(getPass.getText());
+					u.setName(getName.getText());
+					if(!u.isAdmin()) {
+						if(getMemberLevel.getText().equals("General")) {
+							current.setStatus(MemberLevel.GENERAL);
+						}else if(getMemberLevel.getText().equals("Middle")) {
+							current.setStatus(MemberLevel.MIDDLE);
+						}else if(getMemberLevel.getText().equals("Elite")) {
+							current.setStatus(MemberLevel.ELITE);
+						}
 					}
 					
 					if(u.isAdmin()) {
@@ -141,7 +146,7 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 					}else {
 						control.writeCustomer(current);
 					}
-					control.updateUserPassword(current);
+					control.updateUserPassword(u);
 					
 					btn1.setActionListener_clicked(al);
 				}
@@ -198,11 +203,13 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		c.gridy = 24;
 		this.add(getMom,c);
 		
-		c.gridy = 26;
-		this.add(memberLevel,c);
+		if(!u.isAdmin()) {
+			c.gridy = 26;
+			this.add(memberLevel,c);
 		
-		c.gridy = 28;
-		this.add(getMemberLevel,c);
+			c.gridy = 28;
+			this.add(getMemberLevel,c);
+		}
 		
 		c.gridy = 34;
 		this.add(btn1,c);

@@ -30,7 +30,11 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		super(800);
 		//cast u to vendor
 		Vendor v = (Vendor)u;
-		Customer current = (Customer)u;
+		Customer current = null;
+		if(!u.isAdmin()) {
+			current = (Customer)u;
+		}
+		
 		String memberS = "General";
 		//display info for vendor
 		this.setBackground(Color.white);
@@ -38,12 +42,14 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		
 		UserDataController control = UserDataController.getInstance();
 		
-		if(current.getStatus().equals(MemberLevel.GENERAL)) {
-			memberS = "General";
-		}else if(current.getStatus().equals(MemberLevel.MIDDLE)) {
-			memberS = "Middle";
-		}else if(current.getStatus().equals(MemberLevel.ELITE)) {
-			memberS = "Elite";
+		if(!u.isAdmin()) {
+			if(current.getStatus().equals(MemberLevel.GENERAL)) {
+				memberS = "General";
+			}else if(current.getStatus().equals(MemberLevel.MIDDLE)) {
+				memberS = "Middle";
+			}else if(current.getStatus().equals(MemberLevel.ELITE)) {
+				memberS = "Elite";
+			}
 		}
 		
 		email = new JLabel("Your email:");
@@ -80,8 +86,10 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		showPass = new JLabel(v.getPassword());
 		showName = new JLabel(v.getName());
 		showMemberStatus = new JLabel(memberS);
-		showAddress = new JLabel(current.getShippingAddr().getStreet() + "," + current.getShippingAddr().getCity() + ","
-				+ current.getShippingAddr().getState() + " " + current.getShippingAddr().getZipCode());
+		if(!u.isAdmin()) {
+			showAddress = new JLabel(current.getShippingAddr().getStreet() + "," + current.getShippingAddr().getCity() + ","
+					+ current.getShippingAddr().getState() + " " + current.getShippingAddr().getZipCode());
+		}
 		
 		showEmail.setFont(new Font("Cambria",Font.PLAIN,24));
 		showMomName.setFont(new Font("Cambria",Font.PLAIN,24));
@@ -89,9 +97,9 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		showPass.setFont(new Font("Cambria",Font.PLAIN,24));
 		showName.setFont(new Font("Cambria",Font.PLAIN,24));
 		showMemberStatus.setFont(new Font("Cambria",Font.PLAIN,24));
-		showAddress.setFont(new Font("Cambria",Font.PLAIN,24));
-		
-		if(u.isAdmin()) {
+		if(!u.isAdmin()) {
+			showAddress.setFont(new Font("Cambria",Font.PLAIN,24));
+
 			editProfile.disable();
 		}
 		
@@ -139,17 +147,19 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		c.gridy = 20;
 		this.add(showPass, c);
 		
-		c.gridy = 22;
-		this.add(memberStatus, c);
+		if(!u.isAdmin()) {
+			c.gridy = 22;
+			this.add(memberStatus, c);
 		
-		c.gridy = 24;
-		this.add(showMemberStatus, c);
+			c.gridy = 24;
+			this.add(showMemberStatus, c);
+
+			c.gridy = 26;
+			this.add(address, c);
 		
-		c.gridy = 26;
-		this.add(address, c);
-		
-		c.gridy = 28;
-		this.add(showAddress, c);
+			c.gridy = 28;
+			this.add(showAddress, c);
+		}
 		
 		c.gridy = 2;
 		c.gridx = 4;
