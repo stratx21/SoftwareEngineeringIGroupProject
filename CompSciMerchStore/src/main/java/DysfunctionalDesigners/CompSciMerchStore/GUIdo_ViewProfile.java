@@ -87,8 +87,10 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		showName = new JLabel(v.getName());
 		showMemberStatus = new JLabel(memberS);
 		if(!u.isAdmin()) {//if shipping is null, need to handle it////////////////////////////// mackenna
-			showAddress = new JLabel(current.getShippingAddr().getStreet() + "," + current.getShippingAddr().getCity() + ","
-					+ current.getShippingAddr().getState() + " " + current.getShippingAddr().getZipCode());
+			if(current.getShippingAddr() != null) {
+				showAddress = new JLabel(current.getShippingAddr().getStreet() + "," + current.getShippingAddr().getCity() + ","
+						+ current.getShippingAddr().getState() + " " + current.getShippingAddr().getZipCode());
+			}
 		}
 		
 		showEmail.setFont(new Font("Cambria",Font.PLAIN,24));
