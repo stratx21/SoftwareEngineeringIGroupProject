@@ -162,6 +162,13 @@ public class GUIdo_Frame extends JFrame{
 						public void actionPerformed(ActionEvent e) {
 							if(e.getActionCommand().equals("make_promo")) {
 								to_make_promo();
+							} else if(e.getActionCommand().equals("view_all_users")) { 
+								current_panel = new GUIdo_ViewAllUsers(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										to_homescreen();
+									}
+								}, getWidth());
+								scrollpane.getViewport().add(current_panel);
 							} else {
 								//no other - error 
 							}
