@@ -295,7 +295,7 @@
   },
   "13" : {
     "description" : "Are you jealous of how cool Hamerly is when he rocks his Chacos? Feed your jealousy! Get a pair today! *May or may not have been worn by Hamerly himself*",
-    "displayName" : "Hamerly-inspired Chocos",
+    "displayName" : "Hamerly-inspired Chacos",
     "extendedItemID" : "00013",
     "itemID" : 13,
     "stock" : 46,
@@ -337,8 +337,8 @@
     } ]
   },
   "15" : {
-    "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself an 'Hours of planning will save you weeks of debugging' shirt today!",
-    "displayName" : "Hours of Planning Will Save you Weeks of Debugging T-Shirt",
+    "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself a 'Weeks of Debugging Will Save You Hours of Planning' shirt today!",
+    "displayName" : "Weeks of Debugging Will Save You Hours of Planning T-Shirt",
     "extendedItemID" : "00015",
     "itemID" : 15,
     "stock" : 99,
@@ -950,11 +950,6 @@
       "date" : 1556516608283,
       "rating" : 4
     }, {
-      "description" : "Should've been given to the Engineers - Brian Thayil ",
-      "userID" : 19999,
-      "date" : 1556689843138,
-      "rating" : 4
-    }, {
       "description" : "'Why is it not brick?' -everyone on campus ",
       "userID" : 13419,
       "date" : 1556689843148,
@@ -1080,7 +1075,7 @@
       "date" : 1556690163579,
       "rating" : 2
     }, {
-      "description" : "I want to marry Russel",
+      "description" : "I want to marry Russell",
       "userID" : 19999,
       "date" : 1556690205582,
       "rating" : 5
