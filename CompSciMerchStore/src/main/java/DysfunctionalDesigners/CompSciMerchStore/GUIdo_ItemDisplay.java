@@ -404,16 +404,10 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 			stary_t[i] += y;
 		}
 		
-		for(Review review : item.getReviews()) {			int oldy = y;
+		for(Review review : item.getReviews()) {			
+			int oldy = y;
 			y += GAP_BETWEEN_REVIEWS;
 			int i = 0;
-			g.setColor(Color.WHITE);
-			for(;i < review.getRating(); i++) {
-				g.fillPolygon(starx_t, stary_t, 11);
-				for(int k = 0; k < 11; k++) {
-					starx_t [k] += STAR_WIDTH;
-				}
-			}
 			
 			//draw any filled yellow stars:
 			g.setColor(Color.YELLOW); 

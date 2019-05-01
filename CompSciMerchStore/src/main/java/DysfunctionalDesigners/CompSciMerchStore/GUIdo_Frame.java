@@ -158,7 +158,15 @@ public class GUIdo_Frame extends JFrame{
 				}
 			} else if(option.equals("Admin Page")) {
 				if(current_user.isAdmin()) {
-					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user);
+					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if(e.getActionCommand().equals("make_promo")) {
+								
+							} else {
+								//no other - error 
+							}
+						}
+					});
 					scrollpane.getViewport().add(current_panel);
 				} else {
 					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
@@ -168,6 +176,17 @@ public class GUIdo_Frame extends JFrame{
 			}
 				
 		} 
+	}
+	
+	public void to_make_promo() {
+		this.current_panel = new GUIdo_MakePromo(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//TODO add the promo stored in e.getSource() to the list 
+			}
+		}, this.getWidth());
+		
+		scrollpane.getViewport().add(this.current_panel);
 	}
 	
 	/**
