@@ -72,61 +72,67 @@ public class GUIdo_EditProfile extends GUIdo_CPanel{
 		btn1.setActionCommand("submit_changes");	
 		
 		String[] toInput = new String[6];
-		/*
-		 * btn1.addActionListener(new ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent e) { // TODO Auto-generated
-		 * method stub boolean valid = true; if(getEmail.getText().isEmpty()) { valid =
-		 * false; JOptionPane.showMessageDialog(panel, "Email field is blank!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with blank emails"); } else
-		 * if(getMom.getText().isEmpty()) { valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Mother's maiden name field is blank!",
-		 * "Error", JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with blank mom field"); } else
-		 * if(getUN.getText().isEmpty()) { valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Username field is blank!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with blank username"); } else
-		 * if(getPass.getText().isEmpty()) { valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Password field is blank!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with blank emails"); } else
-		 * if(getName.getText().isEmpty()) { valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Name field is blank!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with blank name"); } else
-		 * if(!getEmail.getText().equals(getEmailCon.getText())) { valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Emails are not the same!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with non matching emails"); } else
-		 * if(!getPass.getText().equals(getconfirmPass.getText())) { valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with non matching passwords"); } else
-		 * if(control.getCustomerUsernames().contains(getUN.getText())){ valid = false;
-		 * JOptionPane.showMessageDialog(panel, "Username is taken already!", "Error",
-		 * JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with already taken usernames"); }
-		 * 
-		 * if(!getEmail.getText().isEmpty()) { for(int i = 0; i <
-		 * control.getAllCustomers().size(); i++) {
-		 * if(getEmail.getText().equals(control.getAllCustomers().get(i).getEmail())){
-		 * valid = false; JOptionPane.showMessageDialog(panel,
-		 * "Email already has an account!", "Error", JOptionPane.ERROR_MESSAGE);
-		 * logger.info("Attempted submission with already taken email"); } } }
-		 * 
-		 * if(valid) { toInput[0] = getEmail.getText(); toInput[1] = getMom.getText();
-		 * toInput[3] = getPass.getText(); toInput[4] = getName.getText();
-		 * 
-		 * control.writeCustomer(new Customer(toInput));
-		 * 
-		 * btn1.setActionListener_clicked(al); }
-		 * 
-		 * }
-		 * 
-		 * });
-		 */
+		btn1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				boolean valid = true;
+				if(getEmail.getText().isEmpty()) {
+					valid = false;
+					JOptionPane.showMessageDialog(panel, "Email field is blank!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with blank emails");
+				} else if(getMom.getText().isEmpty()) {
+					valid = false;
+					JOptionPane.showMessageDialog(panel, "Mother's maiden name field is blank!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with blank mom field");
+				} else if(getPass.getText().isEmpty()) {
+					valid = false;
+					JOptionPane.showMessageDialog(panel, "Password field is blank!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with blank emails");
+				} else if(getName.getText().isEmpty()) {
+					valid = false;
+					JOptionPane.showMessageDialog(panel, "Name field is blank!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with blank name");
+				} else if(!getEmail.getText().equals(getEmailCon.getText())) {
+					valid = false;
+					JOptionPane.showMessageDialog(panel, "Emails are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with non matching emails");
+				} else if(!getPass.getText().equals(getconfirmPass.getText())) {
+					valid = false;
+					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Attempted submission with non matching passwords");
+				} 
+				
+//				if(!getEmail.getText().isEmpty()) {
+//					for(int i = 0; i < control.getAllCustomers().size(); i++) {
+//						if(getEmail.getText().equals(control.getAllCustomers().get(i).getEmail())){
+//							valid = false;
+//							JOptionPane.showMessageDialog(panel, "Email already has an account!", "Error", JOptionPane.ERROR_MESSAGE);
+//							logger.info("Attempted submission with already taken email");
+//						}
+//					}
+//				}
+				
+				if(valid) {
+					u.setEmail(getEmail.getText()); 
+					u.setMotherMaidenName(getMom.getText());
+					u.setPassword(getPass.getText());
+					u.setName(getName.getText());
+					
+					if(u.isAdmin()) {
+						control.writeAdmin((Administrator)u);
+					}else {
+						control.writeCustomer((Customer)u);
+					}
+					control.updateUserPassword(u);
+					
+					btn1.setActionListener_clicked(al);
+				}
+				
+			}
+			
+		});
 		
 		GridBagLayout gbl = new GridBagLayout();
 		this.setLayout(gbl);
