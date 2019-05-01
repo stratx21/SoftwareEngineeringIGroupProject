@@ -324,7 +324,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	}
 
 	
-	
+	/**
+	 * Go to the previous orders page
+	 * @param sale			sale to go for
+	 * @param customer		Customer to go for
+	 * @param current_panel	the current panel to go for
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_ReviewAndEditOrder(sale, customer, current_panel, scrollpane);
