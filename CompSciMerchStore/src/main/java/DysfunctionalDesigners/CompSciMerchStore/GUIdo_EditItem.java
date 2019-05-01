@@ -19,23 +19,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GUIdo_EditItem extends GUIdo_CPanel{
+	
+	/**
+	 * The Logger instance that is used to log for the program.
+	 * 
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_EditItem.class.getName());
 	
 	/**
 	 * The ItemInfo instance that is being edited. 
 	 */
-	private ItemInfo item = null;
+	private ItemInfo item = null; 
 	
 	/**
 	 * The width, in pixels, of the textboxes to edit the larger data; This is dependent on 
 	 *  the width of the page. 
 	 */
-	private static int TEXTBOX_WIDTH;
+	private static int TEXTBOX_WIDTH; 
 	
 	/**
 	 * The height of the textboxes to edit the larger data.
 	 */
-	private static final int TEXTBOX_HEIGHT = 125;
+	private static final int TEXTBOX_HEIGHT = 125; 
 	
 	/**
 	 * The height of the box for the smaller text sections. 
@@ -57,21 +62,44 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 */
 	private static final int Y_GAP = 10;
 	
+	/**
+	 * the font used for the labels. 
+	 * 
+	 */
 	private static final Font LABEL_FONT = new Font("Cambria", Font.BOLD, 24);
 	
 	/**
 	 * The String that is used to display the discounts information for
 	 * the PROMO codes. 
+	 * 
 	 */
 	private String discounts_display_string = "";
 	
+	/**
+	 * The new image instance uploaded for the item.
+	 * 
+	 */
 	private BufferedImage newimage = null;
 	
-	private static final int LABEL_HEIGHT = 75;
+	/**
+	 * The height of the labels. 
+	 * 
+	 */
+	private static final int LABEL_HEIGHT = 125;
 	
+	/**
+	 * The JLabel used for the file name that was used to show
+	 *  the name of the file that was uploaded for the edit. 
+	 * 
+	 */
 	private JLabel current_filename = null;
 	
-	private static final int IS_VISIBLE_WIDTH = 230;
+	/**
+	 * The visible width used for the button to show
+	 *  
+	 * 
+	 */
+	private static final int IS_VISIBLE_WIDTH = 325;
 	
 	/**
 	 * 
@@ -82,7 +110,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	 */
 	public GUIdo_EditItem(int width,ItemInfo item_to_edit, ActionListener done, User user) {
 		//page length and width 
-		super(width,1750);
+		super(width,2500);
 		this.setBackground(Color.WHITE);
 		logger.info("Switched to EditItem frame");
 		//get the width to use for the boxes 
@@ -106,7 +134,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		this.add(title);
 		
 		
-		JLabel name_label = new JLabel("Item Display Name");
+		JLabel name_label = new JLabel("Item Display Name:");
 		name_label.setFont(LABEL_FONT);
 		name_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -118,16 +146,16 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		//description text field 
-		JLabel desc_label = new JLabel("Description Of Item:");
-		desc_label.setFont(LABEL_FONT);
-		desc_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
-		y+=LABEL_HEIGHT+7;
-		this.add(desc_label);
-		JTextField desc = new JTextField(item.getDescription());
-		desc.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, GUIdo_EditItem.TEXTBOX_WIDTH, GUIdo_EditItem.TEXTBOX_HEIGHT);
-		this.add(desc); 
-		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.TEXTBOX_HEIGHT;
+		//description text field  
+		JLabel desc_label = new JLabel("Description Of Item:"); 
+		desc_label.setFont(LABEL_FONT); 
+		desc_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT); 
+		y+=LABEL_HEIGHT+7; 
+		this.add(desc_label); 
+		JTextField desc = new JTextField(item.getDescription()); 
+		desc.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, GUIdo_EditItem.TEXTBOX_WIDTH, GUIdo_EditItem.TEXTBOX_HEIGHT); 
+		this.add(desc);  
+		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.TEXTBOX_HEIGHT; 
 		
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +216,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the label for seeing the discount: 
-		JLabel discount_label = new JLabel("Discount");
+		JLabel discount_label = new JLabel("Discount:");
 		discount_label.setFont(LABEL_FONT);
 		discount_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -202,7 +230,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//changing the display image:: 
-		JLabel image_label = new JLabel("Display Image");
+		JLabel image_label = new JLabel("Display Image:");
 		image_label.setFont(LABEL_FONT);
 		image_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
@@ -259,20 +287,20 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		//the viewable stuff for enabling and disabling the item on the store: 
 		
-		JLabel isViewable = new JLabel("Item is visible on the store?: ");
-		isViewable.setFont(LABEL_FONT);
-		isViewable.setBounds(width/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2-GUIdo_EditItem.DONE_WIDTH/2,y,
-				GUIdo_EditItem.IS_VISIBLE_WIDTH,GUIdo_EditItem.DONE_HEIGHT - 70);
+		JLabel isViewable = new JLabel("Item is visible on the store? "); 
+		isViewable.setFont(LABEL_FONT); 
+		isViewable.setBounds(width/2-GUIdo_EditItem.IS_VISIBLE_WIDTH-Y_GAP,y, 
+				GUIdo_EditItem.IS_VISIBLE_WIDTH,LABEL_HEIGHT); 
 		
-		this.add(isViewable);
+		this.add(isViewable); 
 		
 		GUIdo_CButton viewable 
-			= new GUIdo_CButton(width/2+GUIdo_EditItem.DONE_WIDTH/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2,
-					y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT,"YES");
-		viewable.setBackground(Color.GREEN);
-		if(!item.isEnabled()) {
-			viewable.setText("NO");
-			viewable.setBackground(Color.RED);
+			= new GUIdo_CButton(width/2 + Y_GAP, 
+					y,GUIdo_EditItem.DONE_WIDTH,GUIdo_EditItem.DONE_HEIGHT,"YES"); 
+		viewable.setBackground(Color.GREEN); 
+		if(!item.isEnabled()) { 
+			viewable.setText("NO"); 
+			viewable.setBackground(Color.RED); 
 //			viewable.repaint();
 		}
 		
@@ -292,7 +320,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 			}
 		});
 		
-		y+=GUIdo_EditItem.DONE_HEIGHT+GUIdo_EditItem.Y_GAP;
+		y+=GUIdo_EditItem.DONE_HEIGHT+GUIdo_EditItem.Y_GAP*3;
 		this.add(viewable);
 		
 		
