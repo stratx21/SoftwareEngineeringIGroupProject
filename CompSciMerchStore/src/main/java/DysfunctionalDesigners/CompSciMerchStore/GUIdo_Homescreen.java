@@ -90,7 +90,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		
 		
 		g.drawImage(this.cashn, 
-				this.getWidth()*1/10, this.getHeight()*1/28, this.getWidth()*2/5,this.getWidth()*3/14, null);
+				this.getWidth()*1/10, this.getHeight()*1/25, this.getWidth()*2/5,this.getWidth()*3/14, null);
 		
 		
 		//g.drawRect(this.getWidth()*6/10, this.getHeight()*1/10, welcome_width, this.getHeight()*7/10);
