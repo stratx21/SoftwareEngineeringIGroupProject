@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUIdo_MakePromo extends GUIdo_CPanel {
@@ -87,6 +89,8 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 				
 				boolean valid = true;
 				
+				String error_message = "ERROR: \n";
+				
 				Double percentoff = null;
 				try {
 					percentoff = Double.parseDouble(percent_off.getText());
@@ -96,6 +100,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 				} catch(Exception err) {
 					//TODO logger 
 					valid = false;
+					error_message += " percent off invalid. Must be between 0 and 100 % and be in number format only.\n";
 					System.out.println("ERROR: percent off invalid. Must be between 0 and 100 % and be in number format only.");
 				}
 				
@@ -107,6 +112,9 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 					}
 					done.actionPerformed(new ActionEvent(null,ActionEvent.ACTION_PERFORMED,"added_promos"));
 					
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(), error_message, 
+						      "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 			}
 		});
