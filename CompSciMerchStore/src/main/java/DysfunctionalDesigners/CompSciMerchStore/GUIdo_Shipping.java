@@ -28,6 +28,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	
 	GUIdo_Shipping current_pan = this;
 	
+	/**
+	 * Go to the shipping panel
+	 * @param sale			the sale to display for
+	 * @param customer		the customer that's checking out
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scollpane to add to
+	 */
 	public GUIdo_Shipping(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		this.setBackground(Color.WHITE);
@@ -37,6 +44,13 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 		this.repaint();
 	}
 	
+	/**
+	 * Draw the shipping screen
+	 * @param sale			the sale to display for
+	 * @param customer		the customer that's checking out
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scollpane to add to
+	 */
 	public void drawScreen(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter stateFormat = null;
@@ -310,13 +324,26 @@ public class GUIdo_Shipping extends GUIdo_CPanel implements ActionListener{
 	}
 
 	
-	
+	/**
+	 * Go to the previous orders page
+	 * @param sale			sale to go for
+	 * @param customer		Customer to go for
+	 * @param current_panel	the current panel to go for
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_ReviewAndEditOrder(sale, customer, current_panel, scrollpane);
 		scrollpane.getViewport().add(current_panel);
 	}
 
+	/**
+	 * Go to payment screen.
+	 * @param sale			sale to go for
+	 * @param customer		Customer to go for
+	 * @param current_panel	the current panel to go for
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	protected void to_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Payment(sale, customer, current_panel, scrollpane);

@@ -40,6 +40,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
   	    this.repaint();
 	}
 	
+	/**
+	 * Draw the payment screen
+	 * @param sale			the sale to draw
+	 * @param i				i
+	 * @param customer		the customer to draw for
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	private void drawScreen(Sale sale, int i, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter card = null;
@@ -441,12 +449,25 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 	}
 	
+	/**
+	 * Go to the previous orders page
+	 * @param customer		Customer to go for
+	 * @param current_panel	the current panel to go for
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	protected void to_previousOrders(Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_PreviousOrders(customer);
 		scrollpane.getViewport().add(current_panel);
 	}
 
+	/**
+	 * Go to the shipping page
+	 * @param sale				sale to go for
+	 * @param customer			customer this applies to
+	 * @param current_panel		The current panel to change
+	 * @param scrollpane		the scrollpane to add to
+	 */
 	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);
