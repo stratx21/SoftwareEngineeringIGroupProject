@@ -449,6 +449,12 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 	}
 	
+	/**
+	 * Go to the previous orders page
+	 * @param customer		Customer to go for
+	 * @param current_panel	the current panel to go for
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	protected void to_previousOrders(Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_PreviousOrders(customer);
