@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -22,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class GUIdo_Frame extends JFrame{
+	private static Logger logger = Logger.getLogger(GUIdo_Frame.class.getName());
 	
 	/**
 	 * the height in pixels of the toolbar.
@@ -85,6 +87,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	public GUIdo_Frame() {
+		logger.info("Initialized guido_frame");
 		this.initialize();
 		this.setBackground(Color.WHITE);
 	}
@@ -97,6 +100,7 @@ public class GUIdo_Frame extends JFrame{
 	 * 
 	 */
 	public void to_all_uploaded_items(User user) {
+		logger.info("Going to all uploaded items and passing it user" + user.getUserID());
 		List<ItemInfo> items = new ArrayList<>();
 		for(Integer id : ((Vendor)user).getUploadedItems()) {
 			items.add(Catalogue.getInstance().getItem(id));
@@ -170,21 +174,31 @@ public class GUIdo_Frame extends JFrame{
 								}, getWidth());
 								scrollpane.getViewport().add(current_panel);
 							} else {
-								//no other - error 
+								logger.severe("INVALID ADMIN ACTION PERFORMED: " + e.getActionCommand());
 							}
 						}
 					});
 					scrollpane.getViewport().add(current_panel);
 				} else {
+					logger.fine("Non admins trying to access admin page: \"" + current_user.getUserID());
 					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
 				}
 			} else if(option.equals("View Profile")) {
 				to_ViewProfile(current_user);
+			} else if(option.equals("View Past Sales")) {
+				to_PastSales(current_user);
 			}
 				
 		} 
 	}
 	
+	private void to_PastSales(User current_user) {
+		// TODO Auto-generated method stub
+		current_panel = new GUIdo_PastSales((Vendor) current_user);
+		scrollpane.getViewport().add(this.current_panel);
+		scrollpane.repaint();
+	}
+
 	/**
 	 * Set up the promo code making page. 
 	 * 
@@ -456,7 +470,11 @@ public class GUIdo_Frame extends JFrame{
 					cart = (Sale)e.getSource();
 					to_cart(cart, (Customer) user, current_panel, scrollpane);
 				} else if(e.getActionCommand().equals("add_review")) {
-					current_panel = new GUIdo_AddReview(item, (Customer)user);
+					current_panel = new GUIdo_AddReview(item, (Customer)user, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							display_item(item,user);
+						}
+					});
 					scrollpane.getViewport().add(current_panel);
 					//e.getSource() is the item to find reviews for 
 				} else if(e.getActionCommand().equals("edit_item")) {

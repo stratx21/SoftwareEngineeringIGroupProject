@@ -166,6 +166,7 @@ public class GUIdo_CToolbar extends GUIdo_CPanel{
 		options.add("Add Item");
 		options.add("All Uploaded Items");
 		options.add("Admin Page");
+		options.add("View Past Sales");
 		
 		
 		//set up the dropdown menu with a JComboBox for the other options: 

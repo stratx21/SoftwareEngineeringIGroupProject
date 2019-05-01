@@ -16,6 +16,11 @@
       "userID" : 19999,
       "date" : 1556516442159,
       "rating" : 5
+    }, {
+      "description" : "\"They're like skittles, but not edible\" - Brian",
+      "userID" : 19999,
+      "date" : 1556689958105,
+      "rating" : 5
     } ]
   },
   "1" : {
@@ -240,7 +245,17 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I'll stick with Nikes ",
+      "userID" : 19999,
+      "date" : 1556690060719,
+      "rating" : 1
+    }, {
+      "description" : "Goes so well with socks!!!",
+      "userID" : 19999,
+      "date" : 1556690072208,
+      "rating" : 5
+    } ]
   },
   "14" : {
     "description" : "If you've taken Hamerly, you know what it's like to watch him type. If you also look up to his mad skills, buy the VIM download link now. For this item only, all profits go to the Hamerly Fund.",
@@ -254,7 +269,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "HAMERLY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I don't know what ViM is - Brian ",
+      "userID" : 19999,
+      "date" : 1556689933195,
+      "rating" : 1
+    } ]
   },
   "15" : {
     "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself an 'Hours of planning will save you weeks of debugging' shirt today!",
@@ -449,6 +469,11 @@
       "userID" : 19999,
       "date" : 1556516427735,
       "rating" : 4
+    }, {
+      "description" : "This is such a great material to burn with ",
+      "userID" : 19999,
+      "date" : 1556690099158,
+      "rating" : 5
     } ]
   },
   "26" : {
@@ -465,7 +490,12 @@
     },
     "enabled" : true,
     "prof" : "AARSBALD",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I can't decide if this is better than the team hairy aars hat ",
+      "userID" : 19999,
+      "date" : 1556689754550,
+      "rating" : 3
+    } ]
   },
   "27" : {
     "description" : "Do you miss Professor Bald Aars when you leave Cashion? Well, this way you never have to be apart! Order your very own Limited-Edition Professor Bald Aars Bobble Head today!",
@@ -482,7 +512,12 @@
     },
     "enabled" : true,
     "prof" : "AARSBALD",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "It moves around! Great to be in the front of my car, moving around to the car and the tunes.",
+      "userID" : 19999,
+      "date" : 1556689732164,
+      "rating" : 4
+    } ]
   },
   "28" : {
     "description" : "Have you had something inspirational told to you by Professor Hairy Aars? Do you want want a daily reminder of his inspiration? Who wouldn't! Get your own tapestry today.",
@@ -660,7 +695,12 @@
     },
     "enabled" : true,
     "prof" : "DYS_DES",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "I like this shirt!!!!",
+      "userID" : 19999,
+      "date" : 1556689776160,
+      "rating" : 5
+    } ]
   },
   "40" : {
     "description" : "Cashion, the building. You're always welcome to remodel us. Give us a new building. Give us a fourth floor. Please.",
@@ -694,6 +734,11 @@
       "userID" : 19999,
       "date" : 1556516608283,
       "rating" : 4
+    }, {
+      "description" : "Should've been given to the Engineers - Brian Thayil ",
+      "userID" : 19999,
+      "date" : 1556689843138,
+      "rating" : 4
     } ]
   },
   "41" : {
@@ -708,7 +753,22 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "CERNY",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "What a beautiful wedding!!!",
+      "userID" : 19999,
+      "date" : 1556690009382,
+      "rating" : 5
+    }, {
+      "description" : "What a cool dude ",
+      "userID" : 19999,
+      "date" : 1556690022901,
+      "rating" : 4
+    }, {
+      "description" : "Wow",
+      "userID" : 19999,
+      "date" : 1556690032371,
+      "rating" : 1
+    } ]
   },
   "42" : {
     "description" : "What do you call a fish with no eyes...?",
@@ -764,7 +824,37 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "DYS_DES",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Russel should have been paid ",
+      "userID" : 19999,
+      "date" : 1556690123991,
+      "rating" : 4
+    }, {
+      "description" : "Where are Russel's moneys? ",
+      "userID" : 19999,
+      "date" : 1556690136837,
+      "rating" : 2
+    }, {
+      "description" : "Is Russel a pop star yet?",
+      "userID" : 19999,
+      "date" : 1556690163579,
+      "rating" : 2
+    }, {
+      "description" : "I want to marry Russel",
+      "userID" : 19999,
+      "date" : 1556690205582,
+      "rating" : 5
+    }, {
+      "description" : "Russel is such an amazing guy thank you for taking pictures!!!",
+      "userID" : 19999,
+      "date" : 1556690231989,
+      "rating" : 5
+    }, {
+      "description" : "Russel is such a bean",
+      "userID" : 19999,
+      "date" : 1556690240230,
+      "rating" : 5
+    } ]
   },
   "46" : {
     "description" : "Don't you wish you could cozy up with your very own GOLLUM at night?! Well, now is your chance!",

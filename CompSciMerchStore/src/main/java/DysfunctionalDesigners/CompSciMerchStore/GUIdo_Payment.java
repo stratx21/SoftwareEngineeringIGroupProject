@@ -24,6 +24,13 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 	
 	GUIdo_Payment this_panel = this;
 	
+	/**
+	 * Go to payment screen
+	 * @param sale			the sale to register
+	 * @param customer		the customer to check out
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	public GUIdo_Payment(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		super();
 		logger.info("Switched to Payment Screen");
@@ -33,6 +40,14 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
   	    this.repaint();
 	}
 	
+	/**
+	 * Draw the payment screen
+	 * @param sale			the sale to draw
+	 * @param i				i
+	 * @param customer		the customer to draw for
+	 * @param current_panel	the current panel to change
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	private void drawScreen(Sale sale, int i, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		MaskFormatter card = null;
@@ -144,7 +159,8 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 		GUIdo_CButton placeOrder = new GUIdo_CButton(0, 0, 150, 75, "Place Order");
 		placeOrder.disable();
-		placeOrder.setBackground(Color.pink);
+		placeOrder.setBackground(new Color(255,228,225));
+		placeOrder.setHoverColor(new Color(255,192,203));
 		//placeOrder.setForeground(Color.PINK);
 		GUIdo_CButton addCardButton = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Add Card");
 		GUIdo_CButton back = new GUIdo_CButton(GUIdo_CButton.LEADING, GUIdo_CButton.LEADING, 25, 10, "Back");
@@ -155,6 +171,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// save payment data
+				DecimalFormat df = new DecimalFormat("0.00");
 				if(!nameOnCard.getText().isEmpty() && !nameOnCard.getText().isBlank()
 						&& !numberOnCard.getText().isEmpty() && !numberOnCard.getText().isBlank()
 						&& !cvvNum.getText().isEmpty() && !cvvNum.getText().isBlank()
@@ -177,7 +194,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					
 					logger.info("Card Added Successfully to user " + customer.getUserName());
 					sale.setPayment(new Payment(sale.getTotalWithTax(), card));
-					JOptionPane.showMessageDialog(null, (Object) ("Card added successfully with amount " + sale.getTotalWithTax() + "!"));
+					JOptionPane.showMessageDialog(null, (Object) ("Card added successfully with amount $" + df.format(sale.getTotalWithTax()) + "!"));
 				}else if(nameOnCard.getText().isEmpty() || nameOnCard.getText().isBlank()
 						|| numberOnCard.getText().isEmpty() || numberOnCard.getText().isBlank()
 						|| cvvNum.getText().isEmpty() || cvvNum.getText().isBlank()
@@ -433,12 +450,25 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		
 	}
 	
+	/**
+	 * Go to the previous orders page
+	 * @param customer		Customer to go for
+	 * @param current_panel	the current panel to go for
+	 * @param scrollpane	the scrollpane to add to
+	 */
 	protected void to_previousOrders(Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_PreviousOrders(customer);
 		scrollpane.getViewport().add(current_panel);
 	}
 
+	/**
+	 * Go to the shipping page
+	 * @param sale				sale to go for
+	 * @param customer			customer this applies to
+	 * @param current_panel		The current panel to change
+	 * @param scrollpane		the scrollpane to add to
+	 */
 	protected void to_previous(Sale sale, Customer customer, GUIdo_CPanel current_panel, JScrollPane scrollpane) {
 		// TODO Auto-generated method stub
 		current_panel = new GUIdo_Shipping(sale, customer, current_panel, scrollpane);

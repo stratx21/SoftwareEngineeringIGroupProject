@@ -8,16 +8,29 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 
 public class GUIdo_PreviousOrders extends GUIdo_CPanel{
+	private static Logger logger = Logger.getLogger(GUIdo_PreviousOrders.class.getName());
 	
+	/**
+	 * Static instance of the programs catalogue
+	 */
 	public Catalogue catalogue = new Catalogue(); // instance to use to search for item names by id
 	
+	
+	/**
+	 * Constructor, builds the panel to display previous orders
+	 * @param customer customer the sale belongs to
+	 */
 	public GUIdo_PreviousOrders(Customer customer) {
 		super();
+		logger.info("Switched to PreviousOrders");
+		
 		this.setBackground(Color.WHITE);
 		if(customer.getPreviousPurchases().size() < 2) {
 			this.setPreferredSize(new Dimension(this.getWidth(), 500));
@@ -28,7 +41,12 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 		this.repaint();
 	}
 	
+	/**
+	 * Function that draws the screen/frame for the viewing previous orders
+	 * @param customer customer the orders belong to
+	 */
 	public void drawScreen(Customer customer) {
+		DecimalFormat df = new DecimalFormat("0.00");
 		GridBagLayout layout = new GridBagLayout();
 		this.setLayout(layout);
 		GridBagConstraints c = new GridBagConstraints();
@@ -68,7 +86,7 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 				this.add(name, c);
 			}
 			
-			JLabel total = new JLabel("Total: $" + s.getTotalWithTax());
+			JLabel total = new JLabel("Total: $" + df.format(s.getTotalWithTax()));
 			total.setFont(new Font("Cambria", Font.BOLD, 16));
 			total.setForeground(Color.RED);
 			y++;

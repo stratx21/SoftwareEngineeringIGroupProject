@@ -11,6 +11,9 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 public class GUIdo_ViewProfile extends GUIdo_CPanel{
+	/**
+	 * Instance of the logger
+	 */
 	private static Logger logger = Logger.getLogger(GUIdo_ViewProfile.class.getName());
 	JLabel l1, email, momName, yourUN, yourPass, yourName, title, memberStatus, address;
 	JLabel showEmail, showMomName, showUN, showPass, showName, showMemberStatus, showAddress;
@@ -18,6 +21,11 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 	GUIdo_CButton editProfile, viewPreviousOrders;
 	GUIdo_CPanel panel = this;
 	
+	/**
+	 * Function constructs the frame for viewing a profile
+	 * @param al To be able to go to a new frame
+	 * @param u user to be displayed
+	 */
 	GUIdo_ViewProfile(final ActionListener al, User u){
 		super(800);
 		//cast u to vendor
