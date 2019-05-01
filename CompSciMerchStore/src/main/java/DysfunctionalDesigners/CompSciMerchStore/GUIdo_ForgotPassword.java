@@ -30,7 +30,7 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		
 		JTextField tf1, getUN, getMomName, getPass1;
 		
-		GUIdo_CButton btn1;
+		GUIdo_CButton btn1, backBtn;
 		
 		GUIdo_CPanel panel = this;
 		UserDataController control = UserDataController.getInstance();
@@ -58,7 +58,11 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		btn1.setPreferredSize(new Dimension(10,50));
 
 		btn1.setActionCommand("login");
-		
+
+		backBtn = new GUIdo_CButton(450, 450, 170, 30, "Back!");
+		backBtn.setPreferredSize(new Dimension(10,50));
+		backBtn.setActionCommand("login");
+		backBtn.setActionListener_clicked(al);	
 		
 		JTextField getConfirmPass = new JTextField();
 		getUN.setPreferredSize(new Dimension(10,50));
@@ -175,8 +179,10 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 		
 		
 		c.gridy = 12;
-		
 		this.add(btn1,c);
+		
+		c.gridy = 14;
+		this.add(backBtn,c);
 		
 		JLabel fake = new JLabel ("");
 		c.weighty = 1;
