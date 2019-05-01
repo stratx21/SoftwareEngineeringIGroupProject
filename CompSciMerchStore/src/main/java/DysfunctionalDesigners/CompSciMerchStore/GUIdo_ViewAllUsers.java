@@ -5,8 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
+	
+	/**
+	 * Instance of the loggger
+	 */
+	private static Logger logger = Logger.getLogger(GUIdo_ViewAllUsers.class.getName());
+	
 	private static final Font COMPLAINTS_FONT = new Font("Cambria", Font.PLAIN, 20);
 	private static final int BUTTON_WIDTH = 250;
 	private static final int BUTTON_HEIGHT = 80;
