@@ -79,7 +79,15 @@
     "state" : "WQ"
   },
   "wishList" : [ 1, 15 ],
-  "cart" : null,
+  "cart" : {
+    "payment" : null,
+    "dateTime" : null,
+    "customerID" : 10001,
+    "saleID" : 25,
+    "itemList" : { },
+    "shippingAddr" : null,
+    "finalized" : false
+  },
   "previousPurchases" : [ {
     "payment" : {
       "amount" : 1105.4588,

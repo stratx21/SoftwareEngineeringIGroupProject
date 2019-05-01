@@ -35,12 +35,16 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		yourName = new JLabel("Your name:");
 		title = new JLabel("View Profile");
 		title.setFont(new Font("Cambria", Font.BOLD, 34));
+		
 		editProfile = new GUIdo_CButton(650, 650, 170, 30, "Edit Profile");
 		editProfile.addActionListener(al);
-		editProfile.setActionCommand("edit profile");
+		editProfile.setActionCommand("edit_profile");
+		editProfile.setActionListener_clicked(al);
+		
 		viewPreviousOrders = new GUIdo_CButton(650, 650, 170, 30, "View Previous Orders");
 		viewPreviousOrders.addActionListener(al);
 		viewPreviousOrders.setActionCommand("View previous orders");
+		viewPreviousOrders.setActionListener_clicked(al);
 		
 		email.setFont(new Font("Cambria",Font.BOLD,24));
 		momName.setFont(new Font("Cambria",Font.BOLD,24));

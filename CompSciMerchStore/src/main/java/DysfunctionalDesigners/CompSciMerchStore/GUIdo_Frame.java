@@ -261,7 +261,7 @@ public class GUIdo_Frame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(e.getActionCommand().equals("edit profile")) {
+				if(e.getActionCommand().equals("edit_profile")) {
 					//switch to edit profile page
 					to_EditProfile(u);
 				} else if(e.getActionCommand().equals("View previous orders")) {
@@ -282,14 +282,19 @@ public class GUIdo_Frame extends JFrame{
 				// TODO Auto-generated method stub
 				 if(e.getActionCommand().equals("submit_changes")) {
 						to_ViewProfile(u);
+				}else {
+					
 				}
 			}
 			
 		}, u);
+		scrollpane.getViewport().add(current_panel);
+		
 	}
 	
 	private void to_PreviousSales(Vendor v) {
-		
+		current_panel = new GUIdo_PastSales(v);
+		scrollpane.getViewport().add(current_panel);
 	}
 	/**
 	 * This function goes to the wishlist page for the specified User. 
