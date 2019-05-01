@@ -465,7 +465,11 @@ public class GUIdo_Frame extends JFrame{
 					cart = (Sale)e.getSource();
 					to_cart(cart, (Customer) user, current_panel, scrollpane);
 				} else if(e.getActionCommand().equals("add_review")) {
-					current_panel = new GUIdo_AddReview(item, (Customer)user);
+					current_panel = new GUIdo_AddReview(item, (Customer)user, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							display_item(item,user);
+						}
+					});
 					scrollpane.getViewport().add(current_panel);
 					//e.getSource() is the item to find reviews for 
 				} else if(e.getActionCommand().equals("edit_item")) {
