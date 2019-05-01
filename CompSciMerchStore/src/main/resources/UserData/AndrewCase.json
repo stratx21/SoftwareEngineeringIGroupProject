@@ -69,7 +69,7 @@
     "city" : "asdfb",
     "state" : "SD"
   },
-  "wishList" : [ 1, 15 ],
+  "wishList" : [ 15 ],
   "cart" : {
     "payment" : null,
     "dateTime" : null,

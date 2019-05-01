@@ -76,7 +76,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 	 * The Font instance that is used for the title of the admin page. 
 	 * 
 	 */
-	private static final Font TITLE_FONT = new Font("Cambria", Font.PLAIN,50);
+	private static final Font TITLE_FONT = new Font("Cambria", Font.BOLD,50);
 	
 	/**
 	 * The gap in pixels between each line of the complaints.
@@ -106,7 +106,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		
 		JLabel title = new JLabel(GUIdo_AdminPage.TITLE); 
 		title.setBounds(width/2-GUIdo_OutputTools.getPixelWidth(GUIdo_AdminPage.TITLE, GUIdo_AdminPage.TITLE_FONT)/2,
-					y,BUTTON_WIDTH,BUTTON_HEIGHT);
+					y,7*BUTTON_WIDTH,BUTTON_HEIGHT);
 		title.setFont(GUIdo_AdminPage.TITLE_FONT);
 		this.add(title);
 		
