@@ -29,30 +29,29 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 	 */ 
 	private static final int PART_HEIGHT = 100; 
 	
-	private static final int PART_Y_GAP = 15; 
-	
-	private static final int LABEL_HEIGHT = 75; 
-	
-	private static final int DONE_WIDTH = 150; 
-	
-	private static final int DONE_HEIGHT = 100; 
-	
 	/**
-	 * The height of the item display for each display. 
-	 */
-//	private static final int ITEM_DISPLAY_HEIGHT = 600;
-	
-//	private int item_count = 0;
-	
-	
-	private int item_listings_start = 0;
-	
-	
-	/**
-	 * the ids of the selected items. 
+	 * The gap between each part in pixels in the y axis. 
 	 * 
 	 */
-	List<Integer> selectedItems = new ArrayList<Integer>();
+	private static final int PART_Y_GAP = 15; 
+	
+	/**
+	 * The height of the labels. 
+	 * 
+	 */
+	private static final int LABEL_HEIGHT = 75; 
+	
+	/**
+	 * The width of the done button. 
+	 * 
+	 */
+	private static final int DONE_WIDTH = 150; 
+	
+	/**
+	 * The height of the done button. 
+	 * 
+	 */
+	private static final int DONE_HEIGHT = 100; 
 	
 	public GUIdo_MakePromo(ActionListener done, int width) {
 		super(width,1200);
@@ -71,15 +70,17 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 		y+=GUIdo_MakePromo.LABEL_HEIGHT+7;
 		this.add(sale_info);
 		
-		JLabel promo_text_label = new JLabel("code:");
+		//telling what the box is: 
+		JLabel promo_text_label = new JLabel("code:"); 
 		promo_text_label.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.LABEL_HEIGHT);
 		y+=GUIdo_MakePromo.LABEL_HEIGHT+7;
 		this.add(promo_text_label);
 		
-		JTextField promo_text = new JTextField("CODE");
+		//the box used for the promo code text itself: 
+		JTextField promo_text = new JTextField("CODE"); 
 		promo_text.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.PART_HEIGHT);
-		this.add(promo_text);
-		y+=GUIdo_MakePromo.PART_HEIGHT + GUIdo_MakePromo.PART_Y_GAP; 
+		this.add(promo_text); 
+		y+=GUIdo_MakePromo.PART_HEIGHT + GUIdo_MakePromo.PART_Y_GAP;
 		
 		////////////////////////////////////////////////////////////////////
 		//PROMO percent off:
@@ -88,6 +89,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 		y+=GUIdo_MakePromo.LABEL_HEIGHT+7;
 		this.add(percent_off_label);
 		
+		//the percent off that should be changed to numbers: 
 		JTextField percent_off = new JTextField("% off");
 		percent_off.setBounds(width/2-PART_WIDTH/2, y, PART_WIDTH, GUIdo_MakePromo.PART_HEIGHT);
 		this.add(percent_off);
@@ -96,6 +98,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 		
 		//////////////////////////////////////////////////////////////////////
 		
+		//the options for the combo box: 
 		List<String> options = new ArrayList<String>();
 		
 		Arrays.asList(Professor.values()).forEach(p -> options.add(p.name()));
