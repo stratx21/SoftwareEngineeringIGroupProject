@@ -1,11 +1,9 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -164,7 +162,17 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 		
 		//////////////////////////////////////////////////////
 		
+		GUIdo_CButton view_all_users = new GUIdo_CButton(
+								width/2-BUTTON_WIDTH/2, y,
+								BUTTON_WIDTH, BUTTON_HEIGHT, 
+								"View All Users");
+		view_all_users.setActionListener_clicked(done);
+		view_all_users.setActionCommand("view_all_users");
+		this.add(view_all_users);
+		y+= BUTTON_HEIGHT + GUIdo_AdminPage.Y_GAP;
 		
+		
+		//////////////////////////////////////////////////////
 		
 		
 		GUIdo_CButton make_promo = new GUIdo_CButton(width/2-BUTTON_WIDTH/2,
@@ -191,7 +199,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 			public void actionPerformed(ActionEvent e) {
 				//only if the complaints have not already been added: 
 				if(!complaints_shown) {
-					
+					complaints_shown = true;
 					//get the complaints list from the admin priviledges: 
 					List<String> complaints = null;
 					try {
@@ -238,8 +246,7 @@ public class GUIdo_AdminPage extends GUIdo_CPanel {
 				}
 				}
 				
-				page_length= y+200;
-				setPreferredSize(new Dimension(getWidth(),page_length));
+				set_new_length(y+200);
 				repaint();
 			}
 		});

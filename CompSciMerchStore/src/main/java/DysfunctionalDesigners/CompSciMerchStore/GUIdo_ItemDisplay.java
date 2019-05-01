@@ -151,7 +151,7 @@ public class GUIdo_ItemDisplay extends GUIdo_CPanel{
 		this.add(name);
 		
 		//show the price formatting the item, always showing at least one dollar place and always showing two decimal places: 
-		JLabel price =  new JLabel("$"+new DecimalFormat("0.00").format(this.item.getPrice()));
+		JLabel price =  new JLabel("$"+new DecimalFormat("0.00").format(this.item.getTotalPrice()));
 		price.setFont(new Font("Cambria",Font.PLAIN,35));
 		price.setBounds(this.getWidth()/2+this.getWidth()/10, this.getHeight()*5/35, this.getWidth()/2-this.getWidth()/10, this.getHeight()/10);
 		this.add(price);

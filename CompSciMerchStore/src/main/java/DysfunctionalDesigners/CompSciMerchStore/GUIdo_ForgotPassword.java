@@ -77,10 +77,18 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean userFound = false, deservesPage = false;
-				if(!getPass1.getText().equals(getConfirmPass.getText())) {
+				if(getUN.getText().isBlank()) {
+					JOptionPane.showMessageDialog(panel, "Empty username field!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Tried to change  password with blank username");
+				} else if(getMomName.getText().isBlank()) {
+					JOptionPane.showMessageDialog(panel, "Empty mother's maiden name field!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Tried to change  password with blank moms name");
+				} else if(getPass1.getText().isBlank()) {
+					JOptionPane.showMessageDialog(panel, "Empty password field!", "Error", JOptionPane.ERROR_MESSAGE);
+					logger.info("Tried to change  password with blank password");
+				} else if(!getPass1.getText().equals(getConfirmPass.getText())) {
 					JOptionPane.showMessageDialog(panel, "Passwords are not the same!", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				if(!getUN.getText().isEmpty()) {
+				} else if(!getUN.getText().isEmpty()) {
 					
 					List<Customer> customers = control.getAllCustomers();
 					for(int i = 0; i < customers.size(); i++) {
@@ -91,6 +99,7 @@ public class GUIdo_ForgotPassword extends GUIdo_CPanel{
 							if(getMomName.getText().equals(current.getMotherMaidenName())) {
 								current.setPassword(getConfirmPass.getText());
 								control.writeCustomer(current);
+								control.updateUserPassword(current);
 								logger.info("Set new password for " + current.getUserName());
 								deservesPage = true;
 								
