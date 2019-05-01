@@ -14,8 +14,16 @@ import javax.swing.JLabel;
 
 public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 	
+	/**
+	 * Static instance of the programs catalogue
+	 */
 	public Catalogue catalogue = new Catalogue(); // instance to use to search for item names by id
 	
+	
+	/**
+	 * Constructor, builds the panel to display previous orders
+	 * @param customer customer the sale belongs to
+	 */
 	public GUIdo_PreviousOrders(Customer customer) {
 		super();
 		this.setBackground(Color.WHITE);
@@ -28,6 +36,10 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel{
 		this.repaint();
 	}
 	
+	/**
+	 * Function that draws the screen/frame for the viewing previous orders
+	 * @param customer customer the orders belong to
+	 */
 	public void drawScreen(Customer customer) {
 		GridBagLayout layout = new GridBagLayout();
 		this.setLayout(layout);
