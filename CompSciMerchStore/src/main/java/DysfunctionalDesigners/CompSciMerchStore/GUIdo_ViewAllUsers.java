@@ -56,7 +56,7 @@ public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
 	public GUIdo_ViewAllUsers(ActionListener done, int width) {
 		//set 1200 to something greater later if needed: 
 		super(width,1200);//width, length of page in pixels.
-		
+		logger.info("Switched to View All Users");
 		//all components can be added to -this- in this area
 		GUIdo_CButton show_users = new GUIdo_CButton(width/2-BUTTON_WIDTH/2, y,
 				BUTTON_WIDTH, BUTTON_HEIGHT/2,
