@@ -78,7 +78,7 @@
     "city" : "dwsf ",
     "state" : "WQ"
   },
-  "wishList" : [ 15, 1, 33, 35 ],
+  "wishList" : [ 15 ],
   "cart" : {
     "payment" : null,
     "dateTime" : null,
