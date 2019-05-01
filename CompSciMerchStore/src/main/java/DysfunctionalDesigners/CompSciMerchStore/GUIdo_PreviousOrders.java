@@ -22,7 +22,7 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 		if(customer.getPreviousPurchases().size() < 2) {
 			this.setPreferredSize(new Dimension(this.getWidth(), 500));
 		}else {
-			this.setPreferredSize(new Dimension(this.getWidth(), 500 * customer.getPreviousPurchases().size()));
+			this.setPreferredSize(new Dimension(this.getWidth(), 500 + 75 * customer.getPreviousPurchases().size()));
 		}
 		this.drawScreen(customer);
 		this.repaint();
@@ -40,7 +40,8 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 		c.gridx = x;
 		c.gridy = y;
 		c.insets = new Insets(0, 10, 0 , 10);
-		c.anchor = GridBagConstraints.NORTH;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		this.add(previousPurchases, c);
 		
@@ -48,9 +49,12 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 			JLabel orderOn = new JLabel("Order On: " + s.getDateTime());
 			orderOn.setFont(new Font("Cambria", Font.BOLD, 22));
 			y++;
+			c.gridx = x;
 			c.gridy = y;
+			c.weighty = 0;
+			c.gridwidth = 1;
 			c.anchor = GridBagConstraints.LINE_START;
-			c.fill = GridBagConstraints.NONE;
+			c.fill = GridBagConstraints.HORIZONTAL;
 			this.add(orderOn, c);
 			
 			for(Map.Entry<Integer, LineItem> entry : s.getItemList().entrySet()) {
@@ -60,19 +64,29 @@ public class GUIdo_PreviousOrders extends GUIdo_CPanel implements ActionListener
 				y++;
 				c.gridy = y;
 				c.anchor = GridBagConstraints.LINE_START;
-				c.fill = GridBagConstraints.NONE;
+				c.fill = GridBagConstraints.HORIZONTAL;
 				this.add(name, c);
 			}
 			
 			JLabel total = new JLabel("Total: $" + s.getTotalWithTax());
-			total.setFont(new Font("Cambria", Font.PLAIN, 16));
+			total.setFont(new Font("Cambria", Font.BOLD, 16));
+			total.setForeground(Color.RED);
 			y++;
 			c.gridy = y;
 			c.anchor = GridBagConstraints.LINE_START;
 			c.fill = GridBagConstraints.NONE;
+			//c.weighty = 0.2;
 			this.add(total, c);
 			y++; // increment twice to have extra space in between orders
+			JLabel space = new JLabel("                                    ");
+			c.gridy = y;
+			this.add(space, c);
 		}
+		JLabel spacey = new JLabel("                  ");
+		y++;
+		c.gridy = y;
+		c.weighty = 1;
+		this.add(spacey);
 	}
 
 	@Override
