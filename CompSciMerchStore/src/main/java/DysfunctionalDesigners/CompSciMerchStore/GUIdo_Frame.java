@@ -7,8 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -159,17 +156,37 @@ public class GUIdo_Frame extends JFrame{
 				if(!((Customer)current_user).getUserName().equals("guest")) {
 					to_MemberDeals(true);
 				}
-			}
-			else if(option.equals("Admin Page")) {
+			} else if(option.equals("Admin Page")) {
 				if(current_user.isAdmin()) {
-					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user);
+					current_panel = new GUIdo_AdminPage(getWidth(),(Administrator)current_user, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if(e.getActionCommand().equals("make_promo")) {
+								
+							} else {
+								//no other - error 
+							}
+						}
+					});
 					scrollpane.getViewport().add(current_panel);
 				} else {
 					JOptionPane.showMessageDialog(new JFrame(), "Sorry, only Administrators can access the Admin Page!");
 				}
+			} else if(option.equals("View Profile")) {
+				to_ViewProfile(current_user);
 			}
 				
 		} 
+	}
+	
+	public void to_make_promo() {
+		this.current_panel = new GUIdo_MakePromo(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//TODO add the promo stored in e.getSource() to the list 
+			}
+		}, this.getWidth());
+		
+		scrollpane.getViewport().add(this.current_panel);
 	}
 	
 	/**
@@ -220,6 +237,19 @@ public class GUIdo_Frame extends JFrame{
 	 */
 	private void to_aboutus() {
 		current_panel = new GUIdo_AboutUs();
+		scrollpane.getViewport().add(current_panel);
+	}
+	
+	private void to_ViewProfile(User u) {
+		current_panel = new GUIdo_ViewProfile(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}, u);
 		scrollpane.getViewport().add(current_panel);
 	}
 	
