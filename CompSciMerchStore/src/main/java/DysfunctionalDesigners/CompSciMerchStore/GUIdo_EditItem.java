@@ -1,6 +1,7 @@
 package DysfunctionalDesigners.CompSciMerchStore;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -49,12 +50,14 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 	/**
 	 * The height of the done button. 
 	 */
-	private static final int DONE_HEIGHT = 75;
+	private static final int DONE_HEIGHT = 80;
 	
 	/**
 	 * The number of pixels in the gap in the height between each area to edit. 
 	 */
 	private static final int Y_GAP = 10;
+	
+	private static final Font LABEL_FONT = new Font("Cambria", Font.BOLD, 24);
 	
 	/**
 	 * The String that is used to display the discounts information for
@@ -97,7 +100,14 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the name to edit 
-		JLabel name_label = new JLabel("Name");
+		JLabel title = new JLabel("Upload An Item");
+		title.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT - 70);
+		title.setFont(new Font("Cambria", Font.BOLD, 34));
+		this.add(title);
+		
+		
+		JLabel name_label = new JLabel("Item Display Name");
+		name_label.setFont(LABEL_FONT);
 		name_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(name_label);
@@ -109,7 +119,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//description text field 
-		JLabel desc_label = new JLabel("Description");
+		JLabel desc_label = new JLabel("Description Of Item:");
+		desc_label.setFont(LABEL_FONT);
 		desc_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(desc_label);
@@ -122,7 +133,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the price editing 
-		JLabel price_label = new JLabel("Price");
+		JLabel price_label = new JLabel("Item Price:");
+		price_label.setFont(LABEL_FONT);
 		price_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(price_label);
@@ -134,7 +146,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//the stock editing to change the stock 
-		JLabel stock_label = new JLabel("Stock");
+		JLabel stock_label = new JLabel("Current Stock:");
+		stock_label.setFont(LABEL_FONT);
 		stock_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(stock_label);
@@ -149,7 +162,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 //		y += GUIdo_EditItem.Y_GAP+GUIdo_EditItem.SMALLER_TEXT_HEIGHT;
 		
 		//the professor option to change the professor 
-		JLabel professor_label = new JLabel("Professor");
+		JLabel professor_label = new JLabel("Professor:");
+		professor_label.setFont(LABEL_FONT);
 		professor_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(professor_label);
@@ -175,6 +189,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		//the label for seeing the discount: 
 		JLabel discount_label = new JLabel("Discount");
+		discount_label.setFont(LABEL_FONT);
 		discount_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(discount_label);
@@ -188,6 +203,7 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		//changing the display image:: 
 		JLabel image_label = new JLabel("Display Image");
+		image_label.setFont(LABEL_FONT);
 		image_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(image_label);
@@ -226,7 +242,8 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		//get the promo set and put it in a string to show to the user:
 		item.getPromoDiscounts().entrySet().forEach(e -> discounts_display_string += e.getKey() + "," + e.getValue() + "\n");
-		JLabel promo_label = new JLabel("Promo Codes");
+		JLabel promo_label = new JLabel("Promo Codes:");
+		promo_label.setFont(LABEL_FONT);
 		promo_label.setBounds(width/2-GUIdo_EditItem.TEXTBOX_WIDTH/2, y, this.getWidth()/2, LABEL_HEIGHT);
 		y+=LABEL_HEIGHT+7;
 		this.add(promo_label);
@@ -242,9 +259,10 @@ public class GUIdo_EditItem extends GUIdo_CPanel{
 		
 		//the viewable stuff for enabling and disabling the item on the store: 
 		
-		JLabel isViewable = new JLabel("Item is visible on the store: ");
+		JLabel isViewable = new JLabel("Item is visible on the store?: ");
+		isViewable.setFont(LABEL_FONT);
 		isViewable.setBounds(width/2-GUIdo_EditItem.IS_VISIBLE_WIDTH/2-GUIdo_EditItem.DONE_WIDTH/2,y,
-				GUIdo_EditItem.IS_VISIBLE_WIDTH,GUIdo_EditItem.DONE_HEIGHT);
+				GUIdo_EditItem.IS_VISIBLE_WIDTH,GUIdo_EditItem.DONE_HEIGHT - 70);
 		
 		this.add(isViewable);
 		
