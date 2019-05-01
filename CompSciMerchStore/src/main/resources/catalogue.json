@@ -1040,7 +1040,12 @@
     "promoDiscounts" : { },
     "enabled" : true,
     "prof" : "DYS_DES",
-    "reviews" : [ ]
+    "reviews" : [ {
+      "description" : "Better than the new episodes of Star Wars... especially episode 7 and 8... and most likely 9",
+      "userID" : 19999,
+      "date" : 1556693365788,
+      "rating" : 4
+    } ]
   },
   "45" : {
     "description" : "If you need to say thanks, this shirt will be perfect!",
