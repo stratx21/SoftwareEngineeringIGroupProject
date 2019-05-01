@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUIdo_MakePromo extends GUIdo_CPanel {
+	private static Logger logger = Logger.getLogger(GUIdo_MakePromo.class.getName());
 	
 	/**
 	 * The Font instance that is used for the title of the admin page. 
@@ -55,6 +57,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 	
 	public GUIdo_MakePromo(ActionListener done, int width) {
 		super(width,1200);
+		logger.info("Switched to MakePromo frame");
 		
 		final int PART_WIDTH = width*2/3;
 		
@@ -136,6 +139,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 				} catch(Exception err) {
 					//TODO logger 
 					error_message += "converting the section error; choose a professor or all";
+					logger.severe(error_message);
 				}
 				
 				try {
@@ -147,7 +151,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 					//TODO logger 
 					valid = false;
 					error_message += " percent off invalid. Must be between 0 and 100 % and be in number format only.\n";
-					System.out.println("ERROR: percent off invalid. Must be between 0 and 100 % and be in number format only.");
+					logger.severe("ERROR: percent off invalid. Must be between 0 and 100 % and be in number format only.");
 				}
 				
 				if(valid) {
@@ -176,6 +180,7 @@ public class GUIdo_MakePromo extends GUIdo_CPanel {
 					done.actionPerformed(new ActionEvent(percentoff,ActionEvent.ACTION_PERFORMED,"added_promos"));
 					
 				} else {
+					logger.finest(error_message);
 					JOptionPane.showMessageDialog(new JPanel(), error_message, 
 						      "Error", JOptionPane.ERROR_MESSAGE); 
 				}

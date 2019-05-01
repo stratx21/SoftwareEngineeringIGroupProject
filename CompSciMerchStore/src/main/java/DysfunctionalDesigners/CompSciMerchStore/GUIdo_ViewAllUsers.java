@@ -5,22 +5,58 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class GUIdo_ViewAllUsers extends GUIdo_CPanel {
+	
+	/**
+	 * Instance of the loggger
+	 */
+	private static Logger logger = Logger.getLogger(GUIdo_ViewAllUsers.class.getName());
+	
+	/**
+	 * Font for all JLabels
+	 */
 	private static final Font COMPLAINTS_FONT = new Font("Cambria", Font.PLAIN, 20);
+	
+	/**
+	 * Constant button height for buttons
+	 */
 	private static final int BUTTON_WIDTH = 250;
+	
+	/**
+	 * Constant button width
+	 */
 	private static final int BUTTON_HEIGHT = 80;
+	
+	/**
+	 * Constant gap between buttons
+	 */
 	private static final int Y_GAP = 15;
+	
+	/**
+	 * Constant height for text
+	 */
 	private static final int COMPLAINT_HEIGHT
 			= GUIdo_OutputTools.getPixelHeight("User:", GUIdo_ViewAllUsers.COMPLAINTS_FONT) + 40;
+	
+	/**
+	 * Gap between complaints
+	 */
 	private static final int COMPLAINT_GAP = 7;
 	private int y = 75;
 	private boolean users_shown = false;
 	
+	
+	/**
+	 * Function to create the frame to view all users
+	 * @param done actionListener to move to a new frame
+	 * @param width size of frame
+	 */
 	public GUIdo_ViewAllUsers(ActionListener done, int width) {
 		//set 1200 to something greater later if needed: 
 		super(width,1200);//width, length of page in pixels.
-		
+		logger.info("Switched to View All Users");
 		//all components can be added to -this- in this area
 		GUIdo_CButton show_users = new GUIdo_CButton(width/2-BUTTON_WIDTH/2, y,
 				BUTTON_WIDTH, BUTTON_HEIGHT/2,
