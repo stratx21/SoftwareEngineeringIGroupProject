@@ -144,8 +144,13 @@ public class GUIdo_Frame extends JFrame{
 		} else if(e.getActionCommand().equals("login")) {
 			to_login();
 		} else if(e.getActionCommand().equals("cart")) {
-			if(!current_user.isAdmin())
+			if(!current_user.isAdmin()) {
+				if(((Customer)(current_user)).getCart() == null) {
+					((Customer)(current_user)).setCart(new Sale(current_user.getUserID()));
+				}
+				cart = ((Customer)(current_user)).getCart();
 				to_cart(cart, (Customer) current_user, current_panel, scrollpane);
+			}
 		} else if(e.getActionCommand().equals("other_opt")) {
 			JComboBox cb = (JComboBox)e.getSource();
 			String option = (String)cb.getSelectedItem();
