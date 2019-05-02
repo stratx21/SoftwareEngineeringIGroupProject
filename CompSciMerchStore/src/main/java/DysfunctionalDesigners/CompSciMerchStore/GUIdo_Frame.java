@@ -162,6 +162,8 @@ public class GUIdo_Frame extends JFrame{
 			} else if(option.equals("Member Deals")) {
 				if(!((Customer)current_user).getUserName().equals("guest")) {
 					to_MemberDeals(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Sorry, only members can view member deals!");
 				}
 			} else if(option.equals("Admin Page")) {
 				if(current_user.isAdmin()) {
