@@ -105,6 +105,11 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		JFormattedTextField cvvNum = new JFormattedTextField(cvvFormat);
 		cvvNum.setPreferredSize(new Dimension(40, 20));
 		
+		if(customer.getPaymentInfo() != null) {
+			numberOnCard.setText(customer.getPaymentInfo().get(0).getCardNumber());
+			cvvNum.setText(String.valueOf(customer.getPaymentInfo().get(0).getCCV()));
+		}
+		
 		JLabel billingaddy = new JLabel("Billing Address:");
 		billingaddy.setFont(new Font("Cambria", Font.PLAIN, 16));
 		JLabel bAddress1 = new JLabel("Address Line 1");
@@ -124,6 +129,13 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		bZip.setFont(new Font("Cambria", Font.BOLD, 12));
 		JFormattedTextField zip = new JFormattedTextField(zipFormat);
 		zip.setPreferredSize(new Dimension(50, 20));
+		
+		if(customer.getPaymentInfo().get(0).getBillingAddress() != null) {
+			addressLine1.setText(customer.getPaymentInfo().get(0).getBillingAddress().getStreet());
+			city.setText(customer.getPaymentInfo().get(0).getBillingAddress().getCity());
+			state.setText(customer.getPaymentInfo().get(0).getBillingAddress().getState());
+			zip.setText(String.valueOf(customer.getPaymentInfo().get(0).getBillingAddress().getZipCode()));
+		}
 
 		JLabel promoLabel = new JLabel("Promo Code:");
 		promoLabel.setFont(new Font("Cambria", Font.PLAIN, 16));
@@ -188,7 +200,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					ba.setCity(city.getText());
 					ba.setState(state.getText());
 					ba.setZipCode(Integer.valueOf(zip.getText()));
-					PaymentInfo card = new PaymentInfo(nameOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
+					PaymentInfo card = new PaymentInfo(numberOnCard.getText(), ba, Integer.valueOf(cvvNum.getText()));
 					customer.getPaymentInfo().add(card);
 					placeOrder.enable();
 					
