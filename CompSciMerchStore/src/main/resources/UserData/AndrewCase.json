@@ -73,10 +73,10 @@
     "ccv" : 666
   } ],
   "shippingAddr" : {
-    "street" : "aSdf",
-    "zipCode" : 21324,
-    "city" : "dwsf ",
-    "state" : "WQ"
+    "street" : "One Bear Place",
+    "zipCode" : 76798,
+    "city" : "Waco",
+    "state" : "TX"
   },
   "wishList" : [ 15, 10 ],
   "cart" : {
