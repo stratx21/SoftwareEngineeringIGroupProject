@@ -7,16 +7,16 @@
   "userID" : 10001,
   "uploadedItems" : [ ],
   "pastSales" : [ ],
-  "status" : "GENERAL",
+  "status" : "ELITE",
   "paymentInfo" : [ {
-    "cardNumber" : "Andrew Case",
+    "cardNumber" : "1234567891",
     "billingAddress" : {
       "street" : "One Bear Place",
       "zipCode" : 76798,
       "city" : "Waco",
       "state" : "TX"
     },
-    "ccv" : 666
+    "ccv" : 777
   }, {
     "cardNumber" : "Andrew Case",
     "billingAddress" : {
@@ -88,6 +88,11 @@
       "41" : {
         "quantity" : 2,
         "itemID" : 41,
+        "promoCodes" : [ ]
+      },
+      "22" : {
+        "quantity" : 5,
+        "itemID" : 22,
         "promoCodes" : [ ]
       }
     },
