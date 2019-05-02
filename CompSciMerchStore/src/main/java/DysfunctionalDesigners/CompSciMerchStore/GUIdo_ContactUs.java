@@ -150,7 +150,7 @@ public class GUIdo_ContactUs extends GUIdo_CPanel{
 					}
 				}
 				
-				JOptionPane.showMessageDialog(panel, "Complaint has been submitted!", "Accepted", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(panel, "Thank you for your submission!", "Accepted", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});

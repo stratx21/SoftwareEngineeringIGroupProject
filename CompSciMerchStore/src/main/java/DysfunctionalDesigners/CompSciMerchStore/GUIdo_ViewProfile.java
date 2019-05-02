@@ -99,11 +99,12 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 		showPass.setFont(new Font("Cambria",Font.PLAIN,24));
 		showName.setFont(new Font("Cambria",Font.PLAIN,24));
 		showMemberStatus.setFont(new Font("Cambria",Font.PLAIN,24));
-		if(!u.isAdmin()) {
+		if(current.getShippingAddr() != null) {
 			showAddress.setFont(new Font("Cambria",Font.PLAIN,24));
-
-			editProfile.disable();
 		}
+//		if(u.isAdmin()) {
+//			editProfile.disable();
+//		}
 		
 		GridBagLayout gbl = new GridBagLayout();
 		this.setLayout(gbl);
@@ -158,9 +159,11 @@ public class GUIdo_ViewProfile extends GUIdo_CPanel{
 
 			c.gridy = 26;
 			this.add(address, c);
-		
-			c.gridy = 28;
-			this.add(showAddress, c);
+			
+			if(current.getShippingAddr() != null) {
+				c.gridy = 28;
+				this.add(showAddress, c);
+			}
 		}
 		
 		c.gridy = 2;

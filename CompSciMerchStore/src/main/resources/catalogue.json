@@ -295,7 +295,7 @@
   },
   "13" : {
     "description" : "Are you jealous of how cool Hamerly is when he rocks his Chacos? Feed your jealousy! Get a pair today! *May or may not have been worn by Hamerly himself*",
-    "displayName" : "Hamerly-inspired Chocos",
+    "displayName" : "Hamerly-inspired Chacos",
     "extendedItemID" : "00013",
     "itemID" : 13,
     "stock" : 46,
@@ -330,15 +330,15 @@
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ {
-      "description" : "I don't know what ViM is - Brian ",
+      "description" : "It's better than emacs! ",
       "userID" : 19999,
       "date" : 1556689933195,
       "rating" : 1
     } ]
   },
   "15" : {
-    "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself an 'Hours of planning will save you weeks of debugging' shirt today!",
-    "displayName" : "Hours of Planning Will Save you Weeks of Debugging T-Shirt",
+    "description" : "Spend a weekend in the lab while wearing the wise words of Dr. Hamerly on your shirt! Get yourself a 'Weeks of Debugging Will Save You Hours of Planning' shirt today!",
+    "displayName" : "Weeks of Debugging Will Save You Hours of Planning T-Shirt",
     "extendedItemID" : "00015",
     "itemID" : 15,
     "stock" : 99,
@@ -349,20 +349,10 @@
     "enabled" : true,
     "prof" : "HAMERLY",
     "reviews" : [ {
-      "description" : "it's the other way around...",
+      "description" : "Who knew??",
       "userID" : 19999,
       "date" : 1556691108915,
-      "rating" : 1
-    }, {
-      "description" : "Dr. Hamerly's shirt said it the opposite way",
-      "userID" : 19999,
-      "date" : 1556691132980,
-      "rating" : 1
-    }, {
-      "description" : "bad the wrong way ",
-      "userID" : 19999,
-      "date" : 1556691139412,
-      "rating" : 1
+      "rating" : 5
     } ]
   },
   "16" : {
@@ -950,11 +940,6 @@
       "date" : 1556516608283,
       "rating" : 4
     }, {
-      "description" : "Should've been given to the Engineers - Brian Thayil ",
-      "userID" : 19999,
-      "date" : 1556689843138,
-      "rating" : 4
-    }, {
       "description" : "'Why is it not brick?' -everyone on campus ",
       "userID" : 13419,
       "date" : 1556689843148,
@@ -974,7 +959,7 @@
     "enabled" : true,
     "prof" : "CERNY",
     "reviews" : [ {
-      "description" : "What a beautiful wedding!!!",
+      "description" : "What a beautiful wedding!!! - Said a bridesmaid to a waiter",
       "userID" : 19999,
       "date" : 1556690009382,
       "rating" : 5
@@ -1027,7 +1012,7 @@
     "enabled" : true,
     "prof" : "DYS_DES",
     "reviews" : [ {
-      "description" : "\"I should have been on this picture\" - Brian Thayil",
+      "description" : "\"I should have been in this picture\" - Brian Thayil",
       "userID" : 19999,
       "date" : 1556693239017,
       "rating" : 1
@@ -1080,7 +1065,7 @@
       "date" : 1556690163579,
       "rating" : 2
     }, {
-      "description" : "I want to marry Russel",
+      "description" : "I want to marry Russell",
       "userID" : 19999,
       "date" : 1556690205582,
       "rating" : 5
@@ -1123,6 +1108,11 @@
       "userID" : 19999,
       "date" : 1556691287169,
       "rating" : 4
+    }, {
+      "description" : "I relate to this because it's how I feel after 48 hours in the Lab writing a Simplex Solver.",
+      "userID" : 10001,
+      "date" : 1556750242663,
+      "rating" : 5
     } ]
   },
   "50" : {

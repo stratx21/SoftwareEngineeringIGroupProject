@@ -22,8 +22,8 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 			+ "Major at Baylor University. With the use of our product, we believe "
 			+ "Computer Science Majors will better be able to understand and relate "
 			+ "to each other.";
-	private final static ItemInfo display_item1 = Catalogue.getInstance().getItem(00007),
-						          display_item2 = Catalogue.getInstance().getItem(00046);
+	private final static ItemInfo display_item1 = Catalogue.getInstance().getItem(7),
+						          display_item2 = Catalogue.getInstance().getItem(46);
 	
 	private static BufferedImage cashn = null;
 			
@@ -43,6 +43,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 				"view");
 		display_item_1.setActionListener_clicked(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logger.info("Grabbed item \"" + display_item1.getDisplayName() + "\"");
 				done.actionPerformed(new ActionEvent(display_item1, ActionEvent.ACTION_PERFORMED, "display1"));
 			}
 		});
@@ -51,6 +52,7 @@ public class GUIdo_Homescreen extends GUIdo_CPanel{
 		GUIdo_CButton display_item_2 = new GUIdo_CButton(this.getWidth()*3/10, this.getWidth()*3/10*3/4+this.getWidth()*3/10, (int)(this.getWidth()*1.5/10), 30, "view");
 		display_item_2.setActionListener_clicked(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logger.info("Grabbed item \"" + display_item2.getDisplayName() + "\"");
 				done.actionPerformed(new ActionEvent(display_item2, ActionEvent.ACTION_PERFORMED, "display2"));
 			}
 		});
