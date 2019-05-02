@@ -78,26 +78,16 @@
     "city" : "dwsf ",
     "state" : "WQ"
   },
-  "wishList" : [ 15 ],
+  "wishList" : [ 15, 10 ],
   "cart" : {
     "payment" : null,
     "dateTime" : null,
     "customerID" : 10001,
     "saleID" : 25,
     "itemList" : {
-      "13" : {
-        "quantity" : 1,
-        "itemID" : 13,
-        "promoCodes" : [ ]
-      },
-      "33" : {
+      "41" : {
         "quantity" : 2,
-        "itemID" : 33,
-        "promoCodes" : [ ]
-      },
-      "22" : {
-        "quantity" : 1,
-        "itemID" : 22,
+        "itemID" : 41,
         "promoCodes" : [ ]
       }
     },

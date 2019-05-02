@@ -8,9 +8,17 @@
   "uploadedItems" : [ ],
   "pastSales" : [ ],
   "status" : "GENERAL",
+  "paymentInfo" : [ ],
   "shippingAddr" : null,
   "wishList" : [ ],
-  "paymentInfo": [ ],
-  "previousPurchases": [ ],
-  "cart": null
+  "cart" : {
+    "payment" : null,
+    "dateTime" : null,
+    "customerID" : 10000,
+    "saleID" : 303,
+    "itemList" : { },
+    "shippingAddr" : null,
+    "finalized" : false
+  },
+  "previousPurchases" : [ ]
 }
