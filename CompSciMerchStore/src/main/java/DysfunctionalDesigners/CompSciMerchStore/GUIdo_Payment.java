@@ -105,7 +105,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		JFormattedTextField cvvNum = new JFormattedTextField(cvvFormat);
 		cvvNum.setPreferredSize(new Dimension(40, 20));
 		
-		if(customer.getPaymentInfo() != null) {
+		if(!customer.getPaymentInfo().isEmpty()) {
 			numberOnCard.setText(customer.getPaymentInfo().get(0).getCardNumber());
 			cvvNum.setText(String.valueOf(customer.getPaymentInfo().get(0).getCCV()));
 		}
@@ -130,7 +130,7 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 		JFormattedTextField zip = new JFormattedTextField(zipFormat);
 		zip.setPreferredSize(new Dimension(50, 20));
 		
-		if(customer.getPaymentInfo().get(0).getBillingAddress() != null) {
+		if(!customer.getPaymentInfo().isEmpty()) {
 			addressLine1.setText(customer.getPaymentInfo().get(0).getBillingAddress().getStreet());
 			city.setText(customer.getPaymentInfo().get(0).getBillingAddress().getCity());
 			state.setText(customer.getPaymentInfo().get(0).getBillingAddress().getState());
