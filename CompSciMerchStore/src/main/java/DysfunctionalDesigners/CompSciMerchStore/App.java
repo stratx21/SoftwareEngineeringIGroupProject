@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 public class App 
 {
 	private static Logger logger = Logger.getLogger(App.class.getName());
-//	static String resourceTarget = "./src/main/resources/";//testing
-	static String resourceTarget = "";//jar running
+	static String resourceTarget = "./src/main/resources/";//testing
+//	static String resourceTarget = "";//jar running
 	
     public static void main( String[] args )
     {
