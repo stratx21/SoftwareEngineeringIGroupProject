@@ -415,7 +415,27 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(sale.checkPromoCode(promoCode.getText())) {
+					// get new sale 
 					sale.applyPromoCode(promoCode.getText());
+					
+					JLabel newSubtotal = new JLabel("$" + df.format(sale.getTotalWithoutTax()));
+					newSubtotal.setFont(new Font("Cambria", Font.PLAIN, 14));
+					this_panel.remove(subNum);
+					c.gridx = 4;
+					c.gridy = 2;
+					c.weighty = 0;
+					c.anchor = GridBagConstraints.NORTHWEST;
+					this_panel.add(newSubtotal, c);
+					
+					JLabel newTax = new JLabel("$" + df.format(sale.getEstimatedTax()));
+					newTax.setFont(new Font("Cambria", Font.PLAIN, 14));
+					this_panel.remove(estTaxNum);
+					c.gridx = 4;
+					c.gridy = 3;
+					c.weighty = 0;
+					c.anchor = GridBagConstraints.NORTHWEST;
+					this_panel.add(newTax, c);
+					
 					JLabel newTotalCost = new JLabel("$" + df.format(sale.getTotalWithTax()));
 					newTotalCost.setForeground(Color.RED);
 					newTotalCost.setFont(new Font("Cambria", Font.BOLD, 14));
@@ -424,14 +444,16 @@ public class GUIdo_Payment extends GUIdo_CPanel implements ActionListener{
 					c.gridy = 5;
 					c.weighty = 0;
 					c.anchor = GridBagConstraints.NORTHWEST;
+					
 					this_panel.add(newTotalCost, c);
 					this_panel.repaint();
 					this_panel.revalidate();
+					
 					JOptionPane.showMessageDialog(null, "Promo code added!");
 				}else if(!sale.checkPromoCode(promoCode.getText())){
 					JOptionPane.showMessageDialog(null, "Not a valid promo code!");
 				}
-				
+				enterPromoCode.disable();
 			}
 			
 		});
