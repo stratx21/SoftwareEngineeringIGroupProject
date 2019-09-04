@@ -1,4 +1,4 @@
-# SoftwareEngineeringIGroupProject
+# Software Engineering I Group Project
 Group Project for Software Engineering I, Spring 2019
 
 ## Website (main documentation included)
